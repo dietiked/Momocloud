@@ -16,7 +16,6 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 		var data = [];
 		var labels = [];
 		var today = moment();
-		var doys = [];
 		var dates = [];
 		var quantities = [];
 		var date, quantity;
@@ -50,6 +49,7 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 		var typesQuantities = [];
 		var typesDescription = [];
 		var typesColors = [];
+		var typesHighlightColors = [];
 		for (var i=0; i<array.length; i++) {
 			var wine = array[i];
 			if (types.indexOf(wine.winetype_id) > -1) {
@@ -61,6 +61,7 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 				typesDescription.push(wine.winetype_description);
 				typesQuantities.push( wine.stored_quantity);
 				typesColors.push(wine.winetype_color);
+				typesHighlightColors.push(wine.winetype_highlight_color);
 			}
 		}
 		var data = [];
@@ -68,6 +69,7 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 			var segment = {
 				'value': typesQuantities[i],
 				'color': typesColors[i],
+				'highlight': typesHighlightColors[i],
 				'label': typesDescription[i]
 			};
 			data.push(segment);
