@@ -1,67 +1,98 @@
 <?php
 	require_once("../../../config.php");
+	require_once("../../../request.php");
 	
-	$db = new PDO("mysql:host=".$host.";dbname=".$db, $user, $password, array(PDO::ATTR_PERSISTENT => true));
-	$mainTable = "wines";
-	
-	function getWines($db, $table, $id=NULL) {
-		$query = "SELECT * FROM " . $table . " JOIN (wine_producers, wine_types) ON (" . $table. ".producer_id=wine_producers.producer_id AND  " . $table . ".winetype_id=wine_types.winetype_id)";
-		if ($id != NULL) {
-			$query = $query . " WHERE wine_id=" . $id;
-		} 
-		$stmt = $db->prepare($query);		
-		if ($stmt->execute()) {
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+	class WineRequest extends Request {
+		
+		private $selectQuery = "SELECT * FROM wines JOIN (wine_producers, wine_types) ON (wines.producer_id=wine_producers.producer_id AND wines.winetype_id=wine_types.winetype_id)";
+		private $updateQuery = "UPDATE wines SET wine_name=:wineName, producer_id=:prodId, wine_alcohol=:wineAlcohol, wine_grapes=:wineGrapes, winetype_id=:winetypeId, wine_notes=:wineNotes WHERE wine_id=:wineId";
+		private $insertQuery = "INSERT INTO wines (wine_name, producer_id, winetype_id, wine_alcohol, wine_grapes, wine_notes) VALUES (:wineName, :producerId, :winetypeId, :wineAlcohol, :wineGrapes, :wineNotes)";
+		
+		public function getWines() {	
+			$stmt = $this->connection->prepare($this->selectQuery);		
+			if ($stmt->execute()) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+			} else {
+				$result = "Server error";
+			}
+			return $result;		
 		}
-		return $result;		
+		
+		public function getWineWithId($id) {
+			$query = $this->selectQuery . " WHERE wine_id=". $id;
+			$stmt = $this->connection->prepare($query);		
+			if ($stmt->execute()) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+			} else {
+				$result = "Server error";				
+			}
+			return $result;					
+		}
+		
+		public function updateWineWithId($data) {
+			$stmt = $this->connection->prepare($this->updateQuery);
+			$stmt->bindValue(":wineName", $data["wine_name"]);	
+			$stmt->bindValue(":prodId", $data["producer_id"]);	
+			$stmt->bindValue(":wineAlcohol", $data["wine_alcohol"]);	
+			$stmt->bindValue(":wineGrapes", $data["wine_grapes"]);	
+			$stmt->bindValue(":winetypeId", $data["winetype_id"]);	
+			$stmt->bindValue(":wineNotes", $data["wine_notes"]);	
+			$stmt->bindValue(":wineId", $data["wine_id"]);	
+			if ($stmt->execute()) {
+				$result = $stmt->rowCount();
+			} else {
+				$result = 0;
+			}
+			return $result;			
+		}
+		
+		public function insertWine($data) {
+			$stmt = $this->connection->prepare($this->insertQuery);
+			$stmt->bindValue(":wineName", $data["wine_name"]);	
+			$stmt->bindValue(":producerId", $data["producer_id"]);	
+			$stmt->bindValue(":winetypeId", $data["winetype_id"]);	
+			$stmt->bindValue(":wineAlcohol", $data["wine_alcohol"]);	
+			$stmt->bindValue(":wineGrapes", $data["wine_grapes"]);	
+			$stmt->bindValue(":wineNotes", $data["wine_notes"]);	
+			$stmt->execute();
+			$id = $this->connection->lastInsertId();
+			if ($id > 0) {
+				$result = True;
+			} else {
+				$result = False;
+			}
+			return Array('success'=>$result, '$id'=>$id);
+		}
+		
+		public function countWines() {
+			$wines = $this->getWines();
+			return count($wines);
+		}
 	}
+	
+		
+	$request = new WineRequest($host, $db, $user, $password);
 	
 	if ($_GET["f"] == "get") {
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
+			$result = $request->getWineWithId($id);
 		} else {
-			$id = null;
+			$result = $request->getWines();
 		}
-		$result = getWines($db, $mainTable, $id);
 		echo json_encode($result);
 		
 	} else if ($_GET["f"] == "update") {
-		$stmt = $db->prepare("UPDATE " . $mainTable . " SET wine_name=:wineName, producer_id=:prodId, wine_alcohol=:wineAlcohol, wine_grapes=:wineGrapes, winetype_id=:winetypeId, wine_notes=:wineNotes WHERE wine_id=:wineId");
-		//$stmt->bindValue(":table", $mainTable);	
-		$stmt->bindValue(":wineName", $_POST["wine_name"]);	
-		$stmt->bindValue(":prodId", $_POST["producer_id"]);	
-		$stmt->bindValue(":wineAlcohol", $_POST["wine_alcohol"]);	
-		$stmt->bindValue(":wineGrapes", $_POST["wine_grapes"]);	
-		$stmt->bindValue(":winetypeId", $_POST["winetype_id"]);	
-		$stmt->bindValue(":wineNotes", $_POST["wine_notes"]);	
-		$stmt->bindValue(":wineId", $_POST["wine_id"]);	
-		if ($stmt->execute()) {
-			$result = $stmt->rowCount();
-		} else {
-			$result = 0;
-		}
-		echo(json_encode(Array('success'=>$result, 'query'=>$stmt->queryString)));	
+		$result = $request->updateWineWithId($_POST);
+		echo(json_encode(Array('success'=>$result)));	
 		
 	} else if ($_GET["f"] == "insert") {
-		$stmt = $db->prepare("INSERT INTO " . $mainTable . " (wine_name, producer_id, winetype_id, wine_alcohol, wine_grapes, wine_notes) VALUES (:wineName, :producerId, :winetypeId, :wineAlcohol, :wineGrapes, :wineNotes)");
-		$stmt->bindValue(":wineName", $_POST["wine_name"]);	
-		$stmt->bindValue(":producerId", $_POST["producer_id"]);	
-		$stmt->bindValue(":winetypeId", $_POST["winetype_id"]);	
-		$stmt->bindValue(":wineAlcohol", $_POST["wine_alcohol"]);	
-		$stmt->bindValue(":wineGrapes", $_POST["wine_grapes"]);	
-		$stmt->bindValue(":wineNotes", $_POST["wine_notes"]);	
-		$stmt->execute();
-		$id = $db->lastInsertId();
-		if ($id > 0) {
-			$result = True;
-		} else {
-			$result = False;
-		}
-		echo(json_encode(Array('success'=>$result, 'id'=>$id)));
+		$result = $request->insertWine($_POST);
+		echo(json_encode($result));
 			
 	} else if ($_GET["f"] == "countWines") {
-		$wines = getWines($db, $mainTable);
-		echo(json_encode(Array('numberOfWines'=>count($wines))));
+		$numberOfWines = $request->countWines();
+		echo(json_encode(Array('numberOfWines'=>$numberOfWines)));
 	}
 	
 ?>
