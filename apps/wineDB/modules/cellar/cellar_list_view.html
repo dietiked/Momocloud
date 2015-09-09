@@ -1,0 +1,74 @@
+<section class="content-header">
+	<h1>Cellar</h1>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#"><i class="fa fa-glass"></i></a>
+		</li>
+		<li class="active">
+			Cellar
+		</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="box-title">
+						<select ng-model="orderColumn" class="form-control input-sm">
+							<option value="-stored_quantity" selected>Quantity</option>
+							<option value="-vintage_year">Year</option>
+							<option value="-vintage_rating">Rating</option>
+						</select>
+					</div>
+					<div class="box-tools">
+						<div class="input-group" style="max-width: 300px;">
+							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+							<input type="search" ng-model="search" class="form-control input-sm pull-right" placeholder="search...">
+						</div>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Vintage</th>
+								<th>Rating</th>
+								<th>Producer</th>
+								<th>Type</th>
+								<th>Grapes</th>
+								<th>Alcohol</th>
+								<th>Bottles</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn">
+								<td><a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+								<td>{{wine.vintage_year}}</td>
+								<td>{{wine.vintage_rating}}/10</td>
+								<td><a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
+								<td>{{wine.winetype_description}}</td>
+								<td>{{wine.wine_grapes}}</td>
+								<td>{{wine.wine_alcohol}}%</td>
+								<td>{{wine.stored_quantity}}</td>
+								<td>
+									<a class="btn btn-default btn-xs" href="#/cellar/{{wine.stored_wine_id}}/bottles/add"><i class="fa fa-cart-plus"></i> Add</a>
+									<a class="btn btn-default btn-xs" href="#/cellar/drink/{{wine.stored_wine_id}}"><i class="fa fa-glass"></i> Drink one</a>
+									<button class="btn btn-default btn-xs" ng-click="recalculateQuantity(wine.stored_wine_id)">
+										<i class="fa fa-repeat"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="overlay" ng-show="!loaded">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

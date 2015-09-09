@@ -1,0 +1,41 @@
+<section class="content-header">
+	<h1>Producer</h1>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#"><i class="fa fa-glass"></i></a>
+		</li>
+		<li>
+			<a href="#/producers/">Producers</a>
+		</li>
+		<li class="active">
+			Edit
+		</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Edit</h3>
+				</div>
+				<div class="box-body">
+					<error-message error-text="There was an error. {{producer.producer_name}} was not updated." ng-show="showError"></error-message>
+					<form ng-submit="save()">
+						<div class="form-group">
+							<label for="producer_name">Producer name: </label>
+							<input id="producer_name" type="text" ng-model="producer.producer_name" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label for="producer_location">Producer location: </label>
+							<input id="producer_location" type="text" ng-model="producer.producer_location" class="form-control"/>
+						</div>
+						<a href="#/producers/{{producer.producer_id}}" class="btn btn-default">Cancel</a>
+						<button class="btn btn-success" type="submit">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

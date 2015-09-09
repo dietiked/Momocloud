@@ -1,0 +1,59 @@
+<section class="content-header">
+	<h1>New wine</h1>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#"><i class="fa fa-glass"></i></a>
+		</li>
+		<li>
+			<a href="#/wines/">Wines</a>
+		</li>
+		<li class="active">
+			New
+		</li>
+	</ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header">
+				</div>
+				<div class="box-body">
+					<form name="myForm" ng-submit="save()">
+						<div class="form-group">
+							<label for="name">Name: </label>
+							<input id="name" type="text" ng-model="wine.wine_name" class="form-control" required/>
+						</div>
+						<div class="form-group">
+							<label for="producer">Producer: </label>
+							<select ng-model="wine.producer_id" class="form-control">
+								<option ng-repeat="producer in producers | orderBy:'producer_name'" value="{{producer.producer_id}}">{{producer.producer_name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="producer">Type: </label>
+							<select ng-model="wine.winetype_id" class="form-control">
+								<option ng-repeat="type in winetypes" value="{{type.winetype_id}}">{{type.winetype_description}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="alcohol">Alcohol: </label>
+							<input id="alcohol" type="text" ng-model="wine.wine_alcohol" class="form-control" min="0.0" max="99.0"/>
+						</div>
+						<div class="form-group">
+							<label for="grapes">Grapes: </label>
+							<input id="grapes" type="text" ng-model="wine.wine_grapes" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label for="notes">Notes: </label>
+							<textarea id="notes" type="text" ng-model="wine.wine_notes" class="form-control"/>
+						</div>
+						<a href="#/wines/" class="btn btn-default">Cancel</a>
+						<button class="btn btn-success" type="submit" ng-disabled="!dependenciesLoaded">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
