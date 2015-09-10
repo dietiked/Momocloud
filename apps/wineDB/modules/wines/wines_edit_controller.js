@@ -5,8 +5,8 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.wine = {};
 	$scope.producers = [];
 	$scope.winetypes = [];
-	$scope.activateForm = false;
 	$scope.showError = false;
+	$scope.loaded = false;
 	DependenciesChecker.setDependencies(2);
 	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 
@@ -26,7 +26,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	// Notification functions
 	var getWine = function() {
 		$scope.wine = WinesService.wine;		
-		$scope.activateForm = true;
+		$scope.loaded = true;
 	}
 
 	var wineUpdated = function() {
