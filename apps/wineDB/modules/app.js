@@ -6,10 +6,10 @@ var wineDBConstants = angular.module('wineDBConstants', []);
 // External services
 wineDBServices.factory('NotificationCenter', NotificationCenter);
 wineDBServices.factory('DependenciesChecker', DependenciesChecker);
+wineDBServices.factory('AuthService', AuthService);
 // External directives
 wineDBServices.directive('errorMessage', errorMessage);
 wineDBServices.directive('wineRating', wineRating);
-
 
 var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBServices', 'wineDBDirectives', 'angular.filter'], 
 	
@@ -61,6 +61,10 @@ var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBSe
 
 wineDB.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider.
+		when('/login', {
+			templateUrl: 'modules/login/login_view.html',
+			controller: 'LoginController'
+		}).
 		when('/index', {
 			templateUrl: 'modules/index/index_view.html',
 			controller: 'IndexController'
@@ -121,8 +125,8 @@ wineDB.config(['$routeProvider', '$locationProvider', function($routeProvider, $
 
 }]);
 
-/*
-wineDB.run(function($rootScope, $location, AuthFactory) {
+
+wineDB.run(function($rootScope, $location, AuthService) {
 	// enumerate routes that don't need authentication
 	var routesThatDontRequireAuth = ['/login'];
 
@@ -139,12 +143,12 @@ wineDB.run(function($rootScope, $location, AuthFactory) {
 
 	$rootScope.$on('$routeChangeStart', function (event, next, current) {
 		// if route requires auth and user is not logged in
-		if (!routeClean($location.url()) && !AuthFactory.isLoggedIn()) {
+		if (!routeClean($location.url()) && !AuthService.isLoggedIn()) {
 			// redirect back to login
 			$location.path('/login');
 		} else {
-			AuthFactory.init();
+			AuthService.init();
 		}
 	});	
 });
-*/
+

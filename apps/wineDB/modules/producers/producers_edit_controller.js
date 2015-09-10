@@ -1,5 +1,5 @@
-wineDBControllers.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService',
-function($scope, $routeParams, ProducersService, UrlService) {
+wineDBControllers.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'AuthService',
+function($scope, $routeParams, ProducersService, UrlService, AuthService) {
 	console.log('ProducersEditController for producer', $routeParams.producerId);
 	
 	$scope.producer = {};
@@ -35,5 +35,6 @@ function($scope, $routeParams, ProducersService, UrlService) {
 	});
 		
 	ProducersService.getProducer($routeParams.producerId);
+	AuthService.increaseExpiration();
 	
 }]);

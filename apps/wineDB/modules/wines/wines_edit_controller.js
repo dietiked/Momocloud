@@ -1,5 +1,5 @@
-wineDBControllers.controller('WinesEditController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService) {
+wineDBControllers.controller('WinesEditController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService', 'AuthService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService, AuthService) {
 	console.log('WinesEditController', $routeParams.wineId);	
 		
 	$scope.wine = {};
@@ -61,5 +61,6 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		
 	ProducersService.getAll();
 	GeneralDataService.getWinetypes();
+	AuthService.increaseExpiration();
 
 }]);

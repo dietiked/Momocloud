@@ -1,4 +1,4 @@
-wineDBControllers.controller('WinesListController', ['$scope', 'WinesService', function($scope, WinesService) {
+wineDBControllers.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', function($scope, WinesService, AuthService) {
 	console.log('WinesListController');	
 	
 	$scope.loaded = false;
@@ -16,5 +16,6 @@ wineDBControllers.controller('WinesListController', ['$scope', 'WinesService', f
 	});
 
 	WinesService.getAll();
+	AuthService.increaseExpiration();
 
 }]);
