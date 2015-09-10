@@ -22,18 +22,21 @@
 				</div>
 				<div class="box-body">
 					<error-message error-text="There was an error. {{producer.producer_name}} was not updated." ng-show="showError"></error-message>
-					<form ng-submit="save()">
-						<div class="form-group">
-							<label for="producer_name">Producer name: </label>
-							<input id="producer_name" type="text" ng-model="producer.producer_name" class="form-control"/>
+					<form name="producerForm" ng-submit="save()">
+						<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
+							<label for="producerName">Producer name: </label>
+							<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
 						</div>
-						<div class="form-group">
-							<label for="producer_location">Producer location: </label>
-							<input id="producer_location" type="text" ng-model="producer.producer_location" class="form-control"/>
+						<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
+							<label for="producerLocation">Producer location: </label>
+							<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
 						</div>
 						<a href="#/producers/{{producer.producer_id}}" class="btn btn-default">Cancel</a>
 						<button class="btn btn-success" type="submit">Save</button>
 					</form>
+				</div>
+				<div class="overlay" ng-show="!loaded">
+					<i class="fa fa-refresh fa-spin"></i>
 				</div>
 			</div>
 		</div>

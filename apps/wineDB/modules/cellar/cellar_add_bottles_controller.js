@@ -9,10 +9,15 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlServi
 		'movement_date': moment().format('D.M.YYYY'),
 		'movement_quantity': "1"
 	};
-		
+	$scope.status = { opened: false };		
 	$scope.add = function(movement, storedWineId) {
 		MovementsService.insert(movement, storedWineId);
 	}	
+	
+	$scope.open = function(event) {
+		console.log('Click');
+		$scope.status.opened = true;		
+	}
 	
 
 	// Notification functions

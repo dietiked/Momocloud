@@ -23,13 +23,13 @@
 					<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
 					<form name="myForm" ng-submit="save()">
 						<div class="form-group">
-							<label for="year">Year</label>
+							<label for="year">Year *</label>
 							<select name="year" ng-model="vintage.vintage_year" class="form-control">
 								<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="rating">Rating</label>
+							<label for="rating">Rating *</label>
 							<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
 								<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
 							</select>
