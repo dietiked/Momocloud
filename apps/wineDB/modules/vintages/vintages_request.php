@@ -4,8 +4,15 @@
 	$db = new PDO("mysql:host=".$host.";dbname=".$db, $user, $password, array(PDO::ATTR_PERSISTENT => true));
 	$mainTable = "vintages";
 	
+	function getMainCellarId ($db) {
+		$stmt = $db->prepare("SELECT * FROM cellars");
+		$stmt->execute();
+		$cellars = $stmt->fetch();
+		return $cellars["cellar_id"];		
+	}
+	
 	function addVintageToStoredWines ($db, $vintageId) {
-		$cellarId = "2";
+		$cellarId = getMainCellarId ($db);
 		$stmt = $db->prepare("INSERT INTO stored_wines (vintage_id, cellar_id, stored_quantity) VALUES (:vintageId, :cellarId, 0)");
 		$stmt->bindValue(":vintageId", $vintageId);	
 		$stmt->bindValue(":cellarId", $cellarId);	
