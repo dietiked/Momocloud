@@ -1,5 +1,5 @@
-wineDBControllers.controller('VintagesEditController', ['$scope', '$routeParams', '$location', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService',
-function($scope, $routeParams, $location, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService) {
+wineDBControllers.controller('VintagesEditController', ['$scope', '$routeParams', '$location', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
+function($scope, $routeParams, $location, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
 	console.log('VintagesEditController', $routeParams.wineId, $routeParams.vintageId);	
 		
 	$scope.vintage = {};
@@ -58,5 +58,6 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 
 	GeneralDataService.getRatings();
 	GeneralDataService.getYears();
+	AuthService.increaseExpiration();
 		
 }]);

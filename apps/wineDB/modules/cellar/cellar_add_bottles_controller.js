@@ -1,5 +1,5 @@
-wineDBControllers.controller('CellarAddBottlesController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'CellarService', 'MovementsService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlService, CellarService, MovementsService) {
+wineDBControllers.controller('CellarAddBottlesController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'CellarService', 'MovementsService', 'AuthService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlService, CellarService, MovementsService, AuthService) {
 	console.log('CellarAddBottlesController', $routeParams.storedWineId);	
 	
 	$scope.loaded = false;
@@ -43,5 +43,6 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlServi
 	});
 
 	CellarService.get($routeParams.storedWineId);
+	AuthService.increaseExpiration();
 		
 }]);

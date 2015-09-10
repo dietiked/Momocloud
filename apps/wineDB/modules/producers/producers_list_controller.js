@@ -1,4 +1,4 @@
-wineDBControllers.controller('ProducersListController', ['$scope', 'ProducersService', function($scope, ProducersService) {
+wineDBControllers.controller('ProducersListController', ['$scope', 'ProducersService', 'AuthService', function($scope, ProducersService, AuthService) {
 	console.log('ProducersController');
 	
 	// Notification functions
@@ -13,5 +13,6 @@ wineDBControllers.controller('ProducersListController', ['$scope', 'ProducersSer
 	});
 
 	ProducersService.getAll();
+	AuthService.increaseExpiration();
 	
 }]);

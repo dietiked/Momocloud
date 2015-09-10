@@ -1,4 +1,5 @@
-wineDBControllers.controller('ProducersDetailsController', ['$scope', '$routeParams', 'ProducersService', function($scope, $routeParams, ProducersService) {
+wineDBControllers.controller('ProducersDetailsController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 
+function($scope, $routeParams, ProducersService, AuthService) {
 	console.log('ProducersDetailsController for producer', $routeParams.producerId);
 
 	$scope.loaded = false;
@@ -16,5 +17,6 @@ wineDBControllers.controller('ProducersDetailsController', ['$scope', '$routePar
 	});
 		
 	ProducersService.getProducer($routeParams.producerId, true);
+	AuthService.increaseExpiration();
 				
 }]);
