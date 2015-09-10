@@ -19,17 +19,17 @@
 				<div class="box-header">
 				</div>
 				<div class="box-body">
-					<form ng-submit="save()">
-						<div class="form-group">
-							<label for="producer_name">Name: </label>
-							<input id="producer_name" type="text" ng-model="producer.producer_name" class="form-control"/>
+					<form name="producerForm" ng-submit="save()">
+						<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
+							<label for="producerName">Name * </label>
+							<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
 						</div>
-						<div class="form-group">
-							<label for="producer_location">Location: </label>
-							<input id="producer_location" type="text" ng-model="producer.producer_location" class="form-control"/>
+						<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
+							<label for="producerLocation">Location * </label>
+							<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
 						</div>
 						<a href="#/producers/" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit">Save</button>
+						<button class="btn btn-success" type="submit" ng-disabled="!producerForm.$valid">Save</button>
 					</form>
 				</div>
 			</div>

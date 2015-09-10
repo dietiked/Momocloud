@@ -4,6 +4,7 @@ function($scope, $routeParams, ProducersService, UrlService) {
 	
 	$scope.producer = {};
 	$scope.showError = false;
+	$scope.loaded = false;
 		
 	$scope.save = function() {
 		console.log('Save', $scope.producer);
@@ -13,6 +14,7 @@ function($scope, $routeParams, ProducersService, UrlService) {
 	// Notification functions
 	var getProducer = function() {
 		$scope.producer = ProducersService.producer;
+		$scope.loaded = true;
 	}
 	var producerUpdated = function() {
 		UrlService.redirectToProducer($scope.producer.producer_id);
