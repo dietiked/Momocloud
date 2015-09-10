@@ -30,19 +30,21 @@
 						<thead>
 							<tr>
 								<th>Name</th>
+								<th>Appellation</th>
 								<th>Producer</th>
 								<th>Type</th>
-								<th>Grapes</th>
 								<th>Alcohol</th>
+								<th>Grapes</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="wine in wines | filter:search">
 								<td><a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+								<td>{{wine.wine_appellation}}</td>
 								<td><a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
 								<td>{{wine.winetype_description}}</td>
-								<td>{{wine.wine_grapes}}</td>
 								<td>{{wine.wine_alcohol}}%</td>
+								<td>{{wine.wine_grapes}}</td>
 							</tr>
 						</tbody>
 					</table>
