@@ -1,4 +1,5 @@
-wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', function($scope, $routeParams, ProducersService) {
+wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService',
+function($scope, $routeParams, ProducersService, AuthService) {
 	console.log('ProducersNewController');
 	
 	$scope.producer = {};
@@ -20,5 +21,7 @@ wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams'
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getProducerSuccess);
 	});
+
+	AuthService.increaseExpiration();
 			
 }]);

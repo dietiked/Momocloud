@@ -1,5 +1,5 @@
-wineDBControllers.controller('IndexController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 
-function($scope, ProducersService, WinesService, MovementsService) {
+wineDBControllers.controller('IndexController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 'AuthService',
+function($scope, ProducersService, WinesService, MovementsService, AuthService) {
 	console.log('IndexController');
 
 	// Notification functions
@@ -59,6 +59,7 @@ function($scope, ProducersService, WinesService, MovementsService) {
 	
 	ProducersService.getAll();
 	WinesService.countWines();
+	AuthService.increaseExpiration();
 	
 	// -----------
 	ChartDataService.getMovementsForTimeSeries();
