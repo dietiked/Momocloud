@@ -1,6 +1,6 @@
 wineDBControllers.controller('VintagesEditController', ['$scope', '$routeParams', '$location', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
 function($scope, $routeParams, $location, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
-	console.log('VintagesEditController', $routeParams.wineId, $routeParams.vintageId);	
+	//console.log('VintagesEditController', $routeParams.wineId, $routeParams.vintageId);	
 		
 	$scope.vintage = {};
 	$scope.ratings = [];
@@ -10,7 +10,7 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 	$scope.showError = false;
 			
 	$scope.save = function() {
-		console.log('Save vintage', $scope.vintage);
+		//console.log('Save vintage', $scope.vintage);
 		VintagesService.update($scope.vintage);
 	}
 
@@ -25,7 +25,7 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 	// Notification functions
 	var getVintage = function() {
 		$scope.vintage = VintagesService.vintage;
-		console.log('Check', $scope.vintage);	
+		//console.log('Check', $scope.vintage);	
 	}
 	var vintageUpdated = function() {
 		UrlService.redirectToWine($routeParams.wineId);

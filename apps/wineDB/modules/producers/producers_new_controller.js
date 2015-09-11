@@ -1,12 +1,12 @@
 wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService',
 function($scope, $routeParams, ProducersService, AuthService) {
-	console.log('ProducersNewController');
+	//console.log('ProducersNewController');
 	
 	$scope.producer = {};
 	$scope.success = false;
 	
 	$scope.save = function() {
-		console.log('Save', $scope.producer);
+		//console.log('Save', $scope.producer);
 		ProducersService.insert($scope.producer);
 	}
 			

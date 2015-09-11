@@ -1,6 +1,6 @@
 wineDBControllers.controller('WinesNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService, AuthService) {
-	console.log('WinesNewController');	
+	//console.log('WinesNewController');	
 	
 	$scope.wine = {};
 	$scope.producers = [];
@@ -10,7 +10,7 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 	
 	$scope.save = function() {
-		console.log('Save', $scope.wine);
+		//console.log('Save', $scope.wine);
 		WinesService.insert($scope.wine);
 	}
 

@@ -21,12 +21,12 @@ function GeneralDataService($http, NotificationCenter) {
 			request + '?f=winetypes'
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success', data);
+			//console.log('success', data);
 			GeneralDataService.winetypes = data;
 			NotificationCenter.postNotification(GeneralDataService.notifications.TYPES_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
-			console.log('error', data);			
+			//console.log('error', data);			
 			NotificationCenter.postNotification(GeneralDataService.notifications.TYPES_GET_ALL_ERROR);
 		});		
 	};
@@ -37,12 +37,12 @@ function GeneralDataService($http, NotificationCenter) {
 			request + '?f=ratings'
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success', data);
+			//console.log('success', data);
 			GeneralDataService.ratings = data;
 			NotificationCenter.postNotification(GeneralDataService.notifications.RATINGS_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
-			console.log('error', data);			
+			//console.log('error', data);			
 			NotificationCenter.postNotification(GeneralDataService.notifications.RATINGS_GET_ALL_ERROR);
 		});		
 	};
@@ -53,12 +53,12 @@ function GeneralDataService($http, NotificationCenter) {
 			request + '?f=years'
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success', data);
+			//console.log('success', data);
 			GeneralDataService.years = data;
 			NotificationCenter.postNotification(GeneralDataService.notifications.YEARS_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
-			console.log('error', data);			
+			//console.log('error', data);			
 			NotificationCenter.postNotification(GeneralDataService.notifications.YEARS_GET_ALL_ERROR);
 		});		
 	};

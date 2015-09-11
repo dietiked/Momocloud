@@ -1,6 +1,6 @@
 wineDBControllers.controller('CellarAddBottlesController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'CellarService', 'MovementsService', 'AuthService',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlService, CellarService, MovementsService, AuthService) {
-	console.log('CellarAddBottlesController', $routeParams.storedWineId);	
+	//console.log('CellarAddBottlesController', $routeParams.storedWineId);	
 	
 	$scope.loaded = false;
 	$scope.showError = false;
@@ -15,7 +15,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlServi
 	}	
 	
 	$scope.open = function(event) {
-		console.log('Click');
+		//console.log('Click');
 		$scope.status.opened = true;		
 	}
 	

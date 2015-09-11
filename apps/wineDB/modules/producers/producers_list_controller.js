@@ -1,5 +1,5 @@
 wineDBControllers.controller('ProducersListController', ['$scope', 'ProducersService', 'AuthService', function($scope, ProducersService, AuthService) {
-	console.log('ProducersController');
+	//console.log('ProducersController');
 	
 	// Notification functions
 	var getProducers = function() {

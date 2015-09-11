@@ -1,14 +1,15 @@
 wineDBControllers.controller('VintagesNewController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
-	console.log('WinesDetailsController', $routeParams.wineId);	
+	//console.log('WinesDetailsController', $routeParams.wineId);	
 		
 	$scope.vintage = {};
+	$scope.wine = {};
 	$scope.ratings = [];
 	$scope.years = [];
 	$scope.showError = false;
 			
 	$scope.save = function() {
-		console.log('Save vintage', $scope.vintage);
+		//console.log('Save vintage', $scope.vintage);
 		VintagesService.insert($scope.vintage, $scope.wine.wine_id);
 	}
 			
