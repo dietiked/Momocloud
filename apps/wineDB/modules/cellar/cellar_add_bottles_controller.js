@@ -5,19 +5,16 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlServi
 	$scope.loaded = false;
 	$scope.showError = false;
 	$scope.wine = {};
+	$scope.aDate = new Date();
 	$scope.movement = {
-		'movement_date': moment().format('D.M.YYYY'),
+		'movement_date': '', //moment().format('D.M.YYYY'),
 		'movement_quantity': "1"
 	};
-	$scope.status = { opened: false };		
 	$scope.add = function(movement, storedWineId) {
+		$scope.movement.movement_date = moment($scope.aDate).format('D.M.YYYY');
 		MovementsService.insert(movement, storedWineId);
 	}	
-	
-	$scope.open = function(event) {
-		//console.log('Click');
-		$scope.status.opened = true;		
-	}
+	$scope.dateOptions = {};
 	
 
 	// Notification functions

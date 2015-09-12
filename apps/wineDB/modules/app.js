@@ -11,7 +11,7 @@ wineDBServices.factory('AuthService', AuthService);
 wineDBServices.directive('errorMessage', errorMessage);
 wineDBServices.directive('wineRating', wineRating);
 
-var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBServices', 'wineDBDirectives', 'angular.filter'], 
+var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBServices', 'wineDBDirectives', 'angular.filter', 'ui.bootstrap'], 
 	
 	function($httpProvider) {
 	  // Use x-www-form-urlencoded Content-Type
