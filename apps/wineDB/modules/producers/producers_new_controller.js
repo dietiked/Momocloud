@@ -1,5 +1,5 @@
-wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService',
-function($scope, $routeParams, ProducersService, AuthService) {
+wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService',
+function($scope, $routeParams, ProducersService, AuthService, UrlService) {
 	//console.log('ProducersNewController');
 	
 	$scope.producer = {};
@@ -13,7 +13,7 @@ function($scope, $routeParams, ProducersService, AuthService) {
 	// Notification functions
 	var insertSuccess = function() {
 		// Visualize message with ng-show
-		$scope.success = true;
+		UrlService.redirectToProducerList();
 	}
 
 	// Notification handlers
