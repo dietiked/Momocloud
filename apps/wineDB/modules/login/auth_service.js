@@ -12,7 +12,6 @@ function AuthService($http, $location, NotificationCenter) {
 		
 	function activateUser(user) {
 		var expiration = moment().add(1, 'h');		
-		console.log('Expiration', expiration);
 		AuthService.user = {
 			email: user.email,
 			expire: expiration
@@ -22,7 +21,7 @@ function AuthService($http, $location, NotificationCenter) {
 	}
 	
 	AuthService.getUser = function() {
-		console.log(AuthService.user);
+		//console.log(AuthService.user);
 		return AuthService.user;
 	};
 	
@@ -31,7 +30,7 @@ function AuthService($http, $location, NotificationCenter) {
 			'email': user.email,
 			'password': user.password
 		};
-		console.log(data.email, data.password);
+		//console.log(data.email, data.password);
 		$http.post(
 			serverInterface + '?f=login',
 			data
@@ -43,7 +42,7 @@ function AuthService($http, $location, NotificationCenter) {
 			}
 		})
 		.error(function(error) {
-			console.log('Server error: ', error);			
+			//console.log('Server error: ', error);			
 		});
 	};
 	
@@ -60,20 +59,20 @@ function AuthService($http, $location, NotificationCenter) {
 			'email': user.email,
 			'password': user.password
 		};
-		console.log(data.email, data.password);
+		//console.log(data.email, data.password);
 		$http.post(
 			serverInterface + '?f=subscribe',
 			data
 		)
 		.success(function(response) {
-			console.log('Server success: ', response);			
+			//console.log('Server success: ', response);			
 			if (response.isValid) {
 				activateUser(user)
 				$location.path('/index');
 			}
 		})
 		.error(function(error) {
-			console.log('Server error: ', error);			
+			//console.log('Server error: ', error);			
 		});
 	};
 	
@@ -87,10 +86,8 @@ function AuthService($http, $location, NotificationCenter) {
 		var now = moment();
 		var expiration = moment(time);
 		if (now.isBefore(expiration)) {
-			console.log('OKKKKK');
 			return true;			
 		} else {
-			console.log('BUUUU');
 			return false;
 		}		
 	};

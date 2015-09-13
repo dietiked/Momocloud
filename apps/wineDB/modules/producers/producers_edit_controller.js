@@ -1,13 +1,13 @@
 wineDBControllers.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'AuthService',
 function($scope, $routeParams, ProducersService, UrlService, AuthService) {
-	console.log('ProducersEditController for producer', $routeParams.producerId);
+	//console.log('ProducersEditController for producer', $routeParams.producerId);
 	
 	$scope.producer = {};
 	$scope.showError = false;
 	$scope.loaded = false;
 		
 	$scope.save = function() {
-		console.log('Save', $scope.producer);
+		//console.log('Save', $scope.producer);
 		ProducersService.update($scope.producer);
 	}
 			

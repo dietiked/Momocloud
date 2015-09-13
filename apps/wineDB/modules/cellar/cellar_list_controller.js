@@ -1,6 +1,6 @@
 wineDBControllers.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, AuthService) {
-	console.log('WinesDetailsController');	
+	//console.log('WinesDetailsController');	
 	
 	$scope.loaded = false;
 	DependenciesChecker.setDependencies(2);

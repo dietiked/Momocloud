@@ -1,6 +1,6 @@
 wineDBControllers.controller('IndexController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 'AuthService',
 function($scope, ProducersService, WinesService, MovementsService, AuthService) {
-	console.log('IndexController');
+	//console.log('IndexController');
 
 	// Notification functions
 	var activeProducers = function() {
