@@ -17,6 +17,8 @@
 		$stmt->bindValue(":vintageId", $vintageId);	
 		$stmt->bindValue(":cellarId", $cellarId);	
 		$stmt->execute();
+		$id = $db->lastInsertId();
+		return $id;
 	}
 	
 	if ($_GET["f"] == "get") {
@@ -56,13 +58,14 @@
 		$stmt->bindValue(":wineId", $_POST["wine_id"]);	
 		$stmt->execute();
 		$id = $db->lastInsertId();
+		$storedWineId = 0;
 		if ($id > 0) {
 			$result = True;
-			addVintageToStoredWines ($db, $id);
+			$storedWineId = addVintageToStoredWines ($db, $id);
 		} else {
 			$result = False;
 		}
-		echo(json_encode(Array('success'=>$result, 'id'=>$id)));	
+		echo(json_encode(Array('success'=>$result, 'id'=>$id, 'storedWineId'=>$storedWineId)));	
 	}
 	
 ?>

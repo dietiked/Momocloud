@@ -63,7 +63,7 @@
 			} else {
 				$result = False;
 			}
-			return Array('success'=>$result, '$id'=>$id);
+			return Array('success'=>$result, 'id'=>$id);
 		}
 		
 		public function countWines() {

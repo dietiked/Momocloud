@@ -4,6 +4,12 @@ function UrlService($http, $location, NotificationCenter) {
 	UrlService.notifications = {
 	};
 	
+	UrlService.redirectToNewVintage = function(wineId) {
+		$location.path('wines/' +  wineId + '/vintage/new');				
+	};
+	UrlService.redirectToNewWine = function() {
+		$location.path('/wines/new');				
+	};
 	UrlService.redirectToWine = function(id) {
 		$location.path('/wines/' + id);		
 	};
@@ -19,6 +25,9 @@ function UrlService($http, $location, NotificationCenter) {
 	};
 	UrlService.redirectToCellar = function() {
 		$location.path('/cellar');		
+	};
+	UrlService.redirectToAddBottles = function(storedWineId) {
+		$location.path('/cellar/' + storedWineId + '/bottles/add');		
 	};
 
 	return UrlService;

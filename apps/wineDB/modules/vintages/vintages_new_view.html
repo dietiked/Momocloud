@@ -21,7 +21,7 @@
 				</div>
 				<div class="box-body">
 					<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
-					<form name="myForm" ng-submit="save()">
+					<form name="myForm">
 						<div class="form-group">
 							<label for="year">Year *</label>
 							<select name="year" ng-model="vintage.vintage_year" class="form-control">
@@ -35,7 +35,8 @@
 							</select>
 						</div>
 						<a href="#/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit">Save</button>						
+						<button class="btn btn-success" ng-click="save(false)">Save</button>						
+						<button class="btn btn-success" ng-click="save(true)">Save and add bottles</button>						
 					</form>
 				</div>
 			</div>

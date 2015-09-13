@@ -1,6 +1,8 @@
 wineDBControllers.controller('VintagesNewController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
 	//console.log('WinesDetailsController', $routeParams.wineId);	
+
+	var redirectToAddBottlesForm = false;
 		
 	$scope.vintage = {};
 	$scope.wine = {};
@@ -8,8 +10,9 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.years = [];
 	$scope.showError = false;
 			
-	$scope.save = function() {
+	$scope.save = function(addBottles) {
 		//console.log('Save vintage', $scope.vintage);
+		redirectToAddBottlesForm = addBottles;
 		VintagesService.insert($scope.vintage, $scope.wine.wine_id);
 	}
 			
@@ -24,7 +27,11 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		$scope.years = GeneralDataService.years;
 	}
 	var vintageInserted = function() {
-		UrlService.redirectToWine($routeParams.wineId);
+		if (VintagesService.lastStoredWineId > 0 & redirectToAddBottlesForm) {
+			UrlService.redirectToAddBottles(VintagesService.lastStoredWineId);
+		} else {
+			UrlService.redirectToWine($routeParams.wineId);		
+		}
 	}
 	var vintageNotInserted = function() {
 		$scope.showError = true;

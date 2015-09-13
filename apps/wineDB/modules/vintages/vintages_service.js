@@ -6,6 +6,7 @@ function VintagesService($http, NotificationCenter) {
 	VintagesService.vintage = {};
 	VintagesService.isUpdated = false;
 	VintagesService.isInserted = false;
+	VintagesService.lastStoredWineId = 0;
 	
 	VintagesService.notifications = {
 		VINTAGES_GET_ALL_SUCCESS: 'winesGetAllSuccess',
@@ -74,6 +75,7 @@ function VintagesService($http, NotificationCenter) {
 	}
 	
 	VintagesService.insert = function(vintage, wineId) {
+		VintagesService.lastStoredWineId = 0;
 		vintage.wine_id = wineId;
 		$http.post(
 			request + '?f=insert',
@@ -82,6 +84,7 @@ function VintagesService($http, NotificationCenter) {
 		.success(function(data, status, headers, config) {
 			if (data.id > 0) {
 				//console.log('success while inserting', data);
+				VintagesService.lastStoredWineId = Number(data.storedWineId);
 				VintagesService.isInserted = true;
 				NotificationCenter.postNotification(VintagesService.notifications.VINTAGES_INSERT_SUCCESS);				
 			} else {
