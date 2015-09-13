@@ -2,6 +2,8 @@ wineDBControllers.controller('ProducersNewController', ['$scope', '$routeParams'
 function($scope, $routeParams, ProducersService, AuthService, UrlService) {
 	//console.log('ProducersNewController');
 	
+	var redirectToNewWineForm = false;
+	
 	$scope.producer = {};
 	$scope.success = false;
 	
@@ -9,11 +11,20 @@ function($scope, $routeParams, ProducersService, AuthService, UrlService) {
 		//console.log('Save', $scope.producer);
 		ProducersService.insert($scope.producer);
 	}
+	
+	$scope.saveAndAddWine = function() {	
+		redirectToNewWineForm = true;
+		$scope.save();		
+	};
 			
 	// Notification functions
 	var insertSuccess = function() {
 		// Visualize message with ng-show
-		UrlService.redirectToProducerList();
+		if (redirectToNewWineForm) {
+			UrlService.redirectToNewWine();					
+		} else {
+			UrlService.redirectToProducerList();		
+		}
 	}
 
 	// Notification handlers

@@ -2,6 +2,8 @@ wineDBControllers.controller('WinesNewController', ['$scope', 'NotificationCente
 function($scope, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService, AuthService) {
 	//console.log('WinesNewController');	
 	
+	var redirectToNewVintageForm = false;
+	
 	$scope.wine = {};
 	$scope.producers = [];
 	$scope.winetypes = [];
@@ -10,15 +12,26 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 	
 	$scope.save = function() {
-		//console.log('Save', $scope.wine);
 		WinesService.insert($scope.wine);
 	}
+	
+	$scope.saveAndAddVintage = function() {
+		redirectToNewVintageForm = true;
+		$scope.save();
+	};
 
 	// Notification functions
 	var insertSuccess = function() {
-		// Visualize message with ng-show
-		$scope.success = true;
-		UrlService.redirectToWineList();
+		if (redirectToNewVintageForm) {
+			var wineId = WinesService.lastWineId;
+			if (wineId > 0) {
+				UrlService.redirectToNewVintage(wineId);								
+			} else {
+				UrlService.redirectToWineList();		
+			}
+		} else {
+			UrlService.redirectToWineList();		
+		}			
 	}
 
 	var getProducers = function() {
