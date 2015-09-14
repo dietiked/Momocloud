@@ -1,3 +1,10 @@
+@brand-primary: darken(#428bca, 6.5%); // #337ab7
+@brand-success: #5cb85c;
+@brand-info:    #5bc0de;
+@brand-warning: #f0ad4e;
+@brand-danger:  #d9534f;
+
+
 .lockscreen {
 	z-index: 1000000;
 	position: fixed;
@@ -9,6 +16,85 @@
 	min-height: 100%;
 }
 
-.box, .small-box, .btn {
+.box, .small-box, .btn, .info-box {
 	border-radius: 0px;
+}
+
+.info-box-icon {
+	color: white;	
+}
+
+.etiquette-producer {
+	font-size: 14px;
+	text-transform: uppercase;
+	margin-top: 0px;
+	margin-bottom: 2px;
+}
+.etiquette-name {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 2px;
+	margin-bottom: 1px;
+}
+.etiquette-appellation {
+	font-size: 14px;
+	margin-top: 1px;
+	margin-bottom: 3px;
+}
+.etiquette-info {
+	margin-bottom: 0px;
+	text-transform: capitalize;
+}
+.etiquette-quantity {
+	//margin-top: 3px;
+	padding-top: 5px;
+	border-top: 1px solid #6a6a6a;
+	background-color: #222d32;
+	color: white;
+	margin-left: -5px;
+	padding-left: 5px;
+	margin-right: -5px;
+	padding-right: 5px;
+	margin-bottom: -5px;
+	padding-bottom: 5px;
+}
+
+.etiquette {
+	border: 1px solid #222d32;
+	background-color: #f6f6f6;
+	margin-bottom: 15px;
+	padding: 5px;
+	h1 {
+		font-size: 20px;
+		font-weight: bold;	
+		margin-top: 10px;
+		margin-bottom: 3px;
+	}
+	h2 {
+		font-size: 16px;
+		margin-top: 3px;
+		font-weight:  bold;
+	}
+	h3 {
+		font-size: 14px;
+		margin-bottom: 3px;
+	}
+	
+	a:link, a:visited, a:active {
+		color: black;
+	}
+	a:hover {
+		color: gray;
+	}
+				
+	.label-1, .label-2, .label-3, .label-4, .label-5 {
+		background-color: @brand-danger;
+	}
+	.label-6, .label-7 {
+		background-color: @brand-warning;
+	}
+	.label-8, .label-9, .label-10 {
+		background-color: @brand-success;
+	}
+	
 }
