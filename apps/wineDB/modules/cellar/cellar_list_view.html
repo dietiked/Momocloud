@@ -30,8 +30,35 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="box-body">
-					<table class="table">
+					
+					<div class="row">
+						<div ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn" class="col-md-4 col-sm-6 col-xs-12">
+							<div class="etiquette etiquette-{{wine.winetype_description}}">
+								<div class="etiquette-content">
+									<span class="badge"></span>
+									<div class="etiquette-producer">
+										{{wine.producer_name}}
+										<span class="pull-right label label-{{wine.vintage_rating}}">{{wine.vintage_rating}}/10</span>
+									</div>
+									<div class="etiquette-name">
+										<a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a> <a href="#/wines/{{wine.wine_id}}/vintage/{{wine.vintage_id}}/edit">{{wine.vintage_year}}</a>
+									</div>
+									<div class="etiquette-appellation">{{wine.wine_appellation}}</div>
+									<div class="etiquette-info">
+										<span class="pull-left">{{wine.wine_alcohol}}%</span>
+										<span class="pull-right">{{wine.winetype_description}} wine</span>
+										<span class="clearfix"></span>
+									</div>
+									<div class="etiquette-quantity">
+										<span class="">Bottles: {{wine.stored_quantity}}</span>
+										 <a class="btn btn-default btn-xs pull-right" href="#/cellar/{{wine.stored_wine_id}}/bottles/add"><i class="fa fa-cart-plus"></i> add</a>					</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!--<table class="table">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -60,11 +87,11 @@
 									<a class="btn btn-default btn-xs" href="#/cellar/drink/{{wine.stored_wine_id}}"><i class="fa fa-glass"></i> Drink one</a>
 									<!--<button class="btn btn-default btn-xs" ng-click="recalculateQuantity(wine.stored_wine_id)">
 										<i class="fa fa-repeat"></i>
-									</button>-->
+									</button>
 								</td>
 							</tr>
 						</tbody>
-					</table>
+					</table>-->
 				</div>
 				<div class="overlay" ng-show="!loaded">
 					<i class="fa fa-refresh fa-spin"></i>
