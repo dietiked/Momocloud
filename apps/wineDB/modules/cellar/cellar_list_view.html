@@ -34,12 +34,12 @@
 				<div class="box-body">
 					
 					<div class="row">
-						<div ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn" class="col-md-4 col-sm-6 col-xs-12">
+						<div ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 							<div class="etiquette etiquette-{{wine.winetype_description}}">
 								<div class="etiquette-content">
 									<span class="badge"></span>
 									<div class="etiquette-producer">
-										{{wine.producer_name}}
+										<a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a>
 										<span class="pull-right label label-{{wine.vintage_rating}}">{{wine.vintage_rating}}/10</span>
 									</div>
 									<div class="etiquette-name">
