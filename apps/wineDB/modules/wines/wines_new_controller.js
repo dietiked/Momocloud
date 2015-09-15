@@ -9,7 +9,7 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 	$scope.winetypes = [];
 	$scope.success = false;
 	DependenciesChecker.setDependencies(2);
-	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
+	$scope.dependenciesLoaded = DependenciesChecker.init();
 	
 	$scope.save = function() {
 		WinesService.insert($scope.wine);

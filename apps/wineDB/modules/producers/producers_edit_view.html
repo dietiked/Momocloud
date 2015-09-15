@@ -31,6 +31,16 @@
 							<label for="producerLocation">Producer location: </label>
 							<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
 						</div>
+						<div class="form-group" ng-class="{'has-error': producerForm.producerRegion.$invalid}">
+							<label for="producerRegion">Producer region: </label>
+							<input name="producerRegion" type="text" ng-model="producer.producer_region" class="form-control" required/>
+						</div>
+						<div class="form-group">
+							<label for="country">Country *</label>
+							<select name="country" ng-model="producer.country_code" class="form-control">
+								<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
+							</select>
+						</div>
 						<a href="#/producers/{{producer.producer_id}}" class="btn btn-default">Cancel</a>
 						<button class="btn btn-success" type="submit">Save</button>
 					</form>
