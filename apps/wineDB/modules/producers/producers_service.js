@@ -58,7 +58,7 @@ function ProducersService($http, NotificationCenter) {
 			producer
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success while updating', data);
+			console.log('success while updating', data);
 			if (data.success) {
 				NotificationCenter.postNotification(ProducersService.notifications.PRODUCERS_UPDATE_SUCCESS);			
 			} else {

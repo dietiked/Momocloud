@@ -18,6 +18,11 @@
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);					
 		echo json_encode($result);		
+	} else if ($_GET["f"] == "countries") {
+		$stmt = $db->prepare("SELECT * FROM countries");			
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($result);		
 	}
 	
 ?>

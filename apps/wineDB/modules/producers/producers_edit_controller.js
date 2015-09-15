@@ -1,10 +1,11 @@
-wineDBControllers.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'AuthService',
-function($scope, $routeParams, ProducersService, UrlService, AuthService) {
+wineDBControllers.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'AuthService', 'GeneralDataService', 'DependenciesChecker',
+function($scope, $routeParams, ProducersService, UrlService, AuthService, GeneralDataService, DependenciesChecker) {
 	//console.log('ProducersEditController for producer', $routeParams.producerId);
 	
 	$scope.producer = {};
 	$scope.showError = false;
 	$scope.loaded = false;
+	$scope.countries = [];
 		
 	$scope.save = function() {
 		//console.log('Save', $scope.producer);
@@ -23,18 +24,24 @@ function($scope, $routeParams, ProducersService, UrlService, AuthService) {
 		$scope.producer = ProducersService.producer;
 		$scope.showError = true;
 	}
+	var getCountries = function() {
+		$scope.countries = GeneralDataService.countries;
+		ProducersService.getProducer($routeParams.producerId);
+	}
 
 	// Notification handlers
 	var getProducerSuccess = NotificationCenter.subscribe(ProducersService.notifications.PRODUCERS_GET_SUCCESS, getProducer);
 	var updateProducerSuccess = NotificationCenter.subscribe(ProducersService.notifications.PRODUCERS_UPDATE_SUCCESS, producerUpdated);
 	var updateProducerError = NotificationCenter.subscribe(ProducersService.notifications.PRODUCERS_UPDATE_ERROR, producerNotUpdated);
+	var getCountriesSuccess = NotificationCenter.subscribe(GeneralDataService.notifications.COUNTRIES_GET_ALL_SUCCESS, getCountries);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getProducerSuccess);
 		NotificationCenter.unsubscribe(updateProducerSuccess);
 		NotificationCenter.unsubscribe(updateProducerError);
+		NotificationCenter.unsubscribe(getCountriesSuccess);
 	});
 		
-	ProducersService.getProducer($routeParams.producerId);
+	GeneralDataService.getCountries();
 	AuthService.increaseExpiration();
 	
 }]);

@@ -29,7 +29,7 @@
 	}
 	
 	if ($_GET["f"] == "get") {
-		$query = "SELECT * FROM " . $mainTable . " JOIN (vintages, wines, wine_producers, wine_types) ON (" . $mainTable . ".vintage_id=vintages.vintage_id AND vintages.wine_id=wines.wine_id AND wines.producer_id=wine_producers.producer_id AND wines.winetype_id=wine_types.winetype_id)";
+		$query = "SELECT * FROM " . $mainTable . " JOIN (vintages, wines, wine_producers, wine_types, countries) ON (" . $mainTable . ".vintage_id=vintages.vintage_id AND vintages.wine_id=wines.wine_id AND wines.producer_id=wine_producers.producer_id AND wines.winetype_id=wine_types.winetype_id AND wine_producers.country_code=countries.country_code)";
 		if (isset($_GET["vintage_id"])) {
 			$id = $_GET["vintage_id"];
 			$query = $query . " WHERE vintage_id=" . $id;
