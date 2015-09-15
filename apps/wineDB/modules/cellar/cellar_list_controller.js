@@ -6,6 +6,7 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	DependenciesChecker.setDependencies(2);
 		
 	$scope.storedWines = [];
+	$scope.orderColumn = 'wine_name'
 		
 	$scope.recalculateQuantity = function(storedWineId) {
 		CellarService.recalculateQuantity(storedWineId);

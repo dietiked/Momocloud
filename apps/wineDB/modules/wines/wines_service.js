@@ -5,6 +5,7 @@ function WinesService($http, NotificationCenter) {
 	WinesService.wines = [];
 	WinesService.numberOfWines = 0;
 	WinesService.wine = {};
+	WinesService.lastWineId = 0;
 	
 	WinesService.notifications = {
 		WINES_GET_ALL_SUCCESS: 'winesGetAllSuccess',
@@ -88,6 +89,7 @@ function WinesService($http, NotificationCenter) {
 	}
 	
 	WinesService.insert = function(wine) {
+		WinesService.lastWineId = 0;
 		$http.post(
 			request + '?f=insert',
 			wine
@@ -95,6 +97,7 @@ function WinesService($http, NotificationCenter) {
 		.success(function(data, status, headers, config) {
 			if (data.success) {
 				//console.log('success while inserting', data);
+				WinesService.lastWineId = data.id;
 				NotificationCenter.postNotification(WinesService.notifications.WINES_INSERT_SUCCESS);				
 			} else {
 				//console.log('error while inserting', data);			

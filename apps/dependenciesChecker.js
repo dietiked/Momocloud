@@ -6,6 +6,12 @@ function DependenciesChecker () {
 	var dependencies = 0;
 	var loadedDependencies = 0;
 	
+	DependenciesChecker.init = function() {
+		DependenciesChecker.serviceReady = false;
+		dependencies = 0;
+		loadedDependencies = 0;
+	};
+
 	DependenciesChecker.setDependencies = function(numberOfDependencies) {
 		dependencies = numberOfDependencies;
 	};

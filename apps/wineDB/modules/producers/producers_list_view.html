@@ -33,12 +33,16 @@
 							<tr>
 								<th>Producer</th>
 								<th>Location</th>
+								<th>Region</th>
+								<th>Country</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="producer in producers | filter:search">
 								<td><a href="#producers/{{producer.producer_id}}">{{producer.producer_name}}</a></td>
 								<td>{{producer.producer_location}}</td>
+								<td>{{producer.producer_region}}</td>
+								<td>{{producer.country_name_en}}</td>
 							</tr>
 						</tbody>
 					</table>
