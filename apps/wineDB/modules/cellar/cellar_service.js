@@ -4,6 +4,7 @@ function CellarService($http, NotificationCenter) {
 	
 	CellarService.storedWines = [];
 	CellarService.storedWine = {};
+	CellarService.numberOfStoredWines = 0;
 	
 	CellarService.notifications = {
 		CELLAR_GET_ALL_SUCCESS: 'cellarGetAllSuccess',
@@ -24,7 +25,6 @@ function CellarService($http, NotificationCenter) {
 			request + '?f=get'
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success', data);
 			for (var i=0; i<data.length; i++) {
 				data[i].stored_quantity = Number(data[i].stored_quantity);
 				data[i].vintage_rating = Number(data[i].vintage_rating);
