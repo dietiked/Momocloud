@@ -28,32 +28,23 @@ function($scope, ProducersService, WinesService, MovementsService, AuthService) 
 		        }
 		    ]
 		};
+		/*
 		// Get context with jQuery - using jQuery's .get() method.
 		var ctx = $("#wine-movements").get(0).getContext("2d");
 		// This will get the first returned node in the jQuery collection.
 		var wineMovementsChart = new Chart(ctx);
 		wineMovementsChart.Line(data, {bezierCurve: true});
+		*/
 	};
 	
 	getTypesForChartSuccess = function() {
-		var chartData = ChartDataService.typesForChart;
-		// Get context with jQuery - using jQuery's .get() method.
-		var ctx = $("#wine-types").get(0).getContext("2d");
-		// This will get the first returned node in the jQuery collection.
-		var wineMovementsChart = new Chart(ctx);
-		wineMovementsChart.Pie(chartData)
-		
+		$scope.chartDataType = ChartDataService.typesForChart;		
 	};
 
 	getCountriesForChartSuccess = function() {
-		var chartData = ChartDataService.countriesForChart;
-		// Get context with jQuery - using jQuery's .get() method.
-		var ctx = $("#wine-countries").get(0).getContext("2d");
-		// This will get the first returned node in the jQuery collection.
-		var wineMovementsChart = new Chart(ctx);
-		wineMovementsChart.Pie(chartData)
-		
+		$scope.chartDataCountry = ChartDataService.countriesForChart;		
 	};
+	
 	// Notification handlers
 	var getProducersSuccess = NotificationCenter.subscribe(ProducersService.notifications.PRODUCERS_GET_ALL_SUCCESS, activeProducers);
 	var getWinesSuccess = NotificationCenter.subscribe(WinesService.notifications.WINES_COUNT_SUCCESS, getWines);

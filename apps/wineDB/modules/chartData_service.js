@@ -90,9 +90,8 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 		}
 		var data = [];
 		var r = 255/ids.length;
-		console.log('r', r);
 		for (var i=0; i<ids.length; i++) {
-			console.log('r*i', r*i);
+			//console.log('r*i', r*i);
 			var segment = {
 				'label': labels[i],
 				'value': values[i],
