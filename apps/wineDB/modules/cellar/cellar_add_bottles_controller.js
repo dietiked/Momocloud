@@ -20,6 +20,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, UrlServi
 	// Notification functions
 	var getWine = function() {
 		$scope.wine = CellarService.storedWine;
+		console.log('wine', $scope.wine);
 	}
 	var movementInserted = function() {
 		UrlService.redirectToCellar();
