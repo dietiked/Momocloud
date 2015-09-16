@@ -32,7 +32,7 @@
 					<h3 class="box-title">Wines by type</h3>
 				</div>
 				<div class="box-body chart-container">
-					<canvas id="wine-types" style="width:47%; height: 200px; display: inline-block"></canvas>
+					<chart chart-type="pie" chart-name="wine-types" chart-data="{{chartDataType}}"></chart>
 				</div>
 			</div>
 		</div>
@@ -42,7 +42,8 @@
 					<h3 class="box-title">Wines by country</h3>
 				</div>
 				<div class="box-body chart-container">
-					<canvas id="wine-countries" style="width:47%; height: 200px; display: inline-block"></canvas>
+					<chart chart-type="pie" chart-name="wine-countries" chart-data="{{chartDataCountry}}"></chart>
+					<!--<canvas id="wine-countries" style="width:47%; height: 200px; display: inline-block"></canvas>-->
 				</div>
 			</div>
 		</div>

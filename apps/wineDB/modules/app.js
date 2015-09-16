@@ -10,6 +10,7 @@ wineDBServices.factory('AuthService', AuthService);
 // External directives
 wineDBServices.directive('errorMessage', errorMessage);
 wineDBServices.directive('wineRating', wineRating);
+wineDBServices.directive('chart', chart);
 
 var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBServices', 'wineDBDirectives', 'angular.filter', 'ui.bootstrap'], 
 	
