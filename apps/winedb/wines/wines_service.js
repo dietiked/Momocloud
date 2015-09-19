@@ -1,6 +1,6 @@
 function WinesService($http, NotificationCenter) {
 	var WinesService = {};
-	var request = 'modules/wines/wines_request.php';
+	var request = 'apps/winedb/wines/wines_request.php';
 	
 	WinesService.wines = [];
 	WinesService.numberOfWines = 0;

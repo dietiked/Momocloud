@@ -1,6 +1,6 @@
 <?php
-	require_once("../../../config.php");
-	require_once("../../../request.php");
+	require_once("../../_php/config.php");
+	require_once("../../_php/request.php");
 	
 	class WineRequest extends Request {
 		

@@ -1,6 +1,6 @@
 function MovementsService($http, NotificationCenter, CellarService) {
 	var MovementsService = {};
-	var request = 'modules/movements/movements_request.php';
+	var request = 'apps/winedb/movements/movements_request.php';
 	
 	MovementsService.movements = [];
 	MovementsService.wine = {};

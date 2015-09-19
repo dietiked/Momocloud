@@ -63,59 +63,59 @@ var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBSe
 wineDB.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/login', {
-			templateUrl: 'modules/login/login_view.html',
+			templateUrl: 'apps/login/login_view.html',
 			controller: 'LoginController'
 		}).
 		when('/index', {
-			templateUrl: 'modules/index/index_view.html',
+			templateUrl: 'apps/winedb/index/index_view.html',
 			controller: 'IndexController'
 		}).
 		when('/producers', {
-			templateUrl: 'modules/producers/producers_list_view.html',
+			templateUrl: 'apps/winedb/producers/producers_list_view.html',
 			controller: 'ProducersListController'
 		}).
 		when('/producers/new', {
-			templateUrl: 'modules/producers/producers_new_view.html',
+			templateUrl: 'apps/winedb/producers/producers_new_view.html',
 			controller: 'ProducersNewController'
 		}).
 		when('/producers/:producerId', {
-			templateUrl: 'modules/producers/producers_details_view.html',
+			templateUrl: 'apps/winedb/producers/producers_details_view.html',
 			controller: 'ProducersDetailsController'
 		}).
 		when('/producers/:producerId/edit', {
-			templateUrl: 'modules/producers/producers_edit_view.html',
+			templateUrl: 'apps/winedb/producers/producers_edit_view.html',
 			controller: 'ProducersEditController'
 		}).
 		when('/wines', {
-			templateUrl: 'modules/wines/wines_list_view.html',
+			templateUrl: 'apps/winedb/wines/wines_list_view.html',
 			controller: 'WinesListController'
 		}).
 		when('/wines/new', {
-			templateUrl: 'modules/wines/wines_new_view.html',
+			templateUrl: 'apps/winedb/wines/wines_new_view.html',
 			controller: 'WinesNewController'
 		}).
 		when('/wines/:wineId', {
-			templateUrl: 'modules/wines/wines_details_view.html',
+			templateUrl: 'apps/winedb/wines/wines_details_view.html',
 			controller: 'WinesDetailsController'
 		}).
 		when('/wines/:wineId/edit', {
-			templateUrl: 'modules/wines/wines_edit_view.html',
+			templateUrl: 'apps/winedb/wines/wines_edit_view.html',
 			controller: 'WinesEditController'
 		}).
 		when('/wines/:wineId/vintage/new', {
-			templateUrl: 'modules/vintages/vintages_new_view.html',
+			templateUrl: 'apps/winedb/vintages/vintages_new_view.html',
 			controller: 'VintagesNewController'
 		}).
 		when('/wines/:wineId/vintage/:vintageId/edit', {
-			templateUrl: 'modules/vintages/vintages_edit_view.html',
+			templateUrl: 'apps/winedb/vintages/vintages_edit_view.html',
 			controller: 'VintagesEditController'
 		}).
 		when('/cellar', {
-			templateUrl: 'modules/cellar/cellar_list_view.html',
+			templateUrl: 'apps/winedb/cellar/cellar_list_view.html',
 			controller: 'CellarListController'
 		}).
 		when('/cellar/:storedWineId/bottles/add', {
-			templateUrl: 'modules/cellar/cellar_add_bottles_view.html',
+			templateUrl: 'apps/winedb/cellar/cellar_add_bottles_view.html',
 			controller: 'CellarAddBottlesController'
 		}).
 		otherwise({

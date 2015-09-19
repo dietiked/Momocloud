@@ -1,6 +1,6 @@
 function VintagesService($http, NotificationCenter) {
 	var VintagesService = {};
-	var request = 'modules/vintages/vintages_request.php';
+	var request = 'apps/winedb/vintages/vintages_request.php';
 	
 	VintagesService.vintages = [];
 	VintagesService.vintage = {};
