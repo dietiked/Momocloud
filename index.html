@@ -1,15 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="wineDB">
 	<head>
-		<title>Welcome to MomoCloud</title>
-		<link rel="stylesheet" href="css/styles.css" title="MomoCloud CSS" type="text/css" media="screen" charset="utf-8">
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Wine Database</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
+    	<link rel="stylesheet" href="libs/AdminLTE/css/AdminLTE.css">
+    	<link rel="stylesheet" href="libs/AdminLTE/css/skins/_all-skins.css">
+		<link rel="stylesheet" href="css/styles.css">
+		<script src="libs/jquery-1.8.3.js" charset="utf-8"></script>
+		<script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+		<script src="libs/angular/angular.min.js" charset="utf-8"></script>
+		<script src="libs/angular/angular-route.min.js" charset="utf-8"></script>
+		<script src="libs/angular-filter/angular-filter.min.js" charset="utf-8"></script>
+		<script src="libs/moment.js" charset="utf-8"></script>
+		<script src="libs/chartjs/Chart.min.js" charset="utf-8"></script>
+		<script src="libs/AdminLTE/js/app.min.js" charset="utf-8"></script>
+		<script src="libs/ui_bootstrap/ui-bootstrap-0.13.0.js" charset="utf-8"></script>
+		<script src="libs/underscore/underscore.js" charset="utf-8"></script>
+		<script src="directives/error_message/error_message.js" charset="utf-8"></script>
+		<script src="directives/wine_rating/wine_rating.js" charset="utf-8"></script>
+		<script src="directives/chart/chart.js" charset="utf-8"></script>
+		<script src="services/notificationCenter.js" charset="utf-8"></script>
+		<script src="services/dependenciesChecker.js" charset="utf-8"></script>
+		<script src="apps/login/auth_service.js" charset="utf-8"></script>
+		<script src="apps/app.js" charset="utf-8"></script>
+		<script src="apps/login/login_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/index/index_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_details_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_details_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_add_bottles_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/movements/movements_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/url_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/generalData_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/chartData_service.js" charset="utf-8"></script>
 	</head>
-	<body>
-		<h1>Welcome to MomoCloud</h1>
-		<p>We have following applications</p>
-		<ul>
-			<li><a href="apps/wineDB/">Wine DB</a></li>
-			<li><a href="apps/ricettatore/">Ricettatore<a></li>
-		</ul>
+	<body class="skin-red fixed sidebar-mini sidebar-collapse">
+		
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="#/index" class="logo">
+					<span class="logo-mini"><b>M</b>C</span>
+					<span class="logo-lg"><b>Momo</b>Cloud</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="icon-bar"></span>
+					</a>
+					<div class="container-fluid">
+					</div>
+				</nav>
+			</header>
+			
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li class="treeview active">
+							<a href="#/index">
+								<i class="fa fa-glass"></i><span>Wines</span><i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="#">Dashboard</a></li>
+								<li><a href="#/cellar/">Cellar</a></li>
+								<li><a href="#/wines/">Wines</a></li>
+								<li><a href="#/producers/">Producers</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-shopping-cart"></i><span>Recipies</span><i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Ricette</a></li>
+								<li><a href="#">Categorie</a></li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-list"></i><span>Todo</span><i class="fa fa-angle-left pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="#">Dashboard</a></li>
+								<li><a href="#">Projects</a></li>
+								<li><a href="#">Todos</a></li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</aside>
+	
+			<div id="main-content" class="content-wrapper">
+				<div ng-view>
+				</div>
+			</div>
+			
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+					<b>Version</b> 1.0
+				</div>
+				<strong>Copyright 2015</strong> by me
+			</footer>
+		
+		</div>
+		
+		<script>
+		  var AdminLTEOptions = {
+		  	sidebarExpandOnHover: false
+		  };
+		</script>
+
 	</body>
 </html>

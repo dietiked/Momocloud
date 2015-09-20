@@ -1,7 +1,7 @@
 function AuthService($http, $location, NotificationCenter) {
 	
 	//var serverInterface = 'app/modules/auth/auth.php';
-	var serverInterface = 'modules/login/auth_request.php';
+	var serverInterface = 'apps/login/auth_request.php';
 	var AuthService = {};
 	AuthService.user;
 	AuthService.identifier = 'Momocloud';

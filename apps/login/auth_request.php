@@ -1,7 +1,7 @@
 <?php
 	
 	include_once('PasswordHash.php');	
-	include_once('../../../config.php');	
+	include_once('../_php/config.php');	
 	
 	class Auth {
 		private $dbh;

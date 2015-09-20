@@ -1,6 +1,6 @@
 function ProducersService($http, NotificationCenter) {
 	var ProducersService = {};
-	var request = 'modules/producers/producers_request.php';
+	var request = 'apps/winedb/producers/producers_request.php';
 	
 	ProducersService.producers = [];
 	ProducersService.producer = {};

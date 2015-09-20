@@ -1,6 +1,6 @@
 function CellarService($http, NotificationCenter) {
 	var CellarService = {};
-	var request = 'modules/cellar/cellar_request.php';
+	var request = 'apps/winedb/cellar/cellar_request.php';
 	
 	CellarService.storedWines = [];
 	CellarService.storedWine = {};

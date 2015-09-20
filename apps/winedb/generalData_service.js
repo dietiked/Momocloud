@@ -1,6 +1,6 @@
 function GeneralDataService($http, NotificationCenter) {
 	var GeneralDataService = {};
-	var request = 'modules/generalData_request.php';
+	var request = 'apps/winedb/generalData_request.php';
 	
 	GeneralDataService.winetypes = [];
 	GeneralDataService.ratings = [];
