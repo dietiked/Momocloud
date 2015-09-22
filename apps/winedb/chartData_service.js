@@ -89,14 +89,16 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 			}
 		}
 		var data = [];
-		var r = 255/ids.length;
+		var r = 0;
+		var g = 255/ids.length;
+		var b = 255/ids.length;
 		for (var i=0; i<ids.length; i++) {
-			//console.log('r*i', r*i);
+			//console.log('b', b);
 			var segment = {
 				'label': labels[i],
 				'value': values[i],
-				'color': 'rgba(' + Math.round(r*i) + ',50, 0, 1.0)',
-				'highlight': 'rgba(' + Math.round(r*i) + ',50, 0, 0.8)',
+				'color': 'rgba(' + r + ',' + Math.round(g*i) + ',' + Math.round(b*i) + ', 1.0)',
+				'highlight': 'rgba(' + r + ',' + Math.round(g*i) + ', ' + Math.round(b*i) + ', 0.8)',
 			};
 			data.push(segment);
 		}
