@@ -1,4 +1,4 @@
-wineDBControllers.controller('LoginController', ['$scope', 'AuthService', 'NotificationCenter', function($scope, AuthService, NotificationCenter) {
+momocloudControllers.controller('LoginController', ['$scope', 'AuthService', 'NotificationCenter', function($scope, AuthService, NotificationCenter) {
 
 	//console.log('loginController');
 	$scope.loginPage = true;

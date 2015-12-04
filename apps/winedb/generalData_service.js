@@ -85,4 +85,4 @@ function GeneralDataService($http, NotificationCenter) {
 	return GeneralDataService;
 }
 
-wineDBServices.factory('GeneralDataService', GeneralDataService);
+momocloudServices.factory('GeneralDataService', GeneralDataService);

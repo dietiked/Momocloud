@@ -5,7 +5,7 @@
 			<a href="#"><i class="fa fa-glass"></i></a>
 		</li>
 		<li>
-			<a href="#/producers/">Producers</a>
+			<a href="#/winedb/producers/">Producers</a>
 		</li>
 		<li class="active">
 			Details
@@ -34,7 +34,7 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="wine in producer.wines">
-										<td><a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+										<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
 										<td>{{wine.winetype_description}}</td>
 										<td>{{wine.wine_grapes}}</td>
 										<td>{{wine.wine_alcohol}}%</td>
@@ -57,7 +57,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div>
-								<a href="#/producers/{{producer.producer_id}}/edit" class="btn btn-default pull-left">
+								<a href="#/winedb/producers/{{producer.producer_id}}/edit" class="btn btn-default pull-left">
 									<span class="glyphicon glyphicon-edit"></span> Edit producer
 								</a> <a href="#" class="btn btn-danger pull-right">
 									<span class="glyphicon glyphicon-trash"></span> Delete producer

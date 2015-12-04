@@ -5,7 +5,7 @@
 			<a href="#"><i class="fa fa-glass"></i></a>
 		</li>
 		<li>
-			<a href="#/wines/">Wines</a>
+			<a href="#/winedb/wines/">Wines</a>
 		</li>
 		<li class="active">
 			Edit
@@ -54,7 +54,7 @@
 							<label for="notes">Notes</label>
 							<textarea id="notes" type="text" ng-model="wine.wine_notes" class="form-control"/>
 						</div>
-						<a href="#/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
+						<a href="#/winedb/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
 						<button class="btn btn-success" type="submit" ng-disabled="wineForm.$invalid">Save</button>
 					</form>
 				</div>

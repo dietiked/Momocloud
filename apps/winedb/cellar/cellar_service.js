@@ -97,4 +97,4 @@ function CellarService($http, NotificationCenter) {
 	return CellarService;
 }
 
-wineDBServices.factory('CellarService', CellarService);
+momocloudServices.factory('CellarService', CellarService);

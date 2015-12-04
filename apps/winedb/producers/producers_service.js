@@ -95,4 +95,4 @@ function ProducersService($http, NotificationCenter) {
 	return ProducersService;
 }
 
-wineDBServices.factory('ProducersService', ProducersService);
+momocloudServices.factory('ProducersService', ProducersService);

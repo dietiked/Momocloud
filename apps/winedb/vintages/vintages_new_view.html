@@ -5,7 +5,7 @@
 			<a href="#"><i class="fa fa-glass"></i></a>
 		</li>
 		<li>
-			<a href="#/wines/">Wines</a>
+			<a href="#/winedb/wines/">Wines</a>
 		</li>
 		<li class="active">
 			Vintage
@@ -34,7 +34,7 @@
 								<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
 							</select>
 						</div>
-						<a href="#/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
+						<a href="#/winedb/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
 						<button class="btn btn-success" ng-click="save(false)">Save</button>						
 						<button class="btn btn-success" ng-click="save(true)">Save and add bottles</button>						
 					</form>

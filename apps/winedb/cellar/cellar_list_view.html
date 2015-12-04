@@ -39,11 +39,11 @@
 								<div class="etiquette-content">
 									<div class="etiquette-country">{{wine.country_code}}</div>
 									<div class="etiquette-producer">
-										<a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a>
+										<a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a>
 										<span class="pull-right label label-{{wine.vintage_rating}}">{{wine.vintage_rating}}/10</span>
 									</div>
 									<div class="etiquette-name">
-										<a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a> <a href="#/wines/{{wine.wine_id}}/vintage/{{wine.vintage_id}}/edit">{{wine.vintage_year}}</a>
+										<a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a> <a href="#/winedb/wines/{{wine.wine_id}}/vintage/{{wine.vintage_id}}/edit">{{wine.vintage_year}}</a>
 									</div>
 									<div class="etiquette-appellation">{{wine.wine_appellation}}</div>
 									<div class="etiquette-info">
@@ -53,7 +53,7 @@
 									</div>
 									<div class="etiquette-quantity">
 										<span class="">Bottles: {{wine.stored_quantity}}</span>
-										 <a class="btn btn-default btn-xs pull-right on-top" href="#/cellar/{{wine.stored_wine_id}}/bottles/add"><i class="fa fa-cart-plus"></i> add</a>					</div>
+										 <a class="btn btn-default btn-xs pull-right on-top" href="#/winedb/cellar/{{wine.stored_wine_id}}/bottles/add"><i class="fa fa-cart-plus"></i> add</a>					</div>
 								</div>
 							</div>
 						</div>

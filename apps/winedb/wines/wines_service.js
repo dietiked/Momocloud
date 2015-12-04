@@ -114,4 +114,4 @@ function WinesService($http, NotificationCenter) {
 	return WinesService;
 }
 
-wineDBServices.factory('WinesService', WinesService);
+momocloudServices.factory('WinesService', WinesService);

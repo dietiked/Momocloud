@@ -1,18 +1,18 @@
-var wineDBDirectives = angular.module('wineDBDirectives', []);
-var wineDBServices = angular.module('wineDBServices', []);
-var wineDBControllers = angular.module('wineDBControllers', []);
-var wineDBConstants = angular.module('wineDBConstants', []);
+var momocloudDirectives = angular.module('momocloudDirectives', []);
+var momocloudServices = angular.module('momocloudServices', []);
+var momocloudControllers = angular.module('momocloudControllers', []);
+var momocloudConstants = angular.module('momocloudConstants', []);
 
 // External services
-wineDBServices.factory('NotificationCenter', NotificationCenter);
-wineDBServices.factory('DependenciesChecker', DependenciesChecker);
-wineDBServices.factory('AuthService', AuthService);
+momocloudServices.factory('NotificationCenter', NotificationCenter);
+momocloudServices.factory('DependenciesChecker', DependenciesChecker);
+momocloudServices.factory('AuthService', AuthService);
 // External directives
-wineDBServices.directive('errorMessage', errorMessage);
-wineDBServices.directive('wineRating', wineRating);
-wineDBServices.directive('chart', chart);
+momocloudServices.directive('errorMessage', errorMessage);
+momocloudServices.directive('wineRating', wineRating);
+momocloudServices.directive('chart', chart);
 
-var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBServices', 'wineDBDirectives', 'angular.filter', 'ui.bootstrap'], 
+var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap'], 
 	
 	function($httpProvider) {
 	  // Use x-www-form-urlencoded Content-Type
@@ -60,63 +60,73 @@ var wineDB = angular.module('wineDB', ['ngRoute', 'wineDBControllers', 'wineDBSe
 	  }];
 });
 
-wineDB.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/login', {
 			templateUrl: 'apps/login/login_view.html',
 			controller: 'LoginController'
 		}).
-		when('/index', {
+		// Wine DB
+		when('/winedb/index', {
 			templateUrl: 'apps/winedb/index/index_view.html',
 			controller: 'IndexController'
 		}).
-		when('/producers', {
+		when('/winedb/producers', {
 			templateUrl: 'apps/winedb/producers/producers_list_view.html',
 			controller: 'ProducersListController'
 		}).
-		when('/producers/new', {
+		when('/winedb/producers/new', {
 			templateUrl: 'apps/winedb/producers/producers_new_view.html',
 			controller: 'ProducersNewController'
 		}).
-		when('/producers/:producerId', {
+		when('/winedb/producers/:producerId', {
 			templateUrl: 'apps/winedb/producers/producers_details_view.html',
 			controller: 'ProducersDetailsController'
 		}).
-		when('/producers/:producerId/edit', {
+		when('/winedb/producers/:producerId/edit', {
 			templateUrl: 'apps/winedb/producers/producers_edit_view.html',
 			controller: 'ProducersEditController'
 		}).
-		when('/wines', {
+		when('/winedb/wines', {
 			templateUrl: 'apps/winedb/wines/wines_list_view.html',
 			controller: 'WinesListController'
 		}).
-		when('/wines/new', {
+		when('/winedb/wines/new', {
 			templateUrl: 'apps/winedb/wines/wines_new_view.html',
 			controller: 'WinesNewController'
 		}).
-		when('/wines/:wineId', {
+		when('/winedb/wines/:wineId', {
 			templateUrl: 'apps/winedb/wines/wines_details_view.html',
 			controller: 'WinesDetailsController'
 		}).
-		when('/wines/:wineId/edit', {
+		when('/winedb/wines/:wineId/edit', {
 			templateUrl: 'apps/winedb/wines/wines_edit_view.html',
 			controller: 'WinesEditController'
 		}).
-		when('/wines/:wineId/vintage/new', {
+		when('/winedb/wines/:wineId/vintage/new', {
 			templateUrl: 'apps/winedb/vintages/vintages_new_view.html',
 			controller: 'VintagesNewController'
 		}).
-		when('/wines/:wineId/vintage/:vintageId/edit', {
+		when('/winedb/wines/:wineId/vintage/:vintageId/edit', {
 			templateUrl: 'apps/winedb/vintages/vintages_edit_view.html',
 			controller: 'VintagesEditController'
 		}).
-		when('/cellar', {
+		when('/winedb/cellar', {
 			templateUrl: 'apps/winedb/cellar/cellar_list_view.html',
 			controller: 'CellarListController'
 		}).
-		when('/cellar/:storedWineId/bottles/add', {
+		when('/winedb/cellar/:storedWineId/bottles/add', {
 			templateUrl: 'apps/winedb/cellar/cellar_add_bottles_view.html',
 			controller: 'CellarAddBottlesController'
+		}).
+		// Ricettatore
+		when('/recipies/categories', {
+			templateUrl: 'apps/ricettatore/categories/categories_list_view.html',
+			controller: 'RecipyCategoriesListController'
+		}).
+		when('/recipies/categories/new', {
+			templateUrl: 'apps/ricettatore/categories/categories_new_view.html',
+			controller: 'RecipyCategoriesNewController'
 		}).
 		otherwise({
 			redirectTo: '/index'
@@ -127,7 +137,7 @@ wineDB.config(['$routeProvider', '$locationProvider', function($routeProvider, $
 }]);
 
 
-wineDB.run(function($rootScope, $location, AuthService) {
+momocloud.run(function($rootScope, $location, AuthService) {
 	// enumerate routes that don't need authentication
 	var routesThatDontRequireAuth = ['/login'];
 

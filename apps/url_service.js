@@ -5,32 +5,36 @@ function UrlService($http, $location, NotificationCenter) {
 	};
 	
 	UrlService.redirectToNewVintage = function(wineId) {
-		$location.path('wines/' +  wineId + '/vintage/new');				
+		$location.path('/winedb/wines/' +  wineId + '/vintage/new');				
 	};
 	UrlService.redirectToNewWine = function() {
-		$location.path('/wines/new');				
+		$location.path('/winedb/wines/new');				
 	};
 	UrlService.redirectToWine = function(id) {
-		$location.path('/wines/' + id);		
+		$location.path('/winedb/wines/' + id);		
 	};
 	UrlService.redirectToWineList = function() {
-		$location.path('/wines');		
+		$location.path('/winedb/wines');		
 	};
 
 	UrlService.redirectToProducer = function(id) {
-		$location.path('/producers/' + id);		
+		$location.path('/winedb/producers/' + id);		
 	};
 	UrlService.redirectToProducerList = function() {
-		$location.path('/producers');		
+		$location.path('/winedb/producers');		
 	};
 	UrlService.redirectToCellar = function() {
-		$location.path('/cellar');		
+		$location.path('/winedb/cellar');		
 	};
 	UrlService.redirectToAddBottles = function(storedWineId) {
-		$location.path('/cellar/' + storedWineId + '/bottles/add');		
+		$location.path('/winedb/cellar/' + storedWineId + '/bottles/add');		
+	};
+
+	UrlService.redirectToRecipyCategoriesList = function(storedWineId) {
+		$location.path('/recipies/categories/');		
 	};
 
 	return UrlService;
 }
 
-wineDBServices.factory('UrlService', UrlService);
+momocloudServices.factory('UrlService', UrlService);

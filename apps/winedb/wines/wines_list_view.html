@@ -16,7 +16,7 @@
 			<div class="box no-padding">
 				<div class="box-header">
 					<div class="box-title">
-						<a class="btn btn-default btn-sm" href="#/wines/new/"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New wine</a>
+						<a class="btn btn-default btn-sm" href="#/winedb/wines/new/"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New wine</a>
 					</div>
 					<div class="box-tools">
 						<div class="input-group" style="max-width: 300px;">
@@ -39,9 +39,9 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="wine in wines | filter:search">
-								<td><a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+								<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
 								<td>{{wine.wine_appellation}}</td>
-								<td><a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
+								<td><a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
 								<td>{{wine.winetype_description}}</td>
 								<td>{{wine.wine_alcohol}}%</td>
 								<td>{{wine.wine_grapes}}</td>
