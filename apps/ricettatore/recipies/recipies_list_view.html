@@ -1,0 +1,38 @@
+<div class="row submenu">
+	<div class="col-xs-6">
+		<a href="#/recipies/recipies/new" class="btn btn-default btn-sm">Nuova ricetta</a>
+	</div>
+	<div class="col-xs-6">
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped table-responsive">
+			<thead>
+				<tr>
+					<th>Ricetta</th>
+					<th>Libro</th>
+					<th>Pagina</th>
+					<th>Valutazione</th>
+					<th>Categorie</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="recipy in recipies | filter:search">
+					<td>{{recipy.recipy_name}}</td>
+					<td>{{recipy.recipy_book_title}}</td>
+					<td>{{recipy.recipy_book_page}}</td>
+					<td>{{recipy.recipy_rating}}/10</td>
+					<td><span ng-repeat="category in recipy.recipy_categories"><span class="label label-primary">{{category}}</span> </span></td>
+					<td><a href="#/recipies/recipies/{{recipy.recipy_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

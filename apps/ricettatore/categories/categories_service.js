@@ -1,11 +1,11 @@
 function RecipyCategoriesService($http, NotificationCenter) {
 	var RecipyCategoriesService = {};
-	var request = 'apps/ricettatore/categories/categories_request.php';
+	var request = 'apps/api/api.php/ricettatore/';
 	
-	RecipyCategoriesService.wines = [];
-	RecipyCategoriesService.numberOfWines = 0;
-	RecipyCategoriesService.wine = {};
-	RecipyCategoriesService.lastWineId = 0;
+	RecipyCategoriesService.categories = [];
+	RecipyCategoriesService.numberOfRecipies = 0;
+	RecipyCategoriesService.recipy = {};
+	RecipyCategoriesService.lastInsertedCategory = 0;
 	
 	RecipyCategoriesService.notifications = {
 		RECIPY_CATEGORIES_GET_ALL_SUCCESS: 'recipyCategoryGetAllSuccess',
@@ -24,12 +24,12 @@ function RecipyCategoriesService($http, NotificationCenter) {
 	
 	RecipyCategoriesService.getAll = function() {
 		var results = null;
-		$http.post(
-			request + '?f=get'
+		$http.get(
+			request + 'categories/'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
-			RecipyCategoriesService.wines = data;
+			RecipyCategoriesService.categories = data;
 			NotificationCenter.postNotification(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -43,8 +43,8 @@ function RecipyCategoriesService($http, NotificationCenter) {
 			request + '?f=countCategories'
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success while countin wines', data.numberOfWines);
-			RecipyCategoriesService.numberOfWines = data.numberOfWines;
+			//console.log('success while countin recipies', data.numberOfRecipies);
+			RecipyCategoriesService.numberOfRecipies = data.numberOfRecipies;
 			NotificationCenter.postNotification(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_COUNT_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -59,7 +59,7 @@ function RecipyCategoriesService($http, NotificationCenter) {
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
-			RecipyCategoriesService.wine = data[0];
+			RecipyCategoriesService.recipy = data[0];
 			NotificationCenter.postNotification(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_GET_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -88,19 +88,19 @@ function RecipyCategoriesService($http, NotificationCenter) {
 		});				
 	}
 	
-	RecipyCategoriesService.insert = function(wine) {
-		RecipyCategoriesService.lastWineId = 0;
+	RecipyCategoriesService.insert = function(category) {
+		RecipyCategoriesService.lastInsertedCategory = 0;
 		$http.post(
-			request + '?f=insert',
-			wine
+			request + 'categories/',
+			category
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				//console.log('success while inserting', data);
-				RecipyCategoriesService.lastWineId = data.id;
+				console.log('success while inserting', data);
+				RecipyCategoriesService.lastInsertedCategory = data.id;
 				NotificationCenter.postNotification(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_INSERT_SUCCESS);				
 			} else {
-				//console.log('error while inserting', data);			
+				console.log('error while inserting', data);			
 				NotificationCenter.postNotification(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_INSERT_ERROR);				
 			}
 		})

@@ -1,53 +1,38 @@
-<section class="content-header">
-	<h1>Producers</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li class="active">
-			Producers
-		</li>
-	</ol>
-</section>
+<div class="row submenu">
+	<div class="col-xs-6">
+		<span class="page-title"><back-button to="#/winedb/index"></back-button> I produttori</span>
+		<a class="btn btn-default btn-sm pull-right" href="#/winedb/producers/new/"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> produttore</a>
+	</div>
+	<div class="col-xs-6">
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+		</div>		
+	</div>
+</div>
+
 
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-					<div class="box-title">
-						<a class="btn btn-default btn-sm" href="#/winedb/producers/new"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New producer</a>
-					</div>
-					<div class="box-tools">
-						<div class="input-group" style="max-width: 300px;">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-							<input type="search" ng-model="search" class="form-control input-sm pull-right" placeholder="search...">
-						</div>
-					</div>
-					<div class="box-tools">
-					</div>
-				</div>
-				<div class="box-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Producer</th>
-								<th>Location</th>
-								<th>Region</th>
-								<th>Country</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="producer in producers | filter:search">
-								<td><a href="#/winedb/producers/{{producer.producer_id}}">{{producer.producer_name}}</a></td>
-								<td>{{producer.producer_location}}</td>
-								<td>{{producer.producer_region}}</td>
-								<td>{{producer.country_name_en}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Producer</th>
+						<th>Location</th>
+						<th>Region</th>
+						<th>Country</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="producer in producers | filter:search">
+						<td><a href="#/winedb/producers/{{producer.producer_id}}">{{producer.producer_name}}</a></td>
+						<td>{{producer.producer_location}}</td>
+						<td>{{producer.producer_region}}</td>
+						<td>{{producer.country_name_en}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </section>

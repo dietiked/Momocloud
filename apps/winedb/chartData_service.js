@@ -1,8 +1,12 @@
 function ChartDataService($http, NotificationCenter, MovementsService, CellarService) {
 	
+	ChartDataService = {};
+	
 	ChartDataService.movementsForChart = [];
 	ChartDataService.typesForChart = [];
 	ChartDataService.countriesForChart = [];
+	ChartDataService.bottlesByWineForChart = {};
+	ChartDataService.rgb = {r:255, g:255, b:255};
 	
 	ChartDataService.notifications = {
 		CHART_GET_MOVEMENTS_SUCCESS: 'chartGetMovementsForTimeSeriesSuccess',
@@ -11,6 +15,8 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 		CHART_GET_TYPES_ERROR: 'chartGetTypesInCellarError',
 		CHART_GET_COUNTRIES_SUCCESS: 'chartGetCountriesInCellarSuccess',
 		CHART_GET_COUNTRIES_ERROR: 'chartGetCountriesInCellarError',
+		CHART_GET_BOTTLES_SUCCESS: 'chartGetBottlesByWineInCellarSuccess',
+		CHART_GET_BOTTLES_ERROR: 'chartGetBottlesByWineInCellarError',
 	};
 	
 	// ! Private APIs
@@ -65,7 +71,28 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 			highColorColumn: 'winetype_highlight_color', 
 			 
 		});
-	};
+	};	
+	
+	var _getBottlesByWine = function(wines) {
+		data = [];
+		labels = [];
+		angular.forEach(wines, function(wine, index) {
+			if (index<12) {
+				data.push(wine.stored_quantity);
+				labels.push(wine.wine_name + " " + wine.vintage_year);
+			}
+		});
+		console.log(data);
+		return {
+			labels: labels,
+			datasets: [
+				{
+					fillColor: 'rgba(' + ChartDataService.rgb.r + ',' + ChartDataService.rgb.g + ',' + ChartDataService.rgb.b + ', 0.8)',
+					data: data
+				}
+			]
+		};
+	}
 	
 	var _aggregateWinesByDescriptor = function(wines, descriptor) {
 		var ids = [];
@@ -89,9 +116,9 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 			}
 		}
 		var data = [];
-		var r = 0;
-		var g = 255/ids.length;
-		var b = 255/ids.length;
+		var r = ChartDataService.rgb.r;
+		var g = ChartDataService.rgb.g/ids.length;
+		var b = ChartDataService.rgb.b/ids.length;
 		for (var i=0; i<ids.length; i++) {
 			//console.log('b', b);
 			var segment = {
@@ -110,20 +137,22 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 		NotificationCenter.postNotification(ChartDataService.notifications.CHART_GET_TYPES_SUCCESS);
 		ChartDataService.countriesForChart = _extractCountriesForChart(CellarService.storedWines);
 		NotificationCenter.postNotification(ChartDataService.notifications.CHART_GET_COUNTRIES_SUCCESS);
+		ChartDataService.bottlesByWineForChart = _getBottlesByWine(CellarService.storedWines);
+		NotificationCenter.postNotification(ChartDataService.notifications.CHART_GET_BOTTLES_SUCCESS);
 	};
-	
-	var _getTypesInCellarSuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_GET_ALL_SUCCESS, _getTypesInCellarSuccessHandler);
-				
+	var _getTypesInCellarSuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_GET_ALL_SUCCESS, _getTypesInCellarSuccessHandler);					
 	
 	// ! Public APIs
 	ChartDataService.getMovementsForTimeSeries = function() {
 		MovementsService.getAll();
 	};
 
-	ChartDataService.getTypesInCellar = function() {
+	ChartDataService.getTypesInCellar = function(r, g, b) {
+		ChartDataService.rgb = {r:r, g:g, b:b};
 		CellarService.getAll();
 	};
-
+	
+	return ChartDataService;
 }
 
 momocloudServices.factory('ChartDataService', ChartDataService);

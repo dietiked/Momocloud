@@ -11,8 +11,9 @@ momocloudServices.factory('AuthService', AuthService);
 momocloudServices.directive('errorMessage', errorMessage);
 momocloudServices.directive('wineRating', wineRating);
 momocloudServices.directive('chart', chart);
+momocloudServices.directive('backButton', backButton);
 
-var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap'], 
+var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
 	
 	function($httpProvider) {
 	  // Use x-www-form-urlencoded Content-Type
@@ -65,6 +66,10 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 		when('/login', {
 			templateUrl: 'apps/login/login_view.html',
 			controller: 'LoginController'
+		}).
+		when('/start', {
+			templateUrl: 'apps/start/start_view.html',
+			controller: 'StartController'
 		}).
 		// Wine DB
 		when('/winedb/index', {
@@ -128,8 +133,28 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/ricettatore/categories/categories_new_view.html',
 			controller: 'RecipyCategoriesNewController'
 		}).
+		when('/recipies/books', {
+			templateUrl: 'apps/ricettatore/books/books_list_view.html',
+			controller: 'RecipyBooksListController'
+		}).
+		when('/recipies/books/new', {
+			templateUrl: 'apps/ricettatore/books/books_new_view.html',
+			controller: 'RecipyBooksNewController'
+		}).
+		when('/recipies/recipies', {
+			templateUrl: 'apps/ricettatore/recipies/recipies_list_view.html',
+			controller: 'RecipiesListController'
+		}).
+		when('/recipies/recipies/new', {
+			templateUrl: 'apps/ricettatore/recipies/recipies_new_view.html',
+			controller: 'RecipiesNewController'
+		}).
+		when('/recipies/recipies/:recipyId/edit', {
+			templateUrl: 'apps/ricettatore/recipies/recipies_edit_view.html',
+			controller: 'RecipiesEditController'
+		}).
 		otherwise({
-			redirectTo: '/index'
+			redirectTo: '/start'
 		});
 		
 	//$locationProvider.html5Mode(true);

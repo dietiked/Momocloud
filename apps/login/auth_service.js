@@ -7,7 +7,8 @@ function AuthService($http, $location, NotificationCenter) {
 	AuthService.identifier = 'Momocloud';
 	
 	AuthService.notifications = {
-			AUTH_STATUS_DID_CHANGE: 'loginOrLogout'
+			AUTH_STATUS_DID_CHANGE: 'loginOrLogout',
+			AUTH_ERROR: "authenticationError"
 	}
 		
 	function activateUser(user) {
@@ -39,10 +40,12 @@ function AuthService($http, $location, NotificationCenter) {
 			if (response.isValid) {
 				activateUser(user)
 				$location.path('/index');
+			} else {
+				NotificationCenter.postNotification(AuthService.notifications.AUTH_ERROR);
 			}
 		})
 		.error(function(error) {
-			//console.log('Server error: ', error);			
+			NotificationCenter.postNotification(AuthService.notifications.AUTH_ERROR);
 		});
 	};
 	

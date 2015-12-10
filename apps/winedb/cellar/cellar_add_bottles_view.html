@@ -1,50 +1,35 @@
-<section class="content-header">
-	<h1>Add bottles of {{wine.wine_name}} {{wine.vintage_year}}</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/cellar/">Cellar</a>
-		</li>
-		<li class="active">
-			Add bottles
-		</li>
-	</ol>
-</section>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title">{{wine.wine_name}} {{wine.vintage_year}}</span>
+	</div>
+</div>
 
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error. Could not add {{movement.movement_quantity}} bottle(s) of {{wine.wine_name}}" ng-show="showError"></error-message>
-					
+<div class="row">
+	<div class="col-md-12">
+		<error-message error-text="There was an error. Could not add {{movement.movement_quantity}} bottle(s) of {{wine.wine_name}}" ng-show="showError"></error-message>
+				
 
 
-					<form name="movementForm" ng-submit="add(movement, wine.stored_wine_id)">
-						
-						<div class="input-group" ng-class="{'has-error': movementForm.date.$invalid}">
-							<label for="date">Date *</label>
-							<input name="date" type="text" class="form-control" ng-model="aDate" datepicker-popup="d.M.yyyy" datepicker-options="dateOptions" ng-required="true">
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-
-						<div class="form-group" ng-class="{'has-error': movementForm.quantity.$invalid}">
-							<label for="quantity">Quantity *</label>
-							<input name="quantity" type="text" ng-model="movement.movement_quantity" class="form-control" required="true"/>
-						</div>
-
-
-						<a href="#/cellar" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit" ng-disabled="movementForm.$invalid">Add bottles</button>
-					</form>
+		<form name="movementForm" ng-submit="add(movement, wine.stored_wine_id)">
+			
+			<div class="form-group">
+				<div class="input-group" ng-class="{'has-error': movementForm.date.$invalid}">
+					<label for="date">Date *</label>
+					<input name="date" type="text" class="form-control" ng-model="aDate" datepicker-popup="d.M.yyyy" datepicker-options="dateOptions" ng-required="true">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
 				</div>
 			</div>
-		</div>
+
+			<div class="form-group" ng-class="{'has-error': movementForm.quantity.$invalid}">
+				<label for="quantity">Quantity *</label>
+				<input name="quantity" type="text" ng-model="movement.movement_quantity" class="form-control" required="true"/>
+			</div>
+
+
+			<a href="#/winedb/cellar" class="btn btn-default">Cancel</a>
+			<button class="btn btn-success" type="submit" ng-disabled="movementForm.$invalid">Save</button>
+		</form>
 	</div>
-</section>
+</div>

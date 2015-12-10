@@ -1,65 +1,47 @@
-<section class="content-header">
-	<h1>New wine</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/winedb/wines/">Wines</a>
-		</li>
-		<li class="active">
-			New
-		</li>
-	</ol>
-</section>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error. {{wine.wine_name}} was not updated." ng-show="showError"></error-message>
-					<form name="wineForm">
-						<div class="form-group" ng-class="{'has-error': wineForm.wineName.$invalid}">
-							<label for="wineName">Name *</label>
-							<input name="wineName" type="text" ng-model="wine.wine_name" class="form-control" required/>
-						</div>
-						<div class="form-group" ng-class="{'has-error': wineForm.appellation.$invalid}">
-							<label for="appellation">Appellation *</label>
-							<input name="appellation" type="text" ng-model="wine.wine_appellation" class="form-control" required/>
-						</div>
-						<div class="form-group">
-							<label for="producer">Producer *</label>
-							<select name="producer" ng-model="wine.producer_id" class="form-control">
-								<option ng-repeat="producer in producers | orderBy:'producer_name'" value="{{producer.producer_id}}">{{producer.producer_name}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="type">Type *</label>
-							<select name="type" ng-model="wine.winetype_id" class="form-control">
-								<option ng-repeat="type in winetypes" value="{{type.winetype_id}}">{{type.winetype_description}}</option>
-							</select>
-						</div>
-						<div class="form-group" ng-class="{'has-error': wineForm.alcohol.$invalid}">
-							<label for="alcohol">Alcohol *</label>
-							<input name="alcohol" type="text" ng-model="wine.wine_alcohol" class="form-control" min="0.0" max="99.0" required/>
-						</div>
-						<div class="form-group">
-							<label for="grapes">Grapes</label>
-							<input id="grapes" type="text" ng-model="wine.wine_grapes" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label for="notes">Notes</label>
-							<textarea id="notes" type="text" ng-model="wine.wine_notes" class="form-control"/>
-						</div>
-						<a href="#/winedb/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit" ng-disabled="wineForm.$invalid" ng-click="save()">Save</button>
-						<button class="btn btn-success" ng-disabled="!wineForm.$valid" ng-click="saveAndAddVintage()">Save and add vintage</button>
-					</form>
-				</div>
-			</div>
-		</div>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> New Wine</span>
 	</div>
-</section>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<error-message error-text="There was an error. {{wine.wine_name}} was not updated." ng-show="showError"></error-message>
+		<form name="wineForm">
+			<div class="form-group" ng-class="{'has-error': wineForm.wineName.$invalid}">
+				<label for="wineName">Name *</label>
+				<input name="wineName" type="text" ng-model="wine.wine_name" class="form-control" required/>
+			</div>
+			<div class="form-group" ng-class="{'has-error': wineForm.appellation.$invalid}">
+				<label for="appellation">Appellation *</label>
+				<input name="appellation" type="text" ng-model="wine.wine_appellation" class="form-control" required/>
+			</div>
+			<div class="form-group">
+				<label for="producer">Producer *</label>
+				<select name="producer" ng-model="wine.producer_id" class="form-control">
+					<option ng-repeat="producer in producers | orderBy:'producer_name'" value="{{producer.producer_id}}">{{producer.producer_name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="type">Type *</label>
+				<select name="type" ng-model="wine.winetype_id" class="form-control">
+					<option ng-repeat="type in winetypes" value="{{type.winetype_id}}">{{type.winetype_description}}</option>
+				</select>
+			</div>
+			<div class="form-group" ng-class="{'has-error': wineForm.alcohol.$invalid}">
+				<label for="alcohol">Alcohol *</label>
+				<input name="alcohol" type="text" ng-model="wine.wine_alcohol" class="form-control" min="0.0" max="99.0" required/>
+			</div>
+			<div class="form-group">
+				<label for="grapes">Grapes</label>
+				<input id="grapes" type="text" ng-model="wine.wine_grapes" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="notes">Notes</label>
+				<textarea id="notes" type="text" ng-model="wine.wine_notes" class="form-control"/>
+			</div>
+			<button class="btn btn-success" type="submit" ng-disabled="wineForm.$invalid" ng-click="save()">Save</button>
+			<button class="btn btn-success" ng-disabled="!wineForm.$valid" ng-click="saveAndAddVintage()">Save and add vintage</button>
+		</form>
+	</div>
+</div>

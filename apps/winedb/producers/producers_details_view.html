@@ -1,75 +1,55 @@
-<section class="content-header">
-	<h1>{{producer.producer_name}}</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/winedb/producers/">Producers</a>
-		</li>
-		<li class="active">
-			Details
-		</li>
-	</ol>
-</section>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button to="#/winedb/producers"></back-button> {{producer.producer_name}} <span class="page-subtitle">{{producer.producer_location}}</span></span>
+		<a href="#/winedb/producers/{{producer.producer_id}}/edit" class="btn btn-default  btn-sm pull-right">
+			<span class="glyphicon glyphicon-edit"></span> Edit</a> 
+	</div>
+</div>
 
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<!--<div class="box-header">
-				</div>-->
-				<div class="box-body">
-					<div class="row">
-						<div class="col-md-8 col-lg-8 col-sm-12">
-							<h4>Wines</h4>
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Type</th>
-										<th>Grapes</th>
-										<th>Alcohol</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="wine in producer.wines">
-										<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
-										<td>{{wine.winetype_description}}</td>
-										<td>{{wine.wine_grapes}}</td>
-										<td>{{wine.wine_alcohol}}%</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="col-md-4 col-lg-4 col-sm-12">
-							<h4>Producer informations</h4>
-							<dl class="dl-horizontal">
-								<dt>Location</dt>
-								<dd>{{producer.producer_location}}</dd>
-								<dt>Region</dt>
-								<dd>{{producer.producer_region}}</dd>
-								<dt>Country</dt>
-								<dd>{{producer.country_name_en}}</dd>
-							</dl>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div>
-								<a href="#/winedb/producers/{{producer.producer_id}}/edit" class="btn btn-default pull-left">
-									<span class="glyphicon glyphicon-edit"></span> Edit producer
-								</a> <a href="#" class="btn btn-danger pull-right">
-									<span class="glyphicon glyphicon-trash"></span> Delete producer
-								</a>
-							</div>
-						</div>						
-					</div>
-				</div>
-				<div class="overlay" ng-show="!loaded">
-					<i class="fa fa-refresh fa-spin"></i>
-				</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-8 col-lg-8 col-sm-12">
+				<h4>Wines</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Grapes</th>
+							<th>Alcohol</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="wine in producer.wines">
+							<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+							<td>{{wine.winetype_description}}</td>
+							<td>{{wine.wine_grapes}}</td>
+							<td>{{wine.wine_alcohol}}%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4 col-lg-4 col-sm-12">
+				<h4>Producer informations</h4>
+				<dl class="dl-horizontal">
+					<dt>Location</dt>
+					<dd>{{producer.producer_location}}</dd>
+					<dt>Region</dt>
+					<dd>{{producer.producer_region}}</dd>
+					<dt>Country</dt>
+					<dd>{{producer.country_name_en}}</dd>
+				</dl>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div>
+					<a href="#" class="btn btn-danger pull-left">
+						<span class="glyphicon glyphicon-trash"></span> Delete producer
+					</a>
+				</div>
+			</div>						
+		</div>
 	</div>
-</section>
+</div>

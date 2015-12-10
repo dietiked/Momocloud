@@ -1,0 +1,26 @@
+<div class="row submenu">
+	<div class="col-md-6 col-sm-12">
+		<a href="#/recipies/books/new" class="btn btn-default btn-sm">Nuovo libro</a>
+	</div>
+	<div class="col-md-6 col-sm-12">
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<tr>
+				<th>Titolo</th>
+				<th>Autore</th>
+			</tr>
+			<tr ng-repeat="book in books | filter:search">
+				<td>{{book.recipy_book_title}}</td>
+				<td>{{book.recipy_book_author}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

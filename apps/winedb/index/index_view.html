@@ -1,61 +1,128 @@
-<section class="content">
-	<div class="row">
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="small-box bg-red">
-				<div class="inner">
-					<h3>Cellar</h3>
+<!--<div class="row">
+	<div class="col-md-4">
+		<a href="#/winedb/cellar" class="small-box-footer">
+			<div class="tile">
+				<div class="tile-content">
+					Cantina
 				</div>
-				<a href="#/winedb/cellar" class="small-box-footer">Go to cellar</a>
 			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="small-box bg-yellow">
-				<div class="inner">
-					<h3>{{availableWines}} wines</h3>
+		</a>
+	</div>
+	<div class="col-md-4">
+		<a href="#/winedb/wines/">
+			<div class="tile">
+				<div class="tile-content">
+					Vini
 				</div>
-				<a href="#/winedb/wines/" class="small-box-footer">Go to wines</a>
 			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-sm-12">
-			<div class="small-box bg-yellow">
-				<div class="inner">
-					<h3>{{activeProducers}} producers</h3>
+		</a>
+	</div>
+	<div class="col-md-4">
+		<a href="#/winedb/producers/">
+			<div class="tile">
+				<div class="tile-content">
+					Produttori
 				</div>
-				<a href="#/winedb/producers/" class="small-box-footer">Go to producers</a>
+			</div>
+		</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="chart-container">
+			<h3 class="box-title">Colore</h3>
+			<div class="">
+				<chart chart-type="pie" chart-name="wine-types" chart-data="{{chartDataType}}" legend="false"></chart>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-12">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Wines by type</h3>
-				</div>
-				<div class="box-body chart-container">
-					<chart chart-type="pie" chart-name="wine-types" chart-data="{{chartDataType}}" legend="true"></chart>
-				</div>
+	<div class="col-md-6">
+		<div class="chart-container">
+			<h3 class="box-title">Bottiglie stoccate</h3>
+			<div class="">
+				<chart chart-type="bar" chart-name="wine-bottles" chart-data="{{chartDataBottles}}" legend="false"></chart>
 			</div>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Wines by country</h3>
-				</div>
-				<div class="box-body chart-container">
-					<chart chart-type="pie" chart-name="wine-countries" chart-data="{{chartDataCountry}}" legend="true"></chart>
-					<!--<canvas id="wine-countries" style="width:47%; height: 200px; display: inline-block"></canvas>-->
-				</div>
-			</div>
-		</div>
-		<!--<div class="col-lg-6 col-md-6 col-sm-12">
-			<div class="box box-danger">
-				<div class="box-header with-border">
-					<h3 class="box-title">Buy & drink</h3>
-				</div>
-				<div class="box-body">
-					<canvas id="wine-movements" style="width:100%; height: 300px"></canvas>
-				</div>
-			</div>
-		</div>-->
 	</div>
-</section>
+	<div class="col-md-3">
+		<div class="chart-container">
+			<h3 class="box-title">Provenienza</h3>
+			<div class="">
+				<chart chart-type="pie" chart-name="wine-countries" chart-data="{{chartDataCountry}}" legend="false"></chart>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+
+
+<div class="row">
+	<div class="col-md-4 col-sm-12">
+		<div class="row">
+			<div class="col-md-12">
+				<a href="#/winedb/cellar" class="small-box-footer">
+					<div class="tile">
+						<div class="tile-content">
+							Cantina
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="#/winedb/wines/">
+					<div class="tile">
+						<div class="tile-content">
+							Vini
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="#/winedb/producers/">
+					<div class="tile">
+						<div class="tile-content">
+							Produttori
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="chart-container">
+					<h3 class="box-title">Bottiglie stoccate</h3>
+					<div class="">
+						<chart chart-type="bar" chart-name="wine-bottles" chart-data="{{chartDataBottles}}" legend="false"></chart>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="chart-container">
+					<h3 class="box-title">Colore</h3>
+					<div class="">
+						<chart chart-type="pie" chart-name="wine-types" chart-data="{{chartDataType}}" legend="false"></chart>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="chart-container">
+					<h3 class="box-title">Provenienza</h3>
+					<div class="">
+						<chart chart-type="pie" chart-name="wine-countries" chart-data="{{chartDataCountry}}" legend="false"></chart>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

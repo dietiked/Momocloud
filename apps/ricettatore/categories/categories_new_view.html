@@ -16,21 +16,15 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
+			<error-message error-text="There was an error. {{category.recipy_category_name}} was not updated." ng-show="showError"></error-message>
+			<form name="categoryForm">
+				<div class="form-group" ng-class="{'has-error': categoryForm.categoryName.$invalid}">
+					<label for="categoryName">Name *</label>
+					<input name="categoryName" type="text" ng-model="category.recipy_category_name" class="form-control" required/>
 				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error. {{category.recipy_category_name}} was not updated." ng-show="showError"></error-message>
-					<form name="categoryForm">
-						<div class="form-group" ng-class="{'has-error': categoryForm.categoryName.$invalid}">
-							<label for="categoryName">Name *</label>
-							<input name="categoryName" type="text" ng-model="category.recipy_category_name" class="form-control" required/>
-						</div>
-						<a href="#/recipies/categories/" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit" ng-disabled="categoryForm.$invalid" ng-click="save()">Save</button>
-					</form>
-				</div>
-			</div>
+				<a href="#/recipies/categories/" class="btn btn-default">Cancel</a>
+				<button class="btn btn-success" type="submit" ng-disabled="categoryForm.$invalid" ng-click="save()">Save</button>
+			</form>
 		</div>
 	</div>
 </section>

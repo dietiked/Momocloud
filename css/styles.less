@@ -7,11 +7,35 @@
 @light-gray:	#F6F4F5;
 @dark-gray:		#9C9A92;
 @brown:			#CBB5AF;
-@light-blue:	#3FB9C1;
-@red:			#A7788D;
+@light-blue:	#3FB9C1; // --> #f39c11
+@red:			#ff2e2e;
+@red-light:		#FF7A7A;
 @dark-blue:		#4D5761;
-@blue:			#44598B;
+@blue:			#44598B; // --> #dc8c0b
 @turquise:		#43B7AA;
+@orange:		#E8543B;
+
+
+
+body { 
+	font-family: 'Lato', sans-serif;
+	padding-top: 70px; 
+	padding-bottom: 20px;
+}
+a:link, a:visited, a:active {
+	color: @red;
+}
+a:hover {
+	color: @red-light;
+	text-decoration: none;
+}
+a.btn-default {
+	color: black;
+}
+
+.btn {
+	border-color: #e6e6e6;
+}
 
 
 .lockscreen {
@@ -23,7 +47,20 @@
 	left: 0px;
 	width: 100%;
 	min-height: 100%;
+	background-color: rgba(255, 46, 46, 0.7);
+	
+	.alert {
+		margin-top: 20px;
+	}
 }
+
+.lockscreen-wrapper {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 200px;
+}
+
 
 .box, .small-box, .btn, .info-box {
 	border-radius: 0px;
@@ -134,10 +171,13 @@
 
 .chart-container {
 	text-align: center;
+	//border: 1px solid @red;
+	//padding: -1px;
+	padding-bottom: 10px;
 }
 
 .chart {
-	margin-left: -100px;	
+	margin-top: 20px;
 }
 
 .pie-legend {
@@ -173,5 +213,66 @@
   width: 20px;
   height: 100%;
   border-radius: 5px;
+}
+
+.submenu {
+	background-color: @red-light;
+	color: white;
+	margin-top: -20px;
+	padding-top: 10px;
+	height: 50px;
+	margin-bottom: 15px;
+}
+
+.page-title {
+	font-size: 23px;
+	font-weight: bold;
+}
+
+.page-subtitle {
+	font-size: 16px;
+	font-weight: 400;	
+}
+
+.form-control {
+	box-shadow: none;
+}
+input[type="text"], input[type="password"], input[type="number"] {
+	border-radius: 0px;
+}
+.progress {
+	border-radius: 0px;
+}
+.progress-xs {
+	height: 2px;
+}
+.tile {
+	min-height: 200px;
+	width: 100%;
+	background-color: #ff2e2e;
+	font-size: 32px;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	display: table;
+	margin-bottom: 15px;
+}
+.tile-content {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+a.back-button {
+	color: white;
+	margin-right: 10px;
+	border: 1px solid white;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+@media (max-width: 767px) {
+	.lockscreen-wrapper {
+		width: 90%;
+	}
 }
 
