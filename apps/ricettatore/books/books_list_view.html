@@ -13,15 +13,19 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<table class="table">
-			<tr>
-				<th>Titolo</th>
-				<th>Autore</th>
-			</tr>
-			<tr ng-repeat="book in books | filter:search">
-				<td>{{book.recipy_book_title}}</td>
-				<td>{{book.recipy_book_author}}</td>
-			</tr>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Titolo</th>
+					<th>Autore</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in books | filter:search">
+					<td>{{book.recipy_book_title}}</td>
+					<td>{{book.recipy_book_author}}</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </div>

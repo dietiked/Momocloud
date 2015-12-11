@@ -22,16 +22,18 @@
 					<th>Type</th>
 					<th>Alcohol</th>
 					<th>Grapes</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="wine in wines | filter:search">
-					<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+					<td>{{wine.wine_name}}</td>
 					<td>{{wine.wine_appellation}}</td>
 					<td><a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
 					<td>{{wine.winetype_description}}</td>
 					<td>{{wine.wine_alcohol}}%</td>
 					<td>{{wine.wine_grapes}}</td>
+					<td><a href="#/winedb/wines/{{wine.wine_id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
 				</tr>
 			</tbody>
 		</table>
