@@ -1,19 +1,20 @@
-@brand-primary: darken(#428bca, 6.5%); // #337ab7
+@brand-primary: #428bca; // #337ab7
 @brand-success: #5cb85c;
 @brand-info:    #5bc0de;
 @brand-warning: #f0ad4e;
 @brand-danger:  #d9534f;
 
-@light-gray:	#F6F4F5;
-@dark-gray:		#9C9A92;
-@brown:			#CBB5AF;
+@light-gray:	#e6e6e6;
+@dark-gray:		#474747;
+@brown:			#73441E;
 @light-blue:	#3FB9C1; // --> #f39c11
-@red:			#ff2e2e;
+@red:			#D95D48; //#ff2e2e;
 @red-light:		#FF7A7A;
 @dark-blue:		#4D5761;
-@blue:			#44598B; // --> #dc8c0b
+@blue:			#53B5D1; // --> #dc8c0b
 @turquise:		#43B7AA;
 @orange:		#E8543B;
+@green:			#44B577;
 
 
 
@@ -33,11 +34,6 @@ a.btn-default {
 	color: black;
 }
 
-.btn {
-	border-color: #e6e6e6;
-}
-
-
 .lockscreen {
 	z-index: 1000000;
 	position: fixed;
@@ -47,7 +43,7 @@ a.btn-default {
 	left: 0px;
 	width: 100%;
 	min-height: 100%;
-	background-color: rgba(71, 71, 71, 0.9);
+	background-color: @blue;
 	
 	.alert {
 		margin-top: 20px;
@@ -216,12 +212,15 @@ a.btn-default {
 }
 
 .submenu {
-	background-color: @red-light;
+	background-color: @blue;
 	color: white;
 	margin-top: -20px;
 	padding-top: 10px;
 	height: 50px;
 	margin-bottom: 15px;
+	.btn {
+		border: 1px solid white;
+	}
 }
 
 .page-title {
@@ -249,7 +248,7 @@ input[type="text"], input[type="password"], input[type="number"] {
 .tile {
 	min-height: 200px;
 	width: 100%;
-	background-color: #ff2e2e;
+	background-color: @blue;
 	font-size: 32px;
 	text-align: center;
 	color: white;
@@ -268,6 +267,38 @@ a.back-button {
 	border: 1px solid white;
 	padding-left: 4px;
 	padding-right: 4px;
+}
+
+.btn {
+	border: none;
+}
+
+a.btn-danger {
+	color: white;
+}
+
+a.btn-default {
+	border: 1px solid @dark-gray;
+}
+
+.input-group {
+	border: none;
+	border-radius: 0px;
+	.input-group-addon {
+		border: none;
+		border-radius: 0px;
+	}
+	.form-control {
+		border: none;
+		border-radius: 0px;
+	}
+}
+
+.input-group-btn {
+	border: none;
+	.btn {
+		border: 1px solid @brand-primary;
+	}
 }
 
 @media (max-width: 767px) {
