@@ -1,4 +1,4 @@
-wineDBControllers.controller('ProducersListController', ['$scope', 'ProducersService', 'AuthService', function($scope, ProducersService, AuthService) {
+momocloudControllers.controller('ProducersListController', ['$scope', 'ProducersService', 'AuthService', function($scope, ProducersService, AuthService) {
 	//console.log('ProducersController');
 	
 	// Notification functions

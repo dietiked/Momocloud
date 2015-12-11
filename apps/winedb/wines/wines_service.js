@@ -1,6 +1,6 @@
 function WinesService($http, NotificationCenter) {
 	var WinesService = {};
-	var request = 'apps/winedb/wines/wines_request.php';
+	var request = 'apps/api/api.php/wines/';
 	
 	WinesService.wines = [];
 	WinesService.numberOfWines = 0;
@@ -24,11 +24,11 @@ function WinesService($http, NotificationCenter) {
 	
 	WinesService.getAll = function() {
 		var results = null;
-		$http.post(
-			request + '?f=get'
+		$http.get(
+			request
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success', data);
+			console.log('success', data);
 			WinesService.wines = data;
 			NotificationCenter.postNotification(WinesService.notifications.WINES_GET_ALL_SUCCESS);
 		})
@@ -39,23 +39,23 @@ function WinesService($http, NotificationCenter) {
 	};
 	
 	WinesService.countWines = function() {
-		$http.post(
-			request + '?f=countWines'
+		$http.get(
+			request + 'count'
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success while countin wines', data.numberOfWines);
+			console.log('success while countin wines', data.numberOfWines);
 			WinesService.numberOfWines = data.numberOfWines;
 			NotificationCenter.postNotification(WinesService.notifications.WINES_COUNT_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
+			console.log('error', data);			
 			NotificationCenter.postNotification(WinesService.notifications.WINES_COUNT_ALL_ERROR);
 		});				
 	}
 	
 	WinesService.getWine = function(id) {
-		$http.post(
-			request + '?f=get&id=' + id
+		$http.get(
+			request + id
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -68,10 +68,10 @@ function WinesService($http, NotificationCenter) {
 		});		
 	}
 	
-	WinesService.update = function(producer) {
+	WinesService.update = function(wine) {
 		$http.post(
-			request + '?f=update',
-			producer
+			request + wine['wine_id'],
+			wine
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
@@ -91,7 +91,7 @@ function WinesService($http, NotificationCenter) {
 	WinesService.insert = function(wine) {
 		WinesService.lastWineId = 0;
 		$http.post(
-			request + '?f=insert',
+			request,
 			wine
 		)
 		.success(function(data, status, headers, config) {
@@ -100,7 +100,7 @@ function WinesService($http, NotificationCenter) {
 				WinesService.lastWineId = data.id;
 				NotificationCenter.postNotification(WinesService.notifications.WINES_INSERT_SUCCESS);				
 			} else {
-				//console.log('error while inserting', data);			
+				//console.log('error while inserting', data, status, headers, config);			
 				NotificationCenter.postNotification(WinesService.notifications.WINES_INSERT_ERROR);				
 			}
 		})
@@ -114,4 +114,4 @@ function WinesService($http, NotificationCenter) {
 	return WinesService;
 }
 
-wineDBServices.factory('WinesService', WinesService);
+momocloudServices.factory('WinesService', WinesService);

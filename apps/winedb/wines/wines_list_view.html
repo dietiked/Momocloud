@@ -1,58 +1,39 @@
-<section class="content-header">
-	<h1>Wines</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li class="active">
-			Wines
-		</li>
-	</ol>
-</section>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-					<div class="box-title">
-						<a class="btn btn-default btn-sm" href="#/wines/new/"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New wine</a>
-					</div>
-					<div class="box-tools">
-						<div class="input-group" style="max-width: 300px;">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-							<input type="search" ng-model="search" class="form-control input-sm pull-right" placeholder="search...">
-						</div>
-					</div>
-				</div>
-				<div class="box-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Appellation</th>
-								<th>Producer</th>
-								<th>Type</th>
-								<th>Alcohol</th>
-								<th>Grapes</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="wine in wines | filter:search">
-								<td><a href="#/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
-								<td>{{wine.wine_appellation}}</td>
-								<td><a href="#/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
-								<td>{{wine.winetype_description}}</td>
-								<td>{{wine.wine_alcohol}}%</td>
-								<td>{{wine.wine_grapes}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="overlay" ng-show="!loaded">
-					<i class="fa fa-refresh fa-spin"></i>
-				</div>
-			</div>
-		</div>
+<div class="row submenu">
+	<div class="col-xs-6">
+		<span class="page-title"><back-button></back-button> I vini</span>
+		<a class="btn btn-default btn-sm pull-right" href="#/winedb/wines/new/"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New wine</a>
 	</div>
-</section>
+	<div class="col-xs-6">
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Appellation</th>
+					<th>Producer</th>
+					<th>Type</th>
+					<th>Alcohol</th>
+					<th>Grapes</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="wine in wines | filter:search">
+					<td><a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a></td>
+					<td>{{wine.wine_appellation}}</td>
+					<td><a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
+					<td>{{wine.winetype_description}}</td>
+					<td>{{wine.wine_alcohol}}%</td>
+					<td>{{wine.wine_grapes}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

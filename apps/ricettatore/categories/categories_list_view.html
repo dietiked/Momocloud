@@ -1,0 +1,20 @@
+<div class="row submenu">
+	<div class="col-xs-6">
+		<a href="#/recipies/categories/new" class="btn btn-default btn-sm">Nuova categoria</a>
+	</div>
+	<div class="col-xs-6">
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>
+			<span ng-repeat="category in categories | filter:search">
+				<span class="label label-primary" >{{category.recipy_category_name}}</span> </span>
+		</h1>
+	</div>
+</div>

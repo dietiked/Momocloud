@@ -1,17 +1,8 @@
-<section class="content-header">
-	<h1>{{vintage.wine_name}}<small>{{vintage.producer_name}}</small></h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/wines/">Wines</a>
-		</li>
-		<li class="active">
-			Vintage
-		</li>
-	</ol>
-</section>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button to="#winedb/wines/{{vintage.wine_id}}"></back-button> {{vintage.wine_name}} <span class="page-subtitle">{{vintage.producer_name}}</span></span>
+	</div>
+</div>
 
 <section class="content">
 	<div class="row">
@@ -34,7 +25,6 @@
 								<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
 							</select>
 						</div>
-						<a href="#/wines/{{vintage.wine_id}}" class="btn btn-default">Cancel</a>
 						<button class="btn btn-success" type="submit" ng-disabled="!dependenciesLoaded">Save</button>						
 						<button class="btn btn-danger pull-right" type="submit">Delete vintage</button>						
 					</form>

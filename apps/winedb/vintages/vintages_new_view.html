@@ -1,45 +1,27 @@
-<section class="content-header">
-	<h1>{{vintage.wine_name}}<small>{{vintage.producer_name}}</small></h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/wines/">Wines</a>
-		</li>
-		<li class="active">
-			Vintage
-		</li>
-	</ol>
-</section>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
-					<form name="myForm">
-						<div class="form-group">
-							<label for="year">Year *</label>
-							<select name="year" ng-model="vintage.vintage_year" class="form-control">
-								<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="rating">Rating *</label>
-							<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
-								<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
-							</select>
-						</div>
-						<a href="#/wines/{{wine.wine_id}}" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" ng-click="save(false)">Save</button>						
-						<button class="btn btn-success" ng-click="save(true)">Save and add bottles</button>						
-					</form>
-				</div>
-			</div>
-		</div>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button to="#winedb/wines/{{wine.wine_id}}"></back-button> {{wine.wine_name}} <span class="page-subtitle">{{wine.producer_name}}</span></span>
 	</div>
-</section>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
+		<form name="myForm">
+			<div class="form-group">
+				<label for="year">Year *</label>
+				<select name="year" ng-model="vintage.vintage_year" class="form-control">
+					<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="rating">Rating *</label>
+				<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
+					<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
+				</select>
+			</div>
+			<button class="btn btn-success" ng-click="save(false)">Save</button>						
+			<button class="btn btn-success" ng-click="save(true)">Save and add bottles</button>						
+		</form>
+	</div>
+</div>

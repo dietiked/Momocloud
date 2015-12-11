@@ -23,8 +23,12 @@ function chart () {
 							chartIdentity = myChart.Pie(chartData, {
 								responsive: true 
 							});
+						} else if ($attrs.chartType == 'bar') {
+							chartIdentity = myChart.Bar(chartData, {
+								responsive: true 
+							});
 						}	
-						if ($attrs.legend) {
+						if ($attrs.legend=='true') {
 							var legend = chartIdentity.generateLegend();
 							$element.after(legend);
 						}	

@@ -1,49 +1,32 @@
-<section class="content-header">
-	<h1>New producer</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/producers/">Producers</a>
-		</li>
-		<li class="active">
-			New
-		</li>
-	</ol></section>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-				</div>
-				<div class="box-body">
-					<form name="producerForm">
-						<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
-							<label for="producerName">Name * </label>
-							<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
-						</div>
-						<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
-							<label for="producerLocation">Location * </label>
-							<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
-						</div>
-						<div class="form-group" ng-class="{'has-error': producerForm.producerRegion.$invalid}">
-							<label for="producerRegion">Producer region: </label>
-							<input name="producerRegion" type="text" ng-model="producer.producer_region" class="form-control" required/>
-						</div>
-						<div class="form-group">
-							<label for="country">Country *</label>
-							<select name="country" ng-model="producer.country_code" class="form-control">
-								<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
-							</select>
-						</div>
-						<a href="#/producers/" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="save()">Save</button>
-						<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="saveAndAddWine()">Save and add wine</button>
-					</form>
-				</div>
-			</div>
-		</div>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> New producer</span>
 	</div>
-</section>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<form name="producerForm">
+			<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
+				<label for="producerName">Name * </label>
+				<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
+			</div>
+			<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
+				<label for="producerLocation">Location * </label>
+				<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
+			</div>
+			<div class="form-group" ng-class="{'has-error': producerForm.producerRegion.$invalid}">
+				<label for="producerRegion">Producer region: </label>
+				<input name="producerRegion" type="text" ng-model="producer.producer_region" class="form-control" required/>
+			</div>
+			<div class="form-group">
+				<label for="country">Country *</label>
+				<select name="country" ng-model="producer.country_code" class="form-control">
+					<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
+				</select>
+			</div>
+			<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="save()">Save</button>
+			<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="saveAndAddWine()">Save and add wine</button>
+		</form>
+	</div>
+</div>

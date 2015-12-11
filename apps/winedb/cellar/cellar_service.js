@@ -4,6 +4,7 @@ function CellarService($http, NotificationCenter) {
 	
 	CellarService.storedWines = [];
 	CellarService.storedWine = {};
+	CellarService.bottlesInCellar = {};
 	CellarService.numberOfStoredWines = 0;
 	
 	CellarService.notifications = {
@@ -11,6 +12,8 @@ function CellarService($http, NotificationCenter) {
 		CELLAR_GET_ALL_ERROR: 'cellarGetAllError',
 		CELLAR_GET_SUCCESS: 'cellarGetSuccess',
 		CELLAR_GET_ERROR: 'cellarGetError',
+		CELLAR_GET_BOTTLES_SUCCESS: 'cellarGetBottlesSuccess',
+		CELLAR_GET_BOTTLES_ERROR: 'cellarGetBottlesError',
 		CELLAR_UPDATE_SUCCESS: 'cellarUpdateSuccess',
 		CELLAR_UPDATE_ERROR: 'cellarUpdateError',
 		CELLAR_DELETE_SUCCESS: 'cellarDeleteSuccess',
@@ -31,6 +34,7 @@ function CellarService($http, NotificationCenter) {
 				data[i].vintage_year = Number(data[i].vintage_year);
 			}
 			CellarService.storedWines = data;
+			console.log(CellarService.storedWines);
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -52,8 +56,8 @@ function CellarService($http, NotificationCenter) {
 			//console.log('error', data);			
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ERROR);
 		});		
-	}
-	
+	};
+		
 	CellarService.recalculateQuantity = function(storedWineId) {
 		$http.post(
 			request + '?f=recalculate&id=' + storedWineId
@@ -71,7 +75,7 @@ function CellarService($http, NotificationCenter) {
 			//console.log('error while inserting recalculated quantity (202)', data);			
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_RECALCULATE_ERROR);
 		});						
-	}
+	};
 		
 	CellarService.updateQuantity = function(movement) {
 		$http.post(
@@ -92,9 +96,9 @@ function CellarService($http, NotificationCenter) {
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_ERROR);
 		});				
 		
-	}
+	};
 	
 	return CellarService;
 }
 
-wineDBServices.factory('CellarService', CellarService);
+momocloudServices.factory('CellarService', CellarService);

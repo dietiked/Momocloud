@@ -1,6 +1,7 @@
 function ProducersService($http, NotificationCenter) {
 	var ProducersService = {};
-	var request = 'apps/winedb/producers/producers_request.php';
+	//var request = 'apps/winedb/producers/producers_request.php';
+	var request = 'apps/api/api.php/producers/';
 	
 	ProducersService.producers = [];
 	ProducersService.producer = {};
@@ -21,8 +22,8 @@ function ProducersService($http, NotificationCenter) {
 	
 	ProducersService.getAll = function() {
 		var results = null;
-		$http.post(
-			request + '?f=get'
+		$http.get(
+			request
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -38,8 +39,8 @@ function ProducersService($http, NotificationCenter) {
 	ProducersService.getProducer = function(id, wines) {
 		wines = wines == undefined ? false : wines;
 		//console.log('wines', wines);
-		$http.post(
-			request + '?f=get&id=' + id + '&wines=' + wines
+		$http.get(
+			request + id + '/wines'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -54,11 +55,11 @@ function ProducersService($http, NotificationCenter) {
 	
 	ProducersService.update = function(producer) {
 		$http.post(
-			request + '?f=update',
+			request + producer['producer_id'] + '/',
 			producer
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success while updating', data);
+			//console.log('success while updating', data);
 			if (data.success) {
 				NotificationCenter.postNotification(ProducersService.notifications.PRODUCERS_UPDATE_SUCCESS);			
 			} else {
@@ -73,15 +74,15 @@ function ProducersService($http, NotificationCenter) {
 	
 	ProducersService.insert = function(producer) {
 		$http.post(
-			request + '?f=insert',
+			request,
 			producer
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				//console.log('success while inserting', data);
+				console.log('success while inserting', data);
 				NotificationCenter.postNotification(ProducersService.notifications.PRODUCERS_INSERT_SUCCESS);				
 			} else {
-				//console.log('error while inserting', data);			
+				console.log('error while inserting', data);			
 				NotificationCenter.postNotification(ProducersService.notifications.PRODUCERS_INSERT_ERROR);				
 			}
 		})
@@ -95,4 +96,4 @@ function ProducersService($http, NotificationCenter) {
 	return ProducersService;
 }
 
-wineDBServices.factory('ProducersService', ProducersService);
+momocloudServices.factory('ProducersService', ProducersService);

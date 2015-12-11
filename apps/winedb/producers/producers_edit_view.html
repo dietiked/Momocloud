@@ -1,54 +1,32 @@
-<section class="content-header">
-	<h1>Producer</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-glass"></i></a>
-		</li>
-		<li>
-			<a href="#/producers/">Producers</a>
-		</li>
-		<li class="active">
-			Edit
-		</li>
-	</ol>
-</section>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Edit</h3>
-				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error. {{producer.producer_name}} was not updated." ng-show="showError"></error-message>
-					<form name="producerForm" ng-submit="save()">
-						<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
-							<label for="producerName">Producer name: </label>
-							<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
-						</div>
-						<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
-							<label for="producerLocation">Producer location: </label>
-							<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
-						</div>
-						<div class="form-group" ng-class="{'has-error': producerForm.producerRegion.$invalid}">
-							<label for="producerRegion">Producer region: </label>
-							<input name="producerRegion" type="text" ng-model="producer.producer_region" class="form-control" required/>
-						</div>
-						<div class="form-group">
-							<label for="country">Country *</label>
-							<select name="country" ng-model="producer.country_code" class="form-control">
-								<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
-							</select>
-						</div>
-						<a href="#/producers/{{producer.producer_id}}" class="btn btn-default">Cancel</a>
-						<button class="btn btn-success" type="submit">Save</button>
-					</form>
-				</div>
-				<div class="overlay" ng-show="!loaded">
-					<i class="fa fa-refresh fa-spin"></i>
-				</div>
-			</div>
-		</div>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> Edit producer</span>
 	</div>
-</section>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<error-message error-text="There was an error. {{producer.producer_name}} was not updated." ng-show="showError"></error-message>
+		<form name="producerForm" ng-submit="save()">
+			<div class="form-group" ng-class="{'has-error': producerForm.producerName.$invalid}">
+				<label for="producerName">Producer name: </label>
+				<input name="producerName" type="text" ng-model="producer.producer_name" class="form-control" required/>
+			</div>
+			<div class="form-group" ng-class="{'has-error': producerForm.producerLocation.$invalid}">
+				<label for="producerLocation">Producer location: </label>
+				<input name="producerLocation" type="text" ng-model="producer.producer_location" class="form-control" required/>
+			</div>
+			<div class="form-group" ng-class="{'has-error': producerForm.producerRegion.$invalid}">
+				<label for="producerRegion">Producer region: </label>
+				<input name="producerRegion" type="text" ng-model="producer.producer_region" class="form-control" required/>
+			</div>
+			<div class="form-group">
+				<label for="country">Country *</label>
+				<select name="country" ng-model="producer.country_code" class="form-control">
+					<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
+				</select>
+			</div>
+			<button class="btn btn-success" type="submit">Save</button>
+		</form>
+	</div>
+</div>
