@@ -1,3 +1,9 @@
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> Aggiorna ricetta</span>
+	</div>
+</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			<error-message error-text="There was an error. {{recipy.recipy_name}} was not updated." ng-show="showError"></error-message>
@@ -34,7 +40,6 @@
 						<auto-complete source="categories"></auto-complete>
 					</tags-input>
 				</div>
-				<a href="#/recipies/recipies/" class="btn btn-default">Cancel</a>
 				<button class="btn btn-success" type="submit" ng-disabled="addForm.$invalid" ng-click="save()">Save</button>
 			</form>
 		</div>
