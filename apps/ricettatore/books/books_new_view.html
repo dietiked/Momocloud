@@ -1,17 +1,8 @@
-<section class="content-header">
-	<h1>Nuovo libro</h1>
-	<ol class="breadcrumb">
-		<li>
-			<a href="#"><i class="fa fa-shopping-cart"></i></a>
-		</li>
-		<li>
-			<a href="#/recipies/books/">Books</a>
-		</li>
-		<li class="active">
-			New
-		</li>
-	</ol>
-</section>
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> Nuovo libro</span>
+	</div>
+</div>
 
 <section class="content">
 	<div class="row">
@@ -26,7 +17,6 @@
 					<label for="bookAuthor">Autore</label>
 					<input name="bookAuthor" type="text" ng-model="book.recipy_book_author" class="form-control"/>
 				</div>
-				<a href="#/recipies/books/" class="btn btn-default">Cancel</a>
 				<button class="btn btn-success" type="submit" ng-disabled="addForm.$invalid" ng-click="save()">Save</button>
 			</form>
 		</div>
