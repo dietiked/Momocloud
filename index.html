@@ -1,15 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="momocloud">
 	<head>
-		<title>Welcome to MomoCloud</title>
-		<link rel="stylesheet" href="css/styles.css" title="MomoCloud CSS" type="text/css" media="screen" charset="utf-8">
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Momocloud</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
+    	<link rel="stylesheet" href="libs/bootstrap/css/sticky-footer.css">
+    	<link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.min.css">
+    	<link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.bootstrap.min.css">
+		<link rel="stylesheet" href="css/styles.css">
 	</head>
 	<body>
-		<h1>Welcome to MomoCloud</h1>
-		<p>We have following applications</p>
-		<ul>
-			<li><a href="apps/wineDB/">Wine DB</a></li>
-			<li><a href="apps/ricettatore/">Ricettatore<a></li>
-		</ul>
+		
+
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	  <div class="container">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Momocloud</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+		  <ul class="nav navbar-nav">
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vinoteca <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#/winedb/index/">Dashboard</a></li>
+				<li><a href="#/winedb/cellar/">Cantina</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="dropdown-header">Banca dati</li>
+				<li><a href="#/winedb/wines/">Vini</a></li>
+				<li><a href="#/winedb/producers/">Produttori</a></li>
+			  </ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ricettatore <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#/recipies/menues/">Menu</a></li>
+					<li><a href="#/recipies/recipies/">Ricette</a></li>
+					<li><a href="#/recipies/books/">Libri</a></li>
+					<li><a href="#/recipies/categories/">Categorie</a></li>
+				 </ul>
+			</li>
+			<li><a href="#contact">Dafare</a></li>
+		  </ul>
+		</div><!--/.nav-collapse -->
+	  </div>
+	</nav>
+	
+    
+		<div class="container-fluid">
+	
+				<div ng-view></div>		
+		</div>
+		
+		<script src="libs/jquery.js" charset="utf-8"></script>
+		<script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+		<script src="libs/angular/angular.js" charset="utf-8"></script>
+		<script src="libs/angular/angular-route.min.js" charset="utf-8"></script>
+		<script src="libs/angular-filter/angular-filter.min.js" charset="utf-8"></script>
+		<script src="libs/moment.js" charset="utf-8"></script>
+		<script src="libs/chartjs/Chart.min.js" charset="utf-8"></script>
+		<script src="libs/ui_bootstrap/ui-bootstrap-0.13.0.js" charset="utf-8"></script>
+		<script src="libs/underscore/underscore.js" charset="utf-8"></script>
+		<script src="libs/ng-tags-input/ng-tags-input.min.js" charset="utf-8"></script>
+		<script src="directives/error_message/error_message.js" charset="utf-8"></script>
+		<script src="directives/wine_rating/wine_rating.js" charset="utf-8"></script>
+		<script src="directives/chart/chart.js" charset="utf-8"></script>
+		<script src="directives/back_button.js" charset="utf-8"></script>
+		<script src="services/notificationCenter.js" charset="utf-8"></script>
+		<script src="services/dependenciesChecker.js" charset="utf-8"></script>
+		<script src="apps/login/auth_service.js" charset="utf-8"></script>
+		<script src="apps/app.js" charset="utf-8"></script>
+		<script src="apps/login/login_controller.js" charset="utf-8"></script>
+		<script src="apps/start/start_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/index/index_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_details_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/producers/producers_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_details_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/wines/wines_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_new_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/vintages/vintages_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_list_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_add_bottles_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/cellar/cellar_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/movements/movements_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/recipies/recipies_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/recipies/recipies_list_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/recipies/recipies_new_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/recipies/recipies_edit_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/books/books_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/books/books_list_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/books/books_new_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/categories/categories_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/categories/categories_list_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/categories/categories_new_controller.js" charset="utf-8"></script>
+		<script src="apps/url_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/generalData_service.js" charset="utf-8"></script>
+		<script src="apps/winedb/chartData_service.js" charset="utf-8"></script>
+
 	</body>
 </html>

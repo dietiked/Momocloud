@@ -1,0 +1,46 @@
+<div class="row submenu">
+	<div class="col-xs-12">
+		<span class="page-title"><back-button></back-button> Nuova ricetta</span>
+	</div>
+</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<error-message error-text="There was an error. {{recipy.recipy_name}} was not updated." ng-show="showError"></error-message>
+			<form name="addForm" ng-show="dependenciesLoaded">
+				<div class="form-group" ng-class="{'has-error': addForm.recipyName.$invalid}">
+					<label for="name">Titolo *</label>
+					<input name="name" type="text" ng-model="recipy.recipy_name" class="form-control" required/>
+				</div>
+				<div class="form-group">
+					<label for="book">Libro</label>
+					<select name="book" ng-model="recipy.recipy_book_id" class="form-control">
+						<option ng-repeat="book in books | orderBy:'recipy_book_title'" value="{{book.recipy_book_id}}">
+							{{book.recipy_book_title}} - {{book.recipy_book_author}}
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="bookPage">Pagina</label>
+					<input name="bookPage" type="text" ng-model="recipy.recipy_book_page" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label for="recipyIngredients">Ingredienti (separati da virgola)</label>
+					<input name="recipyIngredients" type="text" ng-model="recipy.recipy_ingredients" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label for="rating">Valutazione</label>
+					<select name="rating" ng-model="recipy.recipy_rating" class="form-control">
+						<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
+					</select>
+				</div>				
+				<div class="form-group">
+					<label for="categories">Categorie</label>
+					<tags-input ng-model="recipyCategories">
+						<auto-complete source="categories"></auto-complete>
+					</tags-input>
+				</div>
+				<button class="btn btn-success" type="submit" ng-disabled="addForm.$invalid" ng-click="save()">Save</button>
+			</form>
+		</div>
+	</div>

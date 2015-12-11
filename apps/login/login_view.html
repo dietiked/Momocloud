@@ -1,0 +1,20 @@
+
+
+
+
+
+<div class="lockscreen">
+	<div class="lockscreen-wrapper">
+		<form class="lockscreen-credentials">
+			<div class="input-group">
+				<input type="password" class="form-control" placeholder="password" ng-model="user.password">
+				<div class="input-group-btn">
+					<button class="btn btn-primary" ng-click="authenticate(user)">Login</button>
+				</div>
+			</div>
+		</form>
+		<div class="alert alert-danger" ng-show="showError">
+			<p>La password non &egrave; corretta. Riprova</p>
+		</div>
+	</div>
+</div>
