@@ -25,6 +25,36 @@ class Recipy extends Request {
 		return $result;					
 	}
 	
+	public function getRandomRecipy() {
+		// Get number of rows
+		$queryNumOfRows = "SELECT COUNT(*) FROM recipy_recipies";
+		$stmt = $this->connection->prepare($queryNumOfRows);		
+		if ($stmt->execute()) {
+			$numOfRowsResult = $stmt->fetch(PDO::FETCH_ASSOC);
+			$rows = $numOfRowsResult["COUNT(*)"];
+			$randomNumber = rand(0, $rows-1);
+			$recipies = $this->getRecipies();
+			$randomRecipy = $recipies[$randomNumber];
+			$result = true;
+		} else {
+			$result = false;				
+		}
+		return Array("success"=>$result, "recipy"=>$randomRecipy);					
+	}
+	
+	public function searchForRecipy($string) {
+		$query = "SELECT * FROM recipy_recipies JOIN recipy_books ON (recipy_recipies.recipy_book_id=recipy_books.recipy_book_id) WHERE recipy_name LIKE '%" . $string . "%'";
+		$stmt = $this->connection->prepare($query);
+		$result = Array();
+		if ($stmt->execute()) {
+			$success = true;
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			$success = false;
+		}
+		return Array("success"=>$success, "result"=>$result);
+	}
+	
 	public function updateRecipyWithId($id, $data) {
 		if (! isset($data["recipy_name"])) { $data["recipy_name"] = ""; }
 		if (! isset($data["recipy_book_id"])) { $data["recipy_book_id"] = NULL; }

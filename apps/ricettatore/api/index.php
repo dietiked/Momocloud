@@ -15,6 +15,16 @@ $app->get("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $p
 	echo json_encode($request->getRecipyWithId($id));
 });
 
+$app->get("/ricettatore/randomrecipy", function () use ($host, $db, $user, $password) {
+	$request = new Recipy($host, $db, $user, $password);	
+	echo json_encode($request->getRandomRecipy());
+});
+
+$app->get("/ricettatore/search/:query", function ($string) use ($host, $db, $user, $password) {
+	$request = new Recipy($host, $db, $user, $password);	
+	echo json_encode($request->searchForRecipy($string));
+});
+
 $app->post("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $password, $app) {
 	$data = $app->request->post();
 	$request = new Recipy($host, $db, $user, $password);	

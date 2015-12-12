@@ -5,6 +5,8 @@ function RecipiesService($http, NotificationCenter) {
 	RecipiesService.recipies = [];
 	RecipiesService.numberOfRecipies = 0;
 	RecipiesService.recipy = {};
+	RecipiesService.randomRecipy = {};
+	RecipiesService.searchRecipies = [];
 	RecipiesService.lastInsertedRecipy = 0;
 	
 	RecipiesService.notifications = {
@@ -14,6 +16,10 @@ function RecipiesService($http, NotificationCenter) {
 		RECIPIES_COUNT_ALL_ERROR: 'recipyCountError',
 		RECIPIES_GET_SUCCESS: 'recipyGetSuccess',
 		RECIPIES_GET_ERROR: 'recipyGetError',
+		RECIPIES_GET_RANDOM_SUCCESS: 'recipyGetRandomSuccess',
+		RECIPIES_GET_RANDOM_ERROR: 'recipyGetRandomError',
+		RECIPIES_GET_SEARCH_SUCCESS: 'recipySearchSuccess',
+		RECIPIES_GET_SEARCH_ERROR: 'recipySearchError',
 		RECIPIES_UPDATE_SUCCESS: 'recipyUpdateSuccess',
 		RECIPIES_UPDATE_ERROR: 'recipyUpdateError',
 		RECIPIES_DELETE_SUCCESS: 'recipyDeleteSuccess',
@@ -54,28 +60,13 @@ function RecipiesService($http, NotificationCenter) {
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_ERROR);
 		});		
 	};
-	
-	RecipiesService.countWines = function() {
-		$http.post(
-			request + '?f=countCategories'
-		)
-		.success(function(data, status, headers, config) {
-			//console.log('success while countin recipies', data.numberOfRecipies);
-			RecipiesService.numberOfRecipies = data.numberOfRecipies;
-			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_COUNT_SUCCESS);
-		})
-		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
-			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_COUNT_ALL_ERROR);
-		});				
-	}
-	
+		
 	RecipiesService.get = function(id) {
 		$http.get(
 			request + 'recipies/' + id
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success', data);
+			//console.log('success', data);
 			var aRecipy = data[0];
 			aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
 			RecipiesService.recipy = aRecipy;
@@ -86,7 +77,52 @@ function RecipiesService($http, NotificationCenter) {
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ERROR);
 		});		
 	}
+
+	RecipiesService.getRandomRecipy = function() {
+		$http.get(
+			request + 'randomrecipy'
+		)
+		.success(function(data, status, headers, config) {
+			//console.log('success', data);
+			if (data.success) {
+				var aRecipy = data.recipy;
+				aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
+				RecipiesService.randomRecipy = aRecipy;
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_SUCCESS);				
+				//console.log('Recipy', RecipiesService.recipy);
+			} else {
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);			
+			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_ERROR);
+		});		
+	}
 	
+	RecipiesService.search = function(aString) {
+		$http.get(
+			request + 'search/' + aString
+		)
+		.success(function(data, status, headers, config) {
+			//console.log('success', data);
+			if (data.success) {
+				var searchRecipies = data.result;
+				angular.forEach(searchRecipies, function(aRecipy, index) {
+					aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
+				});
+				RecipiesService.searchRecipies = searchRecipies;				
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_SUCCESS);				
+			} else {
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_ERROR);			
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);			
+			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_ERROR);
+		});		
+	}
+
 	RecipiesService.update = function(recipy, categories) {
 		recipy.recipy_categories = tagsToString(categories);
 		$http.post(
