@@ -256,13 +256,33 @@ input[type="text"], input[type="password"], input[type="number"] {
 	display: table;
 	margin-bottom: 15px;
 }
+.tile-big {
+	height: 415px;
+}
 .tile-content {
 	display: table-cell;
 	vertical-align: middle;
+	padding: 10px;
+	.search-result {
+		font-size: 16px;
+		font-weight: normal;
+		margin-top: 10px;
+		text-align: left;
+		ul {
+			margin-left: 0px;
+			padding-left: 0px;
+		}
+		li {
+			list-style-type: none;
+			margin-left: 0px;
+			padding-left: 0px;
+		}
+	}
 }
 
 a.back-button {
-	color: white;
+	color: @dark-gray;
+	background-color: white;
 	margin-right: 10px;
 	border: 1px solid white;
 	padding-left: 4px;

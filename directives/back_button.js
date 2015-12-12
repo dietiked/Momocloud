@@ -6,7 +6,6 @@ function backButton () {
 		scope: {},
 		template: '<a href="#" ng-click="backToPrevious()" class="back-button"><span class="glyphicon glyphicon-arrow-left"></span></a>',
 		link: function(scope, element, attrs) {
-			console.log('Hallo');
 			scope.backToPrevious = function() {
 				window.history.go(-2);
 				console.log(window.history);

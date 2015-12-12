@@ -9,6 +9,7 @@
 		<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
     	<link rel="stylesheet" href="libs/bootstrap/css/sticky-footer.css">
+    	<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     	<link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.min.css">
     	<link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.bootstrap.min.css">
 		<link rel="stylesheet" href="css/styles.css">
@@ -33,10 +34,8 @@
 			<li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vinoteca <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
-				<li><a href="#/winedb/index/">Dashboard</a></li>
-				<li><a href="#/winedb/cellar/">Cantina</a></li>
-				<li role="separator" class="divider"></li>
-				<li class="dropdown-header">Banca dati</li>
+				<li><a href="#/winedb/">Dashboard</a></li>
+				<li><a href="#/winedb/cellar/">In cantina</a></li>
 				<li><a href="#/winedb/wines/">Vini</a></li>
 				<li><a href="#/winedb/producers/">Produttori</a></li>
 			  </ul>
@@ -44,6 +43,7 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ricettatore <span class="caret"></span></a>
 				<ul class="dropdown-menu">
+					<li><a href="#/recipies/">Dashboard</a></li>
 					<li><a href="#/recipies/menues/">Menu</a></li>
 					<li><a href="#/recipies/recipies/">Ricette</a></li>
 					<li><a href="#/recipies/books/">Libri</a></li>
@@ -82,7 +82,7 @@
 		<script src="apps/app.js" charset="utf-8"></script>
 		<script src="apps/login/login_controller.js" charset="utf-8"></script>
 		<script src="apps/start/start_controller.js" charset="utf-8"></script>
-		<script src="apps/winedb/index/index_controller.js" charset="utf-8"></script>
+		<script src="apps/winedb/dashboard/dashboard_controller.js" charset="utf-8"></script>
 		<script src="apps/winedb/producers/producers_list_controller.js" charset="utf-8"></script>
 		<script src="apps/winedb/producers/producers_edit_controller.js" charset="utf-8"></script>
 		<script src="apps/winedb/producers/producers_new_controller.js" charset="utf-8"></script>
@@ -100,6 +100,7 @@
 		<script src="apps/winedb/cellar/cellar_add_bottles_controller.js" charset="utf-8"></script>
 		<script src="apps/winedb/cellar/cellar_service.js" charset="utf-8"></script>
 		<script src="apps/winedb/movements/movements_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/dashboard/dashboard_controller.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_service.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_list_controller.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_new_controller.js" charset="utf-8"></script>

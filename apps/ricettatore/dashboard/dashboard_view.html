@@ -1,0 +1,105 @@
+<div class="row">
+	<div class="col-md-3 col-sm-12">
+		<a href="#/recipies/menu/">
+		<div class="tile">
+			<div class="tile-content">
+				<i class="fa fa-list"></i><br/>
+				Menu
+			</div>
+		</div>
+		</a>
+	</div>
+	<div class="col-md-3 col-sm-12">
+		<a href="#/recipies/recipies/">
+			<div class="tile">
+				<div class="tile-content">
+					<i class="fa fa-cutlery"></i><br/>
+					Ricette
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-md-3 col-sm-12">
+		<a href="#/recipies/books/">
+			<div class="tile">
+				<div class="tile-content">
+					<i class="fa fa-book"></i><br/>
+					Libri
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="col-md-3 col-sm-12">
+		<a href="#/recipies/categories/">
+			<div class="tile">
+				<div class="tile-content">
+					<i class="fa fa-hashtag"></i><br/>
+					Categorie
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 col-sm-12">
+		<div class="tile tile-big">
+			<div class="tile-content">
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-sm-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tile">
+					<div class="tile-content">
+						<span ng-show="!randomRecipe">
+							<button class="btn btn-primary" ng-click="getRandomRecipe()">Cosa si mangia oggi?</button>
+						</span>
+						<span ng-show="randomRecipe">{{randomRecipe.recipe_name}}</span>
+						<small>
+							<span ng-show="randomRecipe.recipe_book_title"><br/>in {{randomRecipe.recipe_book_title}}</span>
+							<span ng-show="randomRecipe.recipe_book_page">- pagina {{randomRecipe.recipe_book_page}}</span>
+						</small>
+						<span ng-show="randomRecipe">
+							<br/>
+							<button class="btn btn-primary" ng-click="getRandomRecipe()">Non ho voglia, dammene un'altra</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-sm-12">
+				<div class="tile">
+					<div class="tile-content">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="cerca ricetta..." ng-model="searchString">
+							<span class="input-group-btn">
+								<button class="btn btn-primary" ng-click="search()">cerca</button>
+							</span>
+						</div>
+						<div class="search-result">
+							<ul>
+								<li ng-repeat="recipe in searchRecipies" >
+									{{recipe.recipe_name}}
+									<span ng-show="recipe.recipe_book_title"> in {{recipe.recipe_book_title}}</span>
+									<span ng-show="recipe.recipe_book_page">- {{recipe.recipe_book_page}}</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-12">
+				<a href="#/recipies/recipies/new">
+					<div class="tile">
+						<div class="tile-content">
+							<i class="fa fa-plus"> </i>
+						</div>
+					</div>
+				</a>
+			</div>			
+		</div>
+	</div>
+</div>

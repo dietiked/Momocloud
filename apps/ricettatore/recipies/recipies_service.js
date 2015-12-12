@@ -4,22 +4,28 @@ function RecipiesService($http, NotificationCenter) {
 	
 	RecipiesService.recipies = [];
 	RecipiesService.numberOfRecipies = 0;
-	RecipiesService.recipy = {};
-	RecipiesService.lastInsertedRecipy = 0;
+	RecipiesService.recipe = {};
+	RecipiesService.randomRecipe = {};
+	RecipiesService.searchRecipies = [];
+	RecipiesService.lastInsertedRecipe = 0;
 	
 	RecipiesService.notifications = {
-		RECIPIES_GET_ALL_SUCCESS: 'recipyGetAllSuccess',
-		RECIPIES_GET_ALL_ERROR: 'recipyGetAllError',
-		RECIPIES_COUNT_SUCCESS: 'recipyCountSuccess',
-		RECIPIES_COUNT_ALL_ERROR: 'recipyCountError',
-		RECIPIES_GET_SUCCESS: 'recipyGetSuccess',
-		RECIPIES_GET_ERROR: 'recipyGetError',
-		RECIPIES_UPDATE_SUCCESS: 'recipyUpdateSuccess',
-		RECIPIES_UPDATE_ERROR: 'recipyUpdateError',
-		RECIPIES_DELETE_SUCCESS: 'recipyDeleteSuccess',
-		RECIPIES_DELETE_ERROR: 'recipyDeleteError',
-		RECIPIES_INSERT_SUCCESS: 'recipyInsertSuccess',
-		RECIPIES_INSERT_ERROR: 'recipyInsertError'
+		RECIPIES_GET_ALL_SUCCESS: 'recipeGetAllSuccess',
+		RECIPIES_GET_ALL_ERROR: 'recipeGetAllError',
+		RECIPIES_COUNT_SUCCESS: 'recipeCountSuccess',
+		RECIPIES_COUNT_ALL_ERROR: 'recipeCountError',
+		RECIPIES_GET_SUCCESS: 'recipeGetSuccess',
+		RECIPIES_GET_ERROR: 'recipeGetError',
+		RECIPIES_GET_RANDOM_SUCCESS: 'recipeGetRandomSuccess',
+		RECIPIES_GET_RANDOM_ERROR: 'recipeGetRandomError',
+		RECIPIES_GET_SEARCH_SUCCESS: 'recipeSearchSuccess',
+		RECIPIES_GET_SEARCH_ERROR: 'recipeSearchError',
+		RECIPIES_UPDATE_SUCCESS: 'recipeUpdateSuccess',
+		RECIPIES_UPDATE_ERROR: 'recipeUpdateError',
+		RECIPIES_DELETE_SUCCESS: 'recipeDeleteSuccess',
+		RECIPIES_DELETE_ERROR: 'recipeDeleteError',
+		RECIPIES_INSERT_SUCCESS: 'recipeInsertSuccess',
+		RECIPIES_INSERT_ERROR: 'recipeInsertError'
 	};
 	
 	var tagsToString = function(tags) {
@@ -44,8 +50,8 @@ function RecipiesService($http, NotificationCenter) {
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
 			RecipiesService.recipies = data;
-			angular.forEach(RecipiesService.recipies, function(recipy, key) {
-				recipy.recipy_categories = stringToTags(recipy.recipy_categories);
+			angular.forEach(RecipiesService.recipies, function(recipe, key) {
+				recipe.recipe_categories = stringToTags(recipe.recipe_categories);
 			});
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS);
 		})
@@ -54,31 +60,16 @@ function RecipiesService($http, NotificationCenter) {
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_ERROR);
 		});		
 	};
-	
-	RecipiesService.countWines = function() {
-		$http.post(
-			request + '?f=countCategories'
-		)
-		.success(function(data, status, headers, config) {
-			//console.log('success while countin recipies', data.numberOfRecipies);
-			RecipiesService.numberOfRecipies = data.numberOfRecipies;
-			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_COUNT_SUCCESS);
-		})
-		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
-			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_COUNT_ALL_ERROR);
-		});				
-	}
-	
+		
 	RecipiesService.get = function(id) {
 		$http.get(
 			request + 'recipies/' + id
 		)
 		.success(function(data, status, headers, config) {
-			console.log('success', data);
-			var aRecipy = data[0];
-			aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
-			RecipiesService.recipy = aRecipy;
+			//console.log('success', data);
+			var aRecipe = data[0];
+			aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
+			RecipiesService.recipe = aRecipe;
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -86,12 +77,57 @@ function RecipiesService($http, NotificationCenter) {
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ERROR);
 		});		
 	}
+
+	RecipiesService.getRandomRecipe = function() {
+		$http.get(
+			request + 'randomrecipe'
+		)
+		.success(function(data, status, headers, config) {
+			//console.log('success', data);
+			if (data.success) {
+				var aRecipe = data.recipe;
+				aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
+				RecipiesService.randomRecipe = aRecipe;
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_SUCCESS);				
+				//console.log('Recipe', RecipiesService.recipe);
+			} else {
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);			
+			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_ERROR);
+		});		
+	}
 	
-	RecipiesService.update = function(recipy, categories) {
-		recipy.recipy_categories = tagsToString(categories);
+	RecipiesService.search = function(aString) {
+		$http.get(
+			request + 'search/' + aString
+		)
+		.success(function(data, status, headers, config) {
+			//console.log('success', data);
+			if (data.success) {
+				var searchRecipies = data.result;
+				angular.forEach(searchRecipies, function(aRecipe, index) {
+					aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
+				});
+				RecipiesService.searchRecipies = searchRecipies;				
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_SUCCESS);				
+			} else {
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_ERROR);			
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);			
+			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_ERROR);
+		});		
+	}
+
+	RecipiesService.update = function(recipe, categories) {
+		recipe.recipe_categories = tagsToString(categories);
 		$http.post(
-			request + 'recipies/' + recipy.recipy_id,
-			recipy
+			request + 'recipies/' + recipe.recipe_id,
+			recipe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
@@ -108,12 +144,12 @@ function RecipiesService($http, NotificationCenter) {
 		});				
 	}
 	
-	RecipiesService.insert = function(recipy, categories) {
+	RecipiesService.insert = function(recipe, categories) {
 		RecipiesService.lastInsertedId = 0;
-		recipy.recipy_categories = tagsToString(categories);
+		recipe.recipe_categories = tagsToString(categories);
 		$http.post(
 			request + 'recipies/',
-			recipy
+			recipe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
