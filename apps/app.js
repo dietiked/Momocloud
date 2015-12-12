@@ -72,9 +72,9 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			controller: 'StartController'
 		}).
 		// Wine DB
-		when('/winedb/index', {
-			templateUrl: 'apps/winedb/index/index_view.html',
-			controller: 'IndexController'
+		when('/winedb', {
+			templateUrl: 'apps/winedb/dashboard/dashboard_view.html',
+			controller: 'WineDBDashboardController'
 		}).
 		when('/winedb/producers', {
 			templateUrl: 'apps/winedb/producers/producers_list_view.html',
@@ -125,6 +125,10 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			controller: 'CellarAddBottlesController'
 		}).
 		// Ricettatore
+		when('/recipies', {
+			templateUrl: 'apps/ricettatore/dashboard/dashboard_view.html',
+			controller: 'RecipyDashboardController'
+		}).
 		when('/recipies/categories', {
 			templateUrl: 'apps/ricettatore/categories/categories_list_view.html',
 			controller: 'RecipyCategoriesListController'
