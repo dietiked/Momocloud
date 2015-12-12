@@ -1,12 +1,12 @@
 momocloudControllers.controller('RecipiesEditController', 
-['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'RecipyCategoriesService', 'RecipyBooksService', 'RecipiesService', 'UrlService', 'AuthService', 'GeneralDataService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipyCategoriesService, RecipyBooksService, RecipiesService, UrlService, AuthService, GeneralDataService) {
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'RecipeCategoriesService', 'RecipeBooksService', 'RecipiesService', 'UrlService', 'AuthService', 'GeneralDataService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeCategoriesService, RecipeBooksService, RecipiesService, UrlService, AuthService, GeneralDataService) {
 	console.log('RecipiesEditController');	
 	
-	var recipyId = $routeParams.recipyId;
+	var recipeId = $routeParams.recipeId;
 		
-	$scope.recipy = {};
-	$scope.recipyCategories = [];
+	$scope.recipe = {};
+	$scope.recipeCategories = [];
 	$scope.books =[];
 	$scope.categories = [];
 	$scope.ratings = [];
@@ -15,31 +15,31 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipyCa
 	DependenciesChecker.setDependencies(3);
 	
 	$scope.save = function() {
-		RecipiesService.update($scope.recipy, $scope.recipyCategories);
+		RecipiesService.update($scope.recipe, $scope.recipeCategories);
 	}
 	
 
 	// Notification functions
-	var getRecipy = function() {
-		$scope.recipy = RecipiesService.recipy;
-		$scope.recipyCategories = RecipiesService.recipy.recipy_categories;
+	var getRecipe = function() {
+		$scope.recipe = RecipiesService.recipe;
+		$scope.recipeCategories = RecipiesService.recipe.recipe_categories;
 		DependenciesChecker.loaded();
 		$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
-		RecipyBooksService.getAll();
-		RecipyCategoriesService.getAll();
+		RecipeBooksService.getAll();
+		RecipeCategoriesService.getAll();
 		GeneralDataService.getRatings();
 	}
 	var updateSuccess = function() {
 		UrlService.redirectToRecipiesList();		
 	}
 	var getBooks = function() {
-		$scope.books = RecipyBooksService.books;
+		$scope.books = RecipeBooksService.books;
 		DependenciesChecker.loaded();
 		$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 	}
 	var getCategories = function() {
-		angular.forEach(RecipyCategoriesService.categories, function(category, key) {
-			$scope.categories.push(category.recipy_category_name);
+		angular.forEach(RecipeCategoriesService.categories, function(category, key) {
+			$scope.categories.push(category.recipe_category_name);
 		});		
 		DependenciesChecker.loaded();
 		$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
@@ -52,20 +52,20 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipyCa
 			
 
 	// Notification handlers
-	var getRecipySuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_SUCCESS, getRecipy);
-	var updateRecipySuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_UPDATE_SUCCESS, updateSuccess);
-	var getBooksSuccess = NotificationCenter.subscribe(RecipyBooksService.notifications.RECIPY_BOOKS_GET_ALL_SUCCESS, getBooks);
-	var getCategoriesSuccess = NotificationCenter.subscribe(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS, getCategories);
+	var getRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_SUCCESS, getRecipe);
+	var updateRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_UPDATE_SUCCESS, updateSuccess);
+	var getBooksSuccess = NotificationCenter.subscribe(RecipeBooksService.notifications.RECIPY_BOOKS_GET_ALL_SUCCESS, getBooks);
+	var getCategoriesSuccess = NotificationCenter.subscribe(RecipeCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS, getCategories);
 	var getRatingsSuccess = NotificationCenter.subscribe(GeneralDataService.notifications.RATINGS_GET_ALL_SUCCESS, getRatings);
 	$scope.$on('$destroy', function(){
-		NotificationCenter.unsubscribe(getRecipySuccess);
-		NotificationCenter.unsubscribe(updateRecipySuccess);
+		NotificationCenter.unsubscribe(getRecipeSuccess);
+		NotificationCenter.unsubscribe(updateRecipeSuccess);
 		NotificationCenter.unsubscribe(getBooksSuccess);
 		NotificationCenter.unsubscribe(getCategoriesSuccess);
 		NotificationCenter.unsubscribe(getRatingsSuccess);
 	});
 
-	RecipiesService.get(recipyId);
+	RecipiesService.get(recipeId);
 	AuthService.increaseExpiration();
 
 }]);

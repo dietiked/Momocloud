@@ -4,28 +4,28 @@ function RecipiesService($http, NotificationCenter) {
 	
 	RecipiesService.recipies = [];
 	RecipiesService.numberOfRecipies = 0;
-	RecipiesService.recipy = {};
-	RecipiesService.randomRecipy = {};
+	RecipiesService.recipe = {};
+	RecipiesService.randomRecipe = {};
 	RecipiesService.searchRecipies = [];
-	RecipiesService.lastInsertedRecipy = 0;
+	RecipiesService.lastInsertedRecipe = 0;
 	
 	RecipiesService.notifications = {
-		RECIPIES_GET_ALL_SUCCESS: 'recipyGetAllSuccess',
-		RECIPIES_GET_ALL_ERROR: 'recipyGetAllError',
-		RECIPIES_COUNT_SUCCESS: 'recipyCountSuccess',
-		RECIPIES_COUNT_ALL_ERROR: 'recipyCountError',
-		RECIPIES_GET_SUCCESS: 'recipyGetSuccess',
-		RECIPIES_GET_ERROR: 'recipyGetError',
-		RECIPIES_GET_RANDOM_SUCCESS: 'recipyGetRandomSuccess',
-		RECIPIES_GET_RANDOM_ERROR: 'recipyGetRandomError',
-		RECIPIES_GET_SEARCH_SUCCESS: 'recipySearchSuccess',
-		RECIPIES_GET_SEARCH_ERROR: 'recipySearchError',
-		RECIPIES_UPDATE_SUCCESS: 'recipyUpdateSuccess',
-		RECIPIES_UPDATE_ERROR: 'recipyUpdateError',
-		RECIPIES_DELETE_SUCCESS: 'recipyDeleteSuccess',
-		RECIPIES_DELETE_ERROR: 'recipyDeleteError',
-		RECIPIES_INSERT_SUCCESS: 'recipyInsertSuccess',
-		RECIPIES_INSERT_ERROR: 'recipyInsertError'
+		RECIPIES_GET_ALL_SUCCESS: 'recipeGetAllSuccess',
+		RECIPIES_GET_ALL_ERROR: 'recipeGetAllError',
+		RECIPIES_COUNT_SUCCESS: 'recipeCountSuccess',
+		RECIPIES_COUNT_ALL_ERROR: 'recipeCountError',
+		RECIPIES_GET_SUCCESS: 'recipeGetSuccess',
+		RECIPIES_GET_ERROR: 'recipeGetError',
+		RECIPIES_GET_RANDOM_SUCCESS: 'recipeGetRandomSuccess',
+		RECIPIES_GET_RANDOM_ERROR: 'recipeGetRandomError',
+		RECIPIES_GET_SEARCH_SUCCESS: 'recipeSearchSuccess',
+		RECIPIES_GET_SEARCH_ERROR: 'recipeSearchError',
+		RECIPIES_UPDATE_SUCCESS: 'recipeUpdateSuccess',
+		RECIPIES_UPDATE_ERROR: 'recipeUpdateError',
+		RECIPIES_DELETE_SUCCESS: 'recipeDeleteSuccess',
+		RECIPIES_DELETE_ERROR: 'recipeDeleteError',
+		RECIPIES_INSERT_SUCCESS: 'recipeInsertSuccess',
+		RECIPIES_INSERT_ERROR: 'recipeInsertError'
 	};
 	
 	var tagsToString = function(tags) {
@@ -50,8 +50,8 @@ function RecipiesService($http, NotificationCenter) {
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
 			RecipiesService.recipies = data;
-			angular.forEach(RecipiesService.recipies, function(recipy, key) {
-				recipy.recipy_categories = stringToTags(recipy.recipy_categories);
+			angular.forEach(RecipiesService.recipies, function(recipe, key) {
+				recipe.recipe_categories = stringToTags(recipe.recipe_categories);
 			});
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS);
 		})
@@ -67,9 +67,9 @@ function RecipiesService($http, NotificationCenter) {
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
-			var aRecipy = data[0];
-			aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
-			RecipiesService.recipy = aRecipy;
+			var aRecipe = data[0];
+			aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
+			RecipiesService.recipe = aRecipe;
 			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
@@ -78,18 +78,18 @@ function RecipiesService($http, NotificationCenter) {
 		});		
 	}
 
-	RecipiesService.getRandomRecipy = function() {
+	RecipiesService.getRandomRecipe = function() {
 		$http.get(
-			request + 'randomrecipy'
+			request + 'randomrecipe'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
 			if (data.success) {
-				var aRecipy = data.recipy;
-				aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
-				RecipiesService.randomRecipy = aRecipy;
+				var aRecipe = data.recipe;
+				aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
+				RecipiesService.randomRecipe = aRecipe;
 				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_SUCCESS);				
-				//console.log('Recipy', RecipiesService.recipy);
+				//console.log('Recipe', RecipiesService.recipe);
 			} else {
 				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_RANDOM_ERROR);
 			}
@@ -108,8 +108,8 @@ function RecipiesService($http, NotificationCenter) {
 			//console.log('success', data);
 			if (data.success) {
 				var searchRecipies = data.result;
-				angular.forEach(searchRecipies, function(aRecipy, index) {
-					aRecipy.recipy_categories = stringToTags(aRecipy.recipy_categories);
+				angular.forEach(searchRecipies, function(aRecipe, index) {
+					aRecipe.recipe_categories = stringToTags(aRecipe.recipe_categories);
 				});
 				RecipiesService.searchRecipies = searchRecipies;				
 				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_SEARCH_SUCCESS);				
@@ -123,11 +123,11 @@ function RecipiesService($http, NotificationCenter) {
 		});		
 	}
 
-	RecipiesService.update = function(recipy, categories) {
-		recipy.recipy_categories = tagsToString(categories);
+	RecipiesService.update = function(recipe, categories) {
+		recipe.recipe_categories = tagsToString(categories);
 		$http.post(
-			request + 'recipies/' + recipy.recipy_id,
-			recipy
+			request + 'recipies/' + recipe.recipe_id,
+			recipe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
@@ -144,12 +144,12 @@ function RecipiesService($http, NotificationCenter) {
 		});				
 	}
 	
-	RecipiesService.insert = function(recipy, categories) {
+	RecipiesService.insert = function(recipe, categories) {
 		RecipiesService.lastInsertedId = 0;
-		recipy.recipy_categories = tagsToString(categories);
+		recipe.recipe_categories = tagsToString(categories);
 		$http.post(
 			request + 'recipies/',
-			recipy
+			recipe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {

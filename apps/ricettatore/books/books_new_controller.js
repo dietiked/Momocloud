@@ -1,23 +1,23 @@
-momocloudControllers.controller('RecipyBooksNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipyBooksService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, RecipyBooksService, UrlService, AuthService) {
-	console.log('RecipyBooksNewController');	
+momocloudControllers.controller('RecipeBooksNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeBooksService', 'UrlService', 'AuthService',
+function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, UrlService, AuthService) {
+	console.log('RecipeBooksNewController');	
 		
 	$scope.book = {};
 	$scope.success = false;
 	
 	$scope.save = function() {
-		RecipyBooksService.insert($scope.book);
+		RecipeBooksService.insert($scope.book);
 	}
 	
 
 	// Notification functions
 	var insertSuccess = function() {
-		UrlService.redirectToRecipyBooksList();		
+		UrlService.redirectToRecipeBooksList();		
 	}
 			
 
 	// Notification handlers
-	var insertBookSuccess = NotificationCenter.subscribe(RecipyBooksService.notifications.RECIPY_BOOKS_INSERT_SUCCESS, insertSuccess);
+	var insertBookSuccess = NotificationCenter.subscribe(RecipeBooksService.notifications.RECIPY_BOOKS_INSERT_SUCCESS, insertSuccess);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(insertBookSuccess);
 	});

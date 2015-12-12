@@ -1,32 +1,32 @@
-momocloudControllers.controller('RecipyDashboardController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'AuthService', 'RecipiesService',
+momocloudControllers.controller('RecipeDashboardController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'AuthService', 'RecipiesService',
 function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthService, RecipiesService) {
-	console.log('RecipyDashboardController');	
+	console.log('RecipeDashboardController');	
 	
-	$scope.randomRecipy;
+	$scope.randomRecipe;
 	$scope.searchRecipies;
 	$scope.searchString = "";
 	
-	$scope.getRandomRecipy = function() {
-		RecipiesService.getRandomRecipy();
+	$scope.getRandomRecipe = function() {
+		RecipiesService.getRandomRecipe();
 	}
 	
 	$scope.search = function() {
 		RecipiesService.search($scope.searchString);
 	}
 	
-	var getRandomRecipyHandler = function() {
-		$scope.randomRecipy = RecipiesService.randomRecipy;
+	var getRandomRecipeHandler = function() {
+		$scope.randomRecipe = RecipiesService.randomRecipe;
 	}
 
-	var getSearchRecipyHandler = function() {
+	var getSearchRecipeHandler = function() {
 		$scope.searchRecipies = RecipiesService.searchRecipies;
 	}
 		
-	var getRandomRecipySuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_RANDOM_SUCCESS, getRandomRecipyHandler);
-	var getSearchRecipySuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_SEARCH_SUCCESS, getSearchRecipyHandler);
+	var getRandomRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_RANDOM_SUCCESS, getRandomRecipeHandler);
+	var getSearchRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_SEARCH_SUCCESS, getSearchRecipeHandler);
 	$scope.$on('$destroy', function(){
-		NotificationCenter.unsubscribe(getRandomRecipySuccess);
-		NotificationCenter.unsubscribe(getSearchRecipyHandler);
+		NotificationCenter.unsubscribe(getRandomRecipeSuccess);
+		NotificationCenter.unsubscribe(getSearchRecipeHandler);
 	});
 
 	AuthService.increaseExpiration();

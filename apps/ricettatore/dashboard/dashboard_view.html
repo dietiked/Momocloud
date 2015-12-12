@@ -53,17 +53,17 @@
 			<div class="col-md-12">
 				<div class="tile">
 					<div class="tile-content">
-						<span ng-show="!randomRecipy">
-							<button class="btn btn-primary" ng-click="getRandomRecipy()">Cosa si mangia oggi?</button>
+						<span ng-show="!randomRecipe">
+							<button class="btn btn-primary" ng-click="getRandomRecipe()">Cosa si mangia oggi?</button>
 						</span>
-						<span ng-show="randomRecipy">{{randomRecipy.recipy_name}}</span>
+						<span ng-show="randomRecipe">{{randomRecipe.recipe_name}}</span>
 						<small>
-							<span ng-show="randomRecipy.recipy_book_title"><br/>in {{randomRecipy.recipy_book_title}}</span>
-							<span ng-show="randomRecipy.recipy_book_page">- pagina {{randomRecipy.recipy_book_page}}</span>
+							<span ng-show="randomRecipe.recipe_book_title"><br/>in {{randomRecipe.recipe_book_title}}</span>
+							<span ng-show="randomRecipe.recipe_book_page">- pagina {{randomRecipe.recipe_book_page}}</span>
 						</small>
-						<span ng-show="randomRecipy">
+						<span ng-show="randomRecipe">
 							<br/>
-							<button class="btn btn-primary" ng-click="getRandomRecipy()">Non ho voglia, dammene un'altra</button>
+							<button class="btn btn-primary" ng-click="getRandomRecipe()">Non ho voglia, dammene un'altra</button>
 						</span>
 					</div>
 				</div>
@@ -81,10 +81,10 @@
 						</div>
 						<div class="search-result">
 							<ul>
-								<li ng-repeat="recipy in searchRecipies" >
-									{{recipy.recipy_name}}
-									<span ng-show="recipy.recipy_book_title"> in {{recipy.recipy_book_title}}</span>
-									<span ng-show="recipy.recipy_book_page">- {{recipy.recipy_book_page}}</span>
+								<li ng-repeat="recipe in searchRecipies" >
+									{{recipe.recipe_name}}
+									<span ng-show="recipe.recipe_book_title"> in {{recipe.recipe_book_title}}</span>
+									<span ng-show="recipe.recipe_book_page">- {{recipe.recipe_book_page}}</span>
 								</li>
 							</ul>
 						</div>

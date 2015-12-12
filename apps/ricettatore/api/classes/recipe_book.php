@@ -1,9 +1,9 @@
 <?php
 
-	class RecipyBook extends Request {
+	class RecipeBook extends Request {
 		
 		public function getBooks() {	
-			$query = "SELECT * FROM recipy_books";
+			$query = "SELECT * FROM recipe_books";
 			$stmt = $this->connection->prepare($query);		
 			if ($stmt->execute()) {
 				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
@@ -14,7 +14,7 @@
 		}
 		
 		public function getBookWithId($id) {
-			$query = "SELECT * FROM recipy_books WHERE recipy_book_id=". $id;
+			$query = "SELECT * FROM recipe_books WHERE recipe_book_id=". $id;
 			$stmt = $this->connection->prepare($query);		
 			if ($stmt->execute()) {
 				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
@@ -25,10 +25,10 @@
 		}
 		
 		public function updateBookWithId($id, $data) {
-			$query = "UPDATE recipy_books SET recipy_book_title=:bookName, recipy_book_author=:bookAuthor WHERE recipy_book_id=:bookID";
+			$query = "UPDATE recipe_books SET recipe_book_title=:bookName, recipe_book_author=:bookAuthor WHERE recipe_book_id=:bookID";
 			$stmt = $this->connection->prepare($query);
-			$stmt->bindValue(":bookName", $data["recipy_book_title"]);	
-			$stmt->bindValue(":bookAuthor", $data["recipy_book_author"]);	
+			$stmt->bindValue(":bookName", $data["recipe_book_title"]);	
+			$stmt->bindValue(":bookAuthor", $data["recipe_book_author"]);	
 			$stmt->bindValue(":bookID", $id);	
 			if ($stmt->execute()) {
 				$result = $stmt->rowCount();
@@ -39,10 +39,10 @@
 		}
 		
 		public function insertBook($data) {
-			$query = "INSERT INTO recipy_books (recipy_book_title, recipy_book_author) VALUES (:bookName, :bookAuthor)";
+			$query = "INSERT INTO recipe_books (recipe_book_title, recipe_book_author) VALUES (:bookName, :bookAuthor)";
 			$stmt = $this->connection->prepare($query);
-			$stmt->bindValue(":bookName", $data["recipy_book_title"]);	
-			$stmt->bindValue(":bookAuthor", $data["recipy_book_author"]);	
+			$stmt->bindValue(":bookName", $data["recipe_book_title"]);	
+			$stmt->bindValue(":bookAuthor", $data["recipe_book_author"]);	
 			$stmt->execute();
 			$id = $this->connection->lastInsertId();
 			if ($id > 0) {
