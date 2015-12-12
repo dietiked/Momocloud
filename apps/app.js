@@ -72,9 +72,9 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			controller: 'StartController'
 		}).
 		// Wine DB
-		when('/winedb/index', {
-			templateUrl: 'apps/winedb/index/index_view.html',
-			controller: 'IndexController'
+		when('/winedb', {
+			templateUrl: 'apps/winedb/dashboard/dashboard_view.html',
+			controller: 'WineDBDashboardController'
 		}).
 		when('/winedb/producers', {
 			templateUrl: 'apps/winedb/producers/producers_list_view.html',
@@ -125,21 +125,25 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			controller: 'CellarAddBottlesController'
 		}).
 		// Ricettatore
+		when('/recipies', {
+			templateUrl: 'apps/ricettatore/dashboard/dashboard_view.html',
+			controller: 'RecipeDashboardController'
+		}).
 		when('/recipies/categories', {
 			templateUrl: 'apps/ricettatore/categories/categories_list_view.html',
-			controller: 'RecipyCategoriesListController'
+			controller: 'RecipeCategoriesListController'
 		}).
 		when('/recipies/categories/new', {
 			templateUrl: 'apps/ricettatore/categories/categories_new_view.html',
-			controller: 'RecipyCategoriesNewController'
+			controller: 'RecipeCategoriesNewController'
 		}).
 		when('/recipies/books', {
 			templateUrl: 'apps/ricettatore/books/books_list_view.html',
-			controller: 'RecipyBooksListController'
+			controller: 'RecipeBooksListController'
 		}).
 		when('/recipies/books/new', {
 			templateUrl: 'apps/ricettatore/books/books_new_view.html',
-			controller: 'RecipyBooksNewController'
+			controller: 'RecipeBooksNewController'
 		}).
 		when('/recipies/recipies', {
 			templateUrl: 'apps/ricettatore/recipies/recipies_list_view.html',
@@ -149,7 +153,7 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/ricettatore/recipies/recipies_new_view.html',
 			controller: 'RecipiesNewController'
 		}).
-		when('/recipies/recipies/:recipyId/edit', {
+		when('/recipies/recipies/:recipeId/edit', {
 			templateUrl: 'apps/ricettatore/recipies/recipies_edit_view.html',
 			controller: 'RecipiesEditController'
 		}).

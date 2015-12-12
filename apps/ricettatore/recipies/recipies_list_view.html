@@ -25,13 +25,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="recipy in recipies | filter:search">
-					<td>{{recipy.recipy_name}}</td>
-					<td>{{recipy.recipy_book_title}}</td>
-					<td>{{recipy.recipy_book_page}}</td>
-					<td>{{recipy.recipy_rating}}/10</td>
-					<td><span ng-repeat="category in recipy.recipy_categories"><span class="label label-primary">{{category}}</span> </span></td>
-					<td><a href="#/recipies/recipies/{{recipy.recipy_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
+				<tr ng-repeat="recipe in recipies | filter:search">
+					<td>{{recipe.recipe_name}}</td>
+					<td>{{recipe.recipe_book_title}}</td>
+					<td>{{recipe.recipe_book_page}}</td>
+					<td>{{recipe.recipe_rating}}/10</td>
+					<td><span ng-repeat="category in recipe.recipe_categories"><span class="label label-primary">{{category}}</span> </span></td>
+					<td><a href="#/recipies/recipies/{{recipe.recipe_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
 				</tr>
 			</tbody>
 		</table>

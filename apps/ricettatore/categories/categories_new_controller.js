@@ -1,23 +1,23 @@
-momocloudControllers.controller('RecipyCategoriesNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipyCategoriesService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, RecipyCategoriesService, UrlService, AuthService) {
-	console.log('RecipyCategoriesNewController');	
+momocloudControllers.controller('RecipeCategoriesNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeCategoriesService', 'UrlService', 'AuthService',
+function($scope, NotificationCenter, DependenciesChecker, RecipeCategoriesService, UrlService, AuthService) {
+	console.log('RecipeCategoriesNewController');	
 		
 	$scope.category = {};
 	$scope.success = false;
 	
 	$scope.save = function() {
-		RecipyCategoriesService.insert($scope.category);
+		RecipeCategoriesService.insert($scope.category);
 	}
 	
 
 	// Notification functions
 	var insertSuccess = function() {
-		UrlService.redirectToRecipyCategoriesList();		
+		UrlService.redirectToRecipeCategoriesList();		
 	}
 			
 
 	// Notification handlers
-	var insertCategorySuccess = NotificationCenter.subscribe(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_INSERT_SUCCESS, insertSuccess);
+	var insertCategorySuccess = NotificationCenter.subscribe(RecipeCategoriesService.notifications.RECIPY_CATEGORIES_INSERT_SUCCESS, insertSuccess);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(insertCategorySuccess);
 	});

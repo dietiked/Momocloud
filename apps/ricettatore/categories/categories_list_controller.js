@@ -1,22 +1,22 @@
-momocloudControllers.controller('RecipyCategoriesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipyCategoriesService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, RecipyCategoriesService, UrlService, AuthService) {
+momocloudControllers.controller('RecipeCategoriesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeCategoriesService', 'UrlService', 'AuthService',
+function($scope, NotificationCenter, DependenciesChecker, RecipeCategoriesService, UrlService, AuthService) {
 	
-	console.log('RecipyCategoriesNewController');
+	console.log('RecipeCategoriesNewController');
 	$scope.loaded = false;
 
 	// Notification functions
 	var getCategories = function() {
-		$scope.categories = RecipyCategoriesService.categories;
+		$scope.categories = RecipeCategoriesService.categories;
 		$scope.loaded = true;
 	}
 
 	// Notification handlers
-	var getCategoriesSuccess = NotificationCenter.subscribe(RecipyCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS, getCategories);
+	var getCategoriesSuccess = NotificationCenter.subscribe(RecipeCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS, getCategories);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getCategoriesSuccess);
 	});
 
-	RecipyCategoriesService.getAll();
+	RecipeCategoriesService.getAll();
 	AuthService.increaseExpiration();
 
 }]);

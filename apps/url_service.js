@@ -30,10 +30,10 @@ function UrlService($http, $location, NotificationCenter) {
 		$location.path('/winedb/cellar/' + storedWineId + '/bottles/add');		
 	};
 
-	UrlService.redirectToRecipyCategoriesList = function() {
+	UrlService.redirectToRecipeCategoriesList = function() {
 		$location.path('/recipies/categories/');		
 	};
-	UrlService.redirectToRecipyBooksList = function() {
+	UrlService.redirectToRecipeBooksList = function() {
 		$location.path('/recipies/books/');		
 	};
 	UrlService.redirectToRecipiesList = function() {
