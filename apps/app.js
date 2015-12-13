@@ -129,6 +129,14 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/ricettatore/dashboard/dashboard_view.html',
 			controller: 'RecipeDashboardController'
 		}).
+		when('/recipies/menus', {
+			templateUrl: 'apps/ricettatore/menus/menus_list_view.html',
+			controller: 'RecipeMenusListController'
+		}).
+		when('/recipies/menus/:menuId', {
+			templateUrl: 'apps/ricettatore/menus/menus_details_view.html',
+			controller: 'RecipeMenusDetailsController'
+		}).
 		when('/recipies/categories', {
 			templateUrl: 'apps/ricettatore/categories/categories_list_view.html',
 			controller: 'RecipeCategoriesListController'
