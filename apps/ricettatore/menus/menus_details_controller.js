@@ -3,18 +3,25 @@ momocloudControllers.controller('RecipeMenusDetailsController',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMenusService, RecipiesService, UrlService, AuthService, GeneralDataService) {
 	console.log('RecipeMenusDetailsController');
 	
-	$scope.menu = [];
+	$scope.menu = {};
 	$scope.recipies = [];
 	$scope.availableRecipies = [];
+	$scope.showSaveButton = false;
 	
 	$scope.addToMenu = function(recipe, index) {
-		$scope.menu.push(recipe);
+		$scope.menu.recipies.push(recipe);
 		$scope.availableRecipies.splice(index, 1);
+		$scope.showSaveButton = true;
 	}
 	
 	$scope.removeFromMenu = function(recipe, index) {
 		$scope.availableRecipies.push(recipe);
-		$scope.menu.splice(index, 1);		
+		$scope.menu.recipies.splice(index, 1);		
+		$scope.showSaveButton = true;
+	}
+	
+	$scope.saveMenu = function() {
+		RecipeMenusService.save($scope.menu);
 	}
 	
 	var getMenuSuccessHandler = function() {
@@ -25,11 +32,17 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 		$scope.availableRecipies = RecipeMenusService.availableRecipies;
 	};
 	
+	var saveMenuSuccessHandler = function() {
+		$scope.showSaveButton = false;
+	}
+	
 	var getMenuSuccess = NotificationCenter.subscribe(RecipeMenusService.notifications.RECIPE_MENUS_GET_SUCCESS, getMenuSuccessHandler);
 	var getRecipiesSuccess = NotificationCenter.subscribe(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_SUCCESS, getRecipiesSuccessHandler);
+	var saveMenuSuccess = NotificationCenter.subscribe(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_SUCCESS, saveMenuSuccessHandler);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getMenuSuccess);
 		NotificationCenter.unsubscribe(getRecipiesSuccess);
+		NotificationCenter.unsubscribe(saveMenuSuccess);
 	});
 	
 	RecipeMenusService.get($routeParams.menuId)

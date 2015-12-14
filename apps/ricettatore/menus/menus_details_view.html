@@ -1,33 +1,47 @@
 <div class="row submenu">
 	<div class="col-xs-6">
-		<span class="page-title"><back-button></back-button> Menu #{{menu[0].recipe_menu_id}}</span>
+		<span class="page-title"><back-button></back-button> Menu #{{menu.recipe_menu_id}}</span>
 	</div>
 	<div class="col-xs-6">
-		<div class="input-group input-group-sm">
-		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
-		</div>		
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-6"> 
-		Ricette selezionate
-		<div class="row" ng-repeat="recipe in menu | filter:search">
+		<h3>Ricette selezionate <button class="btn btn-success" ng-click="saveMenu()" ng-show="showSaveButton">Salva</button></h3>
+		<div class="row" ng-repeat="recipe in menu.recipies">
 			<div class="col-md-12">
-				<button class="btn btn-primary" ng-click="removeFromMenu(recipe, $index)">
-					<i class="fa fa-trash"></i>
-				</button>{{recipe.recipe_name}}
+				<div class="menu-recipe">
+					<p>
+						<button class="btn btn-primary" ng-click="removeFromMenu(recipe, $index)">
+							<i class="fa fa-trash"></i>
+						</button>
+						{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-6"> 
-		Ricette disponibili
+		<h3>Ricette disponibili</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+					<input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+				</div>		
+			</div>
+		</div>
 		<div class="row" ng-repeat="recipe in availableRecipies | filter:search">
 			<div class="col-md-12">
-				<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
-					<i class="fa fa-shopping-cart"></i>
-				</button>{{recipe.recipe_name}}
+				<div class="menu-recipe">
+					<p>
+						<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
+							<i class="fa fa-shopping-cart"></i>
+						</button>
+						{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>

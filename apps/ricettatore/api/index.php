@@ -20,6 +20,12 @@ $app->get("/ricettatore/menus/:id", function ($id) use ($host, $db, $user, $pass
 	echo json_encode($request->getRecipiesForMenuWithId($id));
 });
 
+$app->post("/ricettatore/menus/:id/recipies", function ($id) use ($host, $db, $user, $password, $app) {
+	$recipies = $app->request->post();
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->saveRecipiesForMenu($id, $recipies));
+});
+
 $app->get("/ricettatore/menus/available/:id", function ($id) use ($host, $db, $user, $password) {
 	$request = new RecipeMenu($host, $db, $user, $password);	
 	echo json_encode($request->getAvailableRecipiesForMenu($id));

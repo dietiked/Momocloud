@@ -27,7 +27,7 @@ class RecipeMenu extends Request {
 	function _getQueryForAvailableRecipiesForMenu($id) {
 		$menuRecipiesResult = $this->getRecipiesForMenuWithId($id);
 		if ($menuRecipiesResult["success"]) {
-			$menuRecipies = $menuRecipiesResult["result"];
+			$menuRecipies = $menuRecipiesResult["result"]["recipies"];
 			$exclusionQuery = " ";
 			for ($i=0; $i<count($menuRecipies); $i++) {
 				if ($i==0) {
@@ -45,7 +45,8 @@ class RecipeMenu extends Request {
 	}
 	
 	function getAvailableRecipiesForMenu($id) {
-		$query = "SELECT * FROM recipe_recipies" . $this->_getQueryForAvailableRecipiesForMenu($id);
+		$query = "SELECT * FROM recipe_recipies LEFT JOIN recipe_books ON recipe_recipies.recipe_book_id=recipe_books.recipe_book_id" 
+		. $this->_getQueryForAvailableRecipiesForMenu($id);
 		$stmt = $this->connection->prepare($query);
 		if ($stmt->execute()) {
 			$success = true;	
@@ -58,13 +59,21 @@ class RecipeMenu extends Request {
 	}
 	
 	function getRecipiesForMenuWithId($id) {
-		$query = "SELECT * FROM recipe_menus_recipies JOIN (recipe_recipies) ON (recipe_recipies.recipe_id=recipe_menus_recipies.recipe_id)"
-		. " WHERE recipe_menu_id=:id";
+		$query = "SELECT * FROM recipe_menus WHERE recipe_menu_id=:id";
 		$stmt = $this->connection->prepare($query);
 		$stmt->bindValue(":id", $id);	
 		if ($stmt->execute()) {
-			$success = true;	
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$success = true;
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			$recipiesQuery = "SELECT * FROM recipe_menus_recipies JOIN (recipe_recipies) ON recipe_menus_recipies.recipe_id=recipe_recipies.recipe_id"
+			. " WHERE recipe_menu_id=" . $id;
+			$recipiesStmt = $this->connection->prepare($recipiesQuery);
+			if ($recipiesStmt->execute()) {
+				$recipies = $recipiesStmt->fetchAll(PDO::FETCH_ASSOC);
+				$result["recipies"] = $recipies;				
+			} else {
+				$result = Array();				
+			}
 		} else {
 			$success = false;
 			$result = Array();
@@ -83,6 +92,35 @@ class RecipeMenu extends Request {
 			$result = False;
 		}
 		return Array('success'=>$result, 'id'=>$id);	
+	}
+	
+	function saveRecipiesForMenu($id, $recipies) {
+		$deleteQuery = "DELETE FROM recipe_menus_recipies WHERE recipe_menu_id=:id";
+		$deleteStmt = $this->connection->prepare($deleteQuery);
+		$deleteStmt->bindValue(":id", $id);	
+		if ($deleteStmt->execute()) {
+			$valuesString = "";
+			for ($i=0; $i<count($recipies); $i++) {
+				$recipe = $recipies[$i];
+				$valuesString .= "(" . $id . "," . $recipe["recipe_id"] . ")";			
+				if ($i < (count($recipies)-1)) {
+					$valuesString .= ",";
+				}	
+			}
+			$insertQuery = "INSERT INTO recipe_menus_recipies (recipe_menu_id, recipe_id) VALUES " . $valuesString;
+			$insertStmt = $this->connection->prepare($insertQuery);
+			if ($insertStmt->execute()) {
+				$success = true;	
+				$result = NULL;
+			} else {
+				$success = false;
+				$result = $valuesString;
+			}
+		} else {
+			$success = false;
+			$result = "y";
+		}		
+		return Array('success'=>$success, 'result'=>$result);	
 	}
 
 }
