@@ -12,6 +12,7 @@ momocloudServices.directive('errorMessage', errorMessage);
 momocloudServices.directive('wineRating', wineRating);
 momocloudServices.directive('chart', chart);
 momocloudServices.directive('backButton', backButton);
+momocloudServices.directive('navmenu', navmenu);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
 	

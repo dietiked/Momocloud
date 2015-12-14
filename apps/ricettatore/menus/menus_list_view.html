@@ -1,15 +1,4 @@
-<div class="row submenu">
-	<div class="col-xs-6">
-		<span class="page-title"><back-button></back-button> Menu</span>
-		<button class="btn btn-default btn-sm pull-right" ng-click="newMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuovo menu</button>
-	</div>
-	<div class="col-xs-6">
-		<div class="input-group input-group-sm">
-		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
-		</div>		
-	</div>
-</div>
+<navmenu title="Menu" back-title="Dashboard" back-href="#/ricettatore/dashboard" new-callback="newMenu()" show-btn="true"></navmenu>
 
 <div class="row">
 	<div class="col-md-4" ng-repeat="menu in menus | filter:search">

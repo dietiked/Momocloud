@@ -1,13 +1,7 @@
-<div class="row submenu">
-	<div class="col-xs-6">
-		<span class="page-title"><back-button></back-button> Menu #{{menu.recipe_menu_id}}</span>
-	</div>
-	<div class="col-xs-6">
-	</div>
-</div>
+<navmenu title="#{{menu.recipe_menu_id}}" back-title="Menu" back-href="#/ricettatore/menus" show-btn="false"></navmenu>
 
 <div class="row">
-	<div class="col-md-6"> 
+	<div class="col-md-6 col-sm-6 col-xs-12"> 
 		<h3>Ricette selezionate <button class="btn btn-success" ng-click="saveMenu()" ng-show="showSaveButton">Salva</button></h3>
 		<div class="row" ng-repeat="recipe in menu.recipies">
 			<div class="col-md-12">
@@ -22,7 +16,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6"> 
+	<div class="col-md-6 col-sm-6 col-xs-12"> 
 		<h3>Ricette disponibili</h3>
 		<div class="row">
 			<div class="col-md-12">
