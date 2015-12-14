@@ -281,12 +281,12 @@ input[type="text"], input[type="password"], input[type="number"] {
 }
 
 a.back-button {
-	color: @dark-gray;
-	background-color: white;
+	color: white;
+	background-color: none;
 	margin-right: 10px;
-	border: 1px solid white;
+	//border: 1px solid white;
 	padding-left: 4px;
-	padding-right: 4px;
+	padding-right: 7px;
 }
 
 .btn {
@@ -328,19 +328,9 @@ a.btn-default {
 	}
 }
 
-.menu-container {
-	border: 1px solid @light-gray;
-	margin-top: 10px;
-	.menu-header {
-		background-color: @light-gray;
-		h3 {
-			margin: 0px;
-			padding: 5px;
-		}
-	}
-	.menu-content {
-		padding: 5px;
-	}
+.panel {
+	border-radius: 0px;
+	box-shadow: none;	
 }
 
 @media (max-width: 767px) {

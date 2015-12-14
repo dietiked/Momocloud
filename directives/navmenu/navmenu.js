@@ -1,4 +1,4 @@
-function backButton () {
+function navmenu () {
 	
 	return {
 		restrict: 'E',
