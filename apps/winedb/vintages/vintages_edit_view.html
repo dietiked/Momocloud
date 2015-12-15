@@ -1,35 +1,25 @@
-<div class="row submenu">
-	<div class="col-xs-12">
-		<span class="page-title"><back-button to="#winedb/wines/{{vintage.wine_id}}"></back-button> {{vintage.wine_name}} <span class="page-subtitle">{{vintage.producer_name}}</span></span>
-	</div>
-</div>
+<navmenu title="{{vintage.wine_name}}" back-title="{{vintage.wine_name}}" back-href="#/winedb/wines/{{wine.wine_id}}" btn-type="none"></navmenu>
 
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box">
-				<div class="box-header">
+			<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
+			<form name="myForm" ng-submit="save()">
+				<div class="form-group">
+					<label for="year">Year *</label>
+					<select name="year" ng-model="vintage.vintage_year" class="form-control">
+						<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
+					</select>
 				</div>
-				<div class="box-body">
-					<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
-					<form name="myForm" ng-submit="save()">
-						<div class="form-group">
-							<label for="year">Year *</label>
-							<select name="year" ng-model="vintage.vintage_year" class="form-control">
-								<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="rating">Rating *</label>
-							<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
-								<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
-							</select>
-						</div>
-						<button class="btn btn-success" type="submit" ng-disabled="!dependenciesLoaded">Save</button>						
-						<button class="btn btn-danger pull-right" type="submit">Delete vintage</button>						
-					</form>
+				<div class="form-group">
+					<label for="rating">Rating *</label>
+					<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
+						<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
+					</select>
 				</div>
-			</div>
+				<button class="btn btn-success" type="submit" ng-disabled="!dependenciesLoaded">Save</button>						
+				<button class="btn btn-danger pull-right" type="submit">Delete vintage</button>						
+			</form>
 		</div>
 	</div>
 </section>

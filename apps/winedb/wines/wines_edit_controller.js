@@ -11,7 +11,6 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 
 	$scope.save = function() {
-		//console.log('Save', $scope.wine);
 		WinesService.update($scope.wine);
 	}
 	

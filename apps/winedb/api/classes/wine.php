@@ -38,14 +38,24 @@
 			$stmt->bindValue(":wineNotes", $data["wine_notes"]);	
 			$stmt->bindValue(":wineId", $id);	
 			if ($stmt->execute()) {
+				$success = true;
 				$result = $stmt->rowCount();
 			} else {
+				$success = false;
 				$result = 0;
 			}
-			return $result;			
+			return Array("success"=>$success, "result"=>$result);
 		}
 		
 		public function insertWine($data) {
+			if (! isset($data["wine_name"])) { $data["wine_name"] = "";}
+			if (! isset($data["wine_appellation"])) { $data["wine_appellation"] = "";}
+			if (! isset($data["producer_id"])) { $data["producer_id"] = "";}
+			if (! isset($data["winetype_id"])) { $data["winetype_id"] = "";}
+			if (! isset($data["wine_alcohol"])) { $data["wine_alcohol"] = "";}
+			if (! isset($data["wine_alcohol"])) { $data["wine_alcohol"] = "";}
+			if (! isset($data["wine_grapes"])) { $data["wine_grapes"] = "";}
+			if (! isset($data["wine_notes"])) { $data["wine_notes"] = "";}
 			$stmt = $this->connection->prepare($this->insertQuery);
 			$stmt->bindValue(":wineName", $data["wine_name"]);	
 			$stmt->bindValue(":appellation", $data["wine_appellation"]);	
