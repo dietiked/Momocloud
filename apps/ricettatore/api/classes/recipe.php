@@ -6,11 +6,13 @@ class Recipe extends Request {
 		$query = "SELECT * FROM recipe_recipies LEFT JOIN (recipe_books) ON (recipe_books.recipe_book_id=recipe_recipies.recipe_book_id)";
 		$stmt = $this->connection->prepare($query);		
 		if ($stmt->execute()) {
+			$success = true;
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
 		} else {
-			$result = "Server error";
+			$success = false;
+			$result = Array();
 		}
-		return $result;		
+		return Array("success"=>$result, "result"=>$result);					
 	}
 	
 	public function getRecipeWithId($id) {
@@ -34,7 +36,7 @@ class Recipe extends Request {
 			$rows = $numOfRowsResult["COUNT(*)"];
 			$randomNumber = rand(0, $rows-1);
 			$recipies = $this->getRecipies();
-			$randomRecipe = $recipies[$randomNumber];
+			$randomRecipe = $recipies["result"][$randomNumber];
 			$result = true;
 		} else {
 			$result = false;				

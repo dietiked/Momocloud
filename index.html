@@ -19,7 +19,7 @@
 
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-	  <div class="container">
+	  <div class="container-fluid">
 		<div class="navbar-header">
 		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 			<span class="sr-only">Toggle navigation</span>
@@ -52,6 +52,14 @@
 			</li>
 			<li><a href="#contact">Dafare</a></li>
 		  </ul>
+		  
+		  <form class="navbar-form navbar-right" role="search">
+			<div class="input-group input-group-sm">
+			  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+			  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+			</div>					  
+		  </form>
+		  
 		</div><!--/.nav-collapse -->
 	  </div>
 	</nav>
@@ -76,6 +84,7 @@
 		<script src="directives/wine_rating/wine_rating.js" charset="utf-8"></script>
 		<script src="directives/chart/chart.js" charset="utf-8"></script>
 		<script src="directives/back_button.js" charset="utf-8"></script>
+		<script src="directives/navmenu/navmenu.js" charset="utf-8"></script>
 		<script src="services/notificationCenter.js" charset="utf-8"></script>
 		<script src="services/dependenciesChecker.js" charset="utf-8"></script>
 		<script src="apps/login/auth_service.js" charset="utf-8"></script>
@@ -101,6 +110,9 @@
 		<script src="apps/winedb/cellar/cellar_service.js" charset="utf-8"></script>
 		<script src="apps/winedb/movements/movements_service.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/dashboard/dashboard_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/menus/menus_service.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/menus/menus_list_controller.js" charset="utf-8"></script>
+		<script src="apps/ricettatore/menus/menus_details_controller.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_service.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_list_controller.js" charset="utf-8"></script>
 		<script src="apps/ricettatore/recipies/recipies_new_controller.js" charset="utf-8"></script>

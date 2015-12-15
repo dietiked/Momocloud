@@ -5,6 +5,32 @@ require "classes/recipe_category.php";
 require "classes/recipe_book.php";
 require "classes/recipe_menu.php";
 
+$app->get("/ricettatore/menus/", function () use ($host, $db, $user, $password) {
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->getAll());
+});
+
+$app->post("/ricettatore/menus/", function () use ($host, $db, $user, $password) {
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->insertMenu());
+});
+
+$app->get("/ricettatore/menus/:id", function ($id) use ($host, $db, $user, $password) {
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->getRecipiesForMenuWithId($id));
+});
+
+$app->post("/ricettatore/menus/:id/recipies", function ($id) use ($host, $db, $user, $password, $app) {
+	$recipies = $app->request->post();
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->saveRecipiesForMenu($id, $recipies));
+});
+
+$app->get("/ricettatore/menus/available/:id", function ($id) use ($host, $db, $user, $password) {
+	$request = new RecipeMenu($host, $db, $user, $password);	
+	echo json_encode($request->getAvailableRecipiesForMenu($id));
+});
+
 $app->get("/ricettatore/recipies/", function () use ($host, $db, $user, $password) {
 	$request = new Recipe($host, $db, $user, $password);	
 	echo json_encode($request->getRecipies());

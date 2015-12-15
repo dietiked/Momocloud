@@ -211,22 +211,6 @@ a.btn-default {
   border-radius: 5px;
 }
 
-.submenu {
-	background-color: @blue;
-	color: white;
-	margin-top: -20px;
-	padding-top: 10px;
-	height: 50px;
-	margin-bottom: 15px;
-	.btn {
-		border: 1px solid white;
-	}
-}
-
-.page-title {
-	font-size: 23px;
-	font-weight: bold;
-}
 
 .page-subtitle {
 	font-size: 16px;
@@ -281,12 +265,12 @@ input[type="text"], input[type="password"], input[type="number"] {
 }
 
 a.back-button {
-	color: @dark-gray;
-	background-color: white;
+	color: white;
+	background-color: none;
 	margin-right: 10px;
-	border: 1px solid white;
+	//border: 1px solid white;
 	padding-left: 4px;
-	padding-right: 4px;
+	padding-right: 7px;
 }
 
 .btn {
@@ -319,6 +303,55 @@ a.btn-default {
 	.btn {
 		border: 1px solid @brand-primary;
 	}
+}
+
+.menu-recipe {
+	margin-bottom: 5px;
+	button {
+		margin-right: 10px;
+	}
+	button.pull-right {
+		margin-right: 0px;		
+	}
+	h3 {
+		margin-top: 0px;
+	}
+	.list-group-item {
+		border-radius: 0px;
+		padding: 5px;
+	}
+}
+
+.panel {
+	border-radius: 0px;
+	box-shadow: none;	
+}
+
+.navmenu {
+	background-color: @blue;
+	color: white;
+	margin-top: -20px;
+	padding-top: 10px;
+	height: 50px;
+	margin-bottom: 15px;
+	.btn {
+		border: 1px solid white;
+	}
+}
+
+.navmenu-title {
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	small {
+		font-weight: normal;
+	}
+}
+
+.navmenu-btn-left {
+	font-size: 18px;
+	margin-top: 6px;
 }
 
 @media (max-width: 767px) {

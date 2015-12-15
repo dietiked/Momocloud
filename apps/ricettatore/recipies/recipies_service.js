@@ -48,12 +48,17 @@ function RecipiesService($http, NotificationCenter) {
 			request + 'recipies/'
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success', data);
-			RecipiesService.recipies = data;
-			angular.forEach(RecipiesService.recipies, function(recipe, key) {
-				recipe.recipe_categories = stringToTags(recipe.recipe_categories);
-			});
-			NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS);
+			if (data.success) {
+				console.log('success', data);
+				RecipiesService.recipies = data.result;
+				angular.forEach(RecipiesService.recipies, function(recipe, key) {
+					recipe.recipe_categories = stringToTags(recipe.recipe_categories);
+				});
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS);				
+			} else {
+				console.log('error', data);
+				NotificationCenter.postNotification(RecipiesService.notifications.RECIPIES_GET_ALL_ERROR);
+			}
 		})
 		.error(function(data, status, headers, config) {
 			//console.log('error', data);			
