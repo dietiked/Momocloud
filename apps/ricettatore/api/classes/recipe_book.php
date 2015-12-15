@@ -39,6 +39,7 @@
 		}
 		
 		public function insertBook($data) {
+			if (! isset($data["recipe_book_author"])) {$data["recipe_book_author"] = ""; }
 			$query = "INSERT INTO recipe_books (recipe_book_title, recipe_book_author) VALUES (:bookName, :bookAuthor)";
 			$stmt = $this->connection->prepare($query);
 			$stmt->bindValue(":bookName", $data["recipe_book_title"]);	

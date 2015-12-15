@@ -1,23 +1,17 @@
-<div class="row submenu">
-	<div class="col-xs-12">
-		<span class="page-title"><back-button to="#/winedb/producers"></back-button> {{producer.producer_name}} <span class="page-subtitle">{{producer.producer_location}}</span></span>
-		<a href="#/winedb/producers/{{producer.producer_id}}/edit" class="btn btn-default  btn-sm pull-right">
-			<span class="glyphicon glyphicon-edit"></span> Edit</a> 
-	</div>
-</div>
+<navmenu title="{{producer.producer_name}}" back-title="Produttori" back-href="#/winedb/producers" btn-type="edit" new-href="#/winedb/producers/{{producer.producer_id}}/edit"></navmenu>
 
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-8 col-lg-8 col-sm-12">
-				<h4>Wines</h4>
+				<h4>Vini</h4>
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Type</th>
-							<th>Grapes</th>
-							<th>Alcohol</th>
+							<th>Nome</th>
+							<th>Tipo</th>
+							<th>Vitigno</th>
+							<th>Alcool</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -33,13 +27,13 @@
 				</table>
 			</div>
 			<div class="col-md-4 col-lg-4 col-sm-12">
-				<h4>Producer informations</h4>
+				<h4>Informazioni supplementari</h4>
 				<dl class="dl-horizontal">
-					<dt>Location</dt>
+					<dt>Luogo</dt>
 					<dd>{{producer.producer_location}}</dd>
-					<dt>Region</dt>
+					<dt>Regione</dt>
 					<dd>{{producer.producer_region}}</dd>
-					<dt>Country</dt>
+					<dt>Stato</dt>
 					<dd>{{producer.country_name_en}}</dd>
 				</dl>
 			</div>
@@ -48,7 +42,7 @@
 			<div class="col-md-12">
 				<div>
 					<a href="#" class="btn btn-danger pull-left">
-						<span class="glyphicon glyphicon-trash"></span> Delete producer
+						<span class="glyphicon glyphicon-trash"></span> Cancella produttore
 					</a>
 				</div>
 			</div>						

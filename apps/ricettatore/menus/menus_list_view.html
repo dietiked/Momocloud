@@ -1,0 +1,17 @@
+<navmenu title="Menu" back-title="Dashboard" back-href="#/ricettatore/dashboard" new-callback="newMenu()" btn-type="plus"></navmenu>
+
+<div class="row">
+	<div class="col-md-4" ng-repeat="menu in menus | filter:search">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<a href="#/recipies/menus/{{menu.recipe_menu_id}}">#{{menu.recipe_menu_id}}</a>
+				<span class="pull-right"><small>{{menu.recipe_menu_date | date:"dd.MM.yyyy"}}</small></span>
+			</div>
+			<div class="panel-body">
+				<div ng-repeat="recipe in menu.recipies">
+					{{recipe.recipe_name}}
+				</div>
+  			</div>
+		</div>
+	</div>
+</div>

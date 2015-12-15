@@ -12,6 +12,7 @@ momocloudServices.directive('errorMessage', errorMessage);
 momocloudServices.directive('wineRating', wineRating);
 momocloudServices.directive('chart', chart);
 momocloudServices.directive('backButton', backButton);
+momocloudServices.directive('navmenu', ['$location', navmenu]);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
 	
@@ -128,6 +129,14 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 		when('/recipies', {
 			templateUrl: 'apps/ricettatore/dashboard/dashboard_view.html',
 			controller: 'RecipeDashboardController'
+		}).
+		when('/recipies/menus', {
+			templateUrl: 'apps/ricettatore/menus/menus_list_view.html',
+			controller: 'RecipeMenusListController'
+		}).
+		when('/recipies/menus/:menuId', {
+			templateUrl: 'apps/ricettatore/menus/menus_details_view.html',
+			controller: 'RecipeMenusDetailsController'
 		}).
 		when('/recipies/categories', {
 			templateUrl: 'apps/ricettatore/categories/categories_list_view.html',
