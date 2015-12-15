@@ -1,4 +1,4 @@
-function navmenu () {
+function navmenu ($location) {
 	
 	return {
 		restrict: 'E',
@@ -6,20 +6,22 @@ function navmenu () {
 		scope: {
 			'title': '@title',
 			'backTitle': '@backTitle',
+			'backHref': '@backHref',
 			'newCallback': '&',
 			'newHref': '@newHref',
-			'showBtn': '@showBtn'
+			'btnType': '@btnType'
 		},
 		templateUrl: 'directives/navmenu/navmenu.html',
 		link: function(scope, element, attrs) {
 			scope.backToPrevious = function() {
-				window.history.go(-2);
-				console.log(window.history);
+				/*if (scope.backHref !== undefined) {
+					$location.path(scope.backHref);
+				} else {*/
+					window.history.go(-2);
+				//}
 			};			
-						
-			console.log(scope.showBtn);
-			
-			if (scope.showBtn == 'false') {
+									
+			if (scope.btnType == 'none') {
 				scope.isHref = false;
 				scope.isBtn = false;
 			} else { // href defined
@@ -31,6 +33,7 @@ function navmenu () {
 					scope.isBtn = true;					
 				}
 			}
+			
 
 		}
 	};

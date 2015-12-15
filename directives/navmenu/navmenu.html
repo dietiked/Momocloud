@@ -1,14 +1,19 @@
 <div>
-	<div class="row submenu">
-		<div class="col-xs-12">
-			<div class="navmenu-title">
-				{{title}}
-				<div class="pull-left">
-					<small><a href="#" ng-click="backToPrevious()" class="back-button"><i class="fa fa-chevron-left"></i> {{backTitle}}</a></small>
-				</div>
-				<button class="btn btn-default btn-sm pull-right" ng-click="newCallback()" ng-show="isBtn"><i class="fa fa-plus"></i></button>
-				<a href="{{newHref}}" class="btn btn-default btn-sm pull-right" ng-show="isHref"><i class="fa fa-plus"></i></a>
+	<div class="row navmenu">
+		<div class="col-xs-4">
+			<div class="navmenu-btn-left">
+				<small class="pull-left"><a href="#" ng-click="backToPrevious()" class="back-button"><i class="fa fa-chevron-left"></i> {{backTitle}}</a></small>
 			</div>
+		</div>
+		<div class="col-xs-4">
+			<div class="navmenu-title">
+			{{title}}
+			</div>
+		</div>
+		<div class="col-xs-4">
+			<button class="btn btn-default btn-sm pull-right" ng-click="newCallback()" ng-show="isBtn"><i class="fa fa-{{btnType}}"></i></button>
+			<a href="{{newHref}}" class="btn btn-default btn-sm pull-right" ng-show="isHref"><i class="fa fa-{{btnType}}"></i></a>
 		</div>
 	</div>
 </div>
+
