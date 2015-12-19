@@ -42,6 +42,10 @@ function UrlService($http, $location, NotificationCenter) {
 	UrlService.redirectToRecipiesList = function() {
 		$location.path('/recipies/recipies/');		
 	};
+	
+	UrlService.go = function(url) {
+		$location.path(url);		
+	}
 
 	return UrlService;
 }

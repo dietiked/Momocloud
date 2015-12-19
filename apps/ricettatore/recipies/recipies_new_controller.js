@@ -14,6 +14,10 @@ GeneralDataService) {
 	$scope.dependenciesLoaded = DependenciesChecker.init();
 	DependenciesChecker.setDependencies(3);
 	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	$scope.save = function() {
 		RecipiesService.insert($scope.recipe, $scope.recipeCategories);
 	}

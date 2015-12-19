@@ -1,4 +1,6 @@
-@brand-primary: #428bca; // #337ab7
+@brand-primary: #E91E63; // #337ab7
+@brand-primary-light: #F48FB1; // #337ab7
+@brand-accent:	#2196F3;	
 @brand-success: #5cb85c;
 @brand-info:    #5bc0de;
 @brand-warning: #f0ad4e;
@@ -16,12 +18,15 @@
 @orange:		#E8543B;
 @green:			#44B577;
 
+@border-radius: 1px;
+
 
 
 body { 
-	font-family: 'Lato', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	padding-top: 70px; 
 	padding-bottom: 20px;
+	font-size: 1.3em;
 }
 a:link, a:visited, a:active {
 	color: @red;
@@ -58,9 +63,6 @@ a.btn-default {
 }
 
 
-.box, .small-box, .btn, .info-box {
-	border-radius: 0px;
-}
 
 .info-box-icon {
 	color: white;	
@@ -217,12 +219,6 @@ a.btn-default {
 	font-weight: 400;	
 }
 
-.form-control {
-	box-shadow: none;
-}
-input[type="text"], input[type="password"], input[type="number"] {
-	border-radius: 0px;
-}
 .progress {
 	border-radius: 0px;
 }
@@ -232,7 +228,7 @@ input[type="text"], input[type="password"], input[type="number"] {
 .tile {
 	min-height: 200px;
 	width: 100%;
-	background-color: @blue;
+	background-color: @brand-accent;
 	font-size: 32px;
 	text-align: center;
 	color: white;
@@ -264,25 +260,9 @@ input[type="text"], input[type="password"], input[type="number"] {
 	}
 }
 
-a.back-button {
-	color: white;
-	background-color: none;
-	margin-right: 10px;
-	//border: 1px solid white;
-	padding-left: 4px;
-	padding-right: 7px;
-}
-
 .btn {
+	border-radius: @border-radius;
 	border: none;
-}
-
-a.btn-danger {
-	color: white;
-}
-
-a.btn-default {
-	border: 1px solid @dark-gray;
 }
 
 .input-group {
@@ -327,6 +307,7 @@ a.btn-default {
 	box-shadow: none;	
 }
 
+
 .navmenu {
 	background-color: @blue;
 	color: white;
@@ -352,6 +333,161 @@ a.btn-default {
 .navmenu-btn-left {
 	font-size: 18px;
 	margin-top: 6px;
+}
+
+.form-control {
+	box-shadow: none;
+}
+input[type="text"], input[type="password"], input[type="number"] {
+	border-radius: 0px;
+}
+
+input[type="text"]:focus {
+	border: none;
+	box-shadow: none;
+}
+
+.form-group {
+	label {
+		font-size: 0.9em;
+		margin-bottom: 1px;
+	}
+	input[type="text"] {
+		border: none;
+		border-bottom: 1px solid @light-gray;
+	}
+	input[type="text"]:focus {
+		border: none;
+		border-bottom: 1px solid @brand-primary;
+	}
+}
+
+.input-group {
+	.input-group-addon {
+		background-color: transparent;
+		border: none;
+		color: white;
+	}
+	input[type="text"] {
+		background-color: transparent;
+		border-bottom: 1px solid #ffffff;
+		color: white;
+	}
+	::-webkit-input-placeholder {
+	   color: white;
+	}	
+}	
+
+.md-button-fab {
+	border-radius: 25px;
+	height: 50px;
+	width: 50px;
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.md-select {
+	border-radius: @border-radius;
+	select {
+		box-shadow: none !important;
+		background-color: white !important;
+		border-radius: @border-radius;
+		border: none;
+		border-bottom: 1px solid @light-gray;
+		transition: none;
+	}
+}
+
+.navbar-default {
+	border: none;
+}
+
+.navbar-default .navbar-nav > li > {
+	a {
+		color: white;	
+	}
+	a:hover {
+		color: white;
+	}
+}
+
+.mmc-navbar-primary {
+	.navbar-brand {
+		color: white;
+	}
+	.navbar-brand:hover {
+		color: white;
+	}
+	.dropdown-menu {
+		background-color: white;
+		li>a {
+			color: black;
+		}
+	}
+}
+
+.navbar-default .navbar-nav > li a:hover {
+	color: black;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover {
+	background-color: @brand-primary-light;
+	color: white;
+}
+.navbar-nav>li>.dropdown-menu {
+	border: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: white;
+}
+
+.mmc-navbar-shadow-2 {
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4)
+}
+.mmc-navbar-shadow-3 {
+	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4)
+}
+.mmc-navbar-shadow-4 {
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4)
+}
+
+.md-button-primary, 
+.md-button-accent {
+	color: white;	
+}
+
+.md-button-primary:hover, 
+.md-button-accent:hover {
+	color: white;	
+}
+
+.md-button-primary,
+.mmc-navbar-primary {
+	background-color: @brand-primary;
+}
+
+.md-button-accent {
+	background-color: @brand-accent;
+}
+
+.mmc-fixed-menu-bottomright {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	width: 100%;
+	padding: 10px;
+	text-align: right;
+	background-color: @light-gray;
+}
+
+.mmc-fixed-fab-bottomright {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+
+.btn {
+	text-transform: uppercase;
 }
 
 @media (max-width: 767px) {
