@@ -1,6 +1,23 @@
 <div class="row">
 	<div class="col-md-12">
-		<table class="table table-striped table-responsive">
+		<div class="md-list">
+			<div class="md-list-item" ng-repeat="recipe in recipies | filter:search">
+				<h1 class="md-list-item-title">{{recipe.recipe_name}}
+				<span class="md-list-item-addon">
+					<a href="#/recipies/recipies/{{recipe.recipe_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>				
+				</span>
+					
+				</h1>
+				<p class="md-list-item-subtitle">{{recipe.recipe_book_title}} - {{recipe.recipe_book_page}}</p>
+				<p class="md-list-item-text">
+					<span ng-repeat="category in recipe.recipe_categories"><span class="">{{category}}</span> </span>
+					<span class="md-list-item-addon">
+						{{recipe.recipe_rating}}/10
+					</span>
+				</p>
+			</div>
+		</div>
+		<!--<table class="table table-striped table-responsive">
 			<thead>
 				<tr>
 					<th>Ricetta</th>
@@ -21,8 +38,10 @@
 					<td><a href="#/recipies/recipies/{{recipe.recipe_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a></td>
 				</tr>
 			</tbody>
-		</table>
+		</table>-->
 	</div>
 </div>
 
-<button class="btn md-button-fab md-button-accent mmc-fixed-fab-bottomright" ng-click="go('/recipies/recipies/new')"><i class="fa fa-plus"></i></button>
+<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" ng-click="go('/recipies/recipies/new')">
+	<i class="fa fa-plus"></i>
+</button>
