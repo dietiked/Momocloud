@@ -1,6 +1,3 @@
-<navmenu title="Menu #{{menu.recipe_menu_id}}" back-title="Menu" back-href="#/ricettatore/menus" btn-type="none">
-</navmenu>
-
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12"> 
 		<div class="menu-recipe">
@@ -30,3 +27,7 @@
 	</div>
 </div>
 
+<div class="mmc-fixed-menu-bottomright">
+		<button class="btn btn-default" type="cancel" ng-click="go('/recipies/menus')">Annulla</button>
+		<button class="btn btn-primary" type="submit" ng-click="saveMenu()">Salva</button>
+</div>

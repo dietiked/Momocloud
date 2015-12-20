@@ -7,6 +7,10 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, Ur
 		RecipeMenusService.insert();
 	};
 	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	var addMenusSuccessHandler = function() {
 		UrlService.redirectToRecipeMenuDetails(RecipeMenusService.lastInsertedId);
 	};
