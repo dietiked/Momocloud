@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12"> 
 		<div class="menu-recipe">
-			<h3>Ricette <button class="btn btn-success pull-right" ng-click="saveMenu()" ng-show="showSaveButton">Salva</button></h3>
+			<h3>Ricette</h3>
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="recipe in menu.recipies">
-					<button class="btn btn-success" ng-click="removeFromMenu(recipe, $index)">
+					<button class="btn btn-accent" ng-click="removeFromMenu(recipe, $index)">
 						<i class="fa fa-trash"></i>
 					</button>
 					{{recipe.recipe_name}}<span ng-show="recipe.recipe_book_id > 0"> - {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>

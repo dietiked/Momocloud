@@ -17,6 +17,9 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeCa
 	$scope.save = function() {
 		RecipiesService.update($scope.recipe, $scope.recipeCategories);
 	}
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 	
 
 	// Notification functions

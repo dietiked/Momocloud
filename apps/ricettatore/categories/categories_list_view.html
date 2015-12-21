@@ -1,10 +1,9 @@
-<navmenu title="Categorie" back-title="categorie" back-href="#/ricettatore/categories" new-href="#/recipies/categories/new" btn-type="plus"></navmenu>
-
 <div class="row">
 	<div class="col-md-12">
-		<h1>
-			<span ng-repeat="category in categories | filter:search">
-				<span class="label label-primary" >{{category.recipe_category_name}}</span> </span>
-		</h1>
+		<div class="md-chip categories-chips" ng-repeat="category in categories | filter:search">{{category.recipe_category_name}}</div>
 	</div>
 </div>
+
+<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="go('recipies/categories/new')">
+	<i class="fa fa-plus"></i>
+</button>
