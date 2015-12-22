@@ -1,29 +1,49 @@
 <div class="row">
 	<div class="col-md-6 col-sm-6 col-xs-12"> 
-		<div class="menu-recipe">
-			<h3>Ricette</h3>
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="recipe in menu.recipies">
-					<button class="btn btn-accent" ng-click="removeFromMenu(recipe, $index)">
-						<i class="fa fa-trash"></i>
-					</button>
-					{{recipe.recipe_name}}<span ng-show="recipe.recipe_book_id > 0"> - {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
-				</li>
-			</ul>
-		</div>			
+		<div class="list-group">
+			<div class="list-group list-group--1-line">
+				<div class="list-group-header">
+					<div class="md-list-item-title">
+						Nel menu
+					</div>
+				</div>
+				<div class="list-group-item" ng-repeat="recipe in menu.recipies">
+					<div class="md-list-item-group">
+						<div class="md-list-item-icon">
+							<button class="btn btn-accent" ng-click="removeFromMenu(recipe, $index)">
+								<i class="fa fa-trash"></i>
+							</button>
+						</div>
+						<div class="md-list-item-title">
+							{{recipe.recipe_name}}<span ng-show="recipe.recipe_book_id > 0"> - {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="col-md-6 col-sm-6 col-xs-12"> 
-		<div class="menu-recipe">
-			<h3>Disponibili</h3>
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="recipe in availableRecipies | filter:search">
-					<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
-						<i class="fa fa-shopping-cart"></i>
-					</button>
-					{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
-				</li>
-			</ul>
-		</div>				
+		<div class="list-group">
+			<div class="list-group list-group--1-line">
+				<div class="list-group-header">
+					<div class="md-list-item-title">
+						Disponibile
+					</div>
+				</div>
+				<div class="list-group-item" ng-repeat="recipe in availableRecipies | filter:search">
+					<div class="md-list-item-group">
+						<div class="md-list-item-icon">
+							<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
+								<i class="fa fa-shopping-cart"></i>
+							</button>
+						</div>
+						<div class="md-list-item-title">
+							{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
