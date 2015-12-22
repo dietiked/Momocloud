@@ -329,6 +329,7 @@ input[type="password"]:focus {
 
 // ! - List
 .list-group {
+	margin-bottom: 0px;
 	.list-group-item,
 	.list-group-header {
 		padding-left: 16px;		
@@ -338,13 +339,16 @@ input[type="password"]:focus {
 		border-radius: 0px;		
 	}
 	.list-group-item {
-		border-bottom: 1px solid @gray-medium;		
+		//border-bottom: 1px solid @gray-medium;	
+		border: none;	
 	}
 	.list-group-header {
 		display: table;
 		width: 100%;
-		background-color: @gray-light;
-		height: 56px;
+		background-color: rgba(232, 232, 232, 1);
+		height: 32px;
+		//border-top: 1px solid @gray-light;	
+		font-weight: 700;	
 		.md-list-item-title {
 			display: table-cell;
 			vertical-align: middle;
@@ -538,6 +542,9 @@ input[type="password"]:focus {
 	.panel {
 		margin-left: 10px;
 		margin-right: 10px;
+	}
+	.panel:first-child {
+		margin-top: 10px;
 	}
 }
 
