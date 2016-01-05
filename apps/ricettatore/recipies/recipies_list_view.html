@@ -1,20 +1,22 @@
 <div class="row">
 	<div class="col-md-12">
-		<div class="list-group">
-			<div class="list-group-item list-group-item--2-lines" ng-repeat="recipe in recipies | filter:search">
-				<div class="md-list-item-title">{{recipe.recipe_name}}
-				<span class="md-list-item-addon">
-					<a href="#/recipies/recipies/{{recipe.recipe_id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>				
-				</span>
+		<div class="list-group list-group--3-line">
+				<div class="list-group-header">
+					<div class="md-list-item-title">
+						Ricette
+					</div>
+				</div>
+			<div class="list-group-item list-group-item--hline" ng-repeat="recipe in recipies | filter:search">
+				<div class="md-list-item-title"><a href="#/recipies/recipies/{{recipe.recipe_id}}/edit">{{recipe.recipe_name}}</a>
 					
 				</div>
 				<div class="md-list-item-subtitle">{{recipe.recipe_book_title}} - {{recipe.recipe_book_page}}</div>
-				<!--<div class="md-list-item-text">
-					<span ng-repeat="category in recipe.recipe_categories"><span class="md-chip">{{category}}</span> </span>
-					<span class="md-list-item-addon">
+				<div class="md-list-item-text">
+					<span ng-repeat="category in recipe.recipe_categories"><span class="">{{category}}</span> </span>
+					<!--<span class="md-list-item-addon">
 						{{recipe.recipe_rating}}/10
-					</span>
-				</div>-->
+					</span>-->
+				</div>
 			</div>
 		</div>
 		<!--<table class="table table-striped table-responsive">
@@ -42,6 +44,9 @@
 	</div>
 </div>
 
+<button class="btn btn-primary mmc-fixed-bottomleft" ng-click="go('/recipies')">
+	<i class="fa fa-chevron-left"></i> Back
+</button>
 <button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="go('/recipies/recipies/new')">
 	<i class="fa fa-plus"></i>
 </button>

@@ -8,7 +8,9 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, Ur
 	$scope.save = function() {
 		RecipeBooksService.insert($scope.book);
 	}
-	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}	
 
 	// Notification functions
 	var insertSuccess = function() {

@@ -1,45 +1,20 @@
 <div class="row">
-	<div class="col-md-6 col-sm-6 col-xs-12"> 
-		<div class="list-group">
-			<div class="list-group list-group--1-line">
-				<div class="list-group-header">
-					<div class="md-list-item-title">
-						Menu #{{menu.recipe_menu_id}}
-					</div>
-				</div>
-				<div class="list-group-item" ng-repeat="recipe in menu.recipies">
-					<div class="md-list-item-group">
-						<div class="md-list-item-icon">
-							<button class="btn btn-accent" ng-click="removeFromMenu(recipe, $index)">
-								<i class="fa fa-trash"></i>
-							</button>
-						</div>
-						<div class="md-list-item-title">
-							{{recipe.recipe_name}}<span ng-show="recipe.recipe_book_id > 0"> - {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
-						</div>
-					</div>
+	<div class="col-md-12 col-sm-12 col-xs-12"> 
+		<div class="list-group list-group--1-line">
+			<div class="list-group-header">
+				<div class="md-list-item-title">
+					Menu #{{menu.recipe_menu_id}}
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="col-md-6 col-sm-6 col-xs-12"> 
-		<div class="list-group">
-			<div class="list-group list-group--1-line">
-				<div class="list-group-header">
-					<div class="md-list-item-title">
-						Disponibile
+			<div class="list-group-item" ng-repeat="recipe in menu.recipies">
+				<div class="md-list-item-group">
+					<div class="md-list-item-icon">
+						<button class="btn btn-accent" ng-click="removeFromMenu(recipe, $index)">
+							<i class="fa fa-trash"></i>
+						</button>
 					</div>
-				</div>
-				<div class="list-group-item" ng-repeat="recipe in availableRecipies | filter:search">
-					<div class="md-list-item-group">
-						<div class="md-list-item-icon">
-							<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
-								<i class="fa fa-shopping-cart"></i>
-							</button>
-						</div>
-						<div class="md-list-item-title">
-							{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
-						</div>
+					<div class="md-list-item-title">
+						{{recipe.recipe_name}}<span ng-show="recipe.recipe_book_id > 0"> - {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
 					</div>
 				</div>
 			</div>
@@ -48,6 +23,43 @@
 </div>
 
 <div class="mmc-fixed-menu-bottomright">
+		<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" data-toggle="modal" data-target="#modal">
+			<i class="fa fa-plus"></i>
+		</button>
 		<button class="btn btn-default" type="cancel" ng-click="go('/recipies/menus')">Annulla</button>
 		<button class="btn btn-primary" type="submit" ng-click="saveMenu()">Salva</button>
+</div>
+
+
+<!-- Modal -->
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal">
+  <div class="modal-dialog modal-lg">
+  	<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" id="myModalLabel">Aggiungi ricetta</h5>
+      </div>
+      <div class="modal-body">
+     	 <input type="text" ng-model="searchRecipies" class="form-control" placeholder="cerca...">
+		<div class="list-group list-group--1-line">
+			<div class="list-group-item" ng-repeat="recipe in availableRecipies | filter:searchRecipies">
+				<div class="md-list-item-group">
+					<div class="md-list-item-icon">
+						<button class="btn btn-primary" ng-click="addToMenu(recipe, $index)">
+							<i class="fa fa-shopping-cart"></i>
+						</button>
+					</div>
+					<div class="md-list-item-title">
+						{{recipe.recipe_name}} <span ng-show="recipe.recipe_book_id > 0">- {{recipe.recipe_book_title}}, {{recipe.recipe_book_page}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+			<button class="btn btn-default" data-dismiss="modal">
+				Fatto
+			</button>	      
+      </div>
+  	</div>
 </div>
