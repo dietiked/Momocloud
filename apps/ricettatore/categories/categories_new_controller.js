@@ -8,6 +8,9 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeCategoriesServic
 	$scope.save = function() {
 		RecipeCategoriesService.insert($scope.category);
 	}
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 	
 
 	// Notification functions

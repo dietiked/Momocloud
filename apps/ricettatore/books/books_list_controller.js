@@ -9,6 +9,9 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, Ur
 		$scope.books = RecipeBooksService.books;
 		$scope.loaded = true;
 	}
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 
 	// Notification handlers
 	var getBooksSuccess = NotificationCenter.subscribe(RecipeBooksService.notifications.RECIPY_BOOKS_GET_ALL_SUCCESS, getBooks);

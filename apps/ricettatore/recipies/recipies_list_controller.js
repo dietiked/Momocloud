@@ -3,6 +3,10 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	
 	console.log('RecipiesListController');
 	$scope.loaded = false;
+	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 
 	// Notification functions
 	var getRecipies = function() {

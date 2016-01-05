@@ -4,6 +4,10 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeCategoriesServic
 	console.log('RecipeCategoriesNewController');
 	$scope.loaded = false;
 
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	// Notification functions
 	var getCategories = function() {
 		$scope.categories = RecipeCategoriesService.categories;

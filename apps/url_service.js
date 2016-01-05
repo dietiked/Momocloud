@@ -33,6 +33,9 @@ function UrlService($http, $location, NotificationCenter) {
 	UrlService.redirectToRecipeMenuDetails = function(id) {
 		$location.path('/recipies/menus/' + id);		
 	};
+	UrlService.redirectToRecipeMenus = function(id) {
+		$location.path('/recipies/menus/');		
+	};
 	UrlService.redirectToRecipeCategoriesList = function() {
 		$location.path('/recipies/categories/');		
 	};
@@ -42,6 +45,10 @@ function UrlService($http, $location, NotificationCenter) {
 	UrlService.redirectToRecipiesList = function() {
 		$location.path('/recipies/recipies/');		
 	};
+	
+	UrlService.go = function(url) {
+		$location.path(url);		
+	}
 
 	return UrlService;
 }

@@ -1,16 +1,15 @@
-<navmenu title="Nuova categorie" back-title="Categorie" back-href="#/ricettatore/categories" new-href="#/recipies/categories/new" btn-type="none"></navmenu>
-
-<section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<error-message error-text="There was an error. {{category.recipe_category_name}} was not updated." ng-show="showError"></error-message>
 			<form name="categoryForm">
-				<div class="form-group" ng-class="{'has-error': categoryForm.categoryName.$invalid}">
-					<label for="categoryName">Name *</label>
+				<div class="form-group" >
+					<label for="categoryName">Descrizione *</label>
 					<input name="categoryName" type="text" ng-model="category.recipe_category_name" class="form-control" required/>
 				</div>
-				<button class="btn btn-success" type="submit" ng-disabled="categoryForm.$invalid" ng-click="save()">Save</button>
+				<div class="mmc-fixed-menu-bottomright">
+						<button class="btn btn-default" type="cancel" ng-click="go('/recipies/')">annulla</button>
+						<button class="btn btn-primary" type="submit" ng-disabled="categoryForm.$invalid" ng-click="save()">salva</button>
+				</div>
 			</form>
 		</div>
 	</div>
-</section>

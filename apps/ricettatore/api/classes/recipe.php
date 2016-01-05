@@ -3,7 +3,8 @@
 class Recipe extends Request {
 
 	public function getRecipies() {	
-		$query = "SELECT * FROM recipe_recipies LEFT JOIN (recipe_books) ON (recipe_books.recipe_book_id=recipe_recipies.recipe_book_id)";
+		$query = "SELECT * FROM recipe_recipies LEFT JOIN (recipe_books) ON (recipe_books.recipe_book_id=recipe_recipies.recipe_book_id)"
+		. "ORDER BY recipe_name";
 		$stmt = $this->connection->prepare($query);		
 		if ($stmt->execute()) {
 			$success = true;
