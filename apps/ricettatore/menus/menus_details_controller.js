@@ -24,6 +24,10 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 		RecipeMenusService.save($scope.menu);
 	}
 	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	var getMenuSuccessHandler = function() {
 		$scope.menu = RecipeMenusService.menu;
 	};
@@ -33,7 +37,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 	};
 	
 	var saveMenuSuccessHandler = function() {
-		$scope.showSaveButton = false;
+		UrlService.redirectToRecipeMenus();
 	}
 	
 	var getMenuSuccess = NotificationCenter.subscribe(RecipeMenusService.notifications.RECIPE_MENUS_GET_SUCCESS, getMenuSuccessHandler);
