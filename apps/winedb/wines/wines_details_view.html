@@ -39,10 +39,10 @@
 </button>
 
 <fab-actions>
-	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/{{wine.wine_id}}/edit')">
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/'+wine.wine_id+'/edit')">
 		<i class="fa fa-edit"></i>
 	</button>
-	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/{{wine.wine_id}}/vintage/new')">
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/'+wine.wine_id+'/vintage/new')">
 		<i class="fa fa-plus"></i>
 	</button>
 </fab-actions>
