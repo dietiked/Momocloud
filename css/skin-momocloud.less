@@ -20,10 +20,12 @@ body {
 }
 
 .mmc-fixed-bottomright {
+	//float: right;
 	right: 10px;
 }
 
 .mmc-fixed-bottomleft {
+	//float: left;
 	left: 10px;	
 }
 
@@ -120,8 +122,28 @@ body {
 	margin-top: 4px;
 }
 
+.mmc-glass-color--1 { // red
+	color: #E93E3F;
+}
+.mmc-glass-color--2 { // white
+	color: #FFF29F;
+}
+.mmc-glass-color--3 { // sparkling
+	color: #E9D9BF;
+}
+.mmc-glass-color--4 { // sweet
+	color: #FF8D33;
+}
+.mmc-glass-color--5 { // rose
+	color: #F48FB1;
+}
+
 @media (max-width: 767px) {
-	body {
-		padding-top: 50px;
+	.list-group {
+		margin-top: -20px;
+	}
+	
+	.lockscreen-wrapper {
+		width: 90%;
 	}
 }

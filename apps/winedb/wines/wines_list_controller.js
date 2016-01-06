@@ -1,4 +1,4 @@
-momocloudControllers.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', function($scope, WinesService, AuthService) {
+momocloudControllers.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', 'UrlService', function($scope, WinesService, AuthService, UrlService) {
 	//console.log('WinesListController');	
 	
 	$scope.loaded = false;
@@ -7,6 +7,9 @@ momocloudControllers.controller('WinesListController', ['$scope', 'WinesService'
 	var getWines = function() {
 		$scope.wines = WinesService.wines;
 		$scope.loaded = true;
+	}
+	$scope.go = function(url) {
+		UrlService.go(url);
 	}
 
 	// Notification handlers
