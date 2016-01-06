@@ -1,5 +1,5 @@
-momocloudControllers.controller('WinesDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, AuthService) {
+momocloudControllers.controller('WinesDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'AuthService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, AuthService, UrlService) {
 	//console.log('WinesDetailsController', $routeParams.wineId);	
 	
 	$scope.loaded = false;
@@ -8,6 +8,10 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.wine = {};
 	$scope.vintages = [];
 			
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	var loadProgress = function() {
 		DependenciesChecker.loaded();
 		if (DependenciesChecker.serviceReady) {
