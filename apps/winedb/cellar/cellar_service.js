@@ -1,6 +1,7 @@
 function CellarService($http, NotificationCenter) {
 	var CellarService = {};
-	var request = 'apps/winedb/cellar/cellar_request.php';
+	//var request = 'apps/winedb/cellar/cellar_request.php';
+	var request = 'apps/api/api.php/cellar/';
 	
 	CellarService.storedWines = [];
 	CellarService.storedWine = {};
@@ -19,23 +20,31 @@ function CellarService($http, NotificationCenter) {
 		CELLAR_DELETE_SUCCESS: 'cellarDeleteSuccess',
 		CELLAR_DELETE_ERROR: 'cellarDeleteError',
 		CELLAR_ADDED_SUCCESS: 'cellarInsertSuccess',
-		CELLAR_ADDED_ERROR: 'cellarInsertError'
+		CELLAR_ADDED_ERROR: 'cellarInsertError',
+		CELLAR_DRINK_SUCCESS: 'cellarDrinkSuccess',
+		CELLAR_DRINK_ERROR: 'cellarDrinkError',
+		CELLAR_BUY_SUCCESS: 'cellarBuySuccess',
+		CELLAR_BUY_ERROR: 'cellarBuyError'
 	};
 	
 	CellarService.getAll = function() {
 		var results = null;
-		$http.post(
-			request + '?f=get'
+		$http.get(
+			request
 		)
 		.success(function(data, status, headers, config) {
-			for (var i=0; i<data.length; i++) {
-				data[i].stored_quantity = Number(data[i].stored_quantity);
-				data[i].vintage_rating = Number(data[i].vintage_rating);
-				data[i].vintage_year = Number(data[i].vintage_year);
+			if (data.success) {
+				for (var i=0; i<data.length; i++) {
+					data.result[i].stored_quantity = Number(data[i].stored_quantity);
+					data.result[i].vintage_rating = Number(data[i].vintage_rating);
+					data.result[i].vintage_year = Number(data[i].vintage_year);
+				}
+				CellarService.storedWines = data.result;
+				//console.log(CellarService.storedWines);
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ALL_SUCCESS);				
+			} else {
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ALL_ERROR);
 			}
-			CellarService.storedWines = data;
-			console.log(CellarService.storedWines);
-			NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ALL_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
 			//console.log('error', data);			
@@ -45,18 +54,70 @@ function CellarService($http, NotificationCenter) {
 	
 	CellarService.get = function(id) {
 		$http.post(
-			request + '?f=get&id=' + id
+			request + '/' + id + '/'
 		)
 		.success(function(data, status, headers, config) {
-			//console.log('success', data);
-			CellarService.storedWine = data[0];
-			NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_SUCCESS);
+			if (data.success) {
+				//console.log('success', data);
+				CellarService.storedWine = data.result;
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_SUCCESS);				
+			} else {
+				//console.log('error', data);
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ERROR);			
+			}
 		})
 		.error(function(data, status, headers, config) {
 			//console.log('error', data);			
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_GET_ERROR);
 		});		
 	};
+	
+	CellarService.drink = function(storedWineId, aDate) {
+		var postContent = { 'date': moment(aDate).format('YYYY.MM.DD') };
+		//console.log(postContent);
+		$http.post(
+			request + storedWineId + '/drink/',
+			postContent
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				//console.log('success while drinking', data);
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_DRINK_SUCCESS);				
+			} else {
+				//console.log('error while drinking (201)', data);			
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_DRINK_ERROR);				
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error while drinking (202)', data);			
+			NotificationCenter.postNotification(CellarService.notifications.CELLAR_DRINK_ERROR);
+		});						
+	}
+
+	CellarService.buy = function(storedWineId, aDate, quantity) {
+		var postContent = { 
+			'date': moment(aDate).format('YYYY.MM.DD'),
+			'quantity': Number(quantity)
+		};
+		//console.log(postContent);
+		$http.post(
+			request + storedWineId + '/buy/',
+			postContent
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				//console.log('success while drinking', data);
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_BUY_SUCCESS);				
+			} else {
+				//console.log('error while drinking (201)', data);			
+				NotificationCenter.postNotification(CellarService.notifications.CELLAR_BUY_ERROR);				
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error while drinking (202)', data);			
+			NotificationCenter.postNotification(CellarService.notifications.CELLAR_BUY_ERROR);
+		});						
+	}
 		
 	CellarService.recalculateQuantity = function(storedWineId) {
 		$http.post(
@@ -84,15 +145,15 @@ function CellarService($http, NotificationCenter) {
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				//console.log('success while adding bottles', data);
+				console.log('success while adding bottles', data);
 				NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_SUCCESS);				
 			} else {
-				//console.log('error while inserting bottles (201)', data);			
+				console.log('error while inserting bottles (201)', data);			
 				NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_ERROR);				
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error while inserting bottles (202)', data);			
+			console.log('error while inserting bottles (202)', data);			
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_ERROR);
 		});				
 		

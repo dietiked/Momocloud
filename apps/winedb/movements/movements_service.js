@@ -48,16 +48,16 @@ function MovementsService($http, NotificationCenter, CellarService) {
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				//console.log('success while inserting movement', data);
+				console.log('success while inserting movement', data);
 				movement.id = data.id;
 				CellarService.updateQuantity(movement);
 			} else {
-				//console.log('error while inserting movement (201)', data);			
+				console.log('error while inserting movement (201)', data);			
 				NotificationCenter.postNotification(MovementsService.notifications.MOVEMENTS_INSERT_ERROR);				
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error while inserting movement (202)', data);			
+			console.log('error while inserting movement (202)', data);			
 			NotificationCenter.postNotification(MovementsService.notifications.MOVEMENTS_INSERT_ERROR);
 		});				
 		

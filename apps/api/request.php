@@ -1,10 +1,10 @@
 <?php
 
 	class Request {
-		private $host;
-		private $database;
-		private $user;
-		private $password;
+		public $host;
+		public $database;
+		public $user;
+		public $password;
 		protected $connection;
 		
 		public function __construct($host, $database, $user, $password) {

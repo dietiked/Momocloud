@@ -15,10 +15,52 @@
 			</div>
 			<div class="panel-footer">
 				<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">dettagli</button>
-				<button class="btn btn-default" ng-click="go('/winedb/cellar/' + wine.stored_wine_id + '/bottles/add')">bevi</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#modal-drink" ng-click="setSelectedWine(wine)">bevi</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#modal-add"  ng-click="setSelectedWine(wine)">aggiungi</button>
 			</div>
 		</div>
 	</div>
 </div>
 
 <back-button back-to="/winedb"></back-button>
+
+<div id="modal-drink" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Bevi una bottiglia di {{selectedWine.wine_name}} {{selectedWine.vintage_year}}</h5>
+      </div>
+      <div class="modal-body">
+	      <p>Scegli una data</p>
+		<uib-datepicker ng-model="date" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="drink(selectedWine, date)">Bevi</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modal-add" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Aggiungi bottiglie di {{selectedWine.wine_name}} {{selectedWine.vintage_year}}</h5>
+      </div>
+      <div class="modal-body">
+	    <div class="form-group">
+		    <label>Quantit&agrave;</label>
+		    <input class="form-control" type="text" ng-model="quantity" placeholder="Quantit&agrave;">
+	    </div>
+		<uib-datepicker ng-model="date" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="buy(selectedWine, date, quantity)">Aggiungi</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
