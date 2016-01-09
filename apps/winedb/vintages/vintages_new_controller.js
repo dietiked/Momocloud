@@ -15,6 +15,9 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		redirectToAddBottlesForm = addBottles;
 		VintagesService.insert($scope.vintage, $scope.wine.wine_id);
 	}
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 			
 	// Notification functions
 	var getWine = function() {

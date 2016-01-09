@@ -1,5 +1,5 @@
-momocloudControllers.controller('ProducersDetailsController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 
-function($scope, $routeParams, ProducersService, AuthService) {
+momocloudControllers.controller('ProducersDetailsController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService',
+function($scope, $routeParams, ProducersService, AuthService, UrlService) {
 	//console.log('ProducersDetailsController for producer', $routeParams.producerId);
 
 	$scope.loaded = false;
@@ -8,6 +8,10 @@ function($scope, $routeParams, ProducersService, AuthService) {
 	var getProducer = function() {
 		$scope.producer = ProducersService.producer;
 		$scope.loaded = true;
+	}
+
+	$scope.go = function(url) {
+		UrlService.go(url);
 	}
 
 	// Notification handlers

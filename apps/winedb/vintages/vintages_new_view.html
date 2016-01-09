@@ -1,7 +1,6 @@
-<navmenu title="{{wine.wine_name}}" back-title="{{wine.wine_name}}" back-href="#/winedb/wines/{{wine.wine_id}}" btn-type="none"></navmenu>
-
 <div class="row">
 	<div class="col-md-12">
+		<h5>{{wine.wine_name}}</h5>
 		<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
 		<form name="myForm">
 			<div class="form-group">
@@ -16,8 +15,11 @@
 					<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
 				</select>
 			</div>
-			<button class="btn btn-success" ng-click="save(false)">Save</button>						
-			<button class="btn btn-success" ng-click="save(true)">Save and add bottles</button>						
+			<div class="mmc-fixed-menu-bottomright">
+				<button class="btn btn-default" type="cancel" ng-click="go('/winedb/wines/'+wine.wine_id)">Annulla</button>
+				<button class="btn btn-primary" type="submit" ng-click="save(false)">Salva</button>
+				<button class="btn btn-primary" type="submit" ng-click="save(true)">Aggiungi bottiglie</button>
+			</div>
 		</form>
 	</div>
 </div>

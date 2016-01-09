@@ -1,25 +1,26 @@
-<navmenu title="{{vintage.wine_name}}" back-title="{{vintage.wine_name}}" back-href="#/winedb/wines/{{wine.wine_id}}" btn-type="none"></navmenu>
 
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
-			<form name="myForm" ng-submit="save()">
-				<div class="form-group">
-					<label for="year">Year *</label>
-					<select name="year" ng-model="vintage.vintage_year" class="form-control">
-						<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="rating">Rating *</label>
-					<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
-						<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
-					</select>
-				</div>
-				<button class="btn btn-success" type="submit" ng-disabled="!dependenciesLoaded">Save</button>						
-				<button class="btn btn-danger pull-right" type="submit">Delete vintage</button>						
-			</form>
-		</div>
+<div class="row">
+	<div class="col-md-12">
+		<h5>{{vintage.wine_name}}</h5>
+		<error-message error-text="There was an error while updating: database was not updated." ng-show="showError"></error-message>
+		<form name="myForm" ng-submit="save()">
+			<div class="form-group">
+				<label for="year">Year *</label>
+				<select name="year" ng-model="vintage.vintage_year" class="form-control">
+					<option ng-repeat="year in years" value="{{year.year_id}}">{{year.year_id}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="rating">Rating *</label>
+				<select name="rating" ng-model="vintage.vintage_rating" class="form-control">
+					<option ng-repeat="rating in ratings" value="{{rating.rating_id}}">{{rating.rating_value}}</option>
+				</select>
+			</div>
+			<div class="mmc-fixed-menu-bottomright">
+				<button class="btn btn-default" type="cancel" ng-click="go('/winedb/wines/'+vintage.wine_id)">Annulla</button>
+				<button class="btn btn-primary" type="submit" ng-disabled="!dependenciesLoaded">Salva</button>
+			</div>
+		</form>
 	</div>
-</section>
+</div>
+

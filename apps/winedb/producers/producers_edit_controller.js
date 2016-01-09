@@ -12,6 +12,10 @@ function($scope, $routeParams, ProducersService, UrlService, AuthService, Genera
 		ProducersService.update($scope.producer);
 	}
 			
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	// Notification functions
 	var getProducer = function() {
 		$scope.producer = ProducersService.producer;

@@ -1,51 +1,42 @@
-<navmenu title="{{producer.producer_name}}" back-title="Produttori" back-href="#/winedb/producers" btn-type="edit" new-href="#/winedb/producers/{{producer.producer_id}}/edit"></navmenu>
-
 <div class="row">
 	<div class="col-md-12">
+		<h6>{{producer.producer_name}}</h6>
+		<dl class="dl-horizontal">
+			<dt>Luogo</dt>
+			<dd>{{producer.producer_location}}</dd>
+			<dt>Regione</dt>
+			<dd>{{producer.producer_region}}</dd>
+			<dt>Stato</dt>
+			<dd>{{producer.country_name_en}}</dd>
+		</dl>
 		<div class="row">
-			<div class="col-md-8 col-lg-8 col-sm-12">
-				<h4>Vini</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Nome</th>
-							<th>Tipo</th>
-							<th>Vitigno</th>
-							<th>Alcool</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="wine in producer.wines">
-							<td>{{wine.wine_name}}</td>
-							<td>{{wine.winetype_description}}</td>
-							<td>{{wine.wine_grapes}}</td>
-							<td>{{wine.wine_alcohol}}%</td>
-							<td><a href="#/winedb/wines/{{wine.wine_id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="col-md-4 col-lg-4 col-sm-12">
-				<h4>Informazioni supplementari</h4>
-				<dl class="dl-horizontal">
-					<dt>Luogo</dt>
-					<dd>{{producer.producer_location}}</dd>
-					<dt>Regione</dt>
-					<dd>{{producer.producer_region}}</dd>
-					<dt>Stato</dt>
-					<dd>{{producer.country_name_en}}</dd>
-				</dl>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div>
-					<a href="#" class="btn btn-danger pull-left">
-						<span class="glyphicon glyphicon-trash"></span> Cancella produttore
-					</a>
+			<div class="col-md-6 col-sm-12" ng-repeat="wine in producer.wines">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h6>{{wine.wine_name}}<i class="fa fa-glass mmc-glass-color--{{wine.winetype_id}} pull-right"></i></h6>
+						<p>{{wine.wine_appellation}}</p>
+					</div>
+					<div class="panel-body">
+						Alcool: {{wine.wine_alcohol}}%<br/>
+						Vitigni: {{wine.wine_grapes}}
+					</div>
+					<div class="panel-footer">
+						<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">dettagli</button>
+					</div>
 				</div>
-			</div>						
+			</div>
 		</div>
 	</div>
 </div>
+
+<back-button back-to="-1"></back-button>
+
+<fab-actions>
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/producers/'+producer.producer_id+'/edit')">
+		<i class="fa fa-edit"></i>
+	</button>
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/new')">
+		<i class="fa fa-plus"></i>
+	</button>
+</fab-actions>
+

@@ -18,6 +18,10 @@ function($scope, $routeParams, ProducersService, AuthService, UrlService, Genera
 		$scope.save();		
 	};
 			
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	// Notification functions
 	var insertSuccess = function() {
 		// Visualize message with ng-show
