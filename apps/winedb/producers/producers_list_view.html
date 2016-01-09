@@ -1,26 +1,19 @@
-<navmenu title="Produttori" back-title="Dashboard" back-href="#/winedb" btn-type="plus" new-href="#/winedb/producers/new/"></navmenu>
-
-<section class="content">
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Producer</th>
-						<th>Location</th>
-						<th>Region</th>
-						<th>Country</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="producer in producers | filter:search">
-						<td><a href="#/winedb/producers/{{producer.producer_id}}">{{producer.producer_name}}</a></td>
-						<td>{{producer.producer_location}}</td>
-						<td>{{producer.producer_region}}</td>
-						<td>{{producer.country_name_en}}</td>
-					</tr>
-				</tbody>
-			</table>
+<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="producer in producers | filter:search">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<h6>{{producer.producer_name}}</h6>
+			</div>
+			<div class="panel-body">
+				{{producer.producer_location}}, {{producer.producer_region}}
+				<br/>{{producer.country_name_en}}
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-default" ng-click="go('/winedb/producers/'+producer.producer_id)">dettagli</button>
+			</div>
 		</div>
 	</div>
-</section>
+</div>
+
+<back-button back-to="-1"></back-button>
+<add-button go-to="/winedb/producers/new/"></back-button>

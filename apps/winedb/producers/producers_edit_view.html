@@ -1,5 +1,3 @@
-<navmenu title="Aggiorna produttore" back-title="{{producer.producer_name}}" back-href="#/winedb/producers" btn-type="none"></navmenu>
-
 <div class="row">
 	<div class="col-md-12">
 		<error-message error-text="There was an error. {{producer.producer_name}} was not updated." ng-show="showError"></error-message>
@@ -22,7 +20,10 @@
 					<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
 				</select>
 			</div>
-			<button class="btn btn-success" type="submit">Save</button>
+			<div class="mmc-fixed-menu-bottomright">
+				<button class="btn btn-default" type="cancel" ng-click="go('/winedb/producers/'+producer.producer_id)">Annulla</button>
+				<button class="btn btn-primary" type="submit">Salva</button>
+			</div>
 		</form>
 	</div>
 </div>

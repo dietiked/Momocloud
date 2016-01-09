@@ -1,22 +1,38 @@
 <div class="row">
 	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-		<a href="#/winedb">
 			<div class="tile">
+				<div class="tile-picture">
+					<a href="#/winedb">
+						<img src="/momocloud/img/vinoteca_start.jpg" alt="vinoteca" width="100">
+					</a>
+				</div>
 				<div class="tile-content">
 					<span class="glyphicon glyphicon-glass"></span><br/>
 					Vinoteca
 				</div>
-			</div>
-		</a>
-	</div>
-	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-		<a href="#/recipies/">
-			<div class="tile">
-				<div class="tile-content">
-					<span class="glyphicon glyphicon-shopping-cart"></span><br/>
-					Ricettatore
+				<div class="tile-footer">
+					<button class="btn btn-default" ng-click="go('/winedb/cellar/')">cantina</button>
+					<button class="btn btn-default" ng-click="go('/winedb/wines/')">vini</button>
+					<button class="btn btn-default" ng-click="go('/winedb/producers/')">produttori</button>
 				</div>
 			</div>
-		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+		<div class="tile">
+			<div class="tile-picture">
+				<a href="#/recipies">
+					<img src="/momocloud/img/ricettatore_start.jpg" alt="vinoteca" width="100">
+				</a>
+			</div>
+			<div class="tile-content">
+				<span class="glyphicon glyphicon-shopping-cart"></span><br/>
+				Ricettatore
+			</div>
+			<div class="tile-footer">
+				<button class="btn btn-default" ng-click="go('/recipies/menus/')">menu</button>
+				<button class="btn btn-default" ng-click="go('/recipies/recipies/')">ricette</button>
+				<button class="btn btn-default" ng-click="go('/recipies/books/')">libri</button>
+			</div>
+		</div>
 	</div>
 </div>

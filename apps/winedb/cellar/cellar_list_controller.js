@@ -1,5 +1,5 @@
-momocloudControllers.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, AuthService) {
+momocloudControllers.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, AuthService, UrlService) {
 	//console.log('WinesDetailsController');	
 	
 	$scope.loaded = false;
@@ -10,6 +10,10 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 		
 	$scope.recalculateQuantity = function(storedWineId) {
 		CellarService.recalculateQuantity(storedWineId);
+	}
+
+	$scope.go = function(url) {
+		UrlService.go(url);
 	}
 
 	// Notification functions
