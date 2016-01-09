@@ -4,5 +4,9 @@ function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthServic
 
 	console.log('StartController');	
 	AuthService.increaseExpiration();
+	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 
 }]);

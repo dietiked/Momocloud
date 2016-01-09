@@ -1,6 +1,3 @@
-<navmenu title="Nuovo produttore" back-title="Produttori" back-href="#/winedb/producers" btn-type="none"></navmenu>
-
-
 <div class="row">
 	<div class="col-md-12">
 		<form name="producerForm">
@@ -22,8 +19,11 @@
 					<option ng-repeat="country in countries | orderBy:'country_name_en'" value="{{country.country_code}}">{{country.country_name_en}}</option>
 				</select>
 			</div>
-			<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="save()">Save</button>
-			<button class="btn btn-success" ng-disabled="!producerForm.$valid" ng-click="saveAndAddWine()">Save and add wine</button>
+			<div class="mmc-fixed-menu-bottomright">
+				<button class="btn btn-default" type="cancel" ng-click="go('/winedb/producers/'+producer.producer_id)">Annulla</button>
+				<button class="btn btn-primary" type="submit" ng-click="save()">Salva</button>
+				<button class="btn btn-primary" type="submit" ng-click="saveAndAddWine()">Aggiungi bottiglie</button>
+			</div>
 		</form>
 	</div>
 </div>

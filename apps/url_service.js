@@ -47,7 +47,12 @@ function UrlService($http, $location, NotificationCenter) {
 	};
 	
 	UrlService.go = function(url) {
-		$location.path(url);		
+		if (url == -1) {
+			console.log(document.referrer);
+			window.history.go(-1);
+		} else {
+			$location.path(url);					
+		}
 	}
 
 	return UrlService;

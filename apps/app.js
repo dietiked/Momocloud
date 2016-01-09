@@ -11,7 +11,8 @@ momocloudServices.factory('AuthService', AuthService);
 momocloudServices.directive('errorMessage', errorMessage);
 momocloudServices.directive('wineRating', wineRating);
 momocloudServices.directive('chart', chart);
-momocloudServices.directive('backButton', backButton);
+momocloudServices.directive('backButton', ['UrlService', backButton]);
+momocloudServices.directive('addButton', ['UrlService', addButton]);
 momocloudServices.directive('fabActions', fabActions);
 momocloudServices.directive('navmenu', ['$location', navmenu]);
 
