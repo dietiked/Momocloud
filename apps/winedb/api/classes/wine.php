@@ -28,6 +28,14 @@
 		}
 		
 		public function updateWineWithId($id, $data) {
+			if (! isset($data["wine_name"])) { $data["wine_name"] = "";}
+			if (! isset($data["wine_appellation"])) { $data["wine_appellation"] = "";}
+			if (! isset($data["producer_id"])) { $data["producer_id"] = "";}
+			if (! isset($data["winetype_id"])) { $data["winetype_id"] = "";}
+			if (! isset($data["wine_alcohol"])) { $data["wine_alcohol"] = "";}
+			if (! isset($data["wine_alcohol"])) { $data["wine_alcohol"] = "";}
+			if (! isset($data["wine_grapes"])) { $data["wine_grapes"] = "";}
+			if (! isset($data["wine_notes"])) { $data["wine_notes"] = "";}
 			$stmt = $this->connection->prepare($this->updateQuery);
 			$stmt->bindValue(":wineName", $data["wine_name"]);	
 			$stmt->bindValue(":appellation", $data["wine_appellation"]);	

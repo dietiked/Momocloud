@@ -13,6 +13,9 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 		//console.log('Save vintage', $scope.vintage);
 		VintagesService.update($scope.vintage);
 	}
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
 
 	var loadProgress = function() {
 		DependenciesChecker.loaded();

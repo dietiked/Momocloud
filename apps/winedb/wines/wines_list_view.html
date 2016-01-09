@@ -1,30 +1,21 @@
-<navmenu title="Vini" back-title="Dashboard" back-href="#/winedb" btn-type="plus" new-href="#/winedb/wines/new/"></navmenu>
-
 <div class="row">
-	<div class="col-md-12">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Appellation</th>
-					<th>Producer</th>
-					<th>Type</th>
-					<th>Alcohol</th>
-					<th>Grapes</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="wine in wines | filter:search">
-					<td>{{wine.wine_name}}</td>
-					<td>{{wine.wine_appellation}}</td>
-					<td><a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a></td>
-					<td>{{wine.winetype_description}}</td>
-					<td>{{wine.wine_alcohol}}%</td>
-					<td>{{wine.wine_grapes}}</td>
-					<td><a href="#/winedb/wines/{{wine.wine_id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="wine in wines | filter:search">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<h6>{{wine.wine_name}}<i class="fa fa-glass mmc-glass-color--{{wine.winetype_id}} pull-right"></i></h6>
+				<p>{{wine.wine_appellation}}</p>
+			</div>
+			<div class="panel-body">
+				Produttore: {{wine.producer_name}}<br/>
+				Vitigni: {{wine.wine_grapes}}
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">scopri</button>
+				<button class="btn btn-default" ng-click="go('/winedb/producers/'+wine.producer_id)">produttore</button>
+			</div>
+		</div>
 	</div>
 </div>
+
+<back-button back-to="/winedb/"></back-button>
+<add-button go-to="/winedb/wines/new"></add-button>

@@ -1,51 +1,66 @@
-<navmenu title="In cantina" back-title="Dashboard" back-href="#/winedb" btn-type="none"></navmenu>
-
-<!--<div class="row submenu">
-	<div class="col-xs-3">
-		<span class="page-title"><back-button to="#/winedb/index"></back-button> La cantina</span>
-	</div>
-	<div class="col-xs-3">
-		<select ng-model="orderColumn" class="form-control input-sm pull-right">
-			<option value="wine_name" ng-selected="true">Nome</option>
-			<option value="-stored_quantity">Quantit&agrave;</option>
-			<option value="-vintage_year">Anno</option>
-			<option value="-vintage_rating">Valutazione</option>
-		</select>
-	</div>
-	<div class="col-xs-6">
-		<div class="input-group input-group-sm">
-		  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
-		  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
-		</div>		
-	</div>
-</div>-->
-
 <div class="row">
-	<div class="col-md-12">				
-		<div class="row">
-			<div ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="etiquette ">
-					<div class="etiquette-content">
-						<div class="etiquette-country">{{wine.country_code}}</div>
-						<div class="etiquette-producer">
-							<a href="#/winedb/producers/{{wine.producer_id}}">{{wine.producer_name}}</a>
-							<span class="pull-right label label-{{wine.vintage_rating}}">{{wine.vintage_rating}}/10</span>
-						</div>
-						<div class="etiquette-name">
-							<a href="#/winedb/wines/{{wine.wine_id}}">{{wine.wine_name}}</a> <a href="#/winedb/wines/{{wine.wine_id}}/vintage/{{wine.vintage_id}}/edit">{{wine.vintage_year}}</a>
-						</div>
-						<div class="etiquette-appellation">{{wine.wine_appellation}}</div>
-						<div class="etiquette-info">
-							<span class="pull-left">{{wine.wine_alcohol}}%</span>
-							<span class="pull-right">{{wine.winetype_description}} wine</span>
-							<span class="clearfix"></span>
-						</div>
-						<div class="etiquette-quantity">
-							<span class="">Bottles: {{wine.stored_quantity}}</span>
-							 <a class="btn btn-default btn-xs pull-right on-top" href="#/winedb/cellar/{{wine.stored_wine_id}}/bottles/add"><i class="fa fa-cart-plus"></i> add</a>					</div>
-					</div>
-				</div>
+	<div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="wine in storedWines | filter:search | orderBy:orderColumn">				
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<h6>{{wine.wine_name}} {{wine.vintage_year}}<i class="fa fa-glass mmc-glass-color--{{wine.winetype_id}} pull-right"></i></h6>
+				<p>{{wine.wine_appellation}}</p>
+			</div>
+			<div class="panel-body">
+				Produttore: {{wine.producer_name}}<br/>
+				Vitigni: {{wine.wine_grapes}}<br/>
+				Bottiglie: {{wine.stored_quantity}}<br/>
+				Alcohol: {{wine.wine_alcohol}}%<br/>
+				{{wine.vintage_rating}}/10<br/>
+				{{wine.country_code}}
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">dettagli</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#modal-drink" ng-click="setSelectedWine(wine)">bevi</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#modal-add"  ng-click="setSelectedWine(wine)">aggiungi</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<back-button back-to="/winedb"></back-button>
+
+<div id="modal-drink" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Bevi una bottiglia di {{selectedWine.wine_name}} {{selectedWine.vintage_year}}</h5>
+      </div>
+      <div class="modal-body">
+	      <p>Scegli una data</p>
+		<uib-datepicker ng-model="date" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="drink(selectedWine, date)">Bevi</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modal-add" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Aggiungi bottiglie di {{selectedWine.wine_name}} {{selectedWine.vintage_year}}</h5>
+      </div>
+      <div class="modal-body">
+	    <div class="form-group">
+		    <label>Quantit&agrave;</label>
+		    <input class="form-control" type="text" ng-model="quantity" placeholder="Quantit&agrave;">
+	    </div>
+		<uib-datepicker ng-model="date" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="buy(selectedWine, date, quantity)">Aggiungi</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

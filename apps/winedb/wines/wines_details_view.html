@@ -1,21 +1,22 @@
-<navmenu title="{{wine.wine_name}}" back-title="Vini" back-href="#/winedb/wines" btn-type="edit" new-href="#/winedb/wines/{{wine.wine_id}}/edit"></navmenu>
-
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
+			<div class="col-md-12">
+				<h4>{{wine.wine_name}}<i class="fa fa-glass mmc-glass-color--{{wine.winetype_id}} pull-right"></i></h4>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-8 col-sm-12">
 				<dl class="dl-horizontal">
-					<dt>Producer</dt>
+					<dt>Produttore</dt>
 					<dd>{{wine.producer_name}}</dd>
-					<dt>Appellation</dt>
+					<dt>Denominazione</dt>
 					<dd>{{wine.wine_appellation}}</dd>
-					<dt>Type</dt>
-					<dd>{{wine.winetype_description}}</dd>
-					<dt>Alcohol</dt>
+					<dt>Alcol</dt>
 					<dd>{{wine.wine_alcohol}}%</dd>
-					<dt>Grapes</dt>
+					<dt>Vitigni</dt>
 					<dd>{{wine.wine_grapes}}</dd>
-					<dt>Notes</dt>
+					<dt>Note</dt>
 					<dd>{{wine.wine_notes}}</dd>
 					<dt></dt>
 				</dl>
@@ -28,18 +29,19 @@
 						vintagerating="{{vintage.vintage_rating}}">
 					</wine-rating>							
 				</div>
-				<a href="#/winedb/wines/{{wine.wine_id}}/vintage/new" class="btn btn-default btn-sm pull-right">Add vintage</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div>
-					 <a href="#" class="btn btn-danger pull-left">
-						<span class="glyphicon glyphicon-trash"></span> Delete
-					</a>
-				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
+
+<back-button back-to="-1"></back-button>
+
+<fab-actions>
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/'+wine.wine_id+'/edit')">
+		<i class="fa fa-edit"></i>
+	</button>
+	<button class="btn btn-default md-button-fab--small" ng-click="go('winedb/wines/'+wine.wine_id+'/vintage/new')">
+		<i class="fa fa-plus"></i>
+	</button>
+</fab-actions>
+

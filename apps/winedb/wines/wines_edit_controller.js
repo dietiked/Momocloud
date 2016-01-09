@@ -14,6 +14,10 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		WinesService.update($scope.wine);
 	}
 	
+	$scope.go = function(url) {
+		UrlService.go(url);
+	}
+
 	var loadProgress = function() {
 		DependenciesChecker.loaded();
 		if (DependenciesChecker.serviceReady) {

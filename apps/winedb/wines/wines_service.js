@@ -75,16 +75,16 @@ function WinesService($http, NotificationCenter) {
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				//console.log('success while updating', data);
+				console.log('success while updating', data);
 				NotificationCenter.postNotification(WinesService.notifications.WINES_UPDATE_SUCCESS);			
 			} else {
-				//console.log('error while updating (101)', data);			
-				NotificationCenter.postNotification(WinesService.notifications.WINES_UPDATE_ERROR);
+				console.log('error while updating (101)', data);			
+				//NotificationCenter.postNotification(WinesService.notifications.WINES_UPDATE_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error while updating (102)', data);			
-			NotificationCenter.postNotification(WinesService.notifications.WINES_UPDATE_ERROR);
+			console.log('error while updating (102)', data);			
+			//NotificationCenter.postNotification(WinesService.notifications.WINES_UPDATE_ERROR);
 		});				
 	}
 	

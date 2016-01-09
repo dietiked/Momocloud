@@ -14,6 +14,7 @@
     	<link rel="stylesheet" href="libs/ng-tags-input/ng-tags-input.bootstrap.min.css">
 		<link rel="stylesheet" href="css/material-design.css">
 		<link rel="stylesheet" href="css/skin-momocloud.css">
+		<link rel="stylesheet" href="directives/error_message/error_message.css">
 	</head>
 	<body>
 		
@@ -36,7 +37,7 @@
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vinoteca <span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 				<li><a href="#/winedb/">Dashboard</a></li>
-				<li><a href="#/winedb/cellar/">In cantina</a></li>
+				<li><a href="#/winedb/cellar/">Cantina</a></li>
 				<li><a href="#/winedb/wines/">Vini</a></li>
 				<li><a href="#/winedb/producers/">Produttori</a></li>
 			  </ul>
@@ -51,7 +52,8 @@
 					<li><a href="#/recipies/categories/">Categorie</a></li>
 				 </ul>
 			</li>
-			<li><a href="#contact">Dafare</a></li>
+			<li><a href="#">Dafare</a></li>
+			<li><a href="#">Libreria</a></li>
 		  </ul>
 		  
 		  <form class="navbar-form navbar-right" role="search">
@@ -73,20 +75,21 @@
 		
 		<script src="libs/jquery.js" charset="utf-8"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
-		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
 		<script src="libs/angular/angular.js" charset="utf-8"></script>
 		<script src="libs/angular/angular-route.min.js" charset="utf-8"></script>
 		<script src="libs/angular-filter/angular-filter.min.js" charset="utf-8"></script>
 		<script src="libs/moment.js" charset="utf-8"></script>
 		<script src="libs/chartjs/Chart.min.js" charset="utf-8"></script>
-		<script src="libs/ui_bootstrap/ui-bootstrap-0.13.0.js" charset="utf-8"></script>
+		<script src="libs/ui_bootstrap/ui_bootstrap.min.js" charset="utf-8"></script>
 		<script src="libs/underscore/underscore.js" charset="utf-8"></script>
 		<script src="libs/ng-tags-input/ng-tags-input.min.js" charset="utf-8"></script>
 		<script src="directives/error_message/error_message.js" charset="utf-8"></script>
 		<script src="directives/wine_rating/wine_rating.js" charset="utf-8"></script>
 		<script src="directives/chart/chart.js" charset="utf-8"></script>
-		<script src="directives/back_button.js" charset="utf-8"></script>
+		<script src="directives/add_button/add_button.js" charset="utf-8"></script>
+		<script src="directives/back_button/back_button.js" charset="utf-8"></script>
 		<script src="directives/navmenu/navmenu.js" charset="utf-8"></script>
+		<script src="directives/fab_actions/fab_actions.js" charset="utf-8"></script>
 		<script src="services/notificationCenter.js" charset="utf-8"></script>
 		<script src="services/dependenciesChecker.js" charset="utf-8"></script>
 		<script src="apps/login/auth_service.js" charset="utf-8"></script>
