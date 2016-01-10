@@ -168,6 +168,11 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/ricettatore/recipies/recipies_edit_view.html',
 			controller: 'RecipiesEditController'
 		}).
+		// Ricettatore
+		when('/library/search', {
+			templateUrl: 'apps/library/books/search_book_view.html',
+			controller: 'LibraryBookSearchController'
+		}).
 		otherwise({
 			redirectTo: '/start'
 		});

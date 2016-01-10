@@ -54,7 +54,7 @@ function CellarService($http, NotificationCenter) {
 	
 	CellarService.get = function(id) {
 		$http.post(
-			request + '/' + id + '/'
+			request + id + '/'
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {

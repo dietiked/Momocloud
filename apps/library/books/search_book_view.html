@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="col-md-12">
+		<form class="form" ng-submit="search()">
+			<div class="form-group">
+				<label>Cerca</label>
+				<input type="text" class="form-control" placeholder="cerca..." ng-model="searchQuery">
+			</div>
+			<button type="submit" class="btn btn-primary">cerca</button>
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default" ng-repeat="book in searchBooks">
+			<div class="panel-heading">
+				<h6>{{book.title}}</h6>
+				<p>{{book.authors}}</p>
+			</div>
+			<div class="panel-body">
+				<img ng-src="{{book.thumbnail}}" alt="copertina">
+				Editore: {{book.publisher}}<br/>
+				Lingua: {{book.language}}<br/>
+				ISBN: {{book.ISBN13}}<br/>
+				Categorie: {{category}}
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-default" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook(book)">aggiungi</button>
+			</div>
+		</div>		
+	</div>
+</div>
+<div class="row" ng-show="searchStartIndex > 0">
+	<div class="col-md-12">
+		<button class="btn btn-primary" ng-click="loadMoreSearchResults()">carica altri</button>
+	</div>
+</div>
+
+<div id="modal-add-book" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Aggiungi alla libreria</h5>
+      </div>
+      <div class="modal-body">
+			<div class="form-group">
+				<label>Titolo</label>
+				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.title">
+			</div>
+			<div class="form-group">
+				<label>Autore</label>
+				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.authors">
+			</div>
+			<div class="form-group">
+				<label>Categorie</label>
+				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.categories">
+			</div>
+			<div class="form-group">
+				<label>Editore</label>
+				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.publisher">
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="addBookToLibrary(selectedBook)">Salva</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
