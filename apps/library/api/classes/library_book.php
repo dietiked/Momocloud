@@ -1,6 +1,19 @@
 <?php
 	
 class LibraryBook extends Request {
+	
+	function getBooks() {
+		$query = "SELECT * FROM library_books";
+		$stmt = $this->connection->prepare($query);
+		if ($stmt->execute()) {
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+			$success = True;
+		} else {
+			$success = False;
+			$result = -1;
+		}
+		return Array("success"=>$success, "result"=>$result);		
+	}
 
 	function addBookToLibrary($book) {
 		if (! isset($book["title"])) { $book["title"] = "";}

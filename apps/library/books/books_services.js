@@ -44,6 +44,23 @@ function LibraryBooksService($http, NotificationCenter) {
 		return momocloudBook;
 	};
 	
+	LibraryBooksService.getAll = function() {
+		$http.get(
+			request
+		)
+		.success(function(data) {
+			if (data.success) {
+				LibraryBooksService.books = data.result;
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_ALL_SUCCESS);
+			} else {
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_ALL_ERROR);				
+			}
+		})
+		.error(function() {
+			NotificationCenter.postNotification(LibraryBooksService.notifications.GET_ALL_ERROR);
+		});
+	}
+	
 	LibraryBooksService.search = function(query, startIndex) {
 		startIndex = startIndex ? startIndex : 0;
 		// Reset results if start index is 0 (i.e. new search)
@@ -76,10 +93,16 @@ function LibraryBooksService($http, NotificationCenter) {
 			book
 		)
 		.success(function(data) {
-			console.log('Success', data);
+			//console.log('Success', data);
+			if (data.success) {
+				NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_SUCCESS);			
+			} else {
+				NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_ERROR);			
+			}
 		})
 		.error(function(data) {
-			console.log('Error', data);			
+			//console.log('Error', data);			
+			NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_ERROR);
 		});
 	};
 	

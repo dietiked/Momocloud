@@ -30,12 +30,18 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, U
 		$scope.searchBooks = LibraryBooksService.searchBooks;
 		$scope.searchStartIndex += 11;
 		console.log($scope.searchBooks);
-	}
+	};
+	
+	var dismissModal = function() {
+		$('.modal').modal('hide');	
+	};
 
 	// Notification handlers
 	var searchBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.SEARCH_SUCCESS, getSearchBooks);
+	var addBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.INSERT_SUCCESS, dismissModal);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(searchBookSuccess);
+		NotificationCenter.unsubscribe(addBookSuccess);
 	});
 
 	AuthService.increaseExpiration();

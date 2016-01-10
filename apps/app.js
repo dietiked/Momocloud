@@ -173,6 +173,10 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/library/books/search_book_view.html',
 			controller: 'LibraryBookSearchController'
 		}).
+		when('/library/books', {
+			templateUrl: 'apps/library/books/books_list_view.html',
+			controller: 'LibraryBooksListController'
+		}).
 		otherwise({
 			redirectTo: '/start'
 		});
