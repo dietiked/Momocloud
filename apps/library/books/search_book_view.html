@@ -35,6 +35,9 @@
 	</div>
 </div>
 
+<back-button></back-button>
+
+
 <div id="modal-add-book" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -49,15 +52,31 @@
 			</div>
 			<div class="form-group">
 				<label>Autore</label>
-				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.authors">
-			</div>
-			<div class="form-group">
-				<label>Categorie</label>
-				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.categories">
+				<input type="text" class="form-control" placeholder="Autore" ng-model="selectedBook.authors">
 			</div>
 			<div class="form-group">
 				<label>Editore</label>
-				<input type="text" class="form-control" placeholder="Titolo" ng-model="selectedBook.publisher">
+				<input type="text" class="form-control" placeholder="Editore" ng-model="selectedBook.publisher">
+			</div>
+			<div class="form-group">
+				<label>Categorie</label>
+				<input type="text" class="form-control" placeholder="Categorie" ng-model="selectedBook.categories">
+			</div>
+			<div class="form-group">
+				<label>Data di pubblicazione</label>
+				<input type="text" class="form-control" placeholder="Data di pubblicazione" ng-model="selectedBook.published_data">
+			</div>
+			<div class="form-group">
+				<label>Lingua</label>
+				<input type="text" class="form-control" placeholder="Data di pubblicazione" ng-model="selectedBook.language">
+			</div>
+			<div class="form-group">
+				<label>ISBN 13</label>
+				<input type="text" class="form-control" placeholder="ISBN" ng-model="selectedBook.ISBN13">
+			</div>
+			<div class="form-group">
+				<label>ISBN 10</label>
+				<input type="text" class="form-control" placeholder="ISBN" ng-model="selectedBook.ISBN10">
 			</div>
       </div>
       <div class="modal-footer">

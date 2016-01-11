@@ -30,12 +30,12 @@ function LibraryBooksService($http, NotificationCenter) {
 		var momocloudBook = {
 			'title' : googleBook.volumeInfo.title ? googleBook.volumeInfo.title : null,
 			'authors' : googleBook.volumeInfo.authors ? googleBook.volumeInfo.authors.join(', ') : null,
+			'publisher': googleBook.volumeInfo.publisher ? googleBook.volumeInfo.publisher : null,
 			'categories' : googleBook.volumeInfo.categories ? googleBook.volumeInfo.categories.join(', ') : null,
+			'published_data': googleBook.volumeInfo.publishedDate ? googleBook.volumeInfo.publishedDate : null,
 			'language' : googleBook.volumeInfo.language ? googleBook.volumeInfo.language : null,
 			'ISBN10' : googleBook.volumeInfo.industryIdentifiers[0] ? googleBook.volumeInfo.industryIdentifiers[0].identifier : null,
 			'ISBN13' : googleBook.volumeInfo.industryIdentifiers[1] ? googleBook.volumeInfo.industryIdentifiers[1].identifier : null,
-			'publisher': googleBook.volumeInfo.publisher ? googleBook.volumeInfo.publisher : null,
-			'published_data': googleBook.volumeInfo.publishedDate ? googleBook.volumeInfo.publishedDate : null,
 			'thumbnail': googleBook.volumeInfo.imageLinks ? googleBook.volumeInfo.imageLinks.smallThumbnail : '',
 			'source_name' : 'Google Books',
 			'source_id': googleBook.id
