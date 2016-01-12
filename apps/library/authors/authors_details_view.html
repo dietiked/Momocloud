@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-md-12">
-		<h5>Libri</h5>
+		<h5>{{author}}</h5>
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books">
+	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books | filter:search">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h6>{{book.title}}</h6>
@@ -24,12 +24,3 @@
 </div>
 
 <back-button></back-button>
-
-<fab-actions>
-	<button class="btn btn-default md-button-fab--small" ng-click="go('library/search')">
-		<i class="fa fa-search"></i>
-	</button>
-	<button class="btn btn-default md-button-fab--small" ng-click="go()">
-		<i class="fa fa-plus"></i>
-	</button>
-</fab-actions>

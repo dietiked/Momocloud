@@ -4,6 +4,7 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, U
 	console.log('LibraryBooksService');
 
 	$scope.searchStartIndex = 0;
+	$scope.performingSearch = false;
 
 	$scope.searchQuery = '';
 	$scope.searchBooks = [];
@@ -13,6 +14,7 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, U
 		UrlService.go(url);
 	};
 	$scope.search = function() {
+		$scope.performingSearch = true;
 		LibraryBooksService.search($scope.searchQuery);
 	};
 	$scope.loadMoreSearchResults = function () {
@@ -30,6 +32,7 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, U
 		$scope.searchBooks = LibraryBooksService.searchBooks;
 		$scope.searchStartIndex += 11;
 		console.log($scope.searchBooks);
+		$scope.performingSearch = false;
 	};
 	
 	var dismissModal = function() {
