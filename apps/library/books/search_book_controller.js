@@ -18,14 +18,12 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, U
 		LibraryBooksService.search($scope.searchQuery);
 	};
 	$scope.loadMoreSearchResults = function () {
+		$scope.performingSearch = true;
 		LibraryBooksService.search($scope.searchQuery, $scope.searchStartIndex);
 	};
 	$scope.setSelectedBook = function (book) {
 		$scope.selectedBook = angular.copy(book);
 	};
-	$scope.addBookToLibrary = function () {
-		LibraryBooksService.addBookToLibrary($scope.selectedBook);
-	}
 
 	// Notification functions
 	var getSearchBooks = function() {

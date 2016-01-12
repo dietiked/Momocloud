@@ -44,6 +44,14 @@ function LibraryBooksService($http, NotificationCenter) {
 		return momocloudBook;
 	};
 	
+	var indexOfBook = function(aBook) {
+		for (var i=0; i<LibraryBooksService.books.length; i++) {
+			if (LibraryBooksService.books[i].id_book == aBook.id_book) {
+				return i;
+			}
+		}
+	}
+	
 	LibraryBooksService.getAll = function() {
 		$http.get(
 			request
@@ -95,6 +103,7 @@ function LibraryBooksService($http, NotificationCenter) {
 		.success(function(data) {
 			//console.log('Success', data);
 			if (data.success) {
+				LibraryBooksService.books.push(book);
 				NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_SUCCESS);			
 			} else {
 				NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_ERROR);			
@@ -103,6 +112,49 @@ function LibraryBooksService($http, NotificationCenter) {
 		.error(function(data) {
 			//console.log('Error', data);			
 			NotificationCenter.postNotification(LibraryBooksService.notifications.INSERT_ERROR);
+		});
+	};
+
+	LibraryBooksService.updateBook = function(book) {
+		console.log(book);
+		$http.post(
+			request + book.id_book,
+			book
+		)
+		.success(function(data) {
+			console.log('Success', data);
+			if (data.success) {
+				var bookIndex = indexOfBook(book);
+				LibraryBooksService.books.splice(bookIndex, 1, book);
+				NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_SUCCESS);	
+			} else {
+				NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_ERROR);			
+			}
+		})
+		.error(function(data) {
+			console.log('Error', data);			
+			NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_ERROR);
+		});
+	};
+
+	LibraryBooksService.deleteBook = function(book) {
+		console.log(book);
+		$http.delete(
+			request + book.id_book
+		)
+		.success(function(data) {
+			console.log('Success', data);
+			if (data.success) {
+				var bookIndex = indexOfBook(book);
+				LibraryBooksService.books.splice(bookIndex, 1);
+				NotificationCenter.postNotification(LibraryBooksService.notifications.DELETE_SUCCESS);	
+			} else {
+				NotificationCenter.postNotification(LibraryBooksService.notifications.DELETE_ERROR);			
+			}
+		})
+		.error(function(data) {
+			console.log('Error', data);			
+			NotificationCenter.postNotification(LibraryBooksService.notifications.DELETE_ERROR);
 		});
 	};
 	

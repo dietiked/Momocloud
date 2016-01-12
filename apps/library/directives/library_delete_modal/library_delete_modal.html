@@ -1,0 +1,16 @@
+<div id="{{id}}" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Elimina libro</h5>
+      </div>
+      <div class="modal-body">
+	      <p>Sei sicuro di voler eliminare <b>{{book.title}}</b> di {{book.authors}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="deleteBook()">Elimina</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

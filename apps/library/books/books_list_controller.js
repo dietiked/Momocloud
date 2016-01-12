@@ -2,23 +2,37 @@ momocloudControllers.controller('LibraryBooksListController', ['$scope', 'Notifi
 function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, UrlService, AuthService) {
 	
 	console.log('LibraryBooksListController');
-	$scope.loaded = false;
+	$scope.loading = true;
 
 	// Notification functions
 	var getBooks = function() {
 		$scope.books = LibraryBooksService.books;
-		$scope.loaded = true;
+		$scope.loading = false;
 	}
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
+	$scope.setSelectedBook = function(aBook) {
+		$scope.selectedBook = angular.copy(aBook);
+	};
+
+	var dismissModal = function() {
+		$scope.books = LibraryBooksService.books;
+		$('.modal').modal('hide');	
+	};
 
 	// Notification handlers
 	var getBooksSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.GET_ALL_SUCCESS, getBooks);
+	var addBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.INSERT_SUCCESS, dismissModal);
+	var updateBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.UPDATE_SUCCESS, dismissModal);
+	var deleteBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.DELETE_SUCCESS, dismissModal);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getBooksSuccess);
+		NotificationCenter.unsubscribe(addBookSuccess);
+		NotificationCenter.unsubscribe(updateBookSuccess);
+		NotificationCenter.unsubscribe(deleteBookSuccess);
 	});
-
+	
 	LibraryBooksService.getAll();
 	AuthService.increaseExpiration();
 
