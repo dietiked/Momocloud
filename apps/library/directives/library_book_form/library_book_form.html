@@ -1,0 +1,60 @@
+<div id="{{id}}" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" ng-show="mode=='insert'">Aggiungi alla libreria</h5>
+        <h5 class="modal-title" ng-show="mode=='update'">Modifica libro</h5>
+      </div>
+      <div class="modal-body">
+	      <form class="form">
+			<div class="form-group">
+				<label>Titolo</label>
+				<input type="text" class="form-control" placeholder="Titolo" ng-model="book.title">
+			</div>
+			<div class="form-group">
+				<label>Autore</label>
+				<input type="text" class="form-control" placeholder="Autore" ng-model="book.authors">
+			</div>
+			<div class="form-group">
+				<label>Editore</label>
+				<input type="text" class="form-control" placeholder="Editore" ng-model="book.publisher">
+			</div>
+			<div class="form-group">
+				<label>Categorie</label>
+				<input type="text" class="form-control" placeholder="Categorie" ng-model="book.categories">
+			</div>
+			<div class="form-group">
+				<label>Data di pubblicazione</label>
+				<input type="text" class="form-control" placeholder="Data di pubblicazione" ng-model="book.published_data">
+			</div>
+			<div class="form-group">
+				<label>Lingua</label>
+				<input type="text" class="form-control" placeholder="Data di pubblicazione" ng-model="book.language">
+			</div>
+			<div class="form-group">
+				<label>ISBN 13</label>
+				<input type="text" class="form-control" placeholder="ISBN" ng-model="book.ISBN13">
+			</div>
+			<div class="form-group">
+				<label>ISBN 10</label>
+				<input type="text" class="form-control" placeholder="ISBN" ng-model="book.ISBN10">
+			</div>
+			<div class="form-group">
+				<label>Prezzo</label>
+				<input type="text" class="form-control" placeholder="Prezzo" ng-model="book.price">
+			</div>
+			<div class="form-group">
+				<label>Valutazione</label><br />
+				<uib-rating ng-model="book.rating" max="10"></uib-rating>
+			</div>
+	      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="addBookToLibrary()" ng-show="mode=='insert'">Aggiungi</button>
+        <button type="button" class="btn btn-primary" ng-click="updateBook()" ng-show="mode=='update'">Salva modifiche</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

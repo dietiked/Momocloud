@@ -11,6 +11,7 @@ $app->response->headers->set('Content-Type', 'application/json');
 
 include "../winedb/api/index.php";
 include "../ricettatore/api/index.php";
+include "../library/api/index.php";
 
 $app->run();	
 

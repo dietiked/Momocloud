@@ -14,6 +14,8 @@ momocloudServices.directive('chart', chart);
 momocloudServices.directive('backButton', ['UrlService', backButton]);
 momocloudServices.directive('addButton', ['UrlService', addButton]);
 momocloudServices.directive('fabActions', fabActions);
+momocloudServices.directive('libraryBookForm', libraryBookForm);
+momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
 momocloudServices.directive('navmenu', ['$location', navmenu]);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
@@ -167,6 +169,23 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 		when('/recipies/recipies/:recipeId/edit', {
 			templateUrl: 'apps/ricettatore/recipies/recipies_edit_view.html',
 			controller: 'RecipiesEditController'
+		}).
+		// Ricettatore
+		when('/library/search', {
+			templateUrl: 'apps/library/books/search_book_view.html',
+			controller: 'LibraryBookSearchController'
+		}).
+		when('/library/books', {
+			templateUrl: 'apps/library/books/books_list_view.html',
+			controller: 'LibraryBooksListController'
+		}).
+		when('/library/authors', {
+			templateUrl: 'apps/library/authors/authors_list_view.html',
+			controller: 'LibraryAuthorsListController'
+		}).
+		when('/library/authors/:authorDescr', {
+			templateUrl: 'apps/library/authors/authors_details_view.html',
+			controller: 'LibraryAuthorsDetailsController'
 		}).
 		otherwise({
 			redirectTo: '/start'

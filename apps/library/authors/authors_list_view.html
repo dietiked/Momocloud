@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-md-12">
+		<h5>Autori</h5>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12" >
+		<span class="md-chip" ng-repeat="author in authors | filter:search">
+			<a ng-click="showDetailsForAuthor(author.authors)">{{author.authors}} ({{author.count}})</a>
+		</span>
+	</div>
+</div>
+
+<back-button></back-button>
