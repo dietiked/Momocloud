@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<h5>Libri</h5>
+		<h5>Libri: {{books.length}}</h5>
 	</div>
 </div>
 <div class="row" ng-show="loading">
@@ -10,24 +10,11 @@
 </div>
 <div class="row">
 	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h6>{{book.title}}</h6>
-				<p>{{book.authors}}</p>
-			</div>
-			<div class="panel-body">
-				<img ng-src="{{book.thumbnail}}" alt="copertina">
-				Editore: {{book.publisher}}<br/>
-				Lingua: {{book.language}}<br/>
-				ISBN: {{book.ISBN13}}<br/>
-				Categorie: {{category}}<br/>
-				<uib-rating ng-model="book.rating" max="10" readonly="true"></uib-rating>
-			</div>
-			<div class="panel-footer">
-				<button class="btn btn-default" data-toggle="modal" data-target="#modal-update-book" ng-click="setSelectedBook(book)">modifica</button>
-				<button class="btn btn-default" data-toggle="modal" data-target="#modal-delete-book" ng-click="setSelectedBook(book)">elimina</button>
-			</div>
-		</div>		
+		<library-book-card ng-model="book">
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-details-book" ng-click="setSelectedBook(book)">dettagli</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-update-book" ng-click="setSelectedBook(book)">modifica</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-delete-book" ng-click="setSelectedBook(book)">elimina</button>
+		</library-book-card>
 	</div>
 </div>
 
@@ -41,7 +28,7 @@
 	<button class="btn btn-default md-button-fab--small" ng-click="go('library/search')">
 		<i class="fa fa-search"></i>
 	</button>
-	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-add-book">
+	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook({})">
 		<i class="fa fa-plus"></i>
 	</button>
 </fab-actions>

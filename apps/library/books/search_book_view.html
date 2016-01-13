@@ -10,23 +10,10 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-default" ng-repeat="book in searchBooks">
-			<div class="panel-heading">
-				<h6>{{book.title}}</h6>
-				<p>{{book.authors}}</p>
-			</div>
-			<div class="panel-body">
-				<img ng-src="{{book.thumbnail}}" alt="copertina">
-				Editore: {{book.publisher}}<br/>
-				Lingua: {{book.language}}<br/>
-				ISBN: {{book.ISBN13}}<br/>
-				Categorie: {{category}}
-			</div>
-			<div class="panel-footer">
-				<button class="btn btn-default" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook(book)">aggiungi</button>
-			</div>
-		</div>		
+	<div class="col-md-12" ng-repeat="book in searchBooks">
+		<library-book-card ng-model="book" advanced="true">
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook(book)">aggiungi</button>
+		</library-book-card>
 	</div>
 </div>
 <div class="row" ng-show="searchStartIndex > 0">
