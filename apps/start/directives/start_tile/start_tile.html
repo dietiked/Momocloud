@@ -1,11 +1,13 @@
 <div class="tile">
 	<div class="tile-picture">
 		<a href="#/winedb">
-			<img src="{{imageLink}}" alt="{{tileTitle}}" width="100">
+			<img ng-src="{{imageLink}}" alt="{{tileTitle}}" width="100">
 		</a>
 	</div>
 	<div class="tile-content">
-		<span class="glyphicon glyphicon-glass"></span><br/>
+		<span class="{{iconClass}}" ng-show="glyphicon"></span>
+		<i class="{{iconClass}}" ng-show="!glyphicon"></i>
+		<br/>
 		{{tileTitle}}
 	</div>
 	<div class="tile-footer">
