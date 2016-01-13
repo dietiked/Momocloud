@@ -16,6 +16,7 @@ momocloudServices.directive('addButton', ['UrlService', addButton]);
 momocloudServices.directive('fabActions', fabActions);
 momocloudServices.directive('libraryBookForm', libraryBookForm);
 momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
+momocloudServices.directive('libraryBookCard', libraryBookCard);
 momocloudServices.directive('navmenu', ['$location', navmenu]);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 

@@ -1,25 +1,12 @@
 <div class="row">
 	<div class="col-md-12">
-		<h5>{{author}}</h5>
+		<h5>{{author}}: {{books.length}}</h5>
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books | filter:search">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h6>{{book.title}}</h6>
-				<p>{{book.authors}}</p>
-			</div>
-			<div class="panel-body">
-				<img ng-src="{{book.thumbnail}}" alt="copertina">
-				Editore: {{book.publisher}}<br/>
-				Lingua: {{book.language}}<br/>
-				ISBN: {{book.ISBN13}}<br/>
-				Categorie: {{category}}
-			</div>
-			<div class="panel-footer">
-			</div>
-		</div>		
+		<library-book-card ng-model="book">
+		</library-book-card>
 	</div>
 </div>
 
