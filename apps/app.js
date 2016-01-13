@@ -15,6 +15,7 @@ momocloudServices.directive('backButton', ['UrlService', backButton]);
 momocloudServices.directive('addButton', ['UrlService', addButton]);
 momocloudServices.directive('fabActions', fabActions);
 momocloudServices.directive('startTile', startTile);
+momocloudServices.directive('inputTag', inputTag);
 momocloudServices.directive('libraryBookForm', libraryBookForm);
 momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
 momocloudServices.directive('libraryBookCard', libraryBookCard);

@@ -11,7 +11,6 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	
 	$scope.setSelectedRecipe = function(aBook) {
 		$scope.selectedRecipe = angular.copy(aBook);	
-		console.log($scope.selectedRecipe);
 	};
 
 	// Notification functions
@@ -25,9 +24,9 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	}
 
 	// Notification handlers
-	var getRecipiesSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS, getRecipies);
-	var insertRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_INSERT_SUCCESS, dismissModal);
-	var updateRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_UPDATE_SUCCESS, dismissModal);
+	var getRecipiesSuccess = NotificationCenter.subscribe(RecipiesService.notifications.GET_ALL_SUCCESS, getRecipies);
+	var insertRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.INSERT_SUCCESS, dismissModal);
+	var updateRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.UPDATE_SUCCESS, dismissModal);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getRecipiesSuccess);
 		NotificationCenter.unsubscribe(insertRecipeSuccess);
