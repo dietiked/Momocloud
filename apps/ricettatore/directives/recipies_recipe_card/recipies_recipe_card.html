@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h6>{{recipe.recipe_name}}</h6>
+		<p><uib-rating readonly="true" ng-model="recipe.recipe_rating" max="10"></uib-rating></p>
+	</div>
+	<div class="panel-body">
+		Libro: {{recipe.recipe_book_title}} - {{recipe.recipe_book_page}}<br/>
+		Categorie: <span ng-repeat="category in recipe.recipe_categories">{{category}} </span>
+	</div>
+	<div class="panel-footer">
+		<div ng-transclude></div>
+	</div>
+</div>		

@@ -1,30 +1,22 @@
 <div class="row">
 	<div class="col-md-12">
-		<div class="list-group list-group--3-line">
-				<div class="list-group-header">
-					<div class="md-list-item-title">
-						Ricette
-					</div>
-				</div>
-			<div class="list-group-item list-group-item--hline" ng-repeat="recipe in recipies | filter:search">
-				<div class="md-list-item-title"><a href="#/recipies/recipies/{{recipe.recipe_id}}/edit">{{recipe.recipe_name}}</a>
-					
-				</div>
-				<div class="md-list-item-subtitle">{{recipe.recipe_book_title}} - {{recipe.recipe_book_page}}</div>
-				<div class="md-list-item-text">
-					<span ng-repeat="category in recipe.recipe_categories"><span class="">{{category}}</span> </span>
-					<!--<span class="md-list-item-addon">
-						{{recipe.recipe_rating}}/10
-					</span>-->
-				</div>
-			</div>
-		</div>
+		<h5>Ricette</h5>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-lg-4 col-sm-12" ng-repeat="recipe in recipies | filter:search">
+		<recipies-recipe-card ng-model="recipe">
+			<button class="btn btn-default"  ng-click="setSelectedRecipe(recipe)" data-toggle="modal" data-target="#recipe-update-modal">Modifica</button>
+			<button class="btn btn-default">Elimina</button>
+		</recipies-recipe-card>
 	</div>
 </div>
 
-<button class="btn btn-primary mmc-fixed-bottomleft" ng-click="go('/recipies')">
-	<i class="fa fa-chevron-left"></i> Back
-</button>
-<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="go('/recipies/recipies/new')">
+<back-button></back-button>
+
+<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" data-toggle="modal" data-target="#recipe-add-modal" ng-click="setSelectedRecipe({})">
 	<i class="fa fa-plus"></i>
 </button>
+
+<recipies-recipe-form modal-id="recipe-add-modal" mode="insert" ng-model="selectedRecipe"></recipies-recipe-form>
+<recipies-recipe-form modal-id="recipe-update-modal" mode="update" ng-model="selectedRecipe"></recipies-recipe-form>

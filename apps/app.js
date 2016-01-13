@@ -18,7 +18,8 @@ momocloudServices.directive('startTile', startTile);
 momocloudServices.directive('libraryBookForm', libraryBookForm);
 momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
 momocloudServices.directive('libraryBookCard', libraryBookCard);
-momocloudServices.directive('navmenu', ['$location', navmenu]);
+momocloudServices.directive('recipiesRecipeCard', recipiesRecipeCard);
+momocloudServices.directive('recipiesRecipeForm', recipiesRecipeForm);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
 	
