@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-12">
+		<h5>Libri: {{books.length}}</h5>
+	</div>
+</div>
+<div class="row" ng-show="loading">
+	<div class="col-md-12" style="text-align: center; margin-top: 30px;">
+		<i class="fa fa-spinner fa-spin fa-3x"></i>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books">
+		<library-book-card ng-model="book">
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-details-book" ng-click="setSelectedBook(book)">dettagli</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-update-book" ng-click="setSelectedBook(book)">modifica</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#modal-delete-book" ng-click="setSelectedBook(book)">elimina</button>
+		</library-book-card>
+	</div>
+</div>
+
+<back-button></back-button>
+
+<library-book-form modal-id="modal-add-book" mode="insert" ng-model="selectedBook"></library-book-form>
+<library-book-form modal-id="modal-update-book" mode="update" ng-model="selectedBook"></library-book-form>
+<library-delete-modal modal-id="modal-delete-book" ng-model="selectedBook"></library-delete-modal>
+
+<fab-actions>
+	<button class="btn btn-default md-button-fab--small" ng-click="go('library/search')">
+		<i class="fa fa-search"></i>
+	</button>
+	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook({})">
+		<i class="fa fa-plus"></i>
+	</button>
+</fab-actions>
+
