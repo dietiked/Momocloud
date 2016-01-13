@@ -1,4 +1,4 @@
-function recipiesRecipeForm (RecipiesService, RecipeBooksService, RecipeCategoriesService) {
+function recipiesRecipeForm (RecipiesService, RecipeBooksService) {
 	
 	return {
 		restrict: 'E',
@@ -10,31 +10,30 @@ function recipiesRecipeForm (RecipiesService, RecipeBooksService, RecipeCategori
 		},
 		templateUrl: 'apps/ricettatore/directives/recipies_recipe_form/recipies_recipe_form.html',
 		link: function(scope, element, attrs) {
+			
+			scope.$watch('recipe', function() {
+				scope.tags = scope.recipe.recipe_categories;
+			});
+			
 			scope.addRecipe = function () {
+				scope.recipe.recipe_categories = scope.tags;
 				RecipiesService.insert(scope.recipe);
 			}
 			scope.updateRecipe = function() {
+				scope.recipe.recipe_categories = scope.tags;
 				RecipiesService.update(scope.recipe);
 			}
 
 			scope.books =[];
-			scope.categories =[];
 			
 			var getBooks = function() {
 				scope.books = RecipeBooksService.books;
 			}
-			var getCategories = function() {
-				angular.forEach(RecipeCategoriesService.categories, function(category, key) {
-					scope.categories.push(category.recipe_category_name);
-				});		
-			}
 		
 			// Notification handlers
 			var getBooksSuccess = NotificationCenter.subscribe(RecipeBooksService.notifications.RECIPY_BOOKS_GET_ALL_SUCCESS, getBooks);
-			var getCategoriesSuccess = NotificationCenter.subscribe(RecipeCategoriesService.notifications.RECIPY_CATEGORIES_GET_ALL_SUCCESS, getCategories);
 			scope.$on('$destroy', function(){
 				NotificationCenter.unsubscribe(getBooksSuccess);
-				NotificationCenter.unsubscribe(getCategoriesSuccess);
 			});
 			
 			RecipeBooksService.getAll();

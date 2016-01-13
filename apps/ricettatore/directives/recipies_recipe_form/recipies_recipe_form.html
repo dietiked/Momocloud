@@ -7,7 +7,7 @@
         <h5 class="modal-title" ng-show="mode=='update'">Modifica ricetta</h5>
       </div>
       <div class="modal-body">
-			<form name="addForm">
+			<form name="addForm" class="form">
 				<div class="form-group" ng-class="{'has-error': addForm.recipeName.$invalid}">
 					<label for="name">Titolo *</label>
 					<input name="name" type="text" ng-model="recipe.recipe_name" class="form-control" required/>
@@ -34,9 +34,7 @@
 				</div>				
 				<div class="form-group">
 					<label for="categories">Categorie</label>
-					<tags-input ng-model="recipeCategories">
-						<auto-complete source="categories"></auto-complete>
-					</tags-input>
+					<input-tag></input-tag>
 				</div>
 			</form>
       </div>
