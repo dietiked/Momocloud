@@ -15,10 +15,12 @@ momocloudServices.directive('backButton', ['UrlService', backButton]);
 momocloudServices.directive('addButton', ['UrlService', addButton]);
 momocloudServices.directive('fabActions', fabActions);
 momocloudServices.directive('startTile', startTile);
+momocloudServices.directive('inputTag', inputTag);
 momocloudServices.directive('libraryBookForm', libraryBookForm);
 momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
 momocloudServices.directive('libraryBookCard', libraryBookCard);
-momocloudServices.directive('navmenu', ['$location', navmenu]);
+momocloudServices.directive('recipiesRecipeCard', recipiesRecipeCard);
+momocloudServices.directive('recipiesRecipeForm', recipiesRecipeForm);
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap', 'ngTagsInput'], 
 	

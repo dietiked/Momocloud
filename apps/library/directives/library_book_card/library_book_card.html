@@ -9,7 +9,7 @@
 		<span ng-show="isAdvanced">Lingua: {{book.language}}<br/></span>
 		<span ng-show="isAdvanced">ISBN: {{book.ISBN13}}<br/></span>
 		<uib-rating ng-model="book.rating" max="10" readonly="true"></uib-rating><br/>
-		Categorie: {{book.category}}<br/>
+		Categorie: <span ng-repeat="category in book.categories track by $index">{{category}} </span><br/>
 		<span ng-show="isAdvanced">Fonte: {{book.source_name}}<br/></span>
 	</div>
 	<div class="panel-footer">
