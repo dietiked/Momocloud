@@ -10,17 +10,12 @@ function recipiesRecipeForm (RecipiesService, RecipeBooksService) {
 		},
 		templateUrl: 'apps/ricettatore/directives/recipies_recipe_form/recipies_recipe_form.html',
 		link: function(scope, element, attrs) {
-			
-			scope.$watch('recipe', function() {
-				scope.tags = scope.recipe.recipe_categories;
-			});
-			
+									
 			scope.addRecipe = function () {
-				scope.recipe.recipe_categories = scope.tags;
+				console.log(scope.recipe);
 				RecipiesService.insert(scope.recipe);
 			}
 			scope.updateRecipe = function() {
-				scope.recipe.recipe_categories = scope.tags;
 				RecipiesService.update(scope.recipe);
 			}
 

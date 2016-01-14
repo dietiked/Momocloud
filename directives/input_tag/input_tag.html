@@ -1,7 +1,7 @@
 <div style="width: 100%;">
-	<input type="text" class="form-control" ng-model="newTag" ng-keyup="addNewTag($event, newTag)" style="margin-bottom:10px; width: 100px; display: inline-block;" placeholder="Aggiungi...">
 	<span ng-repeat="tag in tags track by $index">
 		<span class="md-chip">{{tag}} <i class="fa fa-close" ng-click="removeTag($index)"></i></span>	
 		&nbsp;
 	</span>
+	<input type="text" class="form-control" ng-model="newTag" ng-keyup="addNewTag($event, newTag)" style="margin-bottom:10px; width: 100px; display: inline-block;" placeholder="Aggiungi...">
 </div>

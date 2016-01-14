@@ -4,16 +4,15 @@ function inputTag () {
 		restrict: 'E',
 		replace: true,
 		//scope: true,
-		/*scope: {
-			tags: '=tags'
-		},*/
+		scope: {
+			tags: '='
+		},
 		templateUrl: 'directives/input_tag/input_tag.html',
-		link: function(scope, element, attrs) {
-			console.log('Input', scope);
+		link: function(scope, element, attrs) {									
 			scope.addNewTag = function(event, aTag) {
-				if (event.keyCode == 13) { // Enter
+				if (event.keyCode == 13 && aTag != undefined && aTag != '') { // Enter
 					scope.tags.push(aTag);
-					scope.newTag = '';
+					scope.newTag = '';						
 				}
 			}
 			

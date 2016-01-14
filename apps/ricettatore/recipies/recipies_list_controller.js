@@ -10,7 +10,13 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	}
 	
 	$scope.setSelectedRecipe = function(aBook) {
-		$scope.selectedRecipe = angular.copy(aBook);	
+		if (aBook == 'new') {
+			$scope.selectedRecipe = {
+				recipe_categories : []
+			};	
+		} else {
+			$scope.selectedRecipe = angular.copy(aBook);	
+		}
 	};
 
 	// Notification functions
@@ -20,6 +26,7 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	}
 	
 	var dismissModal = function() {
+		$scope.recipies = RecipiesService.recipies;
 		$('.modal').modal('hide');
 	}
 

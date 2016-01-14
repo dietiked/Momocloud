@@ -37,6 +37,14 @@ function RecipiesService($http, NotificationCenter) {
 		return tags;
 	}
 	
+	var indexOfRecipe = function(aRecipe) {
+		for (var i=0; i<RecipiesService.recipies.length; i++) {
+			if (RecipiesService.recipies[i].recipe_id == aRecipe.recipe_id) {
+				return i;
+			}
+		}
+	}
+
 	RecipiesService.getAll = function() {
 		var results = null;
 		$http.get(
@@ -124,16 +132,17 @@ function RecipiesService($http, NotificationCenter) {
 	}
 
 	RecipiesService.update = function(aRecipe) {
-		console.log('Categories', aRecipe.recipe_categories);
 		var recipe = angular.copy(aRecipe);
 		recipe.recipe_categories = tagsToString(aRecipe.recipe_categories);
-		console.log('Categories', recipe.recipe_categories);
 		$http.post(
 			request + 'recipies/' + recipe.recipe_id,
 			recipe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
+				var recipeIndex = indexOfRecipe(aRecipe);
+				console.log('Index', recipeIndex);
+				RecipiesService.recipies.splice(recipeIndex, 1, aRecipe);
 				console.log('success while updating', data);
 				NotificationCenter.postNotification(RecipiesService.notifications.UPDATE_SUCCESS);			
 			} else {
@@ -147,9 +156,10 @@ function RecipiesService($http, NotificationCenter) {
 		});				
 	}
 	
-	RecipiesService.insert = function(recipe, categories) {
+	RecipiesService.insert = function(aRecipe, categories) {
 		RecipiesService.lastInsertedId = 0;
-		recipe.recipe_categories = tagsToString(categories);
+		var recipe = angular.copy(aRecipe);
+		recipe.recipe_categories = tagsToString(recipe.recipe_categories);
 		$http.post(
 			request + 'recipies/',
 			recipe
@@ -158,6 +168,7 @@ function RecipiesService($http, NotificationCenter) {
 			if (data.success) {
 				console.log('success while inserting', data);
 				RecipiesService.lastInsertedId = data.id;
+				RecipiesService.recipies.push(aRecipe);
 				NotificationCenter.postNotification(RecipiesService.notifications.INSERT_SUCCESS);				
 			} else {
 				console.log('error while inserting', data);			

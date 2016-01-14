@@ -25,13 +25,22 @@ function LibraryBooksService($http, NotificationCenter) {
 		SEARCH_ERROR: 'libraryBookSearchError',
 	};
 		
+	var tagsToString = function(tags) {
+		return tags.join(',');
+	};
+	
+	var stringToTags = function(aString) {
+		var tags = aString.split(',');
+		return tags;
+	}
+
 	var googleBookToMomocloudBook = function (googleBook) {
 		var isbn10, isbn13;
 		var momocloudBook = {
 			'title' : googleBook.volumeInfo.title ? googleBook.volumeInfo.title : null,
 			'authors' : googleBook.volumeInfo.authors ? googleBook.volumeInfo.authors.join(', ') : null,
 			'publisher': googleBook.volumeInfo.publisher ? googleBook.volumeInfo.publisher : null,
-			'categories' : googleBook.volumeInfo.categories ? googleBook.volumeInfo.categories.join(', ') : null,
+			'categories' : googleBook.volumeInfo.categories ? googleBook.volumeInfo.categories : [],
 			'published_data': googleBook.volumeInfo.publishedDate ? googleBook.volumeInfo.publishedDate : null,
 			'language' : googleBook.volumeInfo.language ? googleBook.volumeInfo.language : null,
 			'ISBN10' : googleBook.volumeInfo.industryIdentifiers[0] ? googleBook.volumeInfo.industryIdentifiers[0].identifier : null,
@@ -59,6 +68,9 @@ function LibraryBooksService($http, NotificationCenter) {
 		.success(function(data) {
 			if (data.success) {
 				LibraryBooksService.books = data.result;
+				angular.forEach(LibraryBooksService.books, function(book, key) {
+					book.categories = stringToTags(book.categories);
+				});
 				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_ALL_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_ALL_ERROR);				
@@ -81,20 +93,21 @@ function LibraryBooksService($http, NotificationCenter) {
 			requestUrl
 		)
 		.success( function(data, status, headers, config) {
-			console.log(data);
+			//console.log(data);
 			for (var i=0; i<data.items.length; i++) {
 				LibraryBooksService.searchBooks.push(googleBookToMomocloudBook(data.items[i]));
 			}
-			console.log(LibraryBooksService.searchBooks);
+			//console.log(LibraryBooksService.searchBooks);
 			NotificationCenter.postNotification(LibraryBooksService.notifications.SEARCH_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
-			console.log('error' + data)
+			//console.log('error' + data)
 			NotificationCenter.postNotification(LibraryBooksService.notifications.SEARCH_ERROR);
 		});
 	};
 	
 	LibraryBooksService.addBookToLibrary = function(book) {
+		book.categories = tagsToString(book.categories);
 		console.log(book);
 		$http.post(
 			request,
@@ -116,34 +129,35 @@ function LibraryBooksService($http, NotificationCenter) {
 	};
 
 	LibraryBooksService.updateBook = function(book) {
-		console.log(book);
+		var bookObj = angular.copy(book);
+		book.categories = tagsToString(book.categories);
 		$http.post(
 			request + book.id_book,
 			book
 		)
 		.success(function(data) {
-			console.log('Success', data);
+			//console.log('Success', data);
 			if (data.success) {
-				var bookIndex = indexOfBook(book);
-				LibraryBooksService.books.splice(bookIndex, 1, book);
+				var bookIndex = indexOfBook(bookObj);
+				LibraryBooksService.books.splice(bookIndex, 1, bookObj);
 				NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_SUCCESS);	
 			} else {
 				NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_ERROR);			
 			}
 		})
 		.error(function(data) {
-			console.log('Error', data);			
+			//console.log('Error', data);			
 			NotificationCenter.postNotification(LibraryBooksService.notifications.UPDATE_ERROR);
 		});
 	};
 
 	LibraryBooksService.deleteBook = function(book) {
-		console.log(book);
+		//console.log(book);
 		$http.delete(
 			request + book.id_book
 		)
 		.success(function(data) {
-			console.log('Success', data);
+			//console.log('Success', data);
 			if (data.success) {
 				var bookIndex = indexOfBook(book);
 				LibraryBooksService.books.splice(bookIndex, 1);
@@ -153,7 +167,7 @@ function LibraryBooksService($http, NotificationCenter) {
 			}
 		})
 		.error(function(data) {
-			console.log('Error', data);			
+			//console.log('Error', data);			
 			NotificationCenter.postNotification(LibraryBooksService.notifications.DELETE_ERROR);
 		});
 	};
