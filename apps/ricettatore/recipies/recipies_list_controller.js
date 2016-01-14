@@ -3,21 +3,41 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	
 	console.log('RecipiesListController');
 	$scope.loaded = false;
+	$scope.selectedRecipe = {};
 	
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
+	
+	$scope.setSelectedRecipe = function(aBook) {
+		if (aBook == 'new') {
+			$scope.selectedRecipe = {
+				recipe_categories : []
+			};	
+		} else {
+			$scope.selectedRecipe = angular.copy(aBook);	
+		}
+	};
 
 	// Notification functions
 	var getRecipies = function() {
 		$scope.recipies = RecipiesService.recipies;
 		$scope.loaded = true;
 	}
+	
+	var dismissModal = function() {
+		$scope.recipies = RecipiesService.recipies;
+		$('.modal').modal('hide');
+	}
 
 	// Notification handlers
-	var getRecipiesSuccess = NotificationCenter.subscribe(RecipiesService.notifications.RECIPIES_GET_ALL_SUCCESS, getRecipies);
+	var getRecipiesSuccess = NotificationCenter.subscribe(RecipiesService.notifications.GET_ALL_SUCCESS, getRecipies);
+	var insertRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.INSERT_SUCCESS, dismissModal);
+	var updateRecipeSuccess = NotificationCenter.subscribe(RecipiesService.notifications.UPDATE_SUCCESS, dismissModal);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getRecipiesSuccess);
+		NotificationCenter.unsubscribe(insertRecipeSuccess);
+		NotificationCenter.unsubscribe(updateRecipeSuccess);
 	});
 
 	RecipiesService.getAll();

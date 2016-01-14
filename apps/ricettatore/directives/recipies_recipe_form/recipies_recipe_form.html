@@ -1,0 +1,48 @@
+<div id="{{id}}" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" ng-show="mode=='insert'">Aggiungi ricetta</h5>
+        <h5 class="modal-title" ng-show="mode=='update'">Modifica ricetta</h5>
+      </div>
+      <div class="modal-body">
+			<form name="addForm" class="form">
+				<div class="form-group" ng-class="{'has-error': addForm.recipeName.$invalid}">
+					<label for="name">Titolo *</label>
+					<input name="name" type="text" ng-model="recipe.recipe_name" class="form-control" required/>
+				</div>
+				<div class="form-group">
+					<label for="book">Libro</label>
+					<select name="book" ng-model="recipe.recipe_book_id" class="form-control">
+						<option ng-repeat="book in books | orderBy:'recipe_book_title'" value="{{book.recipe_book_id}}">
+							{{book.recipe_book_title}} - {{book.recipe_book_author}}
+						</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="bookPage">Pagina</label>
+					<input name="bookPage" type="text" ng-model="recipe.recipe_book_page" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label for="recipeIngredients">Ingredienti (separati da virgola)</label>
+					<input name="recipeIngredients" type="text" ng-model="recipe.recipe_ingredients" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<label for="rating">Valutazione</label><br/>
+					<uib-rating max="10" ng-model="recipe.recipe_rating"></uib-rating>
+				</div>				
+				<div class="form-group">
+					<label for="categories">Categorie</label>
+					<input-tag tags="recipe.recipe_categories"></input-tag>
+				</div>
+			</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+        <button type="button" class="btn btn-primary" ng-click="addRecipe()" ng-show="mode=='insert'">Aggiungi</button>
+        <button type="button" class="btn btn-primary" ng-click="updateRecipe()" ng-show="mode=='update'">Salva modifiche</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
