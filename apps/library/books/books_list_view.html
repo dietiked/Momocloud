@@ -3,11 +3,9 @@
 		<h5>Libri: {{books.length}}</h5>
 	</div>
 </div>
-<div class="row" ng-show="loading">
-	<div class="col-md-12" style="text-align: center; margin-top: 30px;">
-		<i class="fa fa-spinner fa-spin fa-3x"></i>
-	</div>
-</div>
+
+<loader visible="loading"></loader>
+
 <div class="row">
 	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books">
 		<library-book-card ng-model="book">
