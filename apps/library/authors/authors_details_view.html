@@ -3,6 +3,9 @@
 		<h5>{{author}}: {{books.length}}</h5>
 	</div>
 </div>
+
+<loader visible="loading"></loader>
+
 <div class="row">
 	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books | filter:search">
 		<library-book-card ng-model="book">
