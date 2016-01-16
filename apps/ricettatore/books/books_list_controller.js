@@ -2,12 +2,12 @@ momocloudControllers.controller('RecipeBooksListController', ['$scope', 'Notific
 function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, UrlService, AuthService) {
 	
 	console.log('RecipeBooksListController');
-	$scope.loaded = false;
+	$scope.loading = true;
 
 	// Notification functions
 	var getBooks = function() {
 		$scope.books = RecipeBooksService.books;
-		$scope.loaded = true;
+		$scope.loading = false;
 	}
 	$scope.go = function(url) {
 		UrlService.go(url);
