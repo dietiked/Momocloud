@@ -15,6 +15,8 @@ function LibraryBooksService($http, NotificationCenter) {
 		GET_ALL_ERROR: 'libraryBookGetAllError',
 		GET_SUCCESS: 'libraryBookGetSuccess',
 		GET_ERROR: 'libraryBookGetError',
+		GET_FORAUTHOR_SUCCESS: 'libraryBookGetBooksForAuthoSuccess',
+		GET_FORAUTHOR_ERROR: 'libraryBookGetBooksForAuthoError',
 		UPDATE_SUCCESS: 'libraryBookUpdateSuccess',
 		UPDATE_ERROR: 'libraryBookUpdateError',
 		DELETE_SUCCESS: 'libraryBookDeleteSuccess',
@@ -81,6 +83,29 @@ function LibraryBooksService($http, NotificationCenter) {
 		});
 	}
 	
+	LibraryBooksService.getBooksForAuthor = function(author) {
+		$http.get(
+			request + 'authors/'+ author + '/books/'
+		)
+		.success(function(data) {
+			if (data.success) {
+				console.log(data.result);
+				LibraryBooksService.books = data.result;
+				angular.forEach(LibraryBooksService.books, function(book, key) {
+					book.categories = stringToTags(book.categories);
+				});
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_SUCCESS);
+			} else {
+				console.log(data);
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_ERROR);				
+			}
+		})
+		.error(function(data) {
+			console.log(data);
+			NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_ERROR);
+		});
+	}
+
 	LibraryBooksService.search = function(query, startIndex) {
 		startIndex = startIndex ? startIndex : 0;
 		// Reset results if start index is 0 (i.e. new search)
