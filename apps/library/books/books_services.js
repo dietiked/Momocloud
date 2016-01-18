@@ -38,6 +38,10 @@ function LibraryBooksService($http, NotificationCenter) {
 
 	var googleBookToMomocloudBook = function (googleBook) {
 		var isbn10, isbn13;
+		if (typeof googleBook.volumeInfo.industryIdentifiers !== 'undefined') {
+			isbn10 = googleBook.volumeInfo.industryIdentifiers[0].identifier;
+			isbn13 = googleBook.volumeInfo.industryIdentifiers[1].identifier;
+		}
 		var momocloudBook = {
 			'title' : googleBook.volumeInfo.title ? googleBook.volumeInfo.title : null,
 			'authors' : googleBook.volumeInfo.authors ? googleBook.volumeInfo.authors.join(', ') : null,
@@ -45,8 +49,8 @@ function LibraryBooksService($http, NotificationCenter) {
 			'categories' : googleBook.volumeInfo.categories ? googleBook.volumeInfo.categories : [],
 			'published_data': googleBook.volumeInfo.publishedDate ? googleBook.volumeInfo.publishedDate : null,
 			'language' : googleBook.volumeInfo.language ? googleBook.volumeInfo.language : null,
-			'ISBN10' : googleBook.volumeInfo.industryIdentifiers[0] ? googleBook.volumeInfo.industryIdentifiers[0].identifier : null,
-			'ISBN13' : googleBook.volumeInfo.industryIdentifiers[1] ? googleBook.volumeInfo.industryIdentifiers[1].identifier : null,
+			'ISBN10' : isbn10,
+			'ISBN13' : isbn13,
 			'thumbnail': googleBook.volumeInfo.imageLinks ? googleBook.volumeInfo.imageLinks.smallThumbnail : '',
 			'source_name' : 'Google Books',
 			'source_id': googleBook.id
