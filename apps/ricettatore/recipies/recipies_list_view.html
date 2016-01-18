@@ -3,6 +3,9 @@
 		<h5>Ricette</h5>
 	</div>
 </div>
+
+<loader visible="loading"></loader>
+
 <div class="row">
 	<div class="col-md-4 col-lg-4 col-sm-12" ng-repeat="recipe in recipies | filter:search">
 		<recipies-recipe-card ng-model="recipe">

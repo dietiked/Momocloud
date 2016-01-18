@@ -15,6 +15,8 @@ function LibraryBooksService($http, NotificationCenter) {
 		GET_ALL_ERROR: 'libraryBookGetAllError',
 		GET_SUCCESS: 'libraryBookGetSuccess',
 		GET_ERROR: 'libraryBookGetError',
+		GET_FORAUTHOR_SUCCESS: 'libraryBookGetBooksForAuthoSuccess',
+		GET_FORAUTHOR_ERROR: 'libraryBookGetBooksForAuthoError',
 		UPDATE_SUCCESS: 'libraryBookUpdateSuccess',
 		UPDATE_ERROR: 'libraryBookUpdateError',
 		DELETE_SUCCESS: 'libraryBookDeleteSuccess',
@@ -36,6 +38,10 @@ function LibraryBooksService($http, NotificationCenter) {
 
 	var googleBookToMomocloudBook = function (googleBook) {
 		var isbn10, isbn13;
+		if (typeof googleBook.volumeInfo.industryIdentifiers !== 'undefined') {
+			isbn10 = googleBook.volumeInfo.industryIdentifiers[0].identifier;
+			isbn13 = googleBook.volumeInfo.industryIdentifiers[1].identifier;
+		}
 		var momocloudBook = {
 			'title' : googleBook.volumeInfo.title ? googleBook.volumeInfo.title : null,
 			'authors' : googleBook.volumeInfo.authors ? googleBook.volumeInfo.authors.join(', ') : null,
@@ -43,8 +49,8 @@ function LibraryBooksService($http, NotificationCenter) {
 			'categories' : googleBook.volumeInfo.categories ? googleBook.volumeInfo.categories : [],
 			'published_data': googleBook.volumeInfo.publishedDate ? googleBook.volumeInfo.publishedDate : null,
 			'language' : googleBook.volumeInfo.language ? googleBook.volumeInfo.language : null,
-			'ISBN10' : googleBook.volumeInfo.industryIdentifiers[0] ? googleBook.volumeInfo.industryIdentifiers[0].identifier : null,
-			'ISBN13' : googleBook.volumeInfo.industryIdentifiers[1] ? googleBook.volumeInfo.industryIdentifiers[1].identifier : null,
+			'ISBN10' : isbn10,
+			'ISBN13' : isbn13,
 			'thumbnail': googleBook.volumeInfo.imageLinks ? googleBook.volumeInfo.imageLinks.smallThumbnail : '',
 			'source_name' : 'Google Books',
 			'source_id': googleBook.id
@@ -81,6 +87,29 @@ function LibraryBooksService($http, NotificationCenter) {
 		});
 	}
 	
+	LibraryBooksService.getBooksForAuthor = function(author) {
+		$http.get(
+			request + 'authors/'+ author + '/books/'
+		)
+		.success(function(data) {
+			if (data.success) {
+				console.log(data.result);
+				LibraryBooksService.books = data.result;
+				angular.forEach(LibraryBooksService.books, function(book, key) {
+					book.categories = stringToTags(book.categories);
+				});
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_SUCCESS);
+			} else {
+				console.log(data);
+				NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_ERROR);				
+			}
+		})
+		.error(function(data) {
+			console.log(data);
+			NotificationCenter.postNotification(LibraryBooksService.notifications.GET_FORAUTHOR_ERROR);
+		});
+	}
+
 	LibraryBooksService.search = function(query, startIndex) {
 		startIndex = startIndex ? startIndex : 0;
 		// Reset results if start index is 0 (i.e. new search)

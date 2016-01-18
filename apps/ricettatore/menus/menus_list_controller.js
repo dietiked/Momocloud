@@ -3,6 +3,8 @@ momocloudControllers.controller('RecipeMenusListController',
 function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, UrlService, AuthService, GeneralDataService) {
 	console.log('RecipeMenusListController');
 	
+	$scope.loading = true;
+	
 	$scope.newMenu = function() {
 		RecipeMenusService.insert();
 	};
@@ -17,6 +19,7 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, Ur
 	
 	var getMenusSuccessHandler = function() {
 		$scope.menus = RecipeMenusService.menus;
+		$scope.loading = false;
 	};
 	
 	var getMenusSuccess = NotificationCenter.subscribe(RecipeMenusService.notifications.RECIPE_MENUS_GET_ALL_SUCCESS, getMenusSuccessHandler);

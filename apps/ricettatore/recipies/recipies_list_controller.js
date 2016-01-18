@@ -2,7 +2,7 @@ momocloudControllers.controller('RecipiesListController', ['$scope', 'Notificati
 function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService, AuthService) {
 	
 	console.log('RecipiesListController');
-	$scope.loaded = false;
+	$scope.loading = true;
 	$scope.selectedRecipe = {};
 	
 	$scope.go = function(url) {
@@ -22,7 +22,7 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	// Notification functions
 	var getRecipies = function() {
 		$scope.recipies = RecipiesService.recipies;
-		$scope.loaded = true;
+		$scope.loading = false;
 	}
 	
 	var dismissModal = function() {

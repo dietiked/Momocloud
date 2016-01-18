@@ -1,15 +1,15 @@
-momocloudControllers.controller('LibraryAuthorsDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'UrlService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryAuthorsService, UrlService, AuthService) {
+momocloudControllers.controller('LibraryAuthorsDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'LibraryBooksService', 'UrlService', 'AuthService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryAuthorsService, LibraryBooksService, UrlService, AuthService) {
 	
 	console.log('LibraryAuthorsDetailsController');
-	$scope.loaded = false;
+	$scope.loading = true;
 	$scope.books = [];
 	$scope.author = $routeParams.authorDescr;
 
 	// Notification functions
 	var getBooks = function() {
-		$scope.books = LibraryAuthorsService.books;
-		$scope.loaded = true;
+		$scope.books = LibraryBooksService.books;
+		$scope.loading = false;
 	};
 	$scope.go = function(url) {
 		UrlService.go(url);
@@ -20,12 +20,12 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryA
 	}
 
 	// Notification handlers
-	var getBooksSuccess = NotificationCenter.subscribe(LibraryAuthorsService.notifications.GET_SUCCESS, getBooks);
+	var getBooksSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.GET_FORAUTHOR_SUCCESS, getBooks);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getBooksSuccess);
 	});
 
-	LibraryAuthorsService.getBooksForAuthor($routeParams.authorDescr);
+	LibraryBooksService.getBooksForAuthor($routeParams.authorDescr);
 	AuthService.increaseExpiration();
 
 }]);

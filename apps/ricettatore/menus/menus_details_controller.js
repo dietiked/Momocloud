@@ -7,6 +7,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 	$scope.recipies = [];
 	$scope.availableRecipies = [];
 	$scope.showSaveButton = false;
+	$scope.loading = true;
 	
 	$scope.addToMenu = function(recipe, index) {
 		$scope.menu.recipies.push(recipe);
@@ -30,6 +31,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 
 	var getMenuSuccessHandler = function() {
 		$scope.menu = RecipeMenusService.menu;
+		$scope.loading = false;
 	};
 	
 	var getRecipiesSuccessHandler = function() {

@@ -2,13 +2,13 @@ momocloudControllers.controller('LibraryAuthorsListController', ['$scope', 'Noti
 function($scope, NotificationCenter, DependenciesChecker, LibraryAuthorsService, UrlService, AuthService) {
 	
 	console.log('LibraryAuthorsListController');
-	$scope.loaded = false;
+	$scope.loading = true;
 	$scope.authors = [];
 
 	// Notification functions
 	var getAuthors = function() {
 		$scope.authors = LibraryAuthorsService.authors;
-		$scope.loaded = true;
+		$scope.loading = false;
 	};
 	$scope.go = function(url) {
 		UrlService.go(url);

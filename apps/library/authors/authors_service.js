@@ -43,27 +43,6 @@ function LibraryAuthorsService($http, NotificationCenter) {
 			NotificationCenter.postNotification(LibraryAuthorsService.notifications.GET_ALL_ERROR);
 		});
 	}
-
-	LibraryAuthorsService.getBooksForAuthor = function(author) {
-		$http.get(
-			request + author
-		)
-		.success(function(data) {
-			if (data.success) {
-				console.log(data.result);
-				LibraryAuthorsService.author = author;
-				LibraryAuthorsService.books = data.result;
-				NotificationCenter.postNotification(LibraryAuthorsService.notifications.GET_SUCCESS);
-			} else {
-				console.log(data);
-				NotificationCenter.postNotification(LibraryAuthorsService.notifications.GET_ERROR);				
-			}
-		})
-		.error(function(data) {
-			console.log(data);
-			NotificationCenter.postNotification(LibraryAuthorsService.notifications.GET_ERROR);
-		});
-	}
 		
 	return LibraryAuthorsService;
 }
