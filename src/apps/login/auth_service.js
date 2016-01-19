@@ -116,3 +116,6 @@ function AuthService($http, $location, NotificationCenter) {
 		
 	return AuthService;
 }
+
+momocloudServices.factory('AuthService', AuthService);
+

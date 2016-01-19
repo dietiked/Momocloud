@@ -1,29 +1,5 @@
-var momocloudDirectives = angular.module('momocloudDirectives', []);
-var momocloudServices = angular.module('momocloudServices', []);
-var momocloudControllers = angular.module('momocloudControllers', []);
-var momocloudConstants = angular.module('momocloudConstants', []);
 
-// External services
-momocloudServices.factory('NotificationCenter', NotificationCenter);
-momocloudServices.factory('DependenciesChecker', DependenciesChecker);
-momocloudServices.factory('AuthService', AuthService);
-// External directives
-momocloudServices.directive('errorMessage', errorMessage);
-momocloudServices.directive('wineRating', wineRating);
-momocloudServices.directive('chart', chart);
-momocloudServices.directive('backButton', ['UrlService', backButton]);
-momocloudServices.directive('addButton', ['UrlService', addButton]);
-momocloudServices.directive('fabActions', fabActions);
-momocloudServices.directive('startTile', startTile);
-momocloudServices.directive('inputTag', inputTag);
-momocloudServices.directive('loader', loader);
-momocloudServices.directive('libraryBookForm', libraryBookForm);
-momocloudServices.directive('libraryDeleteModal', libraryDeleteModal);
-momocloudServices.directive('libraryBookCard', libraryBookCard);
-momocloudServices.directive('recipiesRecipeCard', recipiesRecipeCard);
-momocloudServices.directive('recipiesRecipeForm', recipiesRecipeForm);
-
-var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'momocloudDirectives', 'angular.filter', 'ui.bootstrap'], 
+var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'angular.filter', 'ui.bootstrap', 'mc.cloud', 'mc.start', 'mc.recipes', 'mc.library', 'momocloudTemplateCache'], 
 	
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
@@ -227,3 +203,10 @@ momocloud.run(function($rootScope, $location, AuthService) {
 	});	
 });
 
+
+var momocloudServices = angular.module('momocloudServices', []);
+var momocloudControllers = angular.module('momocloudControllers', []);
+var momocloudConstants = angular.module('momocloudConstants', []);
+
+momocloudServices.factory('NotificationCenter', NotificationCenter);
+momocloudServices.factory('DependenciesChecker', DependenciesChecker);
