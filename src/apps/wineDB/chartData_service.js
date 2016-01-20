@@ -155,4 +155,4 @@ function ChartDataService($http, NotificationCenter, MovementsService, CellarSer
 	return ChartDataService;
 }
 
-momocloudServices.factory('ChartDataService', ChartDataService);
+momocloudWineDb.factory('ChartDataService', ChartDataService);

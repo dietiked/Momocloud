@@ -1,7 +1,7 @@
 <?php
 	
 	include_once('PasswordHash.php');	
-	include_once('../api/config.php');	
+	include_once('../../api/config.php');	
 	
 	class Auth {
 		private $dbh;

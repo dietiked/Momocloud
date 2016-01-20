@@ -1,4 +1,4 @@
-momocloudControllers.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService', 'GeneralDataService',
+momocloudWineDb.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService', 'GeneralDataService',
 function($scope, $routeParams, ProducersService, AuthService, UrlService, GeneralDataService) {
 	//console.log('ProducersNewController');
 	

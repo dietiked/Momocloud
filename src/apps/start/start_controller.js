@@ -1,4 +1,4 @@
-momocloudControllers.controller('StartController', 
+momocloudStart.controller('StartController', 
 ['$scope', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthService) {
 

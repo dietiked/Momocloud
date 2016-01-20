@@ -1,6 +1,5 @@
-angular.module('mc.library', [])
-
-.directive('libraryBookCard', ['LibraryBooksService', function(LibraryBooksService) {
+momocloudLibrary
+.directive('libraryBookCard', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	
 	return {
 		restrict: 'E',
@@ -10,7 +9,7 @@ angular.module('mc.library', [])
 			advanced: '@advanced', // default = false
 			book: '=ngModel'
 		},
-		templateUrl: 'apps/library/directives/mc.library.bookcard.html',
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookCard.html',
 		link: function(scope, element, attrs) {
 			if (scope.advanced == undefined) {
 				scope.isAdvanced = false;
@@ -24,7 +23,7 @@ angular.module('mc.library', [])
 	
 }])
 
-.directive('libraryBookForm', ['LibraryBooksService', function(LibraryBooksService) {
+.directive('libraryBookForm', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -33,7 +32,7 @@ angular.module('mc.library', [])
 			mode: '@mode',
 			book: '=ngModel'
 		},
-		templateUrl: 'apps/library/directives/mc.library.bookform.html',
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookForm.html',
 		link: function(scope, element, attrs) {
 			scope.addBookToLibrary = function () {
 				LibraryBooksService.addBookToLibrary(scope.book);
@@ -45,7 +44,7 @@ angular.module('mc.library', [])
 	};
 }])
 
-.directive('libraryDeleteModal', ['LibraryBooksService', function(LibraryBooksService) {
+.directive('libraryDeleteModal', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -53,7 +52,7 @@ angular.module('mc.library', [])
 			id: '@modalId',
 			book: '=ngModel'
 		},
-		templateUrl: 'apps/library/directives/mc.library.deletemodal.html',
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryDeleteModal.html',
 		link: function(scope, element, attrs) {
 			scope.deleteBook = function () {
 				LibraryBooksService.deleteBook(scope.book);

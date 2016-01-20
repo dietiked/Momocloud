@@ -1,5 +1,43 @@
+// Modules definition
+var momocloudHub = angular.module('momocloudHub', []);
+momocloudHub.factory('NotificationCenter', NotificationCenter);
+momocloudHub.factory('DependenciesChecker', DependenciesChecker);
+momocloudHub.factory('UrlService', UrlService);
+momocloudHub.constant('DirectiveTemplatesFolderHub', 'directives/templates/');
 
-var momocloud = angular.module('momocloud', ['ngRoute', 'momocloudControllers', 'momocloudServices', 'angular.filter', 'ui.bootstrap', 'mc.cloud', 'mc.start', 'mc.recipes', 'mc.library', 'momocloudTemplateCache'], 
+// Login module
+var momocloudLogin = angular.module('momocloudLogin', []);
+momocloudLogin.constant('apiUrlLogin', 'apps/login/auth_request.php');
+momocloudLogin.constant('DirectiveTemplatesFolderLogin', 'directives/templates/');
+
+// Start module
+var momocloudStart = angular.module('momocloudStart', []);
+momocloudStart.constant('apiUrlStart', 'directives/templates/');
+momocloudStart.constant('DirectiveTemplatesFolderStart', 'directives/templates/');
+
+// WineDb module
+var momocloudWineDb = angular.module('momocloudWineDb', []);
+momocloudWineDb.constant('apiUrlWineDb', 'api/api.php/winedb/');
+momocloudWineDb.constant('DirectiveTemplatesFolderWineDb', 'directives/templates/');
+
+// Ricettatore module
+var momocloudRicettatore = angular.module('momocloudRicettatore', []);
+momocloudRicettatore.constant('apiUrlRicettatore', 'api/api.php/ricettatore/');
+momocloudRicettatore.constant('DirectiveTemplatesFolderRicettatore', 'directives/templates/');
+
+// Library module
+var momocloudLibrary = angular.module('momocloudLibrary', []);
+momocloudLibrary.constant('apiUrlLibrary', 'api/api.php/library/');
+momocloudLibrary.constant('DirectiveTemplatesFolderLibrary', 'directives/templates/');
+
+// Placeholder for template cache, created with grunt for distribution
+var momocloudTemplateCache = angular.module('momocloudTemplateCache', []);
+
+// Inject shared services
+
+// Define constants
+
+var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter', 'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache', 'ui.bootstrap', ], 
 	
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
@@ -202,11 +240,3 @@ momocloud.run(function($rootScope, $location, AuthService) {
 		}
 	});	
 });
-
-
-var momocloudServices = angular.module('momocloudServices', []);
-var momocloudControllers = angular.module('momocloudControllers', []);
-var momocloudConstants = angular.module('momocloudConstants', []);
-
-momocloudServices.factory('NotificationCenter', NotificationCenter);
-momocloudServices.factory('DependenciesChecker', DependenciesChecker);

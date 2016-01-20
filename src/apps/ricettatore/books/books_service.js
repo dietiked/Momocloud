@@ -1,6 +1,6 @@
-function RecipeBooksService($http, NotificationCenter) {
+function RecipeBooksService($http, NotificationCenter, apiUrlRicettatore) {
 	var RecipeBooksService = {};
-	var request = 'apps/api/api.php/ricettatore/';
+	var request = apiUrlRicettatore;
 	
 	RecipeBooksService.books = [];
 	RecipeBooksService.numberOfBooks = 0;
@@ -114,4 +114,4 @@ function RecipeBooksService($http, NotificationCenter) {
 	return RecipeBooksService;
 }
 
-momocloudServices.factory('RecipeBooksService', RecipeBooksService);
+momocloudRicettatore.factory('RecipeBooksService', RecipeBooksService);

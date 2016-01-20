@@ -1,4 +1,4 @@
-momocloudControllers.controller('LibraryBookSearchController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'LibraryBooksService', 'UrlService', 'AuthService',
+momocloudLibrary.controller('LibraryBookSearchController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'LibraryBooksService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, UrlService, AuthService) {
 	
 	console.log('LibraryBooksService');

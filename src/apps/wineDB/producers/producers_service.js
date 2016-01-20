@@ -1,7 +1,7 @@
-function ProducersService($http, NotificationCenter) {
+function ProducersService($http, NotificationCenter, apiUrlWineDb) {
 	var ProducersService = {};
 	//var request = 'apps/winedb/producers/producers_request.php';
-	var request = 'apps/api/api.php/producers/';
+	var request = apiUrlWineDb + 'producers/';
 	
 	ProducersService.producers = [];
 	ProducersService.producer = {};
@@ -96,4 +96,4 @@ function ProducersService($http, NotificationCenter) {
 	return ProducersService;
 }
 
-momocloudServices.factory('ProducersService', ProducersService);
+momocloudWineDb.factory('ProducersService', ProducersService);

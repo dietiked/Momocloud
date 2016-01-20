@@ -1,4 +1,4 @@
-momocloudControllers.controller('WinesDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'AuthService', 'UrlService',
+momocloudWineDb.controller('WinesDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'AuthService', 'UrlService',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, AuthService, UrlService) {
 	//console.log('WinesDetailsController', $routeParams.wineId);	
 	

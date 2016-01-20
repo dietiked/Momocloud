@@ -1,4 +1,4 @@
-momocloudControllers.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService', 'UrlService',
+momocloudWineDb.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService', 'UrlService',
 function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, AuthService, UrlService) {
 	//console.log('WinesDetailsController');	
 	

@@ -1,6 +1,6 @@
-function RecipeMenusService($http, NotificationCenter, RecipiesService) {
+function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRicettatore) {
 	var RecipeMenusService = {};
-	var request = 'apps/api/api.php/ricettatore/';
+	var request = apiUrlRicettatore;
 	
 	RecipeMenusService.menus = [];
 	RecipeMenusService.menu = {};
@@ -130,4 +130,4 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService) {
 	return RecipeMenusService;
 }
 
-momocloudServices.factory('RecipeMenusService', RecipeMenusService);
+momocloudRicettatore.factory('RecipeMenusService', RecipeMenusService);

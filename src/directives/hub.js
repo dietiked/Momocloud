@@ -1,13 +1,12 @@
-angular.module('mc.cloud', [])
-
-.directive('addButton', ['UrlService', function(UrlService) {
+momocloudHub
+.directive('addButton', ['UrlService', 'DirectiveTemplatesFolderHub', function(UrlService, DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
 			'url': '@goTo',
 		},
-		templateUrl: 'directives/mc.cloud.addButton.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubAddButton.html',
 		link: function(scope, element, attrs) {
 			scope.go = function(url) {
 				UrlService.go(url);
@@ -16,14 +15,14 @@ angular.module('mc.cloud', [])
 	};
 }])
 
-.directive('backButton', ['UrlService', function(UrlService) {
+.directive('backButton', ['UrlService', 'DirectiveTemplatesFolderHub', function(UrlService, DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
 			'url': '@backTo',
 		},
-		templateUrl: 'directives/mc.cloud.backButton.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubBackButton.html',
 		link: function(scope, element, attrs) {
 			scope.go = function(url) {
 				//UrlService.go(url);
@@ -33,7 +32,7 @@ angular.module('mc.cloud', [])
 	};
 }])
 
-.directive('chart', function() {
+.directive('chart', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'AE',
 		template: '<canvas id="{{canvasName}}" class="chart"></canvas>',
@@ -71,24 +70,24 @@ angular.module('mc.cloud', [])
 			}
 		}
 	};
-})
+}])
 
-.directive('errorMessage', function() {
+.directive('errorMessage', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'AE',
-		templateUrl: 'directives/mc.cloud.errorMessage.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubErrorMessage.html',
 		replace: true,
 		scope: {'message': '@errorText'},
 		link: function($scope, $element, $attrs) {
 			
 		}
 	};
-})
+}])
 
-.directive('fabActions', function() {
+.directive('fabActions', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
-		templateUrl: 'directives/mc.cloud.fabActions.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubFabActions.html',
 		//replace: false,
 		transclude: true,
 		scope: {
@@ -113,9 +112,9 @@ angular.module('mc.cloud', [])
 			}
 		}
 	};
-})
+}])
 
-.directive('inputTag', function() {
+.directive('inputTag', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -123,7 +122,7 @@ angular.module('mc.cloud', [])
 		scope: {
 			tags: '='
 		},
-		templateUrl: 'directives/mc.cloud.inputTag.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubInputTag.html',
 		link: function(scope, element, attrs) {									
 			scope.addNewTag = function(event, aTag) {
 				if (event.keyCode == 13 && aTag != undefined && aTag != '') { // Enter
@@ -137,25 +136,25 @@ angular.module('mc.cloud', [])
 			}
 		}
 	};
-})
+}])
 
-.directive('loader', function() {
+.directive('loader', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
 			visible: '='
 		},
-		templateUrl: 'directives/mc.cloud.loader.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubLoader.html',
 		link: function(scope, element, attrs) {									
 		}
 	};
-})
+}])
 
-.directive('wineRating', function() {
+.directive('wineRating', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'E',
-		templateUrl: 'directives/mc.cloud.wineRating.html',
+		templateUrl: DirectiveTemplatesFolderHub + 'hubWineRating.html',
 		replace: false,
 		scope: {
 			'wine_id': '@wine',
@@ -167,5 +166,5 @@ angular.module('mc.cloud', [])
 			
 		}
 	};
-})
+}])
 

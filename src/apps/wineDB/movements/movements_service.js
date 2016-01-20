@@ -66,4 +66,4 @@ function MovementsService($http, NotificationCenter, CellarService) {
 	return MovementsService;
 }
 
-momocloudServices.factory('MovementsService', MovementsService);
+momocloudWineDb.factory('MovementsService', MovementsService);

@@ -1,4 +1,4 @@
-momocloudControllers.controller('RecipiesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipiesService', 'UrlService', 'AuthService',
+momocloudRicettatore.controller('RecipiesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipiesService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService, AuthService) {
 	
 	console.log('RecipiesListController');

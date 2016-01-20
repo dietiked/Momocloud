@@ -1,6 +1,6 @@
-function LibraryAuthorsService($http, NotificationCenter) {
+function LibraryAuthorsService($http, NotificationCenter, apiUrlLibrary) {
 	var LibraryAuthorsService = {};
-	var request = 'apps/api/api.php/library/authors/';
+	var request = apiUrlLibrary + 'authors/';
 	
 	LibraryAuthorsService.authors = [];
 	LibraryAuthorsService.author = {};
@@ -47,4 +47,4 @@ function LibraryAuthorsService($http, NotificationCenter) {
 	return LibraryAuthorsService;
 }
 
-momocloudServices.factory('LibraryAuthorsService', LibraryAuthorsService);
+momocloudLibrary.factory('LibraryAuthorsService', LibraryAuthorsService);

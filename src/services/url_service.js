@@ -57,5 +57,3 @@ function UrlService($http, $location, NotificationCenter) {
 
 	return UrlService;
 }
-
-momocloudServices.factory('UrlService', UrlService);

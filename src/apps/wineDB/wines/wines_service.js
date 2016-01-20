@@ -1,6 +1,6 @@
-function WinesService($http, NotificationCenter) {
+function WinesService($http, NotificationCenter, apiUrlWineDb) {
 	var WinesService = {};
-	var request = 'apps/api/api.php/wines/';
+	var request = apiUrlWineDb + 'wines/';
 	
 	WinesService.wines = [];
 	WinesService.numberOfWines = 0;
@@ -114,4 +114,4 @@ function WinesService($http, NotificationCenter) {
 	return WinesService;
 }
 
-momocloudServices.factory('WinesService', WinesService);
+momocloudWineDb.factory('WinesService', WinesService);

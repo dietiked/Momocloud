@@ -1,6 +1,6 @@
-function LibraryBooksService($http, NotificationCenter) {
+function LibraryBooksService($http, NotificationCenter, apiUrlLibrary) {
 	var LibraryBooksService = {};
-	var request = 'apps/api/api.php/library/';
+	var request = apiUrlLibrary;
 	var googleBooksAPIUrl = 'https://www.googleapis.com/books/v1/';
 	var googleBooksAPIKey = 'AIzaSyBkPMNOde4rkLGYbvkJvESfLE5tcQn0UyQ';
 	
@@ -69,7 +69,7 @@ function LibraryBooksService($http, NotificationCenter) {
 	
 	LibraryBooksService.getAll = function() {
 		$http.get(
-			request
+			request + 'books/'
 		)
 		.success(function(data) {
 			if (data.success) {
@@ -139,7 +139,7 @@ function LibraryBooksService($http, NotificationCenter) {
 		book.categories = tagsToString(book.categories);
 		console.log(book);
 		$http.post(
-			request,
+			request + 'books/',
 			book
 		)
 		.success(function(data) {
@@ -161,7 +161,7 @@ function LibraryBooksService($http, NotificationCenter) {
 		var bookObj = angular.copy(book);
 		book.categories = tagsToString(book.categories);
 		$http.post(
-			request + book.id_book,
+			request + 'books/' + book.id_book,
 			book
 		)
 		.success(function(data) {
@@ -183,7 +183,7 @@ function LibraryBooksService($http, NotificationCenter) {
 	LibraryBooksService.deleteBook = function(book) {
 		//console.log(book);
 		$http.delete(
-			request + book.id_book
+			request + 'books/' + book.id_book
 		)
 		.success(function(data) {
 			//console.log('Success', data);
@@ -204,4 +204,4 @@ function LibraryBooksService($http, NotificationCenter) {
 	return LibraryBooksService;
 }
 
-momocloudServices.factory('LibraryBooksService', LibraryBooksService);
+momocloudLibrary.factory('LibraryBooksService', LibraryBooksService);

@@ -1,6 +1,6 @@
-function RecipiesService($http, NotificationCenter) {
+function RecipiesService($http, NotificationCenter, apiUrlRicettatore) {
 	var RecipiesService = {};
-	var request = 'apps/api/api.php/ricettatore/';
+	var request = apiUrlRicettatore;
 	
 	RecipiesService.recipies = [];
 	RecipiesService.numberOfRecipies = 0;
@@ -185,4 +185,4 @@ function RecipiesService($http, NotificationCenter) {
 	return RecipiesService;
 }
 
-momocloudServices.factory('RecipiesService', RecipiesService);
+momocloudRicettatore.factory('RecipiesService', RecipiesService);

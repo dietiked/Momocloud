@@ -1,7 +1,7 @@
-function AuthService($http, $location, NotificationCenter) {
+function AuthService($http, $location, NotificationCenter, apiUrlLogin) {
 	
 	//var serverInterface = 'app/modules/auth/auth.php';
-	var serverInterface = 'apps/login/auth_request.php';
+	var serverInterface = apiUrlLogin;
 	var AuthService = {};
 	AuthService.user;
 	AuthService.identifier = 'Momocloud';
@@ -117,5 +117,5 @@ function AuthService($http, $location, NotificationCenter) {
 	return AuthService;
 }
 
-momocloudServices.factory('AuthService', AuthService);
+momocloudLogin.factory('AuthService', AuthService);
 

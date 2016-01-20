@@ -1,5 +1,5 @@
 <?php
-	require_once("../_php/config.php");
+	require_once("../../api/config.php");
 	
 	$db = new PDO("mysql:host=".$host.";dbname=".$db, $user, $password, array(PDO::ATTR_PERSISTENT => true));
 	

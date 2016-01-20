@@ -1,4 +1,4 @@
-momocloudControllers.controller('RecipeBooksNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeBooksService', 'UrlService', 'AuthService',
+momocloudRicettatore.controller('RecipeBooksNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeBooksService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, UrlService, AuthService) {
 	console.log('RecipeBooksNewController');	
 		

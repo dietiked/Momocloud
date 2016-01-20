@@ -104,4 +104,4 @@ function VintagesService($http, NotificationCenter) {
 	return VintagesService;
 }
 
-momocloudServices.factory('VintagesService', VintagesService);
+momocloudWineDb.factory('VintagesService', VintagesService);

@@ -1,4 +1,4 @@
-momocloudControllers.controller('WineDBDashboardController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 'AuthService',
+momocloudWineDb.controller('WineDBDashboardController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 'AuthService',
 function($scope, ProducersService, WinesService, ChartDataService, AuthService) {
 	//console.log('IndexController');
 

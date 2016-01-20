@@ -1,4 +1,4 @@
-momocloudControllers.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', 'UrlService', function($scope, WinesService, AuthService, UrlService) {
+momocloudWineDb.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', 'UrlService', function($scope, WinesService, AuthService, UrlService) {
 	//console.log('WinesListController');	
 	
 	$scope.loaded = false;

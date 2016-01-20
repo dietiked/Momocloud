@@ -1,6 +1,5 @@
-angular.module('mc.start', [])
-
-.directive('startTile', function(LibraryBooksService) {
+momocloudStart
+.directive('startTile', ['DirectiveTemplatesFolderStart', function(DirectiveTemplatesFolderStart) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -10,7 +9,7 @@ angular.module('mc.start', [])
 			iconClass: '@icon',
 			tileTitle: '@title'
 		},
-		templateUrl: 'apps/start/directives/mc.start.tile.html',
+		templateUrl: DirectiveTemplatesFolderStart + 'startTile.html',
 		link: function(scope, element, attrs) {
 			var iconSource = scope.iconClass.split(' ')[0];
 			if (iconSource == 'glyphicon') {
@@ -20,4 +19,4 @@ angular.module('mc.start', [])
 			}
 		}
 	};	
-});
+}]);

@@ -1,4 +1,4 @@
-momocloudControllers.controller('LoginController', ['$scope', 'AuthService', 'NotificationCenter', function($scope, AuthService, NotificationCenter) {
+momocloudLogin.controller('LoginController', ['$scope', 'AuthService', 'NotificationCenter', function($scope, AuthService, NotificationCenter) {
 
 	//console.log('loginController');
 	$scope.loginPage = true;

@@ -1,7 +1,7 @@
-function CellarService($http, NotificationCenter) {
+function CellarService($http, NotificationCenter, apiUrlWineDb) {
 	var CellarService = {};
 	//var request = 'apps/winedb/cellar/cellar_request.php';
-	var request = 'apps/api/api.php/cellar/';
+	var request = apiUrlWineDb + 'cellar/';
 	
 	CellarService.storedWines = [];
 	CellarService.storedWine = {};
@@ -118,48 +118,8 @@ function CellarService($http, NotificationCenter) {
 			NotificationCenter.postNotification(CellarService.notifications.CELLAR_BUY_ERROR);
 		});						
 	}
-		
-	CellarService.recalculateQuantity = function(storedWineId) {
-		$http.post(
-			request + '?f=recalculate&id=' + storedWineId
-		)
-		.success(function(data, status, headers, config) {
-			if (data.success) {
-				//console.log('success while adding recalculated quantity', data);
-				NotificationCenter.postNotification(CellarService.notifications.CELLAR_RECALCULATE_SUCCESS);				
-			} else {
-				//console.log('error while inserting recalculated quantity (201)', data);			
-				NotificationCenter.postNotification(CellarService.notifications.CELLAR_RECALCULATE_ERROR);				
-			}
-		})
-		.error(function(data, status, headers, config) {
-			//console.log('error while inserting recalculated quantity (202)', data);			
-			NotificationCenter.postNotification(CellarService.notifications.CELLAR_RECALCULATE_ERROR);
-		});						
-	};
-		
-	CellarService.updateQuantity = function(movement) {
-		$http.post(
-			request + '?f=update',
-			movement
-		)
-		.success(function(data, status, headers, config) {
-			if (data.success) {
-				console.log('success while adding bottles', data);
-				NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_SUCCESS);				
-			} else {
-				console.log('error while inserting bottles (201)', data);			
-				NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_ERROR);				
-			}
-		})
-		.error(function(data, status, headers, config) {
-			console.log('error while inserting bottles (202)', data);			
-			NotificationCenter.postNotification(CellarService.notifications.CELLAR_ADDED_ERROR);
-		});				
-		
-	};
-	
+			
 	return CellarService;
 }
 
-momocloudServices.factory('CellarService', CellarService);
+momocloudWineDb.factory('CellarService', CellarService);

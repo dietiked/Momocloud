@@ -11,28 +11,33 @@ module.exports = function(grunt) {
 			dist: ['dist/**/*.js', '!dist/libs/**']
 		},
 		
+		html2js: {
+			options: {
+				module: 'momocloudTemplateCache',
+				htmlmin: {
+					collapseBooleanAttributes: true,
+					collapseWhitespace: true,
+					removeComments: true,
+				}
+			},
+			deploy: {
+				src: ['src/apps/**/*.html', 'src/directives/templates/**/*.html'],
+				dest: 'temp/templates.js' 
+			}	
+		},
+
 		uglify: {
 			options: {
 				mangle: false
 			},
 			deploy: {
 				files: {
-					'dist/app.min.js': ['src/services/**/*.js', 'src/apps/app.js'],
-					'dist/momocloud.min.js': ['dist/app.min.js', 'src/directives/**/*.js', 'src/apps/**/*.js', '!src/apps/app.js'],
+					'temp/momocloud.min.js': ['src/services/**/*.js', 'src/app.js'],
+					'dist/momocloud.min.js': ['temp/momocloud.min.js', 'src/directives/**/*.js', 'src/apps/**/*.js', 'temp/templates.js'],
 				}
 			}
 		},
-		
-		html2js: {
-			options: {
-				module: 'momocloudTemplateCache'
-			},
-			deploy: {
-				src: ['src/apps/**/*.html'],
-				dest: 'dist/templates.js' 
-			}	
-		},
-		
+				
 		copy: {
 			deploy: {
 				files: [
@@ -42,15 +47,15 @@ module.exports = function(grunt) {
 					{expand: true, cwd: 'src/libs/', src: ['**/*.woff', '**/*.ttf', '**/*.svg'], dest: 'dist/libs/'}, // Fonts
 					{expand: true, cwd: 'src/libs/', src: ['**/*.css'], dest: 'dist/libs/'}, // Libraries CSS
 					//{expand: true, cwd: 'src/apps/', src: ['**/*.html'], dest: 'dist/apps/'}, // Templates
-					{expand: true, cwd: 'src/directives/', src: ['**/*.html'], dest: 'dist/directives/'}, // Libraries CSS
-					{expand: true, cwd: 'src/apps/', src: ['**/*.php'], dest: 'dist/apps/'}, // Server files
+					//{expand: true, cwd: 'src/directives/', src: ['**/*.html'], dest: 'dist/directives/'}, // Directives HTML
+					{expand: true, cwd: 'src/api/', src: ['**/*.php'], dest: 'dist/api/'}, // Server files
 				]
 			}
 		},			
 
 	});
 	
-	grunt.registerTask('deploy', ['uglify:deploy', 'copy:deploy', 'html2js:deploy']);
+	grunt.registerTask('deploy', ['html2js:deploy', 'uglify:deploy', 'copy:deploy']);
 	grunt.registerTask('test-deploy', ['jshint:dist']);
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');

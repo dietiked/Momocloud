@@ -1,6 +1,5 @@
-angular.module('mc.recipes', [])
-
-.directive('recipiesRecipeCard', function() {
+momocloudRicettatore
+.directive('recipiesRecipeCard', ['DirectiveTemplatesFolderRicettatore', function(DirectiveTemplatesFolderRicettatore) {
 	
 	return {
 		restrict: 'E',
@@ -10,7 +9,7 @@ angular.module('mc.recipes', [])
 			advanced: '@advanced', // default = false
 			recipe: '=ngModel'
 		},
-		templateUrl: 'apps/ricettatore/directives/mc.recipes.card.html',
+		templateUrl: DirectiveTemplatesFolderRicettatore + 'recipesCard.html',
 		link: function(scope, element, attrs) {
 			if (scope.advanced == undefined) {
 				scope.isAdvanced = false;
@@ -22,9 +21,9 @@ angular.module('mc.recipes', [])
 		}
 	};
 	
-})
+}])
 
-.directive('recipiesRecipeForm',['RecipiesService', 'RecipeBooksService', function(RecipiesService, RecipeBooksService) {
+.directive('recipiesRecipeForm', ['RecipiesService', 'RecipeBooksService', 'DirectiveTemplatesFolderRicettatore', function(RecipiesService, RecipeBooksService, DirectiveTemplatesFolderRicettatore) {
 	
 	return {
 		restrict: 'E',
@@ -34,7 +33,7 @@ angular.module('mc.recipes', [])
 			mode: '@mode',
 			recipe: '=ngModel'
 		},
-		templateUrl: 'apps/ricettatore/directives/mc.recipes.form.html',
+		templateUrl: DirectiveTemplatesFolderRicettatore + 'recipesForm.html',
 		link: function(scope, element, attrs) {
 									
 			scope.addRecipe = function () {

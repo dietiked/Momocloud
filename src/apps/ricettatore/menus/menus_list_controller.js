@@ -1,4 +1,4 @@
-momocloudControllers.controller('RecipeMenusListController', 
+momocloudRicettatore.controller('RecipeMenusListController', 
 ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeMenusService', 'UrlService', 'AuthService', 'GeneralDataService',
 function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, UrlService, AuthService, GeneralDataService) {
 	console.log('RecipeMenusListController');
