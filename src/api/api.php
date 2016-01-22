@@ -4,6 +4,9 @@ require "Slim/Slim.php";
 require "config.php";
 require "classes/request.php";
 
+require "classes/authPasswordHash.php";	
+require "classes/auth.php";
+
 require "classes/library_book.php";
 require "classes/library_author.php";
 
@@ -21,7 +24,24 @@ require "classes/cellar.php";
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
-$app->response->headers->set('Content-Type', 'application/json');
+$app->response->headers->set("Content-Type", "application/json");
+
+// Authentication API
+$app->post("/auth/login/", function () use ($host, $db, $user, $password, $app) {
+	$email = $app->request->post("email");
+	$userPassword = $app->request->post("password");
+	$request = new Auth($host, $db, $user, $password);	
+	$result = $request->login($email, $userPassword);
+	echo json_encode($result);	
+});
+
+$app->post("/auth/subscribe/", function () use ($host, $db, $user, $password, $app) {
+	$email = $app->request->post("email");
+	$password = $app->request->post("password");
+	$request = new Auth($host, $db, $user, $password);	
+	$result = $request->subscribe($email, $password);
+	echo json_encode($result);	
+});
 
 // Books
 $app->get("/library/books/", function () use ($host, $db, $user, $password) {

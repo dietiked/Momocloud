@@ -7,7 +7,7 @@ momocloudHub.constant('DirectiveTemplatesFolderHub', 'directives/templates/');
 
 // Login module
 var momocloudLogin = angular.module('momocloudLogin', []);
-momocloudLogin.constant('apiUrlLogin', 'apps/login/auth_request.php');
+momocloudLogin.constant('apiUrlLogin', 'api/api.php/auth/');
 momocloudLogin.constant('DirectiveTemplatesFolderLogin', 'directives/templates/');
 
 // Start module

@@ -33,11 +33,12 @@ function AuthService($http, $location, NotificationCenter, apiUrlLogin) {
 		};
 		//console.log(data.email, data.password);
 		$http.post(
-			serverInterface + '?f=login',
+			serverInterface + 'login/',
 			data
 		)
 		.success(function(response) {
-			if (response.isValid) {
+			//console.log(response);
+			if (response.success) {
 				activateUser(user)
 				$location.path('/index');
 			} else {
@@ -64,12 +65,12 @@ function AuthService($http, $location, NotificationCenter, apiUrlLogin) {
 		};
 		//console.log(data.email, data.password);
 		$http.post(
-			serverInterface + '?f=subscribe',
+			serverInterface + 'subscribe/',
 			data
 		)
 		.success(function(response) {
 			//console.log('Server success: ', response);			
-			if (response.isValid) {
+			if (response.success) {
 				activateUser(user)
 				$location.path('/index');
 			}
