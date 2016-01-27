@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<label for="type">Type *</label>
 				<select name="type" ng-model="wine.winetype_id" class="form-control">
-					<option ng-repeat="type in winetypes track by $index" value="{{type.winetype_id}}">{{type.winetype_description}}</option>
+					<option ng-repeat="type in winetypes" value="{{type.winetype_id}}">{{type.winetype_description}}</option>
 				</select>
 			</div>
 			<div class="form-group" ng-class="{'has-error': wineForm.alcohol.$invalid}">

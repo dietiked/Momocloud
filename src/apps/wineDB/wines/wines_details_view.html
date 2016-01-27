@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 col-sm-12">
+			<div class="col-md-8 col-sm-12">
 				<dl class="dl-horizontal">
 					<dt>Produttore</dt>
 					<dd>{{wine.producer_name}}</dd>
@@ -18,11 +18,17 @@
 					<dd>{{wine.wine_grapes}}</dd>
 					<dt>Note</dt>
 					<dd>{{wine.wine_notes}}</dd>
-					<dt>Annate</dt>
-					<dd ng-repeat="vintage in vintages | orderBy:'-vintage_year'">
-						<span>{{vintage.vintage_year}}&nbsp;&nbsp;<uib-rating max="10" readonly="true" ng-model="vintage.vintage_rating" state-on=""></uib-rating></span>
-					</dd>
+					<dt></dt>
 				</dl>
+			</div>
+			<div class="col-md-4 col-sm-12">
+				<div ng-repeat="vintage in vintages | orderBy:'-vintage_year'">
+					<wine-rating wine="{{wine.wine_id}}" 
+						vintage="{{vintage.vintage_id}}" 
+						year="{{vintage.vintage_year}}" 
+						vintagerating="{{vintage.vintage_rating}}">
+					</wine-rating>							
+				</div>
 			</div>
 		</div>
 	</div>

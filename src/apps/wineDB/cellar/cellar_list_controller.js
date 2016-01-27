@@ -58,8 +58,8 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	var recalculateQuantitySuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_RECALCULATE_SUCCESS, recalculateQuantitySuccessHandler);
 	var drinkSuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_DRINK_SUCCESS, drinkSuccessHandler);
 	var drinkError = NotificationCenter.subscribe(CellarService.notifications.CELLAR_DRINK_ERROR, drinkBuyErrorHandler);
-	var buySuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_BUY_SUCCESS, buySuccessHandler);
-	var buyError = NotificationCenter.subscribe(CellarService.notifications.CELLAR_BUY_ERROR, drinkBuyErrorHandler);
+	var buySuccess = NotificationCenter.subscribe(CellarService.notifications.CELLAR_DRINK_SUCCESS, buySuccessHandler);
+	var buyError = NotificationCenter.subscribe(CellarService.notifications.CELLAR_DRINK_ERROR, drinkBuyErrorHandler);
 	$scope.$on('$destroy', function(){
 		NotificationCenter.unsubscribe(getStoredWinesSuccess);
 		NotificationCenter.unsubscribe(recalculateQuantitySuccess);
