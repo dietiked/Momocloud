@@ -1,0 +1,32 @@
+{
+  "name": "momocloud",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-angular-templates": "^0.6.0",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-htmlmin": "^0.6.0",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-nodeunit": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-html2js": "^0.3.5",
+    "jshint-stylish": "latest"
+  },
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dietiked/Momocloud.git"
+  },
+  "author": "Dominique Dietiker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dietiked/Momocloud/issues"
+  },
+  "homepage": "https://github.com/dietiked/Momocloud#readme",
+  "description": "Home Cloud"
+}
