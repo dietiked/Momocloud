@@ -1,6 +1,6 @@
-function GeneralDataService($http, NotificationCenter) {
+function GeneralDataService($http, NotificationCenter, apiUrlWineDb) {
 	var GeneralDataService = {};
-	var request = 'apps/winedb/generalData_request.php';
+	var request = apiUrlWineDb + 'generaldata/';
 	
 	GeneralDataService.winetypes = [];
 	GeneralDataService.ratings = [];
@@ -20,8 +20,8 @@ function GeneralDataService($http, NotificationCenter) {
 	
 	GeneralDataService.getWinetypes = function() {
 		var results = null;
-		$http.post(
-			request + '?f=winetypes'
+		$http.get(
+			request + 'winetypes/'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -36,8 +36,8 @@ function GeneralDataService($http, NotificationCenter) {
 	
 	GeneralDataService.getRatings = function() {
 		var results = null;
-		$http.post(
-			request + '?f=ratings'
+		$http.get(
+			request + 'ratings/'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -52,8 +52,8 @@ function GeneralDataService($http, NotificationCenter) {
 
 	GeneralDataService.getYears = function() {
 		var results = null;
-		$http.post(
-			request + '?f=years'
+		$http.get(
+			request + 'years/'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data);
@@ -68,8 +68,8 @@ function GeneralDataService($http, NotificationCenter) {
 
 	GeneralDataService.getCountries = function() {
 		var results = null;
-		$http.post(
-			request + '?f=countries'
+		$http.get(
+			request + 'countries/'
 		)
 		.success(function(data, status, headers, config) {
 			//console.log('success', data, status, headers);

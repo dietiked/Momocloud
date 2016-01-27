@@ -10,7 +10,8 @@
 				Vitigni: {{wine.wine_grapes}}
 			</div>
 			<div class="panel-footer">
-				<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">scopri</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#wine-edit-modal" ng-click="setSelectedWine(wine)">modifica</button>
+				<button class="btn btn-default" data-toggle="modal" data-target="#wine-detail-modal" ng-click="setSelectedWine(wine)">dettagli</button>
 				<button class="btn btn-default" ng-click="go('/winedb/producers/'+wine.producer_id)">produttore</button>
 			</div>
 		</div>
@@ -19,3 +20,34 @@
 
 <back-button back-to="/winedb/"></back-button>
 <add-button go-to="/winedb/wines/new"></add-button>
+
+<div id="wine-detail-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+		<h5>{{selectedWine.wine_name}}<i class="fa fa-glass mmc-glass-color--{{selectedWine.winetype_id}} pull-right"></i></h5>
+      </div>
+      <div class="modal-body">
+		<dl class="dl-horizontal">
+			<dt>Produttore</dt>
+			<dd>{{selectedWine.producer_name}}</dd>
+			<dt>Denominazione</dt>
+			<dd>{{selectedWine.wine_appellation}}</dd>
+			<dt>Alcol</dt>
+			<dd>{{selectedWine.wine_alcohol}}%</dd>
+			<dt>Vitigni</dt>
+			<dd>{{selectedWine.wine_grapes}}</dd>
+			<dt>Note</dt>
+			<dd>{{selectedWine.wine_notes}}</dd>
+			<dt>Annate</dt>
+			<dd ng-repeat="vintage in selectedWine.vintages | orderBy:'-vintage_year'">
+				{{vintage.vintage_year}}&nbsp;&nbsp;<uib-rating max="10" readonly="true" ng-model="vintage.vintage_rating" state-on=""></uib-rating>
+			</dd>
+		</dl>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

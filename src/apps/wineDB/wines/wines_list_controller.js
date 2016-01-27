@@ -2,6 +2,11 @@ momocloudWineDb.controller('WinesListController', ['$scope', 'WinesService', 'Au
 	//console.log('WinesListController');	
 	
 	$scope.loaded = false;
+	$scope.selectedWine = {};
+	
+	$scope.setSelectedWine = function(aWine) {
+		$scope.selectedWine = aWine;
+	}
 	
 	// Notification functions
 	var getWines = function() {

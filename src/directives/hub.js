@@ -151,20 +151,3 @@ momocloudHub
 	};
 }])
 
-.directive('wineRating', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
-	return {
-		restrict: 'E',
-		templateUrl: DirectiveTemplatesFolderHub + 'hubWineRating.html',
-		replace: false,
-		scope: {
-			'wine_id': '@wine',
-			'vintage_id': '@vintage',
-			'vintage_year': '@year',
-			'vintage_rating': '@vintagerating',
-		},
-		link: function($scope, $element, $attrs) {
-			
-		}
-	};
-}])
-

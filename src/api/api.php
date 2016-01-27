@@ -15,18 +15,19 @@ require "classes/recipe_category.php";
 require "classes/recipe_book.php";
 require "classes/recipe_menu.php";
 
-require "classes/wine.php";
-require "classes/vintage.php";
-require "classes/producer.php";
-require "classes/movement.php";
-require "classes/cellar.php";
+require "classes/winedb_wine.php";
+require "classes/winedb_general_data.php";
+require "classes/winedb_vintage.php";
+require "classes/winedb_producer.php";
+require "classes/winedb_movement.php";
+require "classes/winedb_cellar.php";
 
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
 $app->response->headers->set("Content-Type", "application/json");
 
-// Authentication API
+// ! Authentication API
 $app->post("/auth/login/", function () use ($host, $db, $user, $password, $app) {
 	$email = $app->request->post("email");
 	$userPassword = $app->request->post("password");
@@ -43,7 +44,7 @@ $app->post("/auth/subscribe/", function () use ($host, $db, $user, $password, $a
 	echo json_encode($result);	
 });
 
-// Books
+// ! Books API
 $app->get("/library/books/", function () use ($host, $db, $user, $password) {
 	$request = new LibraryBook($host, $db, $user, $password);	
 	$result = $request->getBooks();
@@ -83,7 +84,7 @@ $app->get("/library/authors/:authorDescr/books/", function ($authorDescr) use ($
 	echo json_encode($result);
 });
 
-// Ricettatore
+// ! Ricettatore API
 $app->get("/ricettatore/menus/", function () use ($host, $db, $user, $password) {
 	$request = new RecipeMenu($host, $db, $user, $password);	
 	echo json_encode($request->getAll());
@@ -165,7 +166,27 @@ $app->post("/ricettatore/books/", function () use ($host, $db, $user, $password,
 });
 
 
-// Wines
+// ! WineDb API
+$app->get("/winedb/generaldata/winetypes/", function () use ($host, $db, $user, $password) {
+	$request = new WinesGeneralData($host, $db, $user, $password);	
+	echo json_encode($request->getWinetype());
+});
+
+$app->get("/winedb/generaldata/ratings/", function () use ($host, $db, $user, $password) {
+	$request = new WinesGeneralData($host, $db, $user, $password);	
+	echo json_encode($request->getRatings());
+});
+
+$app->get("/winedb/generaldata/countries/", function () use ($host, $db, $user, $password) {
+	$request = new WinesGeneralData($host, $db, $user, $password);	
+	echo json_encode($request->getCountries());
+});
+
+$app->get("/winedb/generaldata/years/", function () use ($host, $db, $user, $password) {
+	$request = new WinesGeneralData($host, $db, $user, $password);	
+	echo json_encode($request->getYears());
+});
+
 $app->get("/winedb/wines/", function () use ($host, $db, $user, $password) {
 	$request = new Wine($host, $db, $user, $password);	
 	echo json_encode($request->getWines());
