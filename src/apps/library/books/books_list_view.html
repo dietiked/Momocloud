@@ -9,7 +9,6 @@
 <div class="row">
 	<div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="book in books">
 		<library-book-card ng-model="book">
-			<button class="btn btn-default" data-toggle="modal" data-target="#modal-details-book" ng-click="setSelectedBook(book)">dettagli</button>
 			<button class="btn btn-default" data-toggle="modal" data-target="#modal-update-book" ng-click="setSelectedBook(book)">modifica</button>
 			<button class="btn btn-default" data-toggle="modal" data-target="#modal-delete-book" ng-click="setSelectedBook(book)">elimina</button>
 		</library-book-card>
@@ -17,11 +16,6 @@
 </div>
 
 <back-button></back-button>
-
-<library-book-form modal-id="modal-add-book" mode="insert" ng-model="selectedBook"></library-book-form>
-<library-book-form modal-id="modal-update-book" mode="update" ng-model="selectedBook"></library-book-form>
-<library-delete-modal modal-id="modal-delete-book" ng-model="selectedBook"></library-delete-modal>
-<library-book-search modal-id="modal-search-book"></library-book-search>
 
 <fab-actions>
 	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-search-book">
@@ -32,3 +26,7 @@
 	</button>
 </fab-actions>
 
+<library-book-edit-modal modal-id="modal-add-book" mode="insert" ng-model="selectedBook"></library-book-edit-modal>
+<library-book-edit-modal modal-id="modal-update-book" mode="update" ng-model="selectedBook"></library-book-edit-modal>
+<library-delete-modal modal-id="modal-delete-book" ng-model="selectedBook"></library-delete-modal>
+<library-book-search modal-id="modal-search-book"></library-book-search>

@@ -1,6 +1,6 @@
 momocloudLibrary
 .directive('libraryBookCard', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
-	
+
 	return {
 		restrict: 'E',
 		replace: true,
@@ -14,25 +14,40 @@ momocloudLibrary
 			if (scope.advanced == undefined) {
 				scope.isAdvanced = false;
 			} else if (scope.advanced == 'false') {
-				scope.isAdvanced = false;				
+				scope.isAdvanced = false;
 			} else if (scope.advanced == 'true') {
 				scope.isAdvanced = true;
 			}
 		}
 	};
-	
+
 }])
 
-.directive('libraryBookForm', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+.directive('libraryBookForm', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary',
+function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		restrict: 'E',
 		replace: true,
+		scope: {
+			book: '=ngModel'
+		},
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookForm.html',
+		link: function(scope, element, attrs) {
+		}
+	};
+}])
+
+.directive('libraryBookEditModal', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary',
+function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+	return {
+		restrict: 'E',
+		//replace: true,
 		scope: {
 			id: '@modalId',
 			mode: '@mode',
 			book: '=ngModel'
 		},
-		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookForm.html',
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookEditModal.html',
 		link: function(scope, element, attrs) {
 			scope.addBookToLibrary = function () {
 				LibraryBooksService.addBookToLibrary(scope.book);
@@ -44,7 +59,8 @@ momocloudLibrary
 	};
 }])
 
-.directive('libraryBookSearch', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+.directive('libraryBookSearch', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary',
+function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		//require: 'ngModel',
 		restrict: 'E',
@@ -53,22 +69,42 @@ momocloudLibrary
 		},
 		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookSearch.html',
 		link: function(scope, element, attrs) {
+
 			scope.searchQuery = '';
 			scope.searchBooks = [];
+			scope.book = null;
 			scope.performingSearch = false;
 			scope.searchStartIndex = 0;
+			scope.isEditMode = false;
+
 			scope.search = function(query) {
 				scope.performingSearch = true;
 				LibraryBooksService.search(query);
-				console.log(query);
 			};
+
+			scope.editBook = function(aBook) {
+				scope.book = angular.copy(aBook);
+				scope.isEditMode = true;
+				console.log(scope.isEditMode);
+			};
+
+			scope.dismissEditBook = function () {
+				scope.isEditMode = false;
+			}
+
+			scope.addBookToLibrary = function () {
+				LibraryBooksService.addBookToLibrary(scope.book);
+			}
+
 			var getSearchBooks = function() {
 				scope.searchBooks = LibraryBooksService.searchBooks;
 				scope.searchStartIndex += 11;
 				console.log(scope.searchBooks);
 				scope.performingSearch = false;
 			};
+
 			var searchBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.SEARCH_SUCCESS, getSearchBooks);
+
 			scope.$on('$destroy', function(){
 				NotificationCenter.unsubscribe(searchBookSuccess);
 			});
@@ -76,7 +112,8 @@ momocloudLibrary
 	};
 }])
 
-.directive('libraryDeleteModal', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+.directive('libraryDeleteModal', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary',
+function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		restrict: 'E',
 		replace: true,
