@@ -44,6 +44,38 @@ momocloudLibrary
 	};
 }])
 
+.directive('libraryBookSearch', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+	return {
+		//require: 'ngModel',
+		restrict: 'E',
+		scope: {
+			id: '@modalId',
+		},
+		templateUrl: DirectiveTemplatesFolderLibrary + 'libraryBookSearch.html',
+		link: function(scope, element, attrs) {
+			scope.searchQuery = '';
+			scope.searchBooks = [];
+			scope.performingSearch = false;
+			scope.searchStartIndex = 0;
+			scope.search = function(query) {
+				scope.performingSearch = true;
+				LibraryBooksService.search(query);
+				console.log(query);
+			};
+			var getSearchBooks = function() {
+				scope.searchBooks = LibraryBooksService.searchBooks;
+				scope.searchStartIndex += 11;
+				console.log(scope.searchBooks);
+				scope.performingSearch = false;
+			};
+			var searchBookSuccess = NotificationCenter.subscribe(LibraryBooksService.notifications.SEARCH_SUCCESS, getSearchBooks);
+			scope.$on('$destroy', function(){
+				NotificationCenter.unsubscribe(searchBookSuccess);
+			});
+		}
+	};
+}])
+
 .directive('libraryDeleteModal', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	return {
 		restrict: 'E',

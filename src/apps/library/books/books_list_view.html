@@ -21,9 +21,10 @@
 <library-book-form modal-id="modal-add-book" mode="insert" ng-model="selectedBook"></library-book-form>
 <library-book-form modal-id="modal-update-book" mode="update" ng-model="selectedBook"></library-book-form>
 <library-delete-modal modal-id="modal-delete-book" ng-model="selectedBook"></library-delete-modal>
+<library-book-search modal-id="modal-search-book"></library-book-search>
 
 <fab-actions>
-	<button class="btn btn-default md-button-fab--small" ng-click="go('library/search')">
+	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-search-book">
 		<i class="fa fa-search"></i>
 	</button>
 	<button class="btn btn-default md-button-fab--small" data-toggle="modal" data-target="#modal-add-book" ng-click="setSelectedBook({})">

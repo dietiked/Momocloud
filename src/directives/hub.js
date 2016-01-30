@@ -32,6 +32,19 @@ momocloudHub
 	};
 }])
 
+.directive('hubModal', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
+	return {
+		restrict: 'E',
+		transclude: true,
+		scope: {
+			id: '@modalId',
+		},
+		templateUrl: DirectiveTemplatesFolderHub + 'hubModal.html',
+		controller: ['$scope', function($scope) {
+		}]
+	};
+}])
+
 .directive('chart', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'AE',
