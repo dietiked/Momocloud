@@ -77,15 +77,14 @@ function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 			scope.searchStartIndex = 0;
 			scope.isEditMode = false;
 
-			scope.search = function(query) {
+			scope.search = function(query, startIndex) {
 				scope.performingSearch = true;
-				LibraryBooksService.search(query);
+				LibraryBooksService.search(query, startIndex);
 			};
 
 			scope.editBook = function(aBook) {
 				scope.book = angular.copy(aBook);
 				scope.isEditMode = true;
-				console.log(scope.isEditMode);
 			};
 
 			scope.dismissEditBook = function () {
@@ -99,7 +98,6 @@ function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 			var getSearchBooks = function() {
 				scope.searchBooks = LibraryBooksService.searchBooks;
 				scope.searchStartIndex += 11;
-				console.log(scope.searchBooks);
 				scope.performingSearch = false;
 			};
 

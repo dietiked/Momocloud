@@ -1,32 +1,37 @@
 <hub-modal modal-id="{{id}}">
 
 	<div class="modal-header">
-		<h5 class="modal-title">Aggiungi libro</h5>
+		<h5 class="modal-title">Cerca</h5>
 	</div>
 
 	<div class="modal-body">
 
 		<library-book-form ng-model="book" ng-show="isEditMode"></library-book-form>
 
-		<div id="search-book" ng-show="!isEditMode" ng-submit="search(searchQuery)">
-			<form id="search-book" class="form">
-				<div class="form-group">
-					<label>Cerca</label>
+		<div id="search-book" ng-show="!isEditMode" ng-submit="search(searchQuery, searchStartIndex)">
+			<form id="search-book" class="form" style="margin-bottom: 20px;">
+				<div class="input-group">
 					<input type="text" class="form-control" placeholder="cerca..." ng-model="searchQuery">
+					<div class="input-group-btn">
+						<button type="submit" class="btn btn-primary">cerca</button>
+					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">cerca</button>
 			</form>
 			<div ng-repeat="book in searchBooks">
 				<library-book-card ng-model="book" advanced="true">
 					<button class="btn btn-default" ng-click="editBook(book)">aggiungi</button>
 				</library-book-card>
 			</div>
+			<loader visible="performingSearch"></loader>
 		</div>
 	</div>
 
 	<div class="modal-footer">
-		<button type="cancel" class="btn btn-default" ng-show="isEditMode" ng-click="dismissEditBook()">annulla</button>
-		<button type="submit" class="btn btn-primary" ng-show="isEditMode" ng-click="addBookToLibrary()">aggiungi</button>
+		<button class="btn btn-default" ng-show="isEditMode" ng-click="dismissEditBook()">annulla</button>
+		<button class="btn btn-primary" ng-show="isEditMode" ng-click="addBookToLibrary()">aggiungi</button>
+		<button class="btn btn-primary" ng-show="!isEditMode && searchBooks.length > 0" ng-click="search(searchQuery, searchStartIndex)">
+			carica altri
+		</button>
 	</div>
 
 </hub-modal>
