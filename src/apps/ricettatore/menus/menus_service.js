@@ -1,12 +1,12 @@
-function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRicettatore) {
+function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRicettatore, UtilityService) {
 	var RecipeMenusService = {};
 	var request = apiUrlRicettatore;
-	
+
 	RecipeMenusService.menus = [];
 	RecipeMenusService.menu = {};
 	RecipeMenusService.availableRecipies = [];
 	RecipeMenusService.lastInsertedId = 0;
-	
+
 	RecipeMenusService.notifications = {
 		RECIPE_MENUS_GET_ALL_SUCCESS: 'recipeMenusGetAllSuccess',
 		RECIPE_MENUS_GET_ALL_ERROR: 'recipeMenusGetAllError',
@@ -19,13 +19,7 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 		RECIPE_MENUS_INSERT_SUCCESS: 'recipeMenusInsertSuccess',
 		RECIPE_MENUS_INSERT_ERROR: 'recipeMenusInsertError'
 	};
-		
-	var _convertDate = function(aDate) {
-		var t = aDate.split(/[- :]/);
-		var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);		
-		return d;	
-	};
-		
+
 	RecipeMenusService.getAll = function() {
 		$http.get(
 			request + 'menus/'
@@ -35,19 +29,22 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			if (data.success) {
 				RecipeMenusService.menus = data.result;
 				angular.forEach(RecipeMenusService.menus, function(menu, key){
-					menu.recipe_menu_date = _convertDate(menu.recipe_menu_date);
-				});
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ALL_SUCCESS);			
+					menu.recipe_menu_date = UtilityService.parseSQLDate(menu.recipe_menu_date);
+					angular.forEach(menu.recipies, function(recipe, key) {
+						recipe.recipe_categories = UtilityService.stringToTags(recipe.recipe_categories);
+					});
+			});
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ALL_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ALL_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
+			//console.log('error', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ALL_ERROR);
-		});		
+		});
 	};
-		
+
 	RecipeMenusService.get = function(id) {
 		$http.get(
 			request + 'menus/' + id
@@ -56,15 +53,15 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			console.log('success', data);
 			if (data.success) {
 				RecipeMenusService.menu = data.result;
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_SUCCESS);				
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
+			//console.log('error', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ERROR);
-		});		
+		});
 	}
 
 	RecipeMenusService.save = function(menu) {
@@ -75,16 +72,16 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 		.success(function(data, status, headers, config) {
 			if (data.success) {
 				//console.log('success while inserting', data);
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_SUCCESS);				
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_SUCCESS);
 			} else {
-				//console.log('error while inserting', data);			
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_ERROR);				
+				//console.log('error while inserting', data);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error while inserting', data);			
+			//console.log('error while inserting', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_ERROR);
-		});								
+		});
 	}
 
 	RecipeMenusService.getAvailableRecipies = function(id) {
@@ -95,17 +92,17 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			//console.log('success', data);
 			if (data.success) {
 				RecipeMenusService.availableRecipies = data.result;
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_SUCCESS);				
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error', data);			
+			//console.log('error', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_ERROR);
-		});		
+		});
 	}
-	
+
 	RecipeMenusService.insert = function() {
 		RecipeMenusService.lastInsertedId = 0;
 		$http.post(
@@ -115,18 +112,18 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			if (data.success) {
 				//console.log('success while saving', data);
 				RecipeMenusService.lastInsertedId = data.id;
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_SUCCESS);				
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_SUCCESS);
 			} else {
-				//console.log('error while saving', data);			
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_ERROR);				
+				//console.log('error while saving', data);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_ERROR);
 			}
 		})
 		.error(function(data, status, headers, config) {
-			//console.log('error while inserting', data);			
+			//console.log('error while inserting', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_ERROR);
-		});						
+		});
 	}
-		
+
 	return RecipeMenusService;
 }
 

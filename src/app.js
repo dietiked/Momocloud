@@ -3,6 +3,7 @@ var momocloudHub = angular.module('momocloudHub', []);
 momocloudHub.factory('NotificationCenter', NotificationCenter);
 momocloudHub.factory('DependenciesChecker', DependenciesChecker);
 momocloudHub.factory('UrlService', UrlService);
+momocloudHub.factory('UtilityService', UtilityService);
 momocloudHub.constant('DirectiveTemplatesFolderHub', 'directives/templates/');
 
 // Login module
@@ -37,12 +38,12 @@ var momocloudTemplateCache = angular.module('momocloudTemplateCache', []);
 
 // Define constants
 
-var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter', 'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache', 'ui.bootstrap', ], 
-	
+var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter', 'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache', 'ui.bootstrap', ],
+
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
 		$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-	
+
 		/**
 		* The workhorse; converts an object to x-www-form-urlencoded serialization.
 		* @param {Object} obj
@@ -78,7 +79,7 @@ var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter', 'momoc
 
 				return query.length ? query.substr(0, query.length - 1) : query;
 			};
-		
+
 			// Override $http service's default transformRequest
 			$httpProvider.defaults.transformRequest = [function(data) {
 				return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
@@ -209,7 +210,7 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 		otherwise({
 			redirectTo: '/start'
 		});
-		
+
 	//$locationProvider.html5Mode(true);
 
 }]);
@@ -219,12 +220,12 @@ momocloud.run(function($rootScope, $location, AuthService) {
 	// enumerate routes that don't need authentication
 	var routesThatDontRequireAuth = ['/login'];
 
-	// check if current location matches route	 
+	// check if current location matches route
 	var routeClean = function (route) {
 		return _.find(routesThatDontRequireAuth,
 			function (noAuthRoute) {
 				if (noAuthRoute.split('/')[1] === route.split('/')[1]) {
-					return true;				
+					return true;
 				}
 			}
 		);
@@ -238,5 +239,5 @@ momocloud.run(function($rootScope, $location, AuthService) {
 		} else {
 			AuthService.init();
 		}
-	});	
+	});
 });

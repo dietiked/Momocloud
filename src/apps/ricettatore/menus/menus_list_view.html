@@ -11,6 +11,7 @@
 				</div>
   			</div>
   			<div class="panel-footer">
+					<button class="btn btn-default btn-inverse" data-toggle="modal" data-target="#menu-edit-modal" ng-click="setSelectedMenu(menu)">dettagli</button>
 	  			<button class="btn btn-default btn-inverse" ng-click="go('recipies/menus/'+menu.recipe_menu_id)">cambia</button>
   			</div>
 		</div>
@@ -23,3 +24,16 @@
 <button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="newMenu()">
 	<i class="fa fa-plus"></i>
 </button>
+
+<hub-modal modal-id="menu-edit-modal">
+	<div class="modal-header">
+		<h5>Menu #{{selectedMenu.recipe_menu_id}}</h5>
+	</div>
+	<div class="modal-body">
+		<div ng-repeat="recipe in selectedMenu.recipies">
+			<recipies-recipe-card ng-model="recipe" footer="false"></recipies-recipe-card>
+		</div>
+	</div>
+	<div class="modal-footer">
+	</div>
+</hub-modal>
