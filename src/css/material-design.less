@@ -7,7 +7,7 @@
 @brand-accent-light:	#9FA8DA;
 @brand-accent-dark:	#283593;
 @brand-third:	#7CE958;
-@brand-third-light:	#C5E08B;
+@brand-third-light:	#BFECB1;
 @brand-third-dark:	#6E9C5D;
 @brand-success: #5cb85c;
 @brand-info:    #5bc0de;
@@ -287,7 +287,8 @@ input[type="password"]:focus {
 .panel,
 .panel-default {
 	border-radius: @border-radius;
-	box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+	//border: none;
 	.panel-heading,
 	.panel-body,
 	.panel-footer {
@@ -295,14 +296,22 @@ input[type="password"]:focus {
 		padding-bottom: 8px;
 	}
 	.panel-heading {
-		background-color: @brand-third-light;
+		//background-color: transparent;
+		//border-bottom: 1px solid @gray-light;
 		border-bottom: none;
 		font-size: 20px;
 		font-weight: 500;
 		border-top-left-radius: @border-radius;
 		border-top-right-radius: @border-radius;
-		.panel-subtitle {
+		.panel-subtitle,
+		.panel-subtitle-inline {
 			font-size: 14px;
+			color: @gray-medium;
+		}
+		.panel-subtitle-inline {
+			text-align: right;
+			float: right;
+			margin-top: 7px;
 		}
 	}
 	.panel-body {
@@ -313,7 +322,8 @@ input[type="password"]:focus {
 	}
 	.panel-footer {
 		background-color: white;
-		border-top: 1px solid @gray-light;
+		//border-top: 1px solid @gray-light;
+		border-top: none;
 		.btn {
 			padding-left: 0px;
 			padding-right: 0px;

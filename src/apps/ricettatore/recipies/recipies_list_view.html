@@ -10,7 +10,6 @@
 	<div class="col-md-4 col-lg-4 col-sm-12" ng-repeat="recipe in recipies | filter:search">
 		<recipies-recipe-card ng-model="recipe">
 			<button class="btn btn-default"  ng-click="setSelectedRecipe(recipe)" data-toggle="modal" data-target="#recipe-update-modal">Modifica</button>
-			<button class="btn btn-default">Elimina</button>
 		</recipies-recipe-card>
 	</div>
 </div>
