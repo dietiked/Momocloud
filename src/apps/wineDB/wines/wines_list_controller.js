@@ -1,8 +1,10 @@
-momocloudWineDb.controller('WinesListController', ['$scope', 'WinesService', 'AuthService', 'UrlService', function($scope, WinesService, AuthService, UrlService) {
-	//console.log('WinesListController');	
-	
+momocloudWineDb.controller('WinesListController',
+['$scope', 'WinesService', 'AuthService', 'UrlService', 'NotificationCenter',
+function($scope, WinesService, AuthService, UrlService, NotificationCenter) {
+	//console.log('WinesListController');
+
 	$scope.loaded = false;
-	
+
 	// Notification functions
 	var getWines = function() {
 		$scope.wines = WinesService.wines;
