@@ -69,7 +69,7 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 			var aRecipe = data[0];
 			aRecipe.recipe_categories = UtilityService.stringToTags(aRecipe.recipe_categories);
 			RecipiesService.recipe = aRecipe;
-			NotificationCenter.postNotification(RecipiesService.notifications.GET_SUCCESS);
+				NotificationCenter.postNotification(RecipiesService.notifications.GET_SUCCESS);
 		})
 		.error(function(data, status, headers, config) {
 			//console.log('error', data);
@@ -124,6 +124,14 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 
 	RecipiesService.update = function(aRecipe) {
 		var recipe = angular.copy(aRecipe);
+		var getSuccessHandler = function() {
+			var index = UtilityService.indexForObjectInArray(aRecipe, RecipiesService.recipies, 'recipe_id');
+			RecipiesService.recipies.splice(index, 1, RecipiesService.recipe);
+			NotificationCenter.unsubscribe(getSuccess);
+			NotificationCenter.postNotification(RecipiesService.notifications.UPDATE_SUCCESS);
+		}
+		var getSuccess = NotificationCenter.subscribe(RecipiesService.notifications.GET_SUCCESS, getSuccessHandler);
+
 		recipe.recipe_categories = UtilityService.tagsToString(aRecipe.recipe_categories);
 		$http.post(
 			request + 'recipies/' + recipe.recipe_id,
@@ -131,11 +139,7 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 		)
 		.success(function(data, status, headers, config) {
 			if (data.success) {
-				var recipeIndex = indexOfRecipe(aRecipe);
-				console.log('Index', recipeIndex);
-				RecipiesService.recipies.splice(recipeIndex, 1, aRecipe);
-				console.log('success while updating', data);
-				NotificationCenter.postNotification(RecipiesService.notifications.UPDATE_SUCCESS);
+				RecipiesService.get(aRecipe.recipe_id);
 			} else {
 				console.log('error while updating (101)', data);
 				NotificationCenter.postNotification(RecipiesService.notifications.UPDATE_ERROR);
@@ -170,7 +174,26 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 			//console.log('error while inserting', data);
 			NotificationCenter.postNotification(RecipiesService.notifications.INSERT_ERROR);
 		});
+	}
 
+	RecipiesService.delete = function(aRecipe) {
+		$http.delete(
+			request + 'recipies/' + aRecipe.recipe_id
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				var index = UtilityService.indexForObjectInArray(aRecipe, RecipiesService.recipies, 'recipe_id');
+				RecipiesService.recipies.splice(index, 1);
+				NotificationCenter.postNotification(RecipiesService.notifications.DELETE_SUCCESS, RecipiesService.recipies);
+			} else {
+				console.log('error while inserting', data);
+				NotificationCenter.postNotification(RecipiesService.notifications.DELETE_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error while inserting', data);
+			NotificationCenter.postNotification(RecipiesService.notifications.DELETE_ERROR);
+		});
 	}
 
 	return RecipiesService;

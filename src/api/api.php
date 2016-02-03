@@ -99,15 +99,20 @@ $app->get("/ricettatore/menus/:id", function ($id) use ($host, $db, $user, $pass
 	echo json_encode($request->getRecipiesForMenuWithId($id));
 });
 
-$app->post("/ricettatore/menus/:id/recipies", function ($id) use ($host, $db, $user, $password, $app) {
-	$recipies = $app->request->post();
+$app->post("/ricettatore/menus/:id/recipies", function ($menuId) use ($host, $db, $user, $password, $app) {
+	$recipeId = $app->request->post('recipe_id');
 	$request = new RecipeMenu($host, $db, $user, $password);
-	echo json_encode($request->saveRecipiesForMenu($id, $recipies));
+	echo json_encode($request->addRecipeToMenu($recipeId, $menuId));
 });
 
 $app->get("/ricettatore/menus/available/:id", function ($id) use ($host, $db, $user, $password) {
 	$request = new RecipeMenu($host, $db, $user, $password);
 	echo json_encode($request->getAvailableRecipiesForMenu($id));
+});
+
+$app->delete("/ricettatore/menus/:menuId/recipes/:id", function ($menuId, $recipeId) use ($host, $db, $user, $password) {
+	$request = new RecipeMenu($host, $db, $user, $password);
+	echo json_encode($request->removeRecipeFromMenu($recipeId, $menuId));
 });
 
 $app->get("/ricettatore/recipies/", function () use ($host, $db, $user, $password) {
@@ -120,6 +125,17 @@ $app->get("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $p
 	echo json_encode($request->getRecipeWithId($id));
 });
 
+$app->delete("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $password) {
+	$request = new Recipe($host, $db, $user, $password);
+	echo json_encode($request->deleteRecipeWithId($id));
+});
+
+$app->post("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $password, $app) {
+	$data = $app->request->post();
+	$request = new Recipe($host, $db, $user, $password);
+	echo json_encode($request->updateRecipeWithId($id, $data));
+});
+
 $app->get("/ricettatore/randomrecipe", function () use ($host, $db, $user, $password) {
 	$request = new Recipe($host, $db, $user, $password);
 	echo json_encode($request->getRandomRecipe());
@@ -128,12 +144,6 @@ $app->get("/ricettatore/randomrecipe", function () use ($host, $db, $user, $pass
 $app->get("/ricettatore/search/:query", function ($string) use ($host, $db, $user, $password) {
 	$request = new Recipe($host, $db, $user, $password);
 	echo json_encode($request->searchForRecipe($string));
-});
-
-$app->post("/ricettatore/recipies/:id", function ($id) use ($host, $db, $user, $password, $app) {
-	$data = $app->request->post();
-	$request = new Recipe($host, $db, $user, $password);
-	echo json_encode($request->updateRecipeWithId($id, $data));
 });
 
 $app->post("/ricettatore/recipies/", function () use ($host, $db, $user, $password, $app) {

@@ -31,7 +31,33 @@ momocloudRicettatore
 
 }])
 
-.directive('recipiesRecipeForm', ['RecipiesService', 'RecipeBooksService', 'DirectiveTemplatesFolderRicettatore', function(RecipiesService, RecipeBooksService, DirectiveTemplatesFolderRicettatore) {
+.directive('recipeDeleteModal', ['DirectiveTemplatesFolderRicettatore', 'RecipeMenusService', 'RecipiesService',
+function(DirectiveTemplatesFolderRicettatore, RecipeMenusService, RecipiesService) {
+
+	return {
+		restrict: 'E',
+		scope: {
+			id: '@modalId',
+			recipe: '=',
+			menu: '=',
+		},
+		templateUrl: DirectiveTemplatesFolderRicettatore + 'recipeDeleteModal.html',
+		link: function(scope, element, attrs) {
+			scope.delete = function() {
+				if (scope.menu !== undefined) {
+					RecipeMenusService.removeRecipeFromMenu(scope.recipe, scope.menu);
+				} else if (scope.menu === undefined) {
+					RecipiesService.delete(scope.recipe);
+				}
+			}
+		}
+	};
+
+}])
+
+.directive('recipiesRecipeForm',
+['RecipiesService', 'RecipeBooksService', 'DirectiveTemplatesFolderRicettatore', 'NotificationCenter',
+function(RecipiesService, RecipeBooksService, DirectiveTemplatesFolderRicettatore, NotificationCenter) {
 
 	return {
 		restrict: 'E',

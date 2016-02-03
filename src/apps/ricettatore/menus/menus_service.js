@@ -17,7 +17,9 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 		RECIPE_MENUS_SAVE_SUCCESS: 'recipeMenusSaveSuccess',
 		RECIPE_MENUS_SAVE_ERROR: 'recipeMenusSaveError',
 		RECIPE_MENUS_INSERT_SUCCESS: 'recipeMenusInsertSuccess',
-		RECIPE_MENUS_INSERT_ERROR: 'recipeMenusInsertError'
+		RECIPE_MENUS_INSERT_ERROR: 'recipeMenusInsertError',
+		REMOVE_SUCCESS: 'recipeMenusRemoveRecipeSuccess',
+		REMOVE_ERROR: 'recipeMenusRemoveRecipeError'
 	};
 
 	RecipeMenusService.getAll = function() {
@@ -53,6 +55,9 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			console.log('success', data);
 			if (data.success) {
 				RecipeMenusService.menu = data.result;
+				angular.forEach(RecipeMenusService.menu.recipies, function(recipe, key) {
+					recipe.recipe_categories = UtilityService.stringToTags(recipe.recipe_categories);
+				});
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_ERROR);
@@ -64,26 +69,6 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 		});
 	}
 
-	RecipeMenusService.save = function(menu) {
-		$http.post(
-			request + 'menus/' + menu.recipe_menu_id + '/recipies',
-			menu.recipies
-		)
-		.success(function(data, status, headers, config) {
-			if (data.success) {
-				//console.log('success while inserting', data);
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_SUCCESS);
-			} else {
-				//console.log('error while inserting', data);
-				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_ERROR);
-			}
-		})
-		.error(function(data, status, headers, config) {
-			//console.log('error while inserting', data);
-			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_SAVE_ERROR);
-		});
-	}
-
 	RecipeMenusService.getAvailableRecipies = function(id) {
 		$http.get(
 			request + 'menus/available/' + id
@@ -92,6 +77,9 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 			//console.log('success', data);
 			if (data.success) {
 				RecipeMenusService.availableRecipies = data.result;
+				angular.forEach(RecipeMenusService.availableRecipies, function(recipe, key) {
+					recipe.recipe_categories = UtilityService.stringToTags(recipe.recipe_categories);
+				});
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_SUCCESS);
 			} else {
 				NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_GET_AVAILABLE_ERROR);
@@ -121,6 +109,50 @@ function RecipeMenusService($http, NotificationCenter, RecipiesService, apiUrlRi
 		.error(function(data, status, headers, config) {
 			//console.log('error while inserting', data);
 			NotificationCenter.postNotification(RecipeMenusService.notifications.RECIPE_MENUS_INSERT_ERROR);
+		});
+	}
+
+	RecipeMenusService.addRecipeToMenu = function(aRecipe) {
+		$http.post(
+			request + 'menus/' + RecipeMenusService.menu.recipe_menu_id + '/recipies',
+			aRecipe
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				//console.log('success while inserting', data);
+				RecipeMenusService.menu.recipies.push(aRecipe);
+				var index = UtilityService.indexForObjectInArray(aRecipe, RecipeMenusService.availableRecipies, 'recipe_id');
+				RecipeMenusService.availableRecipies.splice(index, 1);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.ADD_SUCCESS);
+			} else {
+				//console.log('error while inserting', data);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.ADD_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error while inserting', data);
+			NotificationCenter.postNotification(RecipeMenusService.notifications.ADD_ERROR);
+		});
+	}
+
+	RecipeMenusService.removeRecipeFromMenu = function(aRecipe, aMenu) {
+		$http.delete(
+			request + 'menus/' + aMenu.recipe_menu_id + '/recipes/' + aRecipe.recipe_id
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				var index = UtilityService.indexForObjectInArray(aRecipe, RecipeMenusService.menu.recipies, 'recipe_id');
+				RecipeMenusService.menu.recipies.splice(index, 1);
+				console.log('success while removing recipe', index);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.REMOVE_SUCCESS);
+			} else {
+				//console.log('error while saving', data);
+				NotificationCenter.postNotification(RecipeMenusService.notifications.REMOVE_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error while inserting', data);
+			NotificationCenter.postNotification(RecipeMenusService.notifications.REMOVE_ERROR);
 		});
 	}
 

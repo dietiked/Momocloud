@@ -11,8 +11,7 @@
 				</div>
   			</div>
   			<div class="panel-footer">
-					<button class="btn btn-default btn-inverse" data-toggle="modal" data-target="#menu-details-modal" ng-click="setSelectedMenu(menu)">dettagli</button>
-					<button class="btn btn-default btn-inverse" data-toggle="modal" data-target="#menu-edit-modal" ng-click="setSelectedMenu(menu, true)">modifica</button>
+					<button class="btn btn-default btn-inverse" ng-click="go('/recipies/menus/'+menu.recipe_menu_id)">dettagli</button>
   			</div>
 		</div>
 	</div>
@@ -24,47 +23,3 @@
 <button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="newMenu()">
 	<i class="fa fa-plus"></i>
 </button>
-
-<hub-modal modal-id="menu-details-modal">
-	<div class="modal-header">
-		<h5>Menu #{{selectedMenu.recipe_menu_id}}</h5>
-	</div>
-	<div class="modal-body">
-		<div ng-repeat="recipe in selectedMenu.recipies">
-			<recipies-recipe-card ng-model="recipe" footer="false"></recipies-recipe-card>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-default btn-inverse" data-dismiss="modal">chiudi</button>
-	</div>
-</hub-modal>
-
-<hub-modal modal-id="menu-edit-modal">
-	<div class="modal-header">
-		<h5>Modifica menu #{{selectedMenu.recipe_menu_id}}</h5>
-	</div>
-	<div class="modal-body">
-		<input type="text" ng-model="searchRecipesQuery" class="form-control" placeholder="cerca...">
-		<div class="list-group list-group--1-line">
-			<div ng-repeat="recipe in recipes | filter:searchRecipesQuery" class="list-group-item">
-				<div class="md-list-item-group">
-					<div class="md-list-item-icon">
-						<button class="btn btn-primary" ng-show="recipe.isInMenu" ng-click="removeRecipeFromMenu(recipe)">
-							<i class="fa fa-times"></i>
-						</button>
-						<button class="btn btn-default" ng-show="!recipe.isInMenu" ng-click="addRecipeToMenu(recipe)">
-							<i class="fa fa-plus"></i>
-						</button>
-					</div>
-					<div class="md-list-item-title">
-						{{recipe.recipe_name}}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-default btn-inverse" data-dismiss="modal">annulla</button>
-		<button class="btn btn-primary btn-inverse" ng-click="saveMenu()">salva</button>
-	</div>
-</hub-modal>
