@@ -1,21 +1,21 @@
 momocloudRicettatore.controller('RecipiesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipiesService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService, AuthService) {
-	
+
 	console.log('RecipiesListController');
 	$scope.loading = true;
 	$scope.selectedRecipe = {};
-	
+
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
-	
+
 	$scope.setSelectedRecipe = function(aBook) {
 		if (aBook == 'new') {
 			$scope.selectedRecipe = {
 				recipe_categories : []
-			};	
+			};
 		} else {
-			$scope.selectedRecipe = angular.copy(aBook);	
+			$scope.selectedRecipe = angular.copy(aBook);
 		}
 	};
 
@@ -24,7 +24,7 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 		$scope.recipies = RecipiesService.recipies;
 		$scope.loading = false;
 	}
-	
+
 	var dismissModal = function() {
 		$scope.recipies = RecipiesService.recipies;
 		$('.modal').modal('hide');

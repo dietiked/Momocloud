@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<h5>Ricette</h5>
+		<h5>Ricette: {{recipies.length}}</h5>
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 	<div class="col-md-4 col-lg-4 col-sm-12" ng-repeat="recipe in recipies | filter:search">
 		<recipies-recipe-card ng-model="recipe">
 			<button class="btn btn-default"  ng-click="setSelectedRecipe(recipe)" data-toggle="modal" data-target="#recipe-update-modal">Modifica</button>
-			<button class="btn btn-default">Elimina</button>
+			<!--<button class="btn btn-default"  ng-click="setSelectedRecipe(recipe)" data-toggle="modal" data-target="#recipe-delete-modal">Elimina</button>-->
 		</recipies-recipe-card>
 	</div>
 </div>
@@ -23,3 +23,4 @@
 
 <recipies-recipe-form modal-id="recipe-add-modal" mode="insert" ng-model="selectedRecipe"></recipies-recipe-form>
 <recipies-recipe-form modal-id="recipe-update-modal" mode="update" ng-model="selectedRecipe"></recipies-recipe-form>
+<recipe-delete-modal modal-id="recipe-delete-modal" recipe="selectedRecipe"></recipe-delete-modal>
