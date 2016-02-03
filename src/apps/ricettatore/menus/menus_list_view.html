@@ -3,7 +3,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Menu #{{menu.recipe_menu_id}}
-				<div class="panel-subtitle">{{menu.recipe_menu_date | date:"dd.MM.yyyy"}}</div>
+				<span class="panel-subtitle-inline">{{menu.recipe_menu_date | date:"dd.MM.yyyy"}}</span>
 			</div>
 			<div class="panel-body">
 				<div ng-repeat="recipe in menu.recipies">
@@ -11,7 +11,7 @@
 				</div>
   			</div>
   			<div class="panel-footer">
-	  			<button class="btn btn-default btn-inverse" ng-click="go('recipies/menus/'+menu.recipe_menu_id)">cambia</button>
+					<button class="btn btn-default btn-inverse" ng-click="go('/recipies/menus/'+menu.recipe_menu_id)">dettagli</button>
   			</div>
 		</div>
 	</div>

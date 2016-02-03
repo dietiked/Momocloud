@@ -59,8 +59,9 @@ function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
 	};
 }])
 
-.directive('libraryBookSearch', ['LibraryBooksService', 'DirectiveTemplatesFolderLibrary',
-function(LibraryBooksService, DirectiveTemplatesFolderLibrary) {
+.directive('libraryBookSearch',
+['LibraryBooksService', 'DirectiveTemplatesFolderLibrary', 'NotificationCenter',
+function(LibraryBooksService, DirectiveTemplatesFolderLibrary, NotificationCenter) {
 	return {
 		//require: 'ngModel',
 		restrict: 'E',

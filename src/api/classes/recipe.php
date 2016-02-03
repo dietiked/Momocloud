@@ -2,36 +2,36 @@
 
 class Recipe extends Request {
 
-	public function getRecipies() {	
+	public function getRecipies() {
 		$query = "SELECT * FROM recipe_recipies LEFT JOIN (recipe_books) ON (recipe_books.recipe_book_id=recipe_recipies.recipe_book_id)"
 		. "ORDER BY recipe_name";
-		$stmt = $this->connection->prepare($query);		
+		$stmt = $this->connection->prepare($query);
 		if ($stmt->execute()) {
 			$success = true;
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} else {
 			$success = false;
 			$result = Array();
 		}
-		return Array("success"=>$result, "result"=>$result);					
+		return Array("success"=>$result, "result"=>$result);
 	}
-	
+
 	public function getRecipeWithId($id) {
 		$query = "SELECT * FROM recipe_recipies LEFT JOIN (recipe_books) ON (recipe_books.recipe_book_id=recipe_recipies.recipe_book_id) "
 		. "WHERE recipe_id=" . $id;
-		$stmt = $this->connection->prepare($query);		
+		$stmt = $this->connection->prepare($query);
 		if ($stmt->execute()) {
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);			
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		} else {
-			$result = "Server error";				
+			$result = "Server error";
 		}
-		return $result;					
+		return $result;
 	}
-	
+
 	public function getRandomRecipe() {
 		// Get number of rows
 		$queryNumOfRows = "SELECT COUNT(*) FROM recipe_recipies";
-		$stmt = $this->connection->prepare($queryNumOfRows);		
+		$stmt = $this->connection->prepare($queryNumOfRows);
 		if ($stmt->execute()) {
 			$numOfRowsResult = $stmt->fetch(PDO::FETCH_ASSOC);
 			$rows = $numOfRowsResult["COUNT(*)"];
@@ -40,11 +40,11 @@ class Recipe extends Request {
 			$randomRecipe = $recipies["result"][$randomNumber];
 			$result = true;
 		} else {
-			$result = false;				
+			$result = false;
 		}
-		return Array("success"=>$result, "recipe"=>$randomRecipe);					
+		return Array("success"=>$result, "recipe"=>$randomRecipe);
 	}
-	
+
 	public function searchForRecipe($string) {
 		$query = "SELECT * FROM recipe_recipies JOIN recipe_books ON (recipe_recipies.recipe_book_id=recipe_books.recipe_book_id) WHERE recipe_name LIKE '%" . $string . "%'";
 		$stmt = $this->connection->prepare($query);
@@ -57,7 +57,7 @@ class Recipe extends Request {
 		}
 		return Array("success"=>$success, "result"=>$result);
 	}
-	
+
 	public function updateRecipeWithId($id, $data) {
 		if (! isset($data["recipe_name"])) { $data["recipe_name"] = ""; }
 		if (! isset($data["recipe_book_id"])) { $data["recipe_book_id"] = NULL; }
@@ -70,13 +70,13 @@ class Recipe extends Request {
 		."recipe_ingredients=:ingredients, recipe_rating=:rating, recipe_categories=:categories "
 		. "WHERE recipe_id=:id";
 		$stmt = $this->connection->prepare($query);
-		$stmt->bindValue(":name", $data["recipe_name"]);	
-		$stmt->bindValue(":book", $data["recipe_book_id"]);	
-		$stmt->bindValue(":bookPage", $data["recipe_book_page"]);	
-		$stmt->bindValue(":ingredients", $data["recipe_ingredients"]);	
-		$stmt->bindValue(":rating", $data["recipe_rating"]);	
-		$stmt->bindValue(":categories", $data["recipe_categories"]);	
-		$stmt->bindValue(":id", $id);	
+		$stmt->bindValue(":name", $data["recipe_name"]);
+		$stmt->bindValue(":book", $data["recipe_book_id"]);
+		$stmt->bindValue(":bookPage", $data["recipe_book_page"]);
+		$stmt->bindValue(":ingredients", $data["recipe_ingredients"]);
+		$stmt->bindValue(":rating", $data["recipe_rating"]);
+		$stmt->bindValue(":categories", $data["recipe_categories"]);
+		$stmt->bindValue(":id", $id);
 		if ($stmt->execute()) {
 			if ($stmt->rowCount() == 1) {
 				$result = true;
@@ -88,7 +88,7 @@ class Recipe extends Request {
 		}
 		return Array('success'=>$result, 'id'=>$id);
 	}
-	
+
 	public function insert($data) {
 		if (! isset($data["recipe_name"])) { $data["recipe_name"] = ""; }
 		if (! isset($data["recipe_book_id"])) { $data["recipe_book_id"] = NULL; }
@@ -99,12 +99,12 @@ class Recipe extends Request {
 		$query = "INSERT INTO recipe_recipies (recipe_name, recipe_book_id, recipe_book_page, recipe_ingredients, recipe_rating, recipe_categories) "
 		. " VALUES (:name, :book, :bookPage, :ingredients, :rating, :categories)";
 		$stmt = $this->connection->prepare($query);
-		$stmt->bindValue(":name", $data["recipe_name"]);	
-		$stmt->bindValue(":book", $data["recipe_book_id"]);	
-		$stmt->bindValue(":bookPage", $data["recipe_book_page"]);	
-		$stmt->bindValue(":ingredients", $data["recipe_ingredients"]);	
-		$stmt->bindValue(":rating", $data["recipe_rating"]);	
-		$stmt->bindValue(":categories", $data["recipe_categories"]);	
+		$stmt->bindValue(":name", $data["recipe_name"]);
+		$stmt->bindValue(":book", $data["recipe_book_id"]);
+		$stmt->bindValue(":bookPage", $data["recipe_book_page"]);
+		$stmt->bindValue(":ingredients", $data["recipe_ingredients"]);
+		$stmt->bindValue(":rating", $data["recipe_rating"]);
+		$stmt->bindValue(":categories", $data["recipe_categories"]);
 		$stmt->execute();
 		$id = $this->connection->lastInsertId();
 		if ($id > 0) {
@@ -114,7 +114,20 @@ class Recipe extends Request {
 		}
 		return Array('success'=>$result, 'id'=>$id);
 	}
-	
+
+	public function deleteRecipeWithId($id) {
+		$query = "DELETE FROM recipe_recipies WHERE recipe_id=:id";
+		$stmt = $this->connection->prepare($query);
+		$stmt->bindValue(":id", $id);
+		$result = null;
+		if ($stmt->execute()) {
+			$success = true;
+		} else {
+			$success = false;
+		}
+		return Array("success"=>$success, "result"=>$result);
+	}
+
 	public function countRecipies() {
 		$rows = $this->getRecipies();
 		return count($rows);
@@ -122,5 +135,5 @@ class Recipe extends Request {
 
 }
 
-	
+
 ?>
