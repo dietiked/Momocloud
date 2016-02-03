@@ -32,6 +32,19 @@ momocloudHub
 	};
 }])
 
+.directive('hubModal', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
+	return {
+		restrict: 'E',
+		transclude: true,
+		scope: {
+			id: '@modalId',
+		},
+		templateUrl: DirectiveTemplatesFolderHub + 'hubModal.html',
+		controller: ['$scope', function($scope) {
+		}]
+	};
+}])
+
 .directive('chart', ['DirectiveTemplatesFolderHub', function(DirectiveTemplatesFolderHub) {
 	return {
 		restrict: 'AE',
@@ -39,8 +52,8 @@ momocloudHub
 		replace: true,
 		scope: true,
 		compile: function(tElement, tAttrs, transclude) {
-			
-			
+
+
 			return function($scope, $element, $attrs) {
 				$scope.canvasName = $attrs.chartName;
 				$attrs.$observe('chartData', function(val) {
@@ -49,24 +62,24 @@ momocloudHub
 						var ctx = $element.get(0).getContext("2d");
 						// This will get the first returned node in the jQuery collection.
 						var myChart = new Chart(ctx);
-						var chartData = JSON.parse($attrs.chartData);	
-						var chartIdentity;		
+						var chartData = JSON.parse($attrs.chartData);
+						var chartIdentity;
 						if ($attrs.chartType == 'pie') {
 							chartIdentity = myChart.Pie(chartData, {
-								responsive: true 
+								responsive: true
 							});
 						} else if ($attrs.chartType == 'bar') {
 							chartIdentity = myChart.Bar(chartData, {
-								responsive: true 
+								responsive: true
 							});
-						}	
+						}
 						if ($attrs.legend=='true') {
 							var legend = chartIdentity.generateLegend();
 							$element.after(legend);
-						}	
+						}
 					}
 				});
-				
+
 			}
 		}
 	};
@@ -79,7 +92,7 @@ momocloudHub
 		replace: true,
 		scope: {'message': '@errorText'},
 		link: function($scope, $element, $attrs) {
-			
+
 		}
 	};
 }])
@@ -102,12 +115,11 @@ momocloudHub
 			var openIcon = 'times';
 			$scope.icon = closeIcon;
 			$scope.toggle = function() {
-				console.log('Hallo');
 				$('.md-button-group-actions').slideToggle();
 				if ($scope.icon == closeIcon) {
 					$scope.icon = openIcon;
 				} else {
-					$scope.icon = closeIcon;					
+					$scope.icon = closeIcon;
 				}
 			}
 		}
@@ -123,17 +135,18 @@ momocloudHub
 			tags: '='
 		},
 		templateUrl: DirectiveTemplatesFolderHub + 'hubInputTag.html',
-		link: function(scope, element, attrs) {									
+		link: function(scope, element, attrs) {
 			scope.addNewTag = function(event, aTag) {
 				if (event.keyCode == 13 && aTag != undefined && aTag != '') { // Enter
 					scope.tags.push(aTag);
-					scope.newTag = '';						
+					scope.newTag = '';
 				}
 			}
-			
+
 			scope.removeTag = function(index) {
 				scope.tags.splice(index, 1);
 			}
+
 		}
 	};
 }])
@@ -146,7 +159,7 @@ momocloudHub
 			visible: '='
 		},
 		templateUrl: DirectiveTemplatesFolderHub + 'hubLoader.html',
-		link: function(scope, element, attrs) {									
+		link: function(scope, element, attrs) {
 		}
 	};
 }])
@@ -163,8 +176,7 @@ momocloudHub
 			'vintage_rating': '@vintagerating',
 		},
 		link: function($scope, $element, $attrs) {
-			
+
 		}
 	};
 }])
-
