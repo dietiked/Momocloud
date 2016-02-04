@@ -93,6 +93,47 @@ function(RecipiesService, RecipeBooksService, DirectiveTemplatesFolderRicettator
 			RecipeBooksService.getAll();
 
 		}
+	}
+	}])
+
+	.directive('recipesBookForm',
+	['RecipeBooksService', 'DirectiveTemplatesFolderRicettatore', 'NotificationCenter',
+	function(RecipeBooksService, DirectiveTemplatesFolderRicettatore, NotificationCenter) {
+
+		return {
+			restrict: 'E',
+			scope: {
+				id: '@modalId',
+				book: '=ngModel',
+				mode: '@'
+			},
+			templateUrl: DirectiveTemplatesFolderRicettatore + 'recipesBookForm.html',
+			link: function(scope, element, attrs) {
+				scope.save = function() {
+					if (scope.mode == 'insert') {
+						RecipeBooksService.insert(scope.book);
+					} else if (scope.mode == 'update') {
+						RecipeBooksService.update(scope.book);
+					}
+				}
+			}
+		};
+
+}])
+
+.directive('recipesBookCard', ['DirectiveTemplatesFolderRicettatore',
+function(DirectiveTemplatesFolderRicettatore) {
+
+	return {
+		restrict: 'E',
+		replace: true,
+		transclude: true,
+		scope: {
+			book: '=ngModel'
+		},
+		templateUrl: DirectiveTemplatesFolderRicettatore + 'recipesBookCard.html',
+		link: function(scope, element, attrs) {
+		}
 	};
 
 }]);

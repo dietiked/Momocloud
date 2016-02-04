@@ -174,9 +174,9 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 			templateUrl: 'apps/ricettatore/books/books_list_view.html',
 			controller: 'RecipeBooksListController'
 		}).
-		when('/recipies/books/new', {
-			templateUrl: 'apps/ricettatore/books/books_new_view.html',
-			controller: 'RecipeBooksNewController'
+		when('/recipies/books/:id', {
+			templateUrl: 'apps/ricettatore/books/books_details_view.html',
+			controller: 'RecipeBooksDetailsController'
 		}).
 		when('/recipies/recipies', {
 			templateUrl: 'apps/ricettatore/recipies/recipies_list_view.html',

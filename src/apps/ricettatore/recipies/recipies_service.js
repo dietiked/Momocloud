@@ -3,6 +3,7 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 	var request = apiUrlRicettatore;
 
 	RecipiesService.recipies = [];
+	RecipiesService.recipesForBook = [];
 	RecipiesService.numberOfRecipies = 0;
 	RecipiesService.recipe = {};
 	RecipiesService.randomRecipe = {};
@@ -20,6 +21,8 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 		GET_RANDOM_ERROR: 'recipeGetRandomError',
 		GET_SEARCH_SUCCESS: 'recipeSearchSuccess',
 		GET_SEARCH_ERROR: 'recipeSearchError',
+		GET_FOR_BOOK_SUCCESS: 'recipeRecipesForBookSuccess',
+		GET_FOR_BOOK_ERROR: 'recipeRecipesForBookError',
 		UPDATE_SUCCESS: 'recipeUpdateSuccess',
 		UPDATE_ERROR: 'recipeUpdateError',
 		DELETE_SUCCESS: 'recipeDeleteSuccess',
@@ -98,6 +101,28 @@ function RecipiesService($http, NotificationCenter, apiUrlRicettatore, UtilitySe
 			NotificationCenter.postNotification(RecipiesService.notifications.GET_RANDOM_ERROR);
 		});
 	}
+
+	RecipiesService.getRecipesForBook = function(id) {
+		$http.get(
+			request + 'books/' + id + '/recipes'
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				angular.forEach(data.result, function(aRecipe, index) {
+					aRecipe.recipe_categories = UtilityService.stringToTags(aRecipe.recipe_categories);
+				});
+				RecipiesService.recipesForBook = data.result;
+				//console.log('success', RecipiesService.recipesForBook);
+				NotificationCenter.postNotification(RecipiesService.notifications.GET_FOR_BOOK_SUCCESS);
+			} else {
+				NotificationCenter.postNotification(RecipiesService.notifications.GET_FOR_BOOK_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);
+			NotificationCenter.postNotification(RecipiesService.notifications.GET_FOR_BOOK_ERROR);
+		});
+	};
 
 	RecipiesService.search = function(aString) {
 		$http.get(
