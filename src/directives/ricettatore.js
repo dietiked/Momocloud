@@ -113,10 +113,27 @@ function(RecipiesService, RecipeBooksService, DirectiveTemplatesFolderRicettator
 					if (scope.mode == 'insert') {
 						RecipeBooksService.insert(scope.book);
 					} else if (scope.mode == 'update') {
-						RecipeBooksService.update(scope.book);						
+						RecipeBooksService.update(scope.book);
 					}
 				}
 			}
 		};
+
+}])
+
+.directive('recipesBookCard', ['DirectiveTemplatesFolderRicettatore',
+function(DirectiveTemplatesFolderRicettatore) {
+
+	return {
+		restrict: 'E',
+		replace: true,
+		transclude: true,
+		scope: {
+			book: '=ngModel'
+		},
+		templateUrl: DirectiveTemplatesFolderRicettatore + 'recipesBookCard.html',
+		link: function(scope, element, attrs) {
+		}
+	};
 
 }]);

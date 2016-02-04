@@ -1,23 +1,10 @@
 <div class="row">
-	<div class="col-md-12">
-			<div class="list-group list-group--2-line">
-				<div class="list-group-header">
-					<div class="md-list-item-title">
-						Libri
-					</div>
-				</div>
-				<div class="list-group-item" ng-repeat="book in books | filter:search">
-					<div class="md-list-item-title">
-						{{book.recipe_book_title}}
-					</div>
-					<div class="md-list-item-subtitle">
-						{{book.recipe_book_author}}
-						<button class="btn btn-default" data-toggle="modal" data-target="#edit-book-modal" ng-click="setSelectedBook(book)">
-							modifica
-						</button>
-					</div>
-				</div>
-			</div>
+	<div class="col-md-4 col-sm-12" ng-repeat="book in books | filter:search">
+		<recipes-book-card ng-model="book">
+			<button class="btn btn-default" data-toggle="modal" data-target="#edit-book-modal" ng-click="setSelectedBook(book)">
+				modifica
+			</button>
+		</recipes-book-card>
 	</div>
 </div>
 
