@@ -9,13 +9,13 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 		UrlService.go(url);
 	}
 
-	$scope.setSelectedRecipe = function(aBook) {
-		if (aBook == 'new') {
+	$scope.setSelectedRecipe = function(aRecipe) {
+		if (aRecipe == 'new') {
 			$scope.selectedRecipe = {
 				recipe_categories : []
 			};
 		} else {
-			$scope.selectedRecipe = angular.copy(aBook);
+			$scope.selectedRecipe = angular.copy(aRecipe);
 		}
 	};
 

@@ -174,10 +174,20 @@ $app->post("/ricettatore/books/", function () use ($host, $db, $user, $password,
 	echo json_encode($request->insertBook($data));
 });
 
+$app->get("/ricettatore/books/:bookId", function ($id) use ($host, $db, $user, $password) {
+	$request = new RecipeBook($host, $db, $user, $password);
+	echo json_encode($request->getBookWithId($id));
+});
+
 $app->post("/ricettatore/books/:bookId", function ($id) use ($host, $db, $user, $password, $app) {
 	$data = $app->request->post();
 	$request = new RecipeBook($host, $db, $user, $password);
 	echo json_encode($request->updateBookWithId($id, $data));
+});
+
+$app->get("/ricettatore/books/:bookId/recipes", function ($id) use ($host, $db, $user, $password) {
+	$request = new RecipeBook($host, $db, $user, $password);
+	echo json_encode($request->getRecipesForBookWithId($id));
 });
 
 // Wines

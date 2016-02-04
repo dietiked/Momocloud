@@ -18,10 +18,12 @@
 			$stmt = $this->connection->prepare($query);
 			if ($stmt->execute()) {
 				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$success = true;
 			} else {
+				$success = false;
 				$result = "Server error";
 			}
-			return $result;
+			return Array('success'=>$success, 'result'=>$result);
 		}
 
 		public function updateBookWithId($id, $data) {
@@ -60,6 +62,22 @@
 			$rows = $this->getBooks();
 			return count($rows);
 		}
+
+		public function getRecipesForBookWithId($id) {
+			$query = "SELECT * FROM recipe_recipies "
+			. "JOIN recipe_books ON recipe_recipies.recipe_book_id=recipe_books.recipe_book_id "
+			. "WHERE recipe_recipies.recipe_book_id=". $id;
+			$stmt = $this->connection->prepare($query);
+			if ($stmt->execute()) {
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$success = true;
+			} else {
+				$success = false;
+				$result = "Server error";
+			}
+			return Array('success'=>$success, 'result'=>$result);
+		}
+
 	}
 
 ?>

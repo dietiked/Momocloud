@@ -19,7 +19,7 @@ function RecipeBooksService($http, NotificationCenter, apiUrlRicettatore, Utilit
 		DELETE_SUCCESS: 'recipeBookDeleteSuccess',
 		DELETE_ERROR: 'recipeBookDeleteError',
 		INSERT_SUCCESS: 'recipeBookInsertSuccess',
-		INSERT_ERROR: 'recipeBookInsertError'
+		INSERT_ERROR: 'recipeBookInsertError',
 	};
 
 	RecipeBooksService.getAll = function() {
@@ -37,6 +37,26 @@ function RecipeBooksService($http, NotificationCenter, apiUrlRicettatore, Utilit
 			NotificationCenter.postNotification(RecipeBooksService.notifications.RECIPY_BOOKS_GET_ALL_ERROR);
 		});
 	};
+
+	RecipeBooksService.get = function(id) {
+		$http.get(
+			request + 'books/' + id
+		)
+		.success(function(data, status, headers, config) {
+			if (data.success) {
+				RecipeBooksService.book = data.result[0];
+				//console.log('success', RecipeBooksService.book);
+				NotificationCenter.postNotification(RecipeBooksService.notifications.GET_SUCCESS);
+			} else {
+				NotificationCenter.postNotification(RecipeBooksService.notifications.GET_ERROR);
+			}
+		})
+		.error(function(data, status, headers, config) {
+			//console.log('error', data);
+			NotificationCenter.postNotification(RecipeBooksService.notifications.GET_ERROR);
+		});
+	};
+
 
 	RecipeBooksService.update = function(aBook) {
 		$http.post(
