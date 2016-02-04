@@ -174,6 +174,11 @@ $app->post("/ricettatore/books/", function () use ($host, $db, $user, $password,
 	echo json_encode($request->insertBook($data));
 });
 
+$app->post("/ricettatore/books/:bookId", function ($id) use ($host, $db, $user, $password, $app) {
+	$data = $app->request->post();
+	$request = new RecipeBook($host, $db, $user, $password);
+	echo json_encode($request->updateBookWithId($id, $data));
+});
 
 // Wines
 $app->get("/winedb/wines/", function () use ($host, $db, $user, $password) {

@@ -12,6 +12,9 @@
 					</div>
 					<div class="md-list-item-subtitle">
 						{{book.recipe_book_author}}
+						<button class="btn btn-default" data-toggle="modal" data-target="#edit-book-modal" ng-click="setSelectedBook(book)">
+							modifica
+						</button>
 					</div>
 				</div>
 			</div>
@@ -21,6 +24,9 @@
 <loader visible="loading"></loader>
 
 <back-button></back-button>
-<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="go('/recipies/books/new')">
+<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" data-toggle="modal" data-target="#insert-book-modal" ng-click="setSelectedBook({})">
 	<i class="fa fa-plus"></i>
 </button>
+
+<recipes-book-form modal-id="edit-book-modal" ng-model="selectedBook" mode="update"></recipes-book-form>
+<recipes-book-form modal-id="insert-book-modal" ng-model="selectedBook" mode="insert"></recipes-book-form>
