@@ -1,26 +1,25 @@
 <div class="row">
 	<div class="col-md-12">
-			<div class="list-group list-group--2-line">
-				<div class="list-group-header">
-					<div class="md-list-item-title">
-						Libri
-					</div>
-				</div>
-				<div class="list-group-item" ng-repeat="book in books | filter:search">
-					<div class="md-list-item-title">
-						{{book.recipe_book_title}}
-					</div>
-					<div class="md-list-item-subtitle">
-						{{book.recipe_book_author}}
-					</div>
-				</div>
-			</div>
+		<h5>Libri</h5>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-sm-12" ng-repeat="book in books | filter:search">
+		<recipes-book-card ng-model="book">
+			<button class="btn btn-default" ng-click="go('recipies/books/' + book.recipe_book_id)">ricette</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#edit-book-modal" ng-click="setSelectedBook(book)">
+				modifica
+			</button>
+		</recipes-book-card>
 	</div>
 </div>
 
 <loader visible="loading"></loader>
 
 <back-button></back-button>
-<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" ng-click="go('/recipies/books/new')">
+<button class="btn btn-accent md-button-fab mmc-fixed-bottomright" data-toggle="modal" data-target="#insert-book-modal" ng-click="setSelectedBook({})">
 	<i class="fa fa-plus"></i>
 </button>
+
+<recipes-book-form modal-id="edit-book-modal" ng-model="selectedBook" mode="update"></recipes-book-form>
+<recipes-book-form modal-id="insert-book-modal" ng-model="selectedBook" mode="insert"></recipes-book-form>
