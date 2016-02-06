@@ -6,4 +6,15 @@ function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthServic
     $mdSidenav.open(navId);
   }
 
+  var loadNavbar = function(info) {
+    $scope.title = info.title;
+    $scope.application = info.application;
+  }
+
+  // Notification handlers
+	var redirectSuccess = NotificationCenter.subscribe(UrlService.notifications.REDIRECT_SUCCESS, loadNavbar);
+	$scope.$on('$destroy', function(){
+		NotificationCenter.unsubscribe(redirectSuccess);
+	});
+
 }]);
