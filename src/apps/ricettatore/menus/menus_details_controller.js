@@ -34,6 +34,10 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeMe
 	var getMenuSuccessHandler = function(aMenu) {
 		$scope.menu = RecipeMenusService.menu;
 		$scope.loading = false;
+		NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
+			title: 'Menu #' + $scope.menu.recipe_menu_id,
+			application: 'Ricettatore'
+		}]);
 	};
 
 	var deleteRecipeFromMenuSuccessHandler = function() {

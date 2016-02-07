@@ -1,3 +1,7 @@
+// Custom material design
+var momocloudMaterial = angular.module('momocloudMaterial', []);
+momocloudMaterial.constant('DirectiveTemplatesFolderMaterial', 'directives/templates/');
+
 // Modules definition
 var momocloudHub = angular.module('momocloudHub', []);
 momocloudHub.factory('NotificationCenter', NotificationCenter);
@@ -38,7 +42,10 @@ var momocloudTemplateCache = angular.module('momocloudTemplateCache', []);
 
 // Define constants
 
-var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter', 'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache', 'ui.bootstrap', ],
+var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter',
+'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 
+'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache',
+'momocloudMaterial', 'ui.bootstrap', ],
 
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
