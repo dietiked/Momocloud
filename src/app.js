@@ -50,17 +50,7 @@ var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter',
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
 		$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-		$httpProvider.interceptors.push(function() {
-			return {
-				'request': function(config) {
-					if (! AuthService.isLoggedIn) {
-			      config.headers['x-session-token'] = AuthService.user.token;
-			    }
-			    console.log('Configuration object', config);
-			    return config;
-				}
-			}
-		});
+		$httpProvider.interceptors.push('TokenizerService');
 
 		/**
 		* The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -233,7 +223,7 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 
 }]);
 
-momocloud.run(function($rootScope, $location, AuthService) {
+momocloud.run(function($rootScope, $location, SessionService) {
 	// enumerate routes that don't need authentication
 	var routesThatDontRequireAuth = ['/login'];
 
@@ -250,11 +240,11 @@ momocloud.run(function($rootScope, $location, AuthService) {
 
 	$rootScope.$on('$routeChangeStart', function (event, next, current) {
 		// if route requires auth and user is not logged in
-		if (!routeClean($location.url()) && !AuthService.isLoggedIn()) {
+		if (!routeClean($location.url()) && !SessionService.isSessionRunning()) {
 			// redirect back to login
 			$location.path('/login');
 		} else {
-			AuthService.init();
+			SessionService.increaseExpiration();
 		}
 	});
 });

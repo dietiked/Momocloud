@@ -1,6 +1,6 @@
 momocloudWineDb.controller('ProducersDetailsController',
-['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService', 'NotificationCenter',
-function($scope, $routeParams, ProducersService, AuthService, UrlService, NotificationCenter) {
+['$scope', '$routeParams', 'ProducersService', 'UrlService', 'NotificationCenter',
+function($scope, $routeParams, ProducersService, UrlService, NotificationCenter) {
 	//console.log('ProducersDetailsController for producer', $routeParams.producerId);
 
 	$scope.loaded = false;
@@ -22,6 +22,5 @@ function($scope, $routeParams, ProducersService, AuthService, UrlService, Notifi
 	});
 
 	ProducersService.getProducer($routeParams.producerId, true);
-	AuthService.increaseExpiration();
 
 }]);

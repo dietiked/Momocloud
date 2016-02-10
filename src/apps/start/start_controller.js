@@ -1,6 +1,6 @@
 momocloudStart.controller('StartController',
-['$scope', 'NotificationCenter', 'DependenciesChecker', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthService) {
+['$scope', 'NotificationCenter', 'DependenciesChecker', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, UrlService) {
 
 	console.log('StartController');
 
@@ -8,8 +8,6 @@ function($scope, NotificationCenter, DependenciesChecker, UrlService, AuthServic
 		title: 'Start',
 		application: 'Momocloud'
 	}]);
-
-	AuthService.increaseExpiration();
 
 	$scope.go = function(url) {
 		UrlService.go(url);

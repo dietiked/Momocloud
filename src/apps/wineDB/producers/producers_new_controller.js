@@ -1,23 +1,23 @@
-momocloudWineDb.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'AuthService', 'UrlService', 'GeneralDataService',
-function($scope, $routeParams, ProducersService, AuthService, UrlService, GeneralDataService) {
+momocloudWineDb.controller('ProducersNewController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'GeneralDataService',
+function($scope, $routeParams, ProducersService, UrlService, GeneralDataService) {
 	//console.log('ProducersNewController');
-	
+
 	var redirectToNewWineForm = false;
-	
+
 	$scope.producer = {};
 	$scope.success = false;
 	$scope.countries = [];
-	
+
 	$scope.save = function() {
 		//console.log('Save', $scope.producer);
 		ProducersService.insert($scope.producer);
 	}
-	
-	$scope.saveAndAddWine = function() {	
+
+	$scope.saveAndAddWine = function() {
 		redirectToNewWineForm = true;
-		$scope.save();		
+		$scope.save();
 	};
-			
+
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
@@ -26,9 +26,9 @@ function($scope, $routeParams, ProducersService, AuthService, UrlService, Genera
 	var insertSuccess = function() {
 		// Visualize message with ng-show
 		if (redirectToNewWineForm) {
-			UrlService.redirectToNewWine();					
+			UrlService.redirectToNewWine();
 		} else {
-			UrlService.redirectToProducerList();		
+			UrlService.redirectToProducerList();
 		}
 	}
 	var getCountries = function() {
@@ -43,7 +43,6 @@ function($scope, $routeParams, ProducersService, AuthService, UrlService, Genera
 		NotificationCenter.unsubscribe(getCountriesSuccess);
 	});
 
-	AuthService.increaseExpiration();
 	GeneralDataService.getCountries();
-			
+
 }]);

@@ -1,7 +1,8 @@
-momocloudWineDb.controller('WinesEditController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService, AuthService) {
-	//console.log('WinesEditController', $routeParams.wineId);	
-		
+momocloudWineDb.controller('WinesEditController',
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService) {
+	//console.log('WinesEditController', $routeParams.wineId);
+
 	$scope.wine = {};
 	$scope.producers = [];
 	$scope.winetypes = [];
@@ -13,7 +14,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.save = function() {
 		WinesService.update($scope.wine);
 	}
-	
+
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
@@ -23,12 +24,12 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		if (DependenciesChecker.serviceReady) {
 			$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 			WinesService.getWine($routeParams.wineId);
-		}		
+		}
 	}
-			
+
 	// Notification functions
 	var getWine = function() {
-		$scope.wine = WinesService.wine;		
+		$scope.wine = WinesService.wine;
 		$scope.loaded = true;
 	}
 
@@ -61,9 +62,8 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		NotificationCenter.unsubscribe(getProducersSuccess);
 		NotificationCenter.unsubscribe(getTypesSuccess);
 	});
-		
+
 	ProducersService.getAll();
 	GeneralDataService.getWinetypes();
-	AuthService.increaseExpiration();
 
 }]);

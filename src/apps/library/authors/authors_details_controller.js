@@ -1,5 +1,6 @@
-momocloudLibrary.controller('LibraryAuthorsDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'LibraryBooksService', 'UrlService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryAuthorsService, LibraryBooksService, UrlService, AuthService) {
+momocloudLibrary.controller('LibraryAuthorsDetailsController',
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'LibraryBooksService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryAuthorsService, LibraryBooksService, UrlService) {
 
 	console.log('LibraryAuthorsDetailsController');
 	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
@@ -31,6 +32,5 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, LibraryA
 	});
 
 	LibraryBooksService.getBooksForAuthor($routeParams.authorDescr);
-	AuthService.increaseExpiration();
 
 }]);

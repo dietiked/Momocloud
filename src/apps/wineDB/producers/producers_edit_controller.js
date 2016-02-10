@@ -1,17 +1,17 @@
-momocloudWineDb.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'AuthService', 'GeneralDataService', 'DependenciesChecker',
-function($scope, $routeParams, ProducersService, UrlService, AuthService, GeneralDataService, DependenciesChecker) {
+momocloudWineDb.controller('ProducersEditController', ['$scope', '$routeParams', 'ProducersService', 'UrlService', 'GeneralDataService', 'DependenciesChecker',
+function($scope, $routeParams, ProducersService, UrlService, GeneralDataService, DependenciesChecker) {
 	//console.log('ProducersEditController for producer', $routeParams.producerId);
-	
+
 	$scope.producer = {};
 	$scope.showError = false;
 	$scope.loaded = false;
 	$scope.countries = [];
-		
+
 	$scope.save = function() {
 		//console.log('Save', $scope.producer);
 		ProducersService.update($scope.producer);
 	}
-			
+
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
@@ -44,8 +44,7 @@ function($scope, $routeParams, ProducersService, UrlService, AuthService, Genera
 		NotificationCenter.unsubscribe(updateProducerError);
 		NotificationCenter.unsubscribe(getCountriesSuccess);
 	});
-		
+
 	GeneralDataService.getCountries();
-	AuthService.increaseExpiration();
 	
 }]);

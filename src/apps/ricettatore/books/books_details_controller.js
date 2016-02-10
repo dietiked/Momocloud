@@ -1,6 +1,6 @@
 momocloudRicettatore.controller('RecipeBooksDetailsController',
-['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'RecipeBooksService', 'RecipiesService', 'UrlService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeBooksService, RecipiesService, UrlService, AuthService) {
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'RecipeBooksService', 'RecipiesService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeBooksService, RecipiesService, UrlService) {
 
 	console.log('RecipeBooksListController');
 
@@ -44,6 +44,5 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeBo
 
 	RecipeBooksService.get($routeParams.id);
   RecipiesService.getRecipesForBook($routeParams.id);
-	AuthService.increaseExpiration();
 
 }]);

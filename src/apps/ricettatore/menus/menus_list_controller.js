@@ -1,6 +1,6 @@
 momocloudRicettatore.controller('RecipeMenusListController',
-['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeMenusService', 'RecipiesService', 'UrlService', 'AuthService', 'GeneralDataService',
-function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, RecipiesService, UrlService, AuthService, GeneralDataService) {
+['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipeMenusService', 'RecipiesService', 'UrlService', 'GeneralDataService',
+function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, RecipiesService, UrlService, GeneralDataService) {
 	console.log('RecipeMenusListController');
 
 	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
@@ -87,5 +87,5 @@ function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, Re
 
 	RecipeMenusService.getAll();
 	RecipiesService.getAll();
-	AuthService.increaseExpiration();
+
 }]);

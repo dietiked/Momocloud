@@ -1,5 +1,5 @@
-momocloudWineDb.controller('WineDBDashboardController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService', 'AuthService',
-function($scope, ProducersService, WinesService, ChartDataService, AuthService) {
+momocloudWineDb.controller('WineDBDashboardController', ['$scope', 'ProducersService', 'WinesService', 'ChartDataService',
+function($scope, ProducersService, WinesService, ChartDataService) {
 	//console.log('IndexController');
 
 	// Notification functions
@@ -14,19 +14,19 @@ function($scope, ProducersService, WinesService, ChartDataService, AuthService) 
 	var getMovementsForChartSuccess = function() {
 		var chartData = ChartDataService.movementsForChart;
 	};
-	
+
 	getTypesForChartSuccess = function() {
-		$scope.chartDataType = ChartDataService.typesForChart;		
+		$scope.chartDataType = ChartDataService.typesForChart;
 	};
 
 	getCountriesForChartSuccess = function() {
-		$scope.chartDataCountry = ChartDataService.countriesForChart;		
+		$scope.chartDataCountry = ChartDataService.countriesForChart;
 	};
 
 	getBottlesForChartSuccess = function() {
-		$scope.chartDataBottles = ChartDataService.bottlesByWineForChart;		
+		$scope.chartDataBottles = ChartDataService.bottlesByWineForChart;
 	};
-	
+
 	// Notification handlers
 	var getProducersSuccess = NotificationCenter.subscribe(ProducersService.notifications.PRODUCERS_GET_ALL_SUCCESS, activeProducers);
 	var getWinesSuccess = NotificationCenter.subscribe(WinesService.notifications.WINES_COUNT_SUCCESS, getWines);
@@ -41,13 +41,12 @@ function($scope, ProducersService, WinesService, ChartDataService, AuthService) 
 		NotificationCenter.unsubscribe(getBottlesForChartSuccessHandler);
 	});
 
-	
+
 	ProducersService.getAll();
 	WinesService.countWines();
-	AuthService.increaseExpiration();
-	
+
 	// -----------
 	//ChartDataService.getMovementsForTimeSeries();
 	ChartDataService.getTypesInCellar(200, 200, 150);
-	
+
 }]);

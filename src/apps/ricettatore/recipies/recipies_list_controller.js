@@ -1,5 +1,5 @@
-momocloudRicettatore.controller('RecipiesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipiesService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService, AuthService) {
+momocloudRicettatore.controller('RecipiesListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'RecipiesService', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService) {
 
 	console.log('RecipiesListController');
 	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
@@ -45,6 +45,5 @@ function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlSe
 	});
 
 	RecipiesService.getAll();
-	AuthService.increaseExpiration();
 
 }]);

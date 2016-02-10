@@ -1,20 +1,21 @@
-momocloudWineDb.controller('WinesNewController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService, AuthService) {
-	//console.log('WinesNewController');	
-	
+momocloudWineDb.controller('WinesNewController',
+['$scope', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'ProducersService', 'GeneralDataService', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, WinesService, ProducersService, GeneralDataService, UrlService) {
+	//console.log('WinesNewController');
+
 	var redirectToNewVintageForm = false;
-	
+
 	$scope.wine = {};
 	$scope.producers = [];
 	$scope.winetypes = [];
 	$scope.success = false;
 	$scope.dependenciesLoaded = DependenciesChecker.init();
 	DependenciesChecker.setDependencies(2);
-	
+
 	$scope.save = function() {
 		WinesService.insert($scope.wine);
 	}
-	
+
 	$scope.saveAndAddVintage = function() {
 		redirectToNewVintageForm = true;
 		$scope.save();
@@ -25,13 +26,13 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 		if (redirectToNewVintageForm) {
 			var wineId = WinesService.lastWineId;
 			if (wineId > 0) {
-				UrlService.redirectToNewVintage(wineId);								
+				UrlService.redirectToNewVintage(wineId);
 			} else {
-				UrlService.redirectToWineList();		
+				UrlService.redirectToWineList();
 			}
 		} else {
-			UrlService.redirectToWineList();		
-		}			
+			UrlService.redirectToWineList();
+		}
 	}
 
 	var getProducers = function() {
@@ -45,7 +46,7 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 		DependenciesChecker.loaded();
 		$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 	}
-			
+
 
 	// Notification handlers
 	var insertWineSuccess = NotificationCenter.subscribe(WinesService.notifications.WINES_INSERT_SUCCESS, insertSuccess);
@@ -59,6 +60,5 @@ function($scope, NotificationCenter, DependenciesChecker, WinesService, Producer
 
 	ProducersService.getAll();
 	GeneralDataService.getWinetypes();
-	AuthService.increaseExpiration();
 
 }]);

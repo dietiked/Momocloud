@@ -1,16 +1,17 @@
-momocloudWineDb.controller('CellarListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'AuthService', 'UrlService',
-function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, AuthService, UrlService) {
-	//console.log('WinesDetailsController');	
-	
+momocloudWineDb.controller('CellarListController',
+['$scope', 'NotificationCenter', 'DependenciesChecker', 'VintagesService', 'CellarService', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, VintagesService, CellarService, UrlService) {
+	//console.log('WinesDetailsController');
+
 	$scope.loaded = false;
 	DependenciesChecker.setDependencies(2);
-		
+
 	$scope.storedWines = [];
 	$scope.orderColumn = 'wine_name';
 	$scope.selectedWine = null;
 	$scope.date = new Date();
 	$scope.quantity = 1;
-		
+
 	$scope.recalculateQuantity = function(storedWineId) {
 		CellarService.recalculateQuantity(storedWineId);
 	}
@@ -18,11 +19,11 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
-	
+
 	$scope.setSelectedWine = function(wine) {
 		$scope.selectedWine = wine;
 	}
-	
+
 	$scope.drink = function(aWine, aDate) {
 		CellarService.drink(aWine.stored_wine_id, aDate);
 	}
@@ -34,13 +35,13 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	// Notification functions
 	var getStoredWines = function() {
 		$scope.storedWines = CellarService.storedWines;
-		$scope.loaded = true;	
+		$scope.loaded = true;
 	}
 
 	var recalculateQuantitySuccessHandler = function() {
 		CellarService.getAll();
 	}
-	
+
 	var drinkSuccessHandler = function() {
 		$('.modal').modal('hide');
 	}
@@ -49,7 +50,7 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	}
 
 	var drinkBuyErrorHandler = function() {
-		console.log("Drink error");		
+		console.log("Drink error");
 	}
 
 
@@ -70,6 +71,5 @@ function($scope, NotificationCenter, DependenciesChecker, VintagesService, Cella
 	});
 
 	CellarService.getAll()
-	AuthService.increaseExpiration();
-		
+
 }]);

@@ -1,5 +1,6 @@
-momocloudLibrary.controller('LibraryAuthorsListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'UrlService', 'AuthService',
-function($scope, NotificationCenter, DependenciesChecker, LibraryAuthorsService, UrlService, AuthService) {
+momocloudLibrary.controller('LibraryAuthorsListController',
+['$scope', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'UrlService',
+function($scope, NotificationCenter, DependenciesChecker, LibraryAuthorsService, UrlService) {
 
 	console.log('LibraryAuthorsListController');
 
@@ -31,6 +32,4 @@ function($scope, NotificationCenter, DependenciesChecker, LibraryAuthorsService,
 	});
 
 	LibraryAuthorsService.getAll();
-	AuthService.increaseExpiration();
-
 }]);

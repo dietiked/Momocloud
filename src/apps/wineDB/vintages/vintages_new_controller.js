@@ -1,15 +1,16 @@
-momocloudWineDb.controller('VintagesNewController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
-	//console.log('WinesDetailsController', $routeParams.wineId);	
+momocloudWineDb.controller('VintagesNewController',
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService) {
+	//console.log('WinesDetailsController', $routeParams.wineId);
 
 	var redirectToAddBottlesForm = false;
-		
+
 	$scope.vintage = {};
 	$scope.wine = {};
 	$scope.ratings = [];
 	$scope.years = [];
 	$scope.showError = false;
-			
+
 	$scope.save = function(addBottles) {
 		//console.log('Save vintage', $scope.vintage);
 		redirectToAddBottlesForm = addBottles;
@@ -18,13 +19,13 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
-			
+
 	// Notification functions
 	var getWine = function() {
-		$scope.wine = WinesService.wine;		
+		$scope.wine = WinesService.wine;
 	}
 	var getRatings = function() {
-		$scope.ratings = GeneralDataService.ratings;		
+		$scope.ratings = GeneralDataService.ratings;
 	}
 	var getYears = function() {
 		$scope.years = GeneralDataService.years;
@@ -33,7 +34,7 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		if (VintagesService.lastStoredWineId > 0 & redirectToAddBottlesForm) {
 			UrlService.redirectToAddBottles(VintagesService.lastStoredWineId);
 		} else {
-			UrlService.redirectToWine($routeParams.wineId);		
+			UrlService.redirectToWine($routeParams.wineId);
 		}
 	}
 	var vintageNotInserted = function() {
@@ -58,5 +59,5 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 	GeneralDataService.getRatings();
 	GeneralDataService.getYears();
 	AuthService.increaseExpiration();
-		
+
 }]);

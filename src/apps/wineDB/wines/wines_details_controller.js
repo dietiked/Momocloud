@@ -1,13 +1,14 @@
-momocloudWineDb.controller('WinesDetailsController', ['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'AuthService', 'UrlService',
-function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, AuthService, UrlService) {
-	//console.log('WinesDetailsController', $routeParams.wineId);	
-	
+momocloudWineDb.controller('WinesDetailsController',
+['$scope', '$routeParams', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'UrlService',
+function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesService, VintagesService, UrlService) {
+	//console.log('WinesDetailsController', $routeParams.wineId);
+
 	$scope.loaded = false;
 	DependenciesChecker.setDependencies(2);
-		
+
 	$scope.wine = {};
 	$scope.vintages = [];
-			
+
 	$scope.go = function(url) {
 		UrlService.go(url);
 	}
@@ -16,17 +17,17 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 		DependenciesChecker.loaded();
 		if (DependenciesChecker.serviceReady) {
 			$scope.loaded = DependenciesChecker.serviceReady;
-		}		
+		}
 	}
 
 	// Notification functions
 	var getWine = function() {
 		$scope.wine = WinesService.wine;
-		loadProgress();		
+		loadProgress();
 	}
 
 	var getVintages = function() {
-		$scope.vintages = VintagesService.vintages;	
+		$scope.vintages = VintagesService.vintages;
 		loadProgress();
 	}
 
@@ -41,6 +42,5 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, WinesSer
 
 	WinesService.getWine($routeParams.wineId);
 	VintagesService.getAll($routeParams.wineId)
-	AuthService.increaseExpiration();
 		
 }]);

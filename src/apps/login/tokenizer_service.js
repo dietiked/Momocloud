@@ -1,15 +1,14 @@
-function TokenizerService() {
+function TokenizerService(SessionService) {
 
-  var TokenizerService = {};
+  var TokenizerService = {}
 
-  TokenizerService.notifications = {};
+  TokenizerService.notifications = {}
 
 
   TokenizerService.request = function(config) {
-    if (! AuthService.isLoggedIn) {
-      config.headers['x-session-token'] = AuthService.token;
+    if (SessionService.isSessionRunning()) {
+      config.headers['x-session-token'] = SessionService.getToken();
     }
-    console.log('Configuration object', config);
     return config;
   }
 

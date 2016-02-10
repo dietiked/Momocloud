@@ -1,6 +1,6 @@
 momocloudWineDb.controller('ProducersListController',
-['$scope', 'ProducersService', 'AuthService', 'UrlService', 'NotificationCenter',
-function($scope, ProducersService, AuthService, UrlService, NotificationCenter) {
+['$scope', 'ProducersService', 'UrlService', 'NotificationCenter',
+function($scope, ProducersService, UrlService, NotificationCenter) {
 	//console.log('ProducersController');
 
 	$scope.go = function(url) {
@@ -19,6 +19,5 @@ function($scope, ProducersService, AuthService, UrlService, NotificationCenter) 
 	});
 
 	ProducersService.getAll();
-	AuthService.increaseExpiration();
 
 }]);

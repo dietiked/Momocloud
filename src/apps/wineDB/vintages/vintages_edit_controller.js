@@ -1,14 +1,15 @@
-momocloudWineDb.controller('VintagesEditController', ['$scope', '$routeParams', '$location', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService', 'AuthService',
-function($scope, $routeParams, $location, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService, AuthService) {
-	//console.log('VintagesEditController', $routeParams.wineId, $routeParams.vintageId);	
-		
+momocloudWineDb.controller('VintagesEditController',
+['$scope', '$routeParams', '$location', 'NotificationCenter', 'DependenciesChecker', 'WinesService', 'VintagesService', 'GeneralDataService', 'UrlService',
+function($scope, $routeParams, $location, NotificationCenter, DependenciesChecker, WinesService, VintagesService, GeneralDataService, UrlService) {
+	//console.log('VintagesEditController', $routeParams.wineId, $routeParams.vintageId);
+
 	$scope.vintage = {};
 	$scope.ratings = [];
 	$scope.years = [];
 	DependenciesChecker.setDependencies(2);
 	$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 	$scope.showError = false;
-			
+
 	$scope.save = function() {
 		//console.log('Save vintage', $scope.vintage);
 		VintagesService.update($scope.vintage);
@@ -22,13 +23,13 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 		if (DependenciesChecker.serviceReady) {
 			$scope.dependenciesLoaded = DependenciesChecker.serviceReady;
 			VintagesService.get($routeParams.vintageId)
-		}		
+		}
 	}
-			
+
 	// Notification functions
 	var getVintage = function() {
 		$scope.vintage = VintagesService.vintage;
-		//console.log('Check', $scope.vintage);	
+		//console.log('Check', $scope.vintage);
 	}
 	var vintageUpdated = function() {
 		UrlService.redirectToWine($routeParams.wineId);
@@ -38,11 +39,11 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 	}
 	var getRatings = function() {
 		$scope.ratings = GeneralDataService.ratings;
-		loadProgress();		
+		loadProgress();
 	}
 	var getYears = function() {
 		$scope.years = GeneralDataService.years;
-		loadProgress();		
+		loadProgress();
 	}
 
 	// Notification handlers
@@ -61,6 +62,5 @@ function($scope, $routeParams, $location, NotificationCenter, DependenciesChecke
 
 	GeneralDataService.getRatings();
 	GeneralDataService.getYears();
-	AuthService.increaseExpiration();
-		
+
 }]);

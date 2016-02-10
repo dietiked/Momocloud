@@ -1,6 +1,6 @@
 momocloudWineDb.controller('WinesListController',
-['$scope', 'WinesService', 'AuthService', 'UrlService', 'NotificationCenter',
-function($scope, WinesService, AuthService, UrlService, NotificationCenter) {
+['$scope', 'WinesService', 'UrlService', 'NotificationCenter',
+function($scope, WinesService, UrlService, NotificationCenter) {
 	//console.log('WinesListController');
 
 	$scope.loaded = false;
@@ -21,6 +21,5 @@ function($scope, WinesService, AuthService, UrlService, NotificationCenter) {
 	});
 
 	WinesService.getAll();
-	AuthService.increaseExpiration();
 
 }]);
