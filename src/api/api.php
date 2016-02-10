@@ -1,6 +1,9 @@
 <?php
 
 require "Slim/Slim.php";
+
+require "php-jwt/JWT.php";
+
 require "config.php";
 require "classes/request.php";
 

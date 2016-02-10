@@ -43,13 +43,24 @@ var momocloudTemplateCache = angular.module('momocloudTemplateCache', []);
 // Define constants
 
 var momocloud = angular.module('momocloud', ['ngRoute', 'angular.filter',
-'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb', 
+'momocloudHub', 'momocloudLogin', 'momocloudStart', 'momocloudWineDb',
 'momocloudRicettatore', 'momocloudLibrary', 'momocloudTemplateCache',
 'momocloudMaterial', 'ui.bootstrap', ],
 
 	function($httpProvider) {
 		// Use x-www-form-urlencoded Content-Type
 		$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+		$httpProvider.interceptors.push(function() {
+			return {
+				'request': function(config) {
+					if (! AuthService.isLoggedIn) {
+			      config.headers['x-session-token'] = AuthService.user.token;
+			    }
+			    console.log('Configuration object', config);
+			    return config;
+				}
+			}
+		});
 
 		/**
 		* The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -221,7 +232,6 @@ momocloud.config(['$routeProvider', '$locationProvider', function($routeProvider
 	//$locationProvider.html5Mode(true);
 
 }]);
-
 
 momocloud.run(function($rootScope, $location, AuthService) {
 	// enumerate routes that don't need authentication
