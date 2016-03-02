@@ -3,12 +3,6 @@ momocloudLibrary.controller('LibraryBooksListController',
 function($scope, NotificationCenter, DependenciesChecker, LibraryBooksService, UrlService, AuthService) {
 
 	console.log('LibraryBooksListController');
-
-	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-		title: 'Libri',
-		application: 'Libreria'
-	}]);
-
 	$scope.loading = true;
 
 	// Notification functions

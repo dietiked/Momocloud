@@ -3,7 +3,6 @@ momocloudRicettatore.controller('RecipeBooksDetailsController',
 function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeBooksService, RecipiesService, UrlService, AuthService) {
 
 	console.log('RecipeBooksListController');
-
 	$scope.loading = true;
   $scope.books = {};
   $scope.recipes = [];
@@ -16,10 +15,6 @@ function($scope, $routeParams, NotificationCenter, DependenciesChecker, RecipeBo
   // Notification functions
 	var getBook = function() {
 		$scope.book = RecipeBooksService.book;
-		NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-			title: $scope.book.recipe_book_title,
-			application: 'Ricettatore'
-		}]);
 	}
 
   var getRecipes = function() {

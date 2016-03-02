@@ -1,4 +1,9 @@
 <div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<h5>Menu #{{menu.recipe_menu_id}}</h5>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-4 col-sm-12" ng-repeat="recipe in menu.recipies">
 		<recipies-recipe-card ng-model="recipe">
 			<button class="btn btn-default" data-toggle="modal" data-target="#delete-recipe-modal" ng-click="setSelectedRecipe(recipe)">rimuovi</button>

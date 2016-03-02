@@ -3,11 +3,6 @@ momocloudRicettatore.controller('RecipeMenusListController',
 function($scope, NotificationCenter, DependenciesChecker, RecipeMenusService, RecipiesService, UrlService, AuthService, GeneralDataService) {
 	console.log('RecipeMenusListController');
 
-	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-		title: 'Menu',
-		application: 'Ricettatore'
-	}]);
-
 	$scope.loading = true;
 	$scope.selectedMenu = null;
 	$scope.recipes = [];

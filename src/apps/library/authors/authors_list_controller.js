@@ -1,13 +1,7 @@
 momocloudLibrary.controller('LibraryAuthorsListController', ['$scope', 'NotificationCenter', 'DependenciesChecker', 'LibraryAuthorsService', 'UrlService', 'AuthService',
 function($scope, NotificationCenter, DependenciesChecker, LibraryAuthorsService, UrlService, AuthService) {
-
+	
 	console.log('LibraryAuthorsListController');
-
-	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-		title: 'Autori',
-		application: 'Libreria'
-	}]);
-
 	$scope.loading = true;
 	$scope.authors = [];
 

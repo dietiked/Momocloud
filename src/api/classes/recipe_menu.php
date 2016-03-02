@@ -10,15 +10,8 @@ class RecipeMenu extends Request {
 			$success = true;
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			for ($i=0; $i<count($result); $i++) {
-				$query2 = "SELECT * FROM recipe_menus_recipies "
-				. "JOIN (recipe_recipies, recipe_books) "
-				. "ON recipe_menus_recipies.recipe_id=recipe_recipies.recipe_id "
-				. "AND recipe_recipies.recipe_book_id=recipe_books.recipe_book_id"
-				. " WHERE recipe_menu_id=" . $result[$i]["recipe_menu_id"];
-				$stmt2 = $this->connection->prepare($query2);
-				$stmt2->execute();
-				$result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-				$result[$i]["recipies"] = $result2;
+				$recipesForMenu = $this->getRecipiesForMenuWithId($result[$i]["recipe_menu_id"]);
+				$result[$i]["recipies"] = $recipesForMenu["result"]["recipies"];
 			}
 		} else {
 			$success = false;
@@ -68,11 +61,12 @@ class RecipeMenu extends Request {
 		if ($stmt->execute()) {
 			$success = true;
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			$recipiesQuery = "SELECT * FROM recipe_menus_recipies "
-			. "JOIN (recipe_recipies, recipe_books) "
+			$recipiesQuery = "SELECT * FROM recipe_recipies "
+			. "JOIN recipe_menus_recipies "
 			. "ON recipe_menus_recipies.recipe_id=recipe_recipies.recipe_id "
-			. "AND recipe_recipies.recipe_book_id=recipe_books.recipe_book_id"
-			. " WHERE recipe_menu_id=" . $id;
+			. "LEFT JOIN recipe_books "
+			. "ON recipe_recipies.recipe_book_id=recipe_books.recipe_book_id "
+			. "WHERE recipe_menu_id=" . $id;
 			$recipiesStmt = $this->connection->prepare($recipiesQuery);
 			if ($recipiesStmt->execute()) {
 				$recipies = $recipiesStmt->fetchAll(PDO::FETCH_ASSOC);

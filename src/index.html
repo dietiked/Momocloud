@@ -16,53 +16,61 @@
 
 
 	<!-- Fixed navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse mmc-navbar-shadow-3" ng-controller="NavController">
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse mmc-navbar-shadow-3">
 	  <div class="container-fluid">
-			<div class="navbar-header navbar-toggle collapsed">
-				<div class=" ">
-		      <button type="button" class="btn btn-primary navbar-btn navbar-left" ng-click="openSidenav('sidemenu')">
-						<i class="fa fa-bars"></i>
-		      </button>
-				</div>
-	    </div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<button type="button" class="btn btn-primary navbar-btn navbar-left" ng-click="openSidenav('sidemenu')">
-					<i class="fa fa-bars"></i>
-				</button>
-				<p class="navbar-text">{{application}}&nbsp;&ndash;&nbsp;{{title}}</p>
-			</div><!--/.nav-collapse -->
-	  </div>
-	</nav>
-
-	<md-sidenav nav-id="sidemenu">
-		<div class="md-sidenav-title">
-			<a href="#">Momocloud</a>
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Momocloud</a>
 		</div>
-		<ul>
-			<li>Vinoteca
-				<ul>
-					<li><a href="#/winedb/cellar/">Cantina</a></li>
-					<li><a href="#/winedb/wines/">Vini</a></li>
-					<li><a href="#/winedb/producers/">Produttori</a></li>
-				</ul>
+		<div id="navbar" class="navbar-collapse collapse">
+		  <ul class="nav navbar-nav">
+			<li class="dropdown">
+			  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vinoteca <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#/winedb/">Dashboard</a></li>
+				<li><a href="#/winedb/cellar/">Cantina</a></li>
+				<li><a href="#/winedb/wines/">Vini</a></li>
+				<li><a href="#/winedb/producers/">Produttori</a></li>
+			  </ul>
 			</li>
-			<li>Ricettatore
-				<ul>
+			<li class="dropdown">
+				<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ricettatore <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#/recipies/">Dashboard</a></li>
 					<li><a href="#/recipies/menus/">Menu</a></li>
 					<li><a href="#/recipies/recipies/">Ricette</a></li>
 					<li><a href="#/recipies/books/">Libri</a></li>
 				 </ul>
 			</li>
-			<li>Libreria
-				<ul>
-					<li><a href="#/library/books">Libri</a></li>
-					<li><a href="#/library/authors">Autori</a></li>
-				</ul>
+			<li class="dropdown">
+			  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Libreria <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#/library/books">Libri</a></li>
+				<li><a href="#/library/authors">Autori</a></li>
+			  </ul>
 			</li>
-		</ul>
-	</md-sidenav>
+
+		  </ul>
+
+		  <form class="navbar-form navbar-right" role="search">
+			<div class="input-group input-group-sm">
+			  <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+			  <input type="text" class="form-control" placeholder="cerca..." aria-describedby="sizing-addon2" ng-model="search">
+			</div>
+		  </form>
+
+		</div><!--/.nav-collapse -->
+	  </div>
+	</nav>
+
 
 		<div class="container-fluid">
+
 				<div ng-view></div>
 		</div>
 
@@ -88,9 +96,7 @@
 		<script src="directives/start.js" charset="utf-8"></script>
 		<script src="directives/library.js" charset="utf-8"></script>
 		<script src="directives/ricettatore.js" charset="utf-8"></script>
-		<script src="directives/momocloudMaterial.js" charset="utf-8"></script>
 
-		<script src="apps/navController.js" charset="utf-8"></script>
 		<script src="apps/login/auth_service.js" charset="utf-8"></script>
 		<script src="apps/login/login_controller.js" charset="utf-8"></script>
 		<script src="apps/start/start_controller.js" charset="utf-8"></script>

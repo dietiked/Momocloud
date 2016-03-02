@@ -2,10 +2,6 @@ momocloudRicettatore.controller('RecipiesListController', ['$scope', 'Notificati
 function($scope, NotificationCenter, DependenciesChecker, RecipiesService, UrlService, AuthService) {
 
 	console.log('RecipiesListController');
-	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-		title: 'Ricette',
-		application: 'Ricettatore'
-	}]);
 	$scope.loading = true;
 	$scope.selectedRecipe = {};
 

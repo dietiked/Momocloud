@@ -6,8 +6,8 @@
 				<p>{{wine.wine_appellation}}</p>
 			</div>
 			<div class="panel-body">
-				Produttore: {{wine.producer_name}}<br/>
-				Vitigni: {{wine.wine_grapes}}
+				<i class="fa fa-user"></i>&nbsp;&nbsp;{{wine.producer_name}}<br/>
+				<i class="momocloud-icon grape"></i>&nbsp;&nbsp;{{wine.wine_grapes}}
 			</div>
 			<div class="panel-footer">
 				<button class="btn btn-default" ng-click="go('/winedb/wines/'+wine.wine_id)">scopri</button>

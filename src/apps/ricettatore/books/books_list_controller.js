@@ -2,11 +2,6 @@ momocloudRicettatore.controller('RecipeBooksListController', ['$scope', 'Notific
 function($scope, NotificationCenter, DependenciesChecker, RecipeBooksService, UrlService, AuthService) {
 
 	console.log('RecipeBooksListController');
-	NotificationCenter.postNotification(UrlService.notifications.REDIRECT_SUCCESS, [{
-		title: 'Libri di cucina',
-		application: 'Ricettatore'
-	}]);
-
 	$scope.loading = true;
 
 	$scope.go = function(url) {
